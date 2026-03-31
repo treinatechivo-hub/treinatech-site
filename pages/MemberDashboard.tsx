@@ -92,11 +92,11 @@ export const MemberDashboard: React.FC = () => {
     [user]
   );
 
-  const [activeCourse, setActiveCourse] = useState<CourseData>(enrolledCourses[0]);
+  const [activeCourse, setActiveCourse] = useState<CourseData | undefined>(enrolledCourses[0]);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [activeTab, setActiveTab] = useState<'aulas' | 'materiais'>('aulas');
   const [expandedModules, setExpandedModules] = useState<Set<string>>(
-    new Set([activeCourse?.modules[0]?.id])
+    new Set([activeCourse?.modules?.[0]?.id])
   );
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(
     new Set(['ex-1-1', 'ex-1-2', 'pbi-1-1']) // demo: some completed
@@ -126,11 +126,11 @@ export const MemberDashboard: React.FC = () => {
   };
 
   // Progress for current course
-  const totalLessons = activeCourse.modules.flatMap((m) => m.lessons).length;
-  const completedInCourse = activeCourse.modules
+  const totalLessons = activeCourse?.modules.flatMap((m) => m.lessons).length ?? 0;
+  const completedInCourse = activeCourse?.modules
     .flatMap((m) => m.lessons)
-    .filter((l) => completedLessons.has(l.id)).length;
-  const progressPct = Math.round((completedInCourse / totalLessons) * 100);
+    .filter((l) => completedLessons.has(l.id)).length ?? 0;
+  const progressPct = totalLessons > 0 ? Math.round((completedInCourse / totalLessons) * 100) : 0;
 
   if (!user) return null;
 
@@ -160,7 +160,7 @@ export const MemberDashboard: React.FC = () => {
               key={c.id}
               onClick={() => switchCourse(c)}
               className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                activeCourse.id === c.id
+                activeCourse?.id === c.id
                   ? 'bg-green-100 text-green-800'
                   : 'text-slate-500 hover:bg-slate-100'
               }`}
@@ -191,6 +191,7 @@ export const MemberDashboard: React.FC = () => {
         <aside className="w-72 xl:w-80 bg-white border-r border-slate-100 flex flex-col overflow-hidden hidden md:flex">
 
           {/* Course header */}
+          {activeCourse && (
           <div className="p-5 border-b border-slate-100">
             <div className="flex items-start gap-3 mb-4">
               <span className="text-3xl">{activeCourse.icon}</span>
@@ -221,6 +222,7 @@ export const MemberDashboard: React.FC = () => {
               </div>
             </div>
           </div>
+          )}
 
           {/* Tabs */}
           <div className="flex border-b border-slate-100">
@@ -247,7 +249,7 @@ export const MemberDashboard: React.FC = () => {
           <div className="flex-1 overflow-y-auto">
             {activeTab === 'aulas' ? (
               <div className="py-2">
-                {activeCourse.modules.map((mod) => {
+                {activeCourse?.modules.map((mod) => {
                   const isExpanded = expandedModules.has(mod.id);
                   const modCompleted = mod.lessons.filter((l) => completedLessons.has(l.id)).length;
                   return (
@@ -312,7 +314,7 @@ export const MemberDashboard: React.FC = () => {
             ) : (
               /* PDFs Tab */
               <div className="p-4 space-y-3">
-                {activeCourse.pdfs.map((pdf, idx) => (
+                {activeCourse?.pdfs.map((pdf, idx) => (
                   <div
                     key={idx}
                     className="bg-slate-50 border border-slate-200 rounded-2xl p-4 hover:border-green-200 transition-colors"
@@ -356,7 +358,7 @@ export const MemberDashboard: React.FC = () => {
                   <p className="text-sm text-slate-400 mt-1 flex items-center gap-1.5">
                     <Clock size={13} /> {activeLesson.duration}
                     <span className="mx-1">·</span>
-                    <BookOpen size={13} /> {activeCourse.title}
+                    <BookOpen size={13} /> {activeCourse?.title}
                   </p>
                 </div>
 
@@ -379,7 +381,7 @@ export const MemberDashboard: React.FC = () => {
             )}
 
             {/* Welcome card (when no lesson selected) */}
-            {!activeLesson && (
+            {!activeLesson && activeCourse && (
               <div className="mt-6 bg-white rounded-2xl border border-slate-200 p-8">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-3xl">
@@ -426,7 +428,7 @@ export const MemberDashboard: React.FC = () => {
                   key={c.id}
                   onClick={() => switchCourse(c)}
                   className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
-                    activeCourse.id === c.id ? 'bg-green-100 text-green-800' : 'bg-white text-slate-600 border border-slate-200'
+                    activeCourse?.id === c.id ? 'bg-green-100 text-green-800' : 'bg-white text-slate-600 border border-slate-200'
                   }`}
                 >
                   {c.icon} {c.title}
