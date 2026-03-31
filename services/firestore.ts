@@ -9,12 +9,23 @@ import {
   getDocs,
   Firestore,
 } from 'firebase/firestore';
-import { app } from '../firebase';
+import { getApps, initializeApp } from 'firebase/app';
 
-// Inicialização lazy para evitar problemas de ordem de módulos
+const firebaseConfig = {
+  apiKey: "AIzaSyAYNM56HDmP4HbRGW_zT2EC5G6t1BDoJRI",
+  authDomain: "treinatech-3ef28.firebaseapp.com",
+  projectId: "treinatech-3ef28",
+  storageBucket: "treinatech-3ef28.firebasestorage.app",
+  messagingSenderId: "78585439215",
+  appId: "1:78585439215:web:af6af74553729711038c1a",
+};
+
 let _db: Firestore | null = null;
 function getDb(): Firestore {
-  if (!_db) _db = getFirestore(app);
+  if (!_db) {
+    const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+    _db = getFirestore(app);
+  }
   return _db;
 }
 

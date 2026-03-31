@@ -6,9 +6,25 @@ import {
   updateProfile,
   signOut as fbSignOut,
   onAuthStateChanged,
+  GoogleAuthProvider,
+  getAuth,
 } from 'firebase/auth';
-import { auth, googleProvider } from '../firebase';
-import { getStudent, linkUidToStudent, addStudent } from '../services/firestore';
+import { initializeApp, getApps } from 'firebase/app';
+
+// ─── Firebase init (lazy, evita duplicate-app) ────────────────────────────────
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAYNM56HDmP4HbRGW_zT2EC5G6t1BDoJRI",
+  authDomain: "treinatech-3ef28.firebaseapp.com",
+  projectId: "treinatech-3ef28",
+  storageBucket: "treinatech-3ef28.firebasestorage.app",
+  messagingSenderId: "78585439215",
+  appId: "1:78585439215:web:af6af74553729711038c1a",
+};
+
+const firebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const auth = getAuth(firebaseApp);
+const googleProvider = new GoogleAuthProvider();
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -30,6 +46,7 @@ interface AuthContextType {
   signInWithEmail: (email: string, password: string) => Promise<void>;
   signUpWithEmail: (name: string, email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  firebaseApp: typeof firebaseApp;
 }
 
 // ─── Context ──────────────────────────────────────────────────────────────────
@@ -42,33 +59,6 @@ export const useAuth = (): AuthContextType => {
   return ctx;
 };
 
-// ─── Helper: monta User a partir do Firebase + Firestore ─────────────────────
-
-async function buildUser(fbUser: {
-  uid: string;
-  displayName: string | null;
-  email: string | null;
-  photoURL: string | null;
-}): Promise<User> {
-  const email = fbUser.email ?? '';
-  const isAdmin = email === ADMIN_EMAIL;
-
-  // Vincula UID ao registro do aluno no Firestore (se existir)
-  if (!isAdmin) await linkUidToStudent(email, fbUser.uid);
-
-  // Busca cursos liberados no Firestore
-  const record = !isAdmin ? await getStudent(email) : null;
-
-  return {
-    uid: fbUser.uid,
-    name: fbUser.displayName ?? record?.name ?? email.split('@')[0],
-    email,
-    photoURL: fbUser.photoURL,
-    enrolledCourses: record?.enrolledCourses ?? [],
-    isAdmin,
-  };
-}
-
 // ─── Provider ─────────────────────────────────────────────────────────────────
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -79,14 +69,35 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
       try {
         if (fbUser) {
-          const appUser = await buildUser(fbUser);
-          setUser(appUser);
+          const email = fbUser.email ?? '';
+          const isAdmin = email === ADMIN_EMAIL;
+
+          // Carrega cursos do Firestore apenas para não-admins
+          let enrolledCourses: string[] = [];
+          if (!isAdmin) {
+            try {
+              const { getStudent, linkUidToStudent } = await import('../services/firestore');
+              await linkUidToStudent(email, fbUser.uid);
+              const record = await getStudent(email);
+              enrolledCourses = record?.enrolledCourses ?? [];
+            } catch (e) {
+              console.warn('Firestore indisponível:', e);
+            }
+          }
+
+          setUser({
+            uid: fbUser.uid,
+            name: fbUser.displayName ?? email.split('@')[0],
+            email,
+            photoURL: fbUser.photoURL,
+            enrolledCourses,
+            isAdmin,
+          });
         } else {
           setUser(null);
         }
       } catch (err) {
-        console.error('Erro ao carregar usuário:', err);
-        // Fallback: loga sem dados do Firestore
+        console.error('Erro no auth:', err);
         if (fbUser) {
           setUser({
             uid: fbUser.uid,
@@ -106,30 +117,30 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const signInWithGoogle = async () => {
     await signInWithPopup(auth, googleProvider);
-    // onAuthStateChanged cuida do setUser e do setLoading
   };
 
   const signInWithEmail = async (email: string, password: string) => {
-    setLoading(true);
     await signInWithEmailAndPassword(auth, email, password);
   };
 
   const signUpWithEmail = async (name: string, email: string, password: string) => {
-    setLoading(true);
     const result = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(result.user, { displayName: name });
-
-    // Cria registro no Firestore se ainda não existir
-    const existing = await getStudent(email);
-    if (!existing) {
-      await addStudent({
-        name,
-        email,
-        enrolledCourses: [],
-        active: true,
-        createdAt: new Date().toISOString().split('T')[0],
-        uid: result.user.uid,
-      });
+    try {
+      const { addStudent, getStudent } = await import('../services/firestore');
+      const existing = await getStudent(email);
+      if (!existing) {
+        await addStudent({
+          name,
+          email,
+          enrolledCourses: [],
+          active: true,
+          createdAt: new Date().toISOString().split('T')[0],
+          uid: result.user.uid,
+        });
+      }
+    } catch (e) {
+      console.warn('Firestore indisponível ao criar conta:', e);
     }
   };
 
@@ -138,7 +149,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithEmail, signUpWithEmail, signOut }}>
+    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithEmail, signUpWithEmail, signOut, firebaseApp }}>
       {children}
     </AuthContext.Provider>
   );
