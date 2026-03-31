@@ -33,7 +33,7 @@ export const LoginPage: React.FC = () => {
     try {
       await signInWithGoogle();
     } catch {
-      setError('Não foi possível conectar com o Google. Tente novamente.');
+      setError('Login com Google ainda não disponível. Use e-mail e senha.');
     } finally {
       setLoading(false);
     }

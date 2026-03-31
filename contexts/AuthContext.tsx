@@ -94,23 +94,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
      *   const isAdmin = fbUser.email === ADMIN_EMAIL;
      *   setUser({ uid: fbUser.uid, name: fbUser.displayName!, email: fbUser.email!, photoURL: fbUser.photoURL, enrolledCourses: [], isAdmin });
      */
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-
-    // Para testar como ADMIN no modo demo, altere email para ADMIN_EMAIL
-    const mockEmail = 'joao.silva@gmail.com';
-    const mockUser: User = {
-      uid: 'uid_demo_001',
-      name: 'João Silva',
-      email: mockEmail,
-      photoURL: 'https://i.pravatar.cc/150?u=joaosilva',
-      enrolledCourses: ['excel', 'powerbi'],
-      isAdmin: mockEmail === ADMIN_EMAIL,
-    };
-
-    setUser(mockUser);
-    localStorage.setItem('tt_user', JSON.stringify(mockUser));
-    setLoading(false);
+    // Firebase não configurado — lança erro para exibir mensagem ao usuário
+    throw new Error('google_not_configured');
   };
 
   const signOut = async () => {
