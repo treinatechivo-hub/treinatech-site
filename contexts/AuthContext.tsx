@@ -94,8 +94,23 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
      *   const isAdmin = fbUser.email === ADMIN_EMAIL;
      *   setUser({ uid: fbUser.uid, name: fbUser.displayName!, email: fbUser.email!, photoURL: fbUser.photoURL, enrolledCourses: [], isAdmin });
      */
-    // Firebase não configurado — lança erro para exibir mensagem ao usuário
-    throw new Error('google_not_configured');
+    /**
+     * MODO DEMO — simula login com Google como administrador.
+     * Em produção, substituir por signInWithPopup do Firebase.
+     */
+    setLoading(true);
+    await new Promise((r) => setTimeout(r, 1000));
+    const mockUser: User = {
+      uid: 'uid_admin_google',
+      name: 'Ivo Amarante',
+      email: ADMIN_EMAIL,
+      photoURL: null,
+      enrolledCourses: [],
+      isAdmin: true,
+    };
+    setUser(mockUser);
+    localStorage.setItem('tt_user', JSON.stringify(mockUser));
+    setLoading(false);
   };
 
   const signOut = async () => {
