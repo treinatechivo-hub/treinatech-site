@@ -25,6 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
     // Rotas de página inteira (blog, alunos)
     if (href === '#blog' || href === '#alunos') {
       window.location.hash = href;
+      window.scrollTo(0, 0);
       setIsOpen(false);
       return;
     }
