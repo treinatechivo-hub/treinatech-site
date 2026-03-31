@@ -163,10 +163,10 @@ export const AdminDashboard: React.FC = () => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    getAllStudents().then((data) => {
-      setStudents(data);
-      setLoadingData(false);
-    });
+    getAllStudents()
+      .then((data) => setStudents(data))
+      .catch((err) => console.error('Erro ao carregar alunos:', err))
+      .finally(() => setLoadingData(false));
   }, []);
 
   const filtered = students.filter((s) => {

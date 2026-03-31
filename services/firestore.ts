@@ -7,11 +7,10 @@ import {
   deleteDoc,
   collection,
   getDocs,
-  serverTimestamp,
 } from 'firebase/firestore';
-import { auth } from '../firebase';
+import { app } from '../firebase';
 
-export const db = getFirestore();
+export const db = getFirestore(app);
 
 export interface StudentRecord {
   id: string;        // email sanitizado como ID do documento
