@@ -57,7 +57,7 @@ const StudentModal: React.FC<StudentModalProps> = ({ student, onSave, onClose })
       enrolledCourses: courses,
       active,
       createdAt: student?.createdAt ?? new Date().toISOString().split('T')[0],
-      uid: student?.uid,
+      ...(student?.uid ? { uid: student.uid } : {}),
     });
   };
 
