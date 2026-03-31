@@ -77,13 +77,29 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
-      if (fbUser) {
-        const appUser = await buildUser(fbUser);
-        setUser(appUser);
-      } else {
-        setUser(null);
+      try {
+        if (fbUser) {
+          const appUser = await buildUser(fbUser);
+          setUser(appUser);
+        } else {
+          setUser(null);
+        }
+      } catch (err) {
+        console.error('Erro ao carregar usuário:', err);
+        // Fallback: loga sem dados do Firestore
+        if (fbUser) {
+          setUser({
+            uid: fbUser.uid,
+            name: fbUser.displayName ?? fbUser.email ?? 'Usuário',
+            email: fbUser.email ?? '',
+            photoURL: fbUser.photoURL,
+            enrolledCourses: [],
+            isAdmin: fbUser.email === ADMIN_EMAIL,
+          });
+        }
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     });
     return unsubscribe;
   }, []);
