@@ -1,50 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import {
+  getAllStudents, addStudent, updateStudent, deleteStudent,
+  StudentRecord,
+} from '../services/firestore';
+import {
   LogOut, Plus, Trash2, Edit3, Search, Users, BookOpen,
-  CheckCircle2, X, Save, BarChart3, Shield, ChevronDown,
+  CheckCircle2, X, Save, BarChart3, Shield, ChevronDown, Loader2,
 } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-
-interface Student {
-  id: string;
-  name: string;
-  email: string;
-  enrolledCourses: string[];
-  createdAt: string;
-  active: boolean;
-}
 
 const ALL_COURSES = [
   { id: 'excel', label: 'Excel' },
   { id: 'powerbi', label: 'Power BI' },
   { id: 'sql', label: 'SQL' },
 ];
-
-const STORAGE_KEY = 'tt_admin_students';
-
-function loadStudents(): Student[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : defaultStudents();
-  } catch {
-    return defaultStudents();
-  }
-}
-
-function defaultStudents(): Student[] {
-  return [
-    { id: 's1', name: 'Ana Souza', email: 'ana.souza@email.com', enrolledCourses: ['excel', 'powerbi'], createdAt: '2025-11-10', active: true },
-    { id: 's2', name: 'Carlos Lima', email: 'carlos.lima@email.com', enrolledCourses: ['powerbi'], createdAt: '2025-12-03', active: true },
-    { id: 's3', name: 'Maria Oliveira', email: 'maria@cooperativa.com', enrolledCourses: ['excel', 'sql'], createdAt: '2026-01-15', active: true },
-    { id: 's4', name: 'Rafael Santos', email: 'rafael.santos@gmail.com', enrolledCourses: ['sql'], createdAt: '2026-02-20', active: false },
-  ];
-}
-
-function saveStudents(students: Student[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(students));
-}
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -63,8 +34,8 @@ const CourseTag: React.FC<{ courseId: string }> = ({ courseId }) => {
 };
 
 interface StudentModalProps {
-  student?: Student | null;
-  onSave: (s: Omit<Student, 'id' | 'createdAt'>) => void;
+  student?: StudentRecord | null;
+  onSave: (s: Omit<StudentRecord, 'id'>) => void;
   onClose: () => void;
 }
 
@@ -80,29 +51,29 @@ const StudentModal: React.FC<StudentModalProps> = ({ student, onSave, onClose })
 
   const handleSave = () => {
     if (!name.trim() || !email.trim()) return;
-    onSave({ name: name.trim(), email: email.trim(), enrolledCourses: courses, active });
+    onSave({
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      enrolledCourses: courses,
+      active,
+      createdAt: student?.createdAt ?? new Date().toISOString().split('T')[0],
+      uid: student?.uid,
+    });
   };
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-bold text-slate-900">
             {student ? 'Editar Aluno' : 'Adicionar Aluno'}
           </h3>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
-            <X size={20} />
-          </button>
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-600"><X size={20} /></button>
         </div>
 
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-1.5">
-              Nome completo
-            </label>
+            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-1.5">Nome completo</label>
             <input
               type="text"
               value={name}
@@ -113,22 +84,22 @@ const StudentModal: React.FC<StudentModalProps> = ({ student, onSave, onClose })
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-1.5">
-              E-mail
-            </label>
+            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-1.5">E-mail</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="aluno@email.com"
-              className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              disabled={!!student}
+              className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 disabled:bg-slate-50 disabled:text-slate-400"
             />
+            {!student && (
+              <p className="text-xs text-slate-400 mt-1">O aluno usará este e-mail para se cadastrar e acessar os cursos.</p>
+            )}
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">
-              Cursos liberados
-            </label>
+            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">Cursos liberados</label>
             <div className="flex gap-2 flex-wrap">
               {ALL_COURSES.map((c) => (
                 <button
@@ -183,15 +154,20 @@ const StudentModal: React.FC<StudentModalProps> = ({ student, onSave, onClose })
 
 export const AdminDashboard: React.FC = () => {
   const { user, signOut } = useAuth();
-  const [students, setStudents] = useState<Student[]>(loadStudents);
+  const [students, setStudents] = useState<StudentRecord[]>([]);
+  const [loadingData, setLoadingData] = useState(true);
   const [search, setSearch] = useState('');
   const [filterCourse, setFilterCourse] = useState<string>('all');
-  const [modal, setModal] = useState<{ open: boolean; student?: Student | null }>({ open: false });
+  const [modal, setModal] = useState<{ open: boolean; student?: StudentRecord | null }>({ open: false });
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    saveStudents(students);
-  }, [students]);
+    getAllStudents().then((data) => {
+      setStudents(data);
+      setLoadingData(false);
+    });
+  }, []);
 
   const filtered = students.filter((s) => {
     const matchSearch = s.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -208,27 +184,32 @@ export const AdminDashboard: React.FC = () => {
     bySQL: students.filter((s) => s.enrolledCourses.includes('sql')).length,
   };
 
-  const handleSaveStudent = (data: Omit<Student, 'id' | 'createdAt'>) => {
-    if (modal.student) {
-      setStudents((prev) => prev.map((s) => s.id === modal.student!.id ? { ...s, ...data } : s));
-    } else {
-      const newStudent: Student = {
-        id: `s_${Date.now()}`,
-        createdAt: new Date().toISOString().split('T')[0],
-        ...data,
-      };
-      setStudents((prev) => [newStudent, ...prev]);
+  const handleSaveStudent = async (data: Omit<StudentRecord, 'id'>) => {
+    setSaving(true);
+    try {
+      if (modal.student) {
+        await updateStudent(modal.student.id, data);
+        setStudents((prev) => prev.map((s) => s.id === modal.student!.id ? { ...s, ...data } : s));
+      } else {
+        const newStudent = await addStudent(data);
+        setStudents((prev) => [newStudent, ...prev]);
+      }
+    } finally {
+      setSaving(false);
+      setModal({ open: false });
     }
-    setModal({ open: false });
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
+    await deleteStudent(id);
     setStudents((prev) => prev.filter((s) => s.id !== id));
     setDeleteId(null);
   };
 
-  const toggleActive = (id: string) => {
-    setStudents((prev) => prev.map((s) => s.id === id ? { ...s, active: !s.active } : s));
+  const handleToggleActive = async (student: StudentRecord) => {
+    const updated = { ...student, active: !student.active };
+    await updateStudent(student.id, { active: updated.active });
+    setStudents((prev) => prev.map((s) => s.id === student.id ? updated : s));
   };
 
   if (!user) return null;
@@ -289,11 +270,10 @@ export const AdminDashboard: React.FC = () => {
           ))}
         </div>
 
-        {/* ── Table header: search + filters + add ── */}
+        {/* ── Tabela ── */}
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
           <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
             <div className="flex gap-3 flex-1 flex-wrap">
-              {/* Search */}
               <div className="relative flex-1 min-w-[200px]">
                 <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
@@ -304,8 +284,6 @@ export const AdminDashboard: React.FC = () => {
                   className="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
                 />
               </div>
-
-              {/* Course filter */}
               <div className="relative">
                 <select
                   value={filterCourse}
@@ -313,9 +291,7 @@ export const AdminDashboard: React.FC = () => {
                   className="appearance-none pl-3 pr-8 py-2 border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none focus:border-green-500 bg-white"
                 >
                   <option value="all">Todos os cursos</option>
-                  {ALL_COURSES.map((c) => (
-                    <option key={c.id} value={c.id}>{c.label}</option>
-                  ))}
+                  {ALL_COURSES.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
                 </select>
                 <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
               </div>
@@ -329,85 +305,90 @@ export const AdminDashboard: React.FC = () => {
             </button>
           </div>
 
-          {/* ── Table ── */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-slate-100 bg-slate-50">
-                  <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Aluno</th>
-                  <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">E-mail</th>
-                  <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Cursos</th>
-                  <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Status</th>
-                  <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Cadastro</th>
-                  <th className="text-right px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.length === 0 && (
-                  <tr>
-                    <td colSpan={6} className="text-center py-12 text-slate-400 text-sm">
-                      Nenhum aluno encontrado.
-                    </td>
+          {loadingData ? (
+            <div className="flex items-center justify-center py-16">
+              <Loader2 size={24} className="animate-spin text-green-600" />
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-100 bg-slate-50">
+                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Aluno</th>
+                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">E-mail</th>
+                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Cursos</th>
+                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Status</th>
+                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Cadastro</th>
+                    <th className="text-right px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Ações</th>
                   </tr>
-                )}
-                {filtered.map((student) => (
-                  <tr key={student.id} className="border-b border-slate-50 hover:bg-slate-50/60 transition-colors">
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold text-xs flex-shrink-0">
-                          {student.name.charAt(0).toUpperCase()}
+                </thead>
+                <tbody>
+                  {filtered.length === 0 && (
+                    <tr>
+                      <td colSpan={6} className="text-center py-12 text-slate-400 text-sm">
+                        Nenhum aluno encontrado.
+                      </td>
+                    </tr>
+                  )}
+                  {filtered.map((student) => (
+                    <tr key={student.id} className="border-b border-slate-50 hover:bg-slate-50/60 transition-colors">
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold text-xs flex-shrink-0">
+                            {student.name.charAt(0).toUpperCase()}
+                          </div>
+                          <span className="font-semibold text-slate-900 text-sm">{student.name}</span>
                         </div>
-                        <span className="font-semibold text-slate-900 text-sm">{student.name}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-slate-500">{student.email}</td>
-                    <td className="px-4 py-3">
-                      <div className="flex gap-1 flex-wrap">
-                        {student.enrolledCourses.length === 0
-                          ? <span className="text-slate-300 text-xs">—</span>
-                          : student.enrolledCourses.map((c) => <CourseTag key={c} courseId={c} />)
-                        }
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <button
-                        onClick={() => toggleActive(student.id)}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors ${
-                          student.active
-                            ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                            : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
-                        }`}
-                      >
-                        <span className={`w-1.5 h-1.5 rounded-full ${student.active ? 'bg-green-500' : 'bg-slate-400'}`} />
-                        {student.active ? 'Ativo' : 'Suspenso'}
-                      </button>
-                    </td>
-                    <td className="px-4 py-3 text-slate-400 text-xs">{student.createdAt}</td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center justify-end gap-1">
+                      </td>
+                      <td className="px-4 py-3 text-slate-500">{student.email}</td>
+                      <td className="px-4 py-3">
+                        <div className="flex gap-1 flex-wrap">
+                          {student.enrolledCourses.length === 0
+                            ? <span className="text-slate-300 text-xs">—</span>
+                            : student.enrolledCourses.map((c) => <CourseTag key={c} courseId={c} />)
+                          }
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
                         <button
-                          onClick={() => setModal({ open: true, student })}
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
-                          title="Editar"
+                          onClick={() => handleToggleActive(student)}
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors ${
+                            student.active
+                              ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                              : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                          }`}
                         >
-                          <Edit3 size={15} />
+                          <span className={`w-1.5 h-1.5 rounded-full ${student.active ? 'bg-green-500' : 'bg-slate-400'}`} />
+                          {student.active ? 'Ativo' : 'Suspenso'}
                         </button>
-                        <button
-                          onClick={() => setDeleteId(student.id)}
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
-                          title="Excluir"
-                        >
-                          <Trash2 size={15} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      </td>
+                      <td className="px-4 py-3 text-slate-400 text-xs">{student.createdAt}</td>
+                      <td className="px-4 py-3">
+                        <div className="flex items-center justify-end gap-1">
+                          <button
+                            onClick={() => setModal({ open: true, student })}
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                            title="Editar"
+                          >
+                            <Edit3 size={15} />
+                          </button>
+                          <button
+                            onClick={() => setDeleteId(student.id)}
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                            title="Excluir"
+                          >
+                            <Trash2 size={15} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
 
-          {filtered.length > 0 && (
+          {!loadingData && filtered.length > 0 && (
             <div className="px-4 py-3 border-t border-slate-100 text-xs text-slate-400">
               Exibindo {filtered.length} de {students.length} alunos
             </div>
@@ -415,23 +396,21 @@ export const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Add/Edit Modal ── */}
+      {/* ── Modal ── */}
       {modal.open && (
         <StudentModal
           student={modal.student}
           onSave={handleSaveStudent}
-          onClose={() => setModal({ open: false })}
+          onClose={() => !saving && setModal({ open: false })}
         />
       )}
 
-      {/* ── Delete confirmation ── */}
+      {/* ── Confirmar exclusão ── */}
       {deleteId && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm">
             <h3 className="text-base font-bold text-slate-900 mb-2">Excluir aluno?</h3>
-            <p className="text-sm text-slate-500 mb-6">
-              Esta ação é irreversível. O aluno perderá o acesso à plataforma.
-            </p>
+            <p className="text-sm text-slate-500 mb-6">Esta ação é irreversível. O aluno perderá o acesso à plataforma.</p>
             <div className="flex gap-3">
               <button
                 onClick={() => setDeleteId(null)}

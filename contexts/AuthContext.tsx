@@ -8,6 +8,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase';
+import { getStudent, linkUidToStudent, addStudent } from '../services/firestore';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -41,17 +42,30 @@ export const useAuth = (): AuthContextType => {
   return ctx;
 };
 
-// ─── Helper ───────────────────────────────────────────────────────────────────
+// ─── Helper: monta User a partir do Firebase + Firestore ─────────────────────
 
-function toAppUser(fbUser: { uid: string; displayName: string | null; email: string | null; photoURL: string | null }): User {
+async function buildUser(fbUser: {
+  uid: string;
+  displayName: string | null;
+  email: string | null;
+  photoURL: string | null;
+}): Promise<User> {
   const email = fbUser.email ?? '';
+  const isAdmin = email === ADMIN_EMAIL;
+
+  // Vincula UID ao registro do aluno no Firestore (se existir)
+  if (!isAdmin) await linkUidToStudent(email, fbUser.uid);
+
+  // Busca cursos liberados no Firestore
+  const record = !isAdmin ? await getStudent(email) : null;
+
   return {
     uid: fbUser.uid,
-    name: fbUser.displayName ?? email.split('@')[0],
+    name: fbUser.displayName ?? record?.name ?? email.split('@')[0],
     email,
     photoURL: fbUser.photoURL,
-    enrolledCourses: [],
-    isAdmin: email === ADMIN_EMAIL,
+    enrolledCourses: record?.enrolledCourses ?? [],
+    isAdmin,
   };
 }
 
@@ -62,25 +76,46 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (fbUser) => {
-      setUser(fbUser ? toAppUser(fbUser) : null);
+    const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
+      if (fbUser) {
+        const appUser = await buildUser(fbUser);
+        setUser(appUser);
+      } else {
+        setUser(null);
+      }
       setLoading(false);
     });
     return unsubscribe;
   }, []);
 
   const signInWithGoogle = async () => {
+    setLoading(true);
     await signInWithPopup(auth, googleProvider);
+    // onAuthStateChanged cuida do setUser
   };
 
   const signInWithEmail = async (email: string, password: string) => {
+    setLoading(true);
     await signInWithEmailAndPassword(auth, email, password);
   };
 
   const signUpWithEmail = async (name: string, email: string, password: string) => {
+    setLoading(true);
     const result = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(result.user, { displayName: name });
-    setUser(toAppUser({ ...result.user, displayName: name }));
+
+    // Cria registro no Firestore se ainda não existir
+    const existing = await getStudent(email);
+    if (!existing) {
+      await addStudent({
+        name,
+        email,
+        enrolledCourses: [],
+        active: true,
+        createdAt: new Date().toISOString().split('T')[0],
+        uid: result.user.uid,
+      });
+    }
   };
 
   const signOut = async () => {
