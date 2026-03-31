@@ -5,10 +5,40 @@ import { MemberDashboard } from '../../pages/MemberDashboard';
 import { AdminDashboard } from '../../pages/AdminDashboard';
 import { Loader2 } from 'lucide-react';
 
-/**
- * Auth guard: mostra loading → login → dashboard conforme estado.
- * Admin (treinatechivo@gmail.com) é redirecionado para o painel admin.
- */
+// ─── Error Boundary ───────────────────────────────────────────────────────────
+
+interface ErrorBoundaryState { error: Error | null }
+
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, ErrorBoundaryState> {
+  state: ErrorBoundaryState = { error: null };
+
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+
+  render() {
+    if (this.state.error) {
+      return (
+        <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
+          <div className="bg-white rounded-2xl shadow border border-red-100 p-8 max-w-md w-full text-center">
+            <p className="text-red-500 font-bold text-lg mb-2">Erro ao carregar</p>
+            <p className="text-slate-500 text-sm mb-4">{this.state.error.message}</p>
+            <button
+              onClick={() => { window.location.hash = ''; }}
+              className="px-5 py-2.5 bg-green-700 text-white rounded-xl text-sm font-semibold hover:bg-green-800"
+            >
+              Voltar ao site
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+// ─── Auth Gate ────────────────────────────────────────────────────────────────
+
 const AuthGate: React.FC = () => {
   const { user, loading } = useAuth();
 
@@ -30,26 +60,12 @@ const AuthGate: React.FC = () => {
   return <MemberDashboard />;
 };
 
-/**
- * MembersArea — componente raiz da área de membros.
- *
- * USO NO App.tsx:
- * ──────────────
- * import { MembersArea } from './components/members/MembersArea';
- *
- * Opção A — rota dedicada (com React Router):
- *   <Route path="/alunos" element={<MembersArea />} />
- *
- * Opção B — sem router (toggle por estado):
- *   const [showMembers, setShowMembers] = useState(false);
- *   return showMembers ? <MembersArea /> : <LandingPage />;
- *
- * Opção C — link direto no navbar:
- *   <a href="/alunos">Área do Aluno</a>
- *   (requer configuração de SPA no Vercel: vercel.json com rewrites)
- */
+// ─── Export ───────────────────────────────────────────────────────────────────
+
 export const MembersArea: React.FC = () => (
-  <AuthProvider>
-    <AuthGate />
-  </AuthProvider>
+  <ErrorBoundary>
+    <AuthProvider>
+      <AuthGate />
+    </AuthProvider>
+  </ErrorBoundary>
 );

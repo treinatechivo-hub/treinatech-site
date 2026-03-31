@@ -105,9 +105,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   const signInWithGoogle = async () => {
-    setLoading(true);
     await signInWithPopup(auth, googleProvider);
-    // onAuthStateChanged cuida do setUser
+    // onAuthStateChanged cuida do setUser e do setLoading
   };
 
   const signInWithEmail = async (email: string, password: string) => {
