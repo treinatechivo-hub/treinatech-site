@@ -162,12 +162,18 @@ export const AdminDashboard: React.FC = () => {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    getAllStudents()
-      .then((data) => setStudents(data))
-      .catch((err) => console.error('Erro ao carregar alunos:', err))
-      .finally(() => setLoadingData(false));
-  }, []);
+  const loadStudents = async () => {
+    try {
+      const data = await getAllStudents();
+      setStudents(data);
+    } catch (err) {
+      console.error('Erro ao carregar alunos:', err);
+    } finally {
+      setLoadingData(false);
+    }
+  };
+
+  useEffect(() => { loadStudents(); }, []);
 
   const filtered = students.filter((s) => {
     const matchSearch = s.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -189,11 +195,10 @@ export const AdminDashboard: React.FC = () => {
     try {
       if (modal.student) {
         await updateStudent(modal.student.id, data);
-        setStudents((prev) => prev.map((s) => s.id === modal.student!.id ? { ...s, ...data } : s));
       } else {
-        const newStudent = await addStudent(data);
-        setStudents((prev) => [newStudent, ...prev]);
+        await addStudent(data);
       }
+      await loadStudents();
     } finally {
       setSaving(false);
       setModal({ open: false });
@@ -202,14 +207,13 @@ export const AdminDashboard: React.FC = () => {
 
   const handleDelete = async (id: string) => {
     await deleteStudent(id);
-    setStudents((prev) => prev.filter((s) => s.id !== id));
     setDeleteId(null);
+    await loadStudents();
   };
 
   const handleToggleActive = async (student: StudentRecord) => {
-    const updated = { ...student, active: !student.active };
-    await updateStudent(student.id, { active: updated.active });
-    setStudents((prev) => prev.map((s) => s.id === student.id ? updated : s));
+    await updateStudent(student.id, { active: !student.active });
+    await loadStudents();
   };
 
   if (!user) return null;
