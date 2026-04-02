@@ -4,6 +4,16 @@ import { Logo } from './Logo';
 import { Instagram, Linkedin, Facebook, Twitter } from 'lucide-react';
 import { LegalModal } from './LegalModal';
 
+const goToSection = (hash: string) => {
+  // Se já está na home, só rola para a seção
+  if (window.location.hash === '' || !['#blog', '#alunos', '#demo'].some(p => window.location.hash.startsWith(p))) {
+    window.location.hash = hash;
+  } else {
+    // Se está em outra página (blog, alunos, etc.), navega para home + seção
+    window.location.href = '/' + hash;
+  }
+};
+
 export const Footer: React.FC = () => {
   const [legalModal, setLegalModal] = useState<'termos' | 'privacidade' | null>(null);
 
@@ -37,20 +47,20 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-bold mb-6">Links Rápidos</h4>
             <ul className="space-y-4">
-              <li><a href="#inicio" className="text-slate-400 hover:text-green-500 transition-colors">Início</a></li>
-              <li><a href="#cursos" className="text-slate-400 hover:text-green-500 transition-colors">Cursos</a></li>
-              <li><a href="#sobre" className="text-slate-400 hover:text-green-500 transition-colors">Sobre Nós</a></li>
-              <li><a href="#contato" className="text-slate-400 hover:text-green-500 transition-colors">Contato</a></li>
+              <li><button onClick={() => goToSection('#inicio')} className="text-slate-400 hover:text-green-500 transition-colors">Início</button></li>
+              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Cursos</button></li>
+              <li><button onClick={() => goToSection('#sobre')} className="text-slate-400 hover:text-green-500 transition-colors">Sobre Nós</button></li>
+              <li><button onClick={() => goToSection('#contato')} className="text-slate-400 hover:text-green-500 transition-colors">Contato</button></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-bold mb-6">Treinamentos</h4>
             <ul className="space-y-4">
-              <li><a href="#cursos" className="text-slate-400 hover:text-green-500 transition-colors">Excel Avançado</a></li>
-              <li><a href="#cursos" className="text-slate-400 hover:text-green-500 transition-colors">Power BI Professional</a></li>
-              <li><a href="#cursos" className="text-slate-400 hover:text-green-500 transition-colors">SQL para Dados</a></li>
-              <li><a href="#cursos" className="text-slate-400 hover:text-green-500 transition-colors">Trilha Completa</a></li>
+              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Excel Avançado</button></li>
+              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Power BI Professional</button></li>
+              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">SQL para Dados</button></li>
+              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Trilha Completa</button></li>
             </ul>
           </div>
         </div>

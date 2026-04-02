@@ -46,12 +46,12 @@ function emailToId(email: string) {
 export async function getStudent(email: string): Promise<StudentRecord | null> {
   const ref = doc(getDb(), 'students', emailToId(email));
   const snap = await getDoc(ref);
-  return snap.exists() ? (snap.data() as StudentRecord) : null;
+  return snap.exists() ? ({ id: snap.id, ...snap.data() } as StudentRecord) : null;
 }
 
 export async function getAllStudents(): Promise<StudentRecord[]> {
   const snap = await getDocs(collection(getDb(), 'students'));
-  return snap.docs.map((d) => d.data() as StudentRecord);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() } as StudentRecord));
 }
 
 export async function addStudent(data: Omit<StudentRecord, 'id'>): Promise<StudentRecord> {
