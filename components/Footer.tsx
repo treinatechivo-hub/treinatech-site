@@ -1,10 +1,15 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Logo } from './Logo';
 import { Instagram, Linkedin, Facebook, Twitter } from 'lucide-react';
+import { LegalModal } from './LegalModal';
 
 export const Footer: React.FC = () => {
+  const [legalModal, setLegalModal] = useState<'termos' | 'privacidade' | null>(null);
+
   return (
+    <>
+    <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />
     <footer className="bg-slate-950 text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
@@ -42,10 +47,10 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-bold mb-6">Treinamentos</h4>
             <ul className="space-y-4">
-              <li><a href="#" className="text-slate-400 hover:text-green-500 transition-colors">Excel Avançado</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-green-500 transition-colors">Power BI Specialist</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-green-500 transition-colors">SQL Expert</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-green-500 transition-colors">Dashboards Corporativos</a></li>
+              <li><a href="#cursos" className="text-slate-400 hover:text-green-500 transition-colors">Excel Avançado</a></li>
+              <li><a href="#cursos" className="text-slate-400 hover:text-green-500 transition-colors">Power BI Professional</a></li>
+              <li><a href="#cursos" className="text-slate-400 hover:text-green-500 transition-colors">SQL para Dados</a></li>
+              <li><a href="#cursos" className="text-slate-400 hover:text-green-500 transition-colors">Trilha Completa</a></li>
             </ul>
           </div>
         </div>
@@ -55,11 +60,12 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} Treinatech Soluções em Tecnologia Ltda. Todos os direitos reservados.
           </p>
           <div className="flex gap-8 text-sm text-slate-500">
-            <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
-            <a href="#" className="hover:text-white transition-colors">Privacidade</a>
+            <button onClick={() => setLegalModal('termos')} className="hover:text-white transition-colors">Termos de Uso</button>
+            <button onClick={() => setLegalModal('privacidade')} className="hover:text-white transition-colors">Privacidade</button>
           </div>
         </div>
       </div>
     </footer>
+    </>
   );
 };
