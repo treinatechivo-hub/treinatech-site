@@ -1,19 +1,25 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { IncomingMessage, ServerResponse } from 'http';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: IncomingMessage & { body: any }, res: ServerResponse & { status: (code: number) => any; json: (data: any) => void }) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.writeHead(405, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Method not allowed' }));
+    return;
   }
 
-  const { messages, system } = req.body;
+  const { messages, system } = req.body || {};
 
   if (!messages || !Array.isArray(messages)) {
-    return res.status(400).json({ error: 'Invalid request body' });
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Invalid request body' }));
+    return;
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'API key not configured' });
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'API key not configured' }));
+    return;
   }
 
   try {
@@ -32,15 +38,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }),
     });
 
-    if (!response.ok) {
-      const error = await response.text();
-      return res.status(response.status).json({ error });
-    }
-
     const data = await response.json();
-    return res.status(200).json(data);
+    res.writeHead(response.status, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(data));
   } catch (err) {
     console.error('API error:', err);
-    return res.status(500).json({ error: 'Internal server error' });
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Internal server error' }));
   }
 }
