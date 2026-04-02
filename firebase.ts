@@ -3,7 +3,7 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAYNM56HDmP4HbRGW_zT2EC5G6t1BDoJRI",
-  authDomain: "treinatech-3ef28.firebaseapp.com",
+    authDomain: "www.treinatech.com.br",
   projectId: "treinatech-3ef28",
   storageBucket: "treinatech-3ef28.firebasestorage.app",
   messagingSenderId: "78585439215",
