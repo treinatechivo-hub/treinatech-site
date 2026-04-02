@@ -2,16 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, Send, X, Bot, Loader2 } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-
 interface Message {
   role: 'user' | 'assistant';
   content: string;
 }
 
 // ─── System prompt ────────────────────────────────────────────────────────────
-
 const SYSTEM_PROMPT = `Você é o assistente virtual da Treinatech, empresa líder em treinamentos de tecnologia e análise de dados no Brasil.
-
 Informações da empresa:
 - Especialidades: Excel Avançado (VBA, Macros, Dashboards, Tabelas Dinâmicas), Power BI (DAX, Modelagem, Power Query, ETL), SQL (Banco de dados, Joins, Stored Procedures, Otimização)
 - WhatsApp: 41 99183-2100
@@ -20,7 +17,6 @@ Informações da empresa:
 - Atendemos todo o Brasil
 - Instrutores com certificação MCT (Microsoft Certified Trainer)
 - Nota média: 4.9/5 | +5.000 alunos formados | +15.000 horas de aula
-
 Diretrizes:
 - Seja prestativo, profissional e simpático
 - Respostas concisas (máximo 2-3 parágrafos curtos)
@@ -29,20 +25,14 @@ Diretrizes:
 - Foque sempre em como a Treinatech pode resolver o problema do usuário
 - Nunca invente informações — se não souber, sugira o contato direto`;
 
-// ─── API call ─────────────────────────────────────────────────────────────────
-
+// ─── API call (via serverless function para evitar CORS) ───────────────────────
 async function askClaude(messages: Message[]): Promise<string> {
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
+  const response = await fetch('/api/chat', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-api-key': import.meta.env.VITE_ANTHROPIC_API_KEY ?? '',
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-allow-browser': 'true',
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 1000,
       system: SYSTEM_PROMPT,
       messages: messages.map((m) => ({
         role: m.role,
@@ -60,7 +50,6 @@ async function askClaude(messages: Message[]): Promise<string> {
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-
 const INITIAL_MESSAGE: Message = {
   role: 'assistant',
   content:
@@ -93,13 +82,11 @@ export const ChatBot: React.FC = () => {
 
     const userMsg: Message = { role: 'user', content: text };
     const nextMessages = [...messages, userMsg];
-
     setInput('');
     setMessages(nextMessages);
     setLoading(true);
 
     try {
-      // Exclude initial assistant greeting from history sent to API
       const historyForApi = nextMessages.filter((_, i) => i > 0 || nextMessages[0].role === 'user');
       const reply = await askClaude(historyForApi);
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }]);
@@ -141,7 +128,6 @@ export const ChatBot: React.FC = () => {
         `}
       >
         {isOpen ? <X size={26} /> : <MessageSquare size={26} />}
-
         {/* Notification dot */}
         {!isOpen && (
           <span className="absolute -top-1 -right-1 flex h-5 w-5">
@@ -214,7 +200,6 @@ export const ChatBot: React.FC = () => {
               </div>
             </div>
           ))}
-
           {/* Loading indicator */}
           {loading && (
             <div className="flex justify-start">
@@ -224,7 +209,6 @@ export const ChatBot: React.FC = () => {
               </div>
             </div>
           )}
-
           <div ref={messagesEndRef} />
         </div>
 
@@ -268,7 +252,6 @@ export const ChatBot: React.FC = () => {
               <Send size={16} />
             </button>
           </div>
-
           {/* Powered by */}
           <p className="text-center mt-2.5 text-[9px] font-bold uppercase tracking-widest text-slate-300 select-none">
             Powered by Claude AI
