@@ -14,7 +14,7 @@ import { initializeApp, getApps } from 'firebase/app';
 // ─── Firebase init (lazy, evita duplicate-app) ────────────────────────────────
 const firebaseConfig = {
     apiKey: "AIzaSyAYNM56HDmP4HbRGW_zT2EC5G6t1BDoJRI",
-    authDomain: "treinatech-3ef28.firebaseapp.com",h
+    authDomain: "treinatech-3ef28.firebaseapp.com",
     projectId: "treinatech-3ef28",
     storageBucket: "treinatech-3ef28.firebasestorage.app",
     messagingSenderId: "78585439215",
@@ -155,6 +155,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return (
           <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithEmail, signUpWithEmail, signOut, firebaseApp }}>
             {children}
-          </AuthContext.Provider>AuthContext.Provider>
+          </AuthContext.Provider>
         );
 };
