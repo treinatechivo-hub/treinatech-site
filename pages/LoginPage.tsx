@@ -14,7 +14,7 @@ const GoogleIcon = () => (
 type Mode = 'login' | 'signup';
 
 export const LoginPage: React.FC = () => {
-  const { signInWithGoogle, signInWithEmail, signUpWithEmail } = useAuth();
+  const { signInWithGoogle, signInWithEmail, signUpWithEmail, authError, clearAuthError } = useAuth();
   const [mode, setMode] = useState<Mode>('login');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -30,6 +30,7 @@ export const LoginPage: React.FC = () => {
   const handleGoogleLogin = async () => {
     setLoading(true);
     setError(null);
+    clearAuthError();
     try {
       await signInWithGoogle();
     } catch {
@@ -45,6 +46,7 @@ export const LoginPage: React.FC = () => {
     if (mode === 'signup' && !name.trim()) return;
     setLoading(true);
     setError(null);
+    clearAuthError();
     try {
       if (mode === 'login') {
         await signInWithEmail(email, password);
@@ -61,6 +63,7 @@ export const LoginPage: React.FC = () => {
   const switchMode = (m: Mode) => {
     setMode(m);
     setError(null);
+    clearAuthError();
     setName('');
     setEmail('');
     setPassword('');
@@ -176,9 +179,9 @@ export const LoginPage: React.FC = () => {
             </div>
           )}
 
-          {error && (
+          {(error || authError) && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600 text-center">
-              {error}
+              {authError || error}
             </div>
           )}
 

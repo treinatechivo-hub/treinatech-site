@@ -40,6 +40,8 @@ export interface User {
 interface AuthContextType {
     user: User | null;
     loading: boolean;
+    authError: string | null;
+    clearAuthError: () => void;
     signInWithGoogle: () => Promise<void>;
     signInWithEmail: (email: string, password: string) => Promise<void>;
     signUpWithEmail: (name: string, email: string, password: string) => Promise<void>;
@@ -60,6 +62,7 @@ export const useAuth = (): AuthContextType => {
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
+    const [authError, setAuthError] = useState<string | null>(null);
 
     useEffect(() => {
           const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
@@ -77,9 +80,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
                                               // 🔒 BLOQUEIO: apenas alunos cadastrados pelo admin têm acesso
                                               if (!record || !record.active) {
-                                                                console.warn('Acesso negado: usuário não autorizado -', email);
                                                                 await fbSignOut(auth);
                                                                 setUser(null);
+                                                                setAuthError('Acesso negado. Sua conta não está cadastrada. Entre em contato com o administrador.');
                                                                 setLoading(false);
                                                                 return;
                                               }
@@ -89,9 +92,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                                                             enrolledCourses = record.enrolledCourses ?? [];
                                             } catch (e) {
                                                             console.warn('Firestore indisponível:', e);
-                                                            // Em caso de falha no Firestore, nega acesso por segurança
                                               await fbSignOut(auth);
                                                             setUser(null);
+                                                            setAuthError('Erro ao verificar cadastro. Tente novamente.');
                                                             setLoading(false);
                                                             return;
                                             }
@@ -148,12 +151,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           }
     };
 
+    const clearAuthError = () => setAuthError(null);
+
     const signOut = async () => {
           await fbSignOut(auth);
     };
 
     return (
-          <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithEmail, signUpWithEmail, signOut, firebaseApp }}>
+          <AuthContext.Provider value={{ user, loading, authError, clearAuthError, signInWithGoogle, signInWithEmail, signUpWithEmail, signOut, firebaseApp }}>
             {children}
           </AuthContext.Provider>
         );
