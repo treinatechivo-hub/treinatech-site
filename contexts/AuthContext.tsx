@@ -14,7 +14,7 @@ import { initializeApp, getApps } from 'firebase/app';
 // ─── Firebase init (lazy, evita duplicate-app) ────────────────────────────────
 const firebaseConfig = {
     apiKey: "AIzaSyAYNM56HDmP4HbRGW_zT2EC5G6t1BDoJRI",
-    authDomain: "treinatech-3ef28.firebaseapp.com",
+    authDomain: "treinatech-3ef28.firebaseapp.com",h
     projectId: "treinatech-3ef28",
     storageBucket: "treinatech-3ef28.firebasestorage.app",
     messagingSenderId: "78585439215",
