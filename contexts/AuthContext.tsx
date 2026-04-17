@@ -8,6 +8,7 @@ import {
     onAuthStateChanged,
     GoogleAuthProvider,
     getAuth,
+    sendPasswordResetEmail,
 } from 'firebase/auth';
 import { initializeApp, getApps } from 'firebase/app';
 
@@ -45,6 +46,7 @@ interface AuthContextType {
     signInWithGoogle: () => Promise<void>;
     signInWithEmail: (email: string, password: string) => Promise<void>;
     signUpWithEmail: (name: string, email: string, password: string) => Promise<void>;
+    resetPassword: (email: string) => Promise<void>;
     signOut: () => Promise<void>;
     firebaseApp: typeof firebaseApp;
 }
@@ -153,12 +155,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const clearAuthError = () => setAuthError(null);
 
+    const resetPassword = async (email: string) => {
+          await sendPasswordResetEmail(auth, email);
+    };
+
     const signOut = async () => {
           await fbSignOut(auth);
     };
 
     return (
-          <AuthContext.Provider value={{ user, loading, authError, clearAuthError, signInWithGoogle, signInWithEmail, signUpWithEmail, signOut, firebaseApp }}>
+          <AuthContext.Provider value={{ user, loading, authError, clearAuthError, signInWithGoogle, signInWithEmail, signUpWithEmail, resetPassword, signOut, firebaseApp }}>
             {children}
           </AuthContext.Provider>
         );

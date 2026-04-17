@@ -11,10 +11,10 @@ const GoogleIcon = () => (
   </svg>
 );
 
-type Mode = 'login' | 'signup';
+type Mode = 'login' | 'signup' | 'forgot';
 
 export const LoginPage: React.FC = () => {
-  const { signInWithGoogle, signInWithEmail, signUpWithEmail, authError, clearAuthError } = useAuth();
+  const { signInWithGoogle, signInWithEmail, signUpWithEmail, resetPassword, authError, clearAuthError } = useAuth();
   const [mode, setMode] = useState<Mode>('login');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -22,6 +22,7 @@ export const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [resetSent, setResetSent] = useState(false);
 
   const handleBack = () => {
     window.location.hash = '';
@@ -60,10 +61,26 @@ export const LoginPage: React.FC = () => {
     }
   };
 
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setLoading(true);
+    setError(null);
+    try {
+      await resetPassword(email.trim());
+      setResetSent(true);
+    } catch {
+      setError('Não foi possível enviar o e-mail. Verifique o endereço e tente novamente.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const switchMode = (m: Mode) => {
     setMode(m);
     setError(null);
     clearAuthError();
+    setResetSent(false);
     setName('');
     setEmail('');
     setPassword('');
@@ -100,32 +117,76 @@ export const LoginPage: React.FC = () => {
         {/* Title */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-extrabold text-slate-900 mb-1">
-            {mode === 'login' ? 'Área do Aluno' : 'Criar conta'}
+            {mode === 'login' ? 'Área do Aluno' : mode === 'signup' ? 'Criar conta' : 'Redefinir senha'}
           </h1>
           <p className="text-slate-500 text-sm">
             {mode === 'login'
               ? 'Acesse seus treinamentos exclusivos e materiais complementares.'
-              : 'Crie sua conta e comece a aprender hoje mesmo.'}
+              : mode === 'signup'
+              ? 'Crie sua conta e comece a aprender hoje mesmo.'
+              : 'Informe seu e-mail e enviaremos um link para redefinir sua senha.'}
           </p>
         </div>
 
-        {/* Mode tabs */}
-        <div className="flex bg-slate-100 rounded-xl p-1 mb-6">
-          {(['login', 'signup'] as Mode[]).map((m) => (
-            <button
-              key={m}
-              onClick={() => switchMode(m)}
-              className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
-                mode === m ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
-              }`}
-            >
-              {m === 'login' ? 'Entrar' : 'Cadastrar'}
-            </button>
-          ))}
-        </div>
+        {/* Mode tabs — oculto no modo forgot */}
+        {mode !== 'forgot' && (
+          <div className="flex bg-slate-100 rounded-xl p-1 mb-6">
+            {(['login', 'signup'] as Mode[]).map((m) => (
+              <button
+                key={m}
+                onClick={() => switchMode(m)}
+                className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
+                  mode === m ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+                }`}
+              >
+                {m === 'login' ? 'Entrar' : 'Cadastrar'}
+              </button>
+            ))}
+          </div>
+        )}
 
-        {/* Form */}
-        <form onSubmit={handleEmailSubmit} className="space-y-4">
+        {/* Forgot password form */}
+        {mode === 'forgot' && (
+          <form onSubmit={handleResetPassword} className="space-y-4">
+            <div className="relative">
+              <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Seu E-mail"
+                required
+                className="w-full pl-11 pr-4 py-3.5 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              />
+            </div>
+            {error && (
+              <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600 text-center">
+                {error}
+              </div>
+            )}
+            {resetSent && (
+              <div className="p-3 bg-green-50 border border-green-200 rounded-xl text-sm text-green-700 text-center">
+                Link enviado! Verifique sua caixa de entrada.
+              </div>
+            )}
+            <button
+              type="submit"
+              disabled={loading || resetSent}
+              className="w-full py-3.5 bg-green-700 text-white font-bold rounded-xl hover:bg-green-800 transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
+            >
+              {loading ? <Loader2 size={18} className="animate-spin" /> : null}
+              {loading ? 'Enviando...' : resetSent ? 'E-mail enviado' : 'Enviar link de redefinição'}
+            </button>
+            <div className="text-center">
+              <button type="button" onClick={() => switchMode('login')} className="text-xs text-green-700 hover:underline font-medium">
+                Voltar para o login
+              </button>
+            </div>
+          </form>
+        )}
+
+        {/* Login / Signup Form */}
+        {mode !== 'forgot' && <form onSubmit={handleEmailSubmit} className="space-y-4">
           {mode === 'signup' && (
             <div className="relative">
               <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -173,7 +234,7 @@ export const LoginPage: React.FC = () => {
 
           {mode === 'login' && (
             <div className="text-right">
-              <button type="button" className="text-xs text-green-700 hover:underline font-medium">
+              <button type="button" onClick={() => switchMode('forgot')} className="text-xs text-green-700 hover:underline font-medium">
                 Esqueceu a senha?
               </button>
             </div>
@@ -193,9 +254,10 @@ export const LoginPage: React.FC = () => {
             {loading ? <Loader2 size={18} className="animate-spin" /> : null}
             {loading ? 'Aguarde...' : mode === 'login' ? 'Entrar Agora' : 'Criar Conta'}
           </button>
-        </form>
+        </form>}
 
-        {/* Divider */}
+        {/* Divider + Google + Footer — ocultos no modo forgot */}
+        {mode !== 'forgot' && <>
         <div className="flex items-center gap-3 my-5">
           <div className="flex-1 h-px bg-slate-200" />
           <span className="text-xs text-slate-400 font-semibold uppercase tracking-wide">ou continue com</span>
@@ -228,6 +290,7 @@ export const LoginPage: React.FC = () => {
             </>
           )}
         </p>
+        </>}
       </div>
     </div>
   );
