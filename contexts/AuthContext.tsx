@@ -74,6 +74,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                                         const isAdmin = email === ADMIN_EMAIL;
 
                               let enrolledCourses: string[] = [];
+                              let studentName: string | null = null;
 
                               if (!isAdmin) {
                                             try {
@@ -92,6 +93,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                                               // Aluno autorizado: vincula UID e carrega cursos
                                               await linkUidToStudent(email, fbUser.uid);
                                                             enrolledCourses = record.enrolledCourses ?? [];
+                                                            studentName = record.name ?? null;
                                             } catch (e) {
                                                             console.warn('Firestore indisponível:', e);
                                               await fbSignOut(auth);
@@ -104,7 +106,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
                               setUser({
                                             uid: fbUser.uid,
-                                            name: fbUser.displayName ?? email.split('@')[0],
+                                            name: studentName ?? fbUser.displayName ?? email.split('@')[0],
                                             email,
                                             photoURL: fbUser.photoURL,
                                             enrolledCourses,
