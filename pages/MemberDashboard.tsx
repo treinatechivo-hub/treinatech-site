@@ -175,7 +175,10 @@ export const MemberDashboard: React.FC = () => {
           {user.photoURL && (
             <img src={user.photoURL} alt={user.name} className="w-8 h-8 rounded-full ring-2 ring-green-100" />
           )}
-          <span className="text-sm font-medium text-slate-700 hidden sm:block">{user.name.split(' ')[0]}</span>
+          <div className="hidden sm:flex flex-col leading-tight">
+            <span className="text-sm font-medium text-slate-700">{user.name}</span>
+            <span className="text-xs text-slate-400">{user.email}</span>
+          </div>
           <button
             onClick={signOut}
             className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-red-500 transition-colors px-2 py-1.5 rounded-lg hover:bg-red-50"
