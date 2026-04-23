@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-lg font-bold mb-6">Links Rápidos</h4>
             <ul className="space-y-4">
               <li><button onClick={() => goToSection('#inicio')} className="text-slate-400 hover:text-green-500 transition-colors">Início</button></li>
-              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Cursos</button></li>
+              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Treinamentos</button></li>
               <li><button onClick={() => goToSection('#sobre')} className="text-slate-400 hover:text-green-500 transition-colors">Sobre Nós</button></li>
               <li><button onClick={() => goToSection('#contato')} className="text-slate-400 hover:text-green-500 transition-colors">Contato</button></li>
             </ul>
@@ -57,10 +57,10 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-bold mb-6">Treinamentos</h4>
             <ul className="space-y-4">
-              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Excel Avançado</button></li>
-              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Power BI Professional</button></li>
+              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Excel (todos os níveis)</button></li>
+              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Power BI – Módulos 1 e 2</button></li>
               <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">SQL para Dados</button></li>
-              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Trilha Completa</button></li>
+              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors font-semibold text-green-500">→ Ver todos os treinamentos</button></li>
             </ul>
           </div>
         </div>
