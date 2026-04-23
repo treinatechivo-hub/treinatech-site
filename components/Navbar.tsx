@@ -128,13 +128,13 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-white z-40 md:hidden transition-transform duration-500 ease-in-out transform ${
+      <div className={`fixed inset-0 bg-slate-900 z-[9999] md:hidden transition-transform duration-500 ease-in-out transform ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         <div className="flex flex-col items-center justify-center h-full space-y-10 px-6">
           <button
             onClick={() => setIsOpen(false)}
-            className="absolute top-6 right-6 p-4 text-slate-400"
+            className="absolute top-6 right-6 p-4 text-white"
           >
             <X size={32} />
           </button>
@@ -146,7 +146,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
               key={item.href}
               href={item.href}
               onClick={(e) => handleLinkClick(e, item.href)}
-              className="text-3xl font-black text-slate-900 hover:text-green-700 uppercase tracking-tighter"
+              className="text-3xl font-black text-white hover:text-green-400 uppercase tracking-tighter"
             >
               {item.label}
             </a>
