@@ -297,6 +297,274 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
     );
   }
 
+  if (articleId === 3) {
+    return (
+      <div className="min-h-screen bg-slate-50">
+        {/* Header */}
+        <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <button onClick={onBack} className="flex items-center gap-2 text-yellow-100 hover:text-white mb-8 transition-colors">
+              <ChevronLeft className="w-4 h-4" />
+              Voltar ao Blog
+            </button>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Power BI</span>
+              <span className="text-yellow-200 text-sm flex items-center gap-1"><Clock className="w-4 h-4" />8 min de leitura</span>
+              <span className="text-yellow-200 text-sm flex items-center gap-1"><Calendar className="w-4 h-4" />18 mar 2026</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-6">
+              DAX do zero: os 10 conceitos que todo analista precisa dominar
+            </h1>
+            <p className="text-yellow-100 text-lg leading-relaxed">
+              CALCULATE, FILTER, ALL, RELATED... Veja os 10 conceitos de DAX mais cobrados no mercado e como aplicá-los em situações reais.
+            </p>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="bg-white rounded-3xl shadow-sm border border-slate-100 p-8 sm:p-12">
+
+            {/* Intro */}
+            <p className="text-slate-600 text-lg leading-relaxed mb-8">
+              DAX (Data Analysis Expressions) é a linguagem de fórmulas do Power BI, Power Pivot e Analysis Services. Dominar os conceitos certos faz a diferença entre um relatório básico e um modelo de dados verdadeiramente profissional. Neste artigo, reunimos os 10 conceitos fundamentais — com explicação clara e exemplos práticos para cada um.
+            </p>
+
+            {/* Concept 1 */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-yellow-100 text-yellow-700 font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">1</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">Contexto de Filtro (Filter Context)</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">
+                O contexto de filtro é o conjunto de filtros ativos que determinam quais linhas da tabela serão consideradas em um cálculo. Ele é gerado automaticamente por segmentações, linhas e colunas de uma tabela visual ou pela função CALCULATE.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-3">
+                <span className="text-slate-400">// Vendas totais respeitando o filtro da página</span><br />
+                Vendas Total = SUM(Vendas[Valor])
+              </div>
+              <p className="text-slate-500 text-sm">Quando você coloca essa medida numa tabela filtrada por "Região = Sul", o DAX automaticamente calcula apenas as vendas do Sul.</p>
+            </div>
+
+            {/* Concept 2 */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-yellow-100 text-yellow-700 font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">2</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">Contexto de Linha (Row Context)</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">
+                O contexto de linha é criado quando o DAX itera sobre uma tabela linha por linha — como em colunas calculadas ou funções iteradoras (SUMX, AVERAGEX). Cada linha tem acesso aos valores de todas as colunas daquela linha específica.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-3">
+                <span className="text-slate-400">// Coluna calculada — contexto de linha disponível</span><br />
+                Margem = Vendas[Receita] - Vendas[Custo]
+              </div>
+              <p className="text-slate-500 text-sm italic">Atenção: em medidas, não existe contexto de linha por padrão — apenas em colunas calculadas e funções iteradoras.</p>
+            </div>
+
+            {/* Concept 3 */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-yellow-100 text-yellow-700 font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">3</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">CALCULATE — a função mais importante do DAX</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">
+                CALCULATE avalia uma expressão em um contexto de filtro modificado. É a única função DAX capaz de alterar o contexto de filtro. Praticamente todo cálculo avançado passa por ela.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-3">
+                <span className="text-slate-400">// Vendas apenas do produto "Notebook"</span><br />
+                Vendas Notebook = CALCULATE(<br />
+                &nbsp;&nbsp;SUM(Vendas[Valor]),<br />
+                &nbsp;&nbsp;Produtos[Categoria] = "Notebook"<br />
+                )
+              </div>
+              <p className="text-slate-500 text-sm">Sintaxe: <code className="bg-slate-100 px-1 rounded">CALCULATE(expressão, filtro1, filtro2, ...)</code></p>
+            </div>
+
+            {/* Concept 4 */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-yellow-100 text-yellow-700 font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">4</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">ALL — ignorando filtros</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">
+                ALL remove todos os filtros de uma tabela ou coluna, retornando todos os valores independentemente do contexto ativo. É muito usada para calcular totais absolutos e percentuais do total.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-3">
+                <span className="text-slate-400">// % sobre o total geral, ignorando filtros de região</span><br />
+                % do Total = DIVIDE(<br />
+                &nbsp;&nbsp;SUM(Vendas[Valor]),<br />
+                &nbsp;&nbsp;CALCULATE(SUM(Vendas[Valor]), ALL(Vendas))<br />
+                )
+              </div>
+            </div>
+
+            {/* Concept 5 */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-yellow-100 text-yellow-700 font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">5</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">FILTER — filtrando tabelas</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">
+                FILTER retorna uma tabela que é um subconjunto de outra tabela, aplicando uma condição linha por linha. É frequentemente usada dentro de CALCULATE para filtros mais complexos que uma simples igualdade.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-3">
+                <span className="text-slate-400">// Vendas acima de R$ 1.000</span><br />
+                Vendas Grandes = CALCULATE(<br />
+                &nbsp;&nbsp;SUM(Vendas[Valor]),<br />
+                &nbsp;&nbsp;FILTER(Vendas, Vendas[Valor] &gt; 1000)<br />
+                )
+              </div>
+              <p className="text-slate-500 text-sm">Use FILTER quando precisar de condições que envolvem múltiplas colunas ou lógica mais complexa.</p>
+            </div>
+
+            {/* Concept 6 */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-yellow-100 text-yellow-700 font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">6</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">RELATED — cruzando tabelas</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">
+                RELATED traz um valor de uma tabela relacionada, navegando pelo relacionamento já definido no modelo de dados. É o equivalente DAX ao PROCV do Excel — mas usando a estrutura de relacionamentos.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-3">
+                <span className="text-slate-400">// Coluna calculada: traz a categoria do produto</span><br />
+                Categoria = RELATED(Produtos[Categoria])
+              </div>
+              <p className="text-slate-500 text-sm">RELATED só funciona no lado "muitos" do relacionamento. Para o lado "um", use RELATEDTABLE.</p>
+            </div>
+
+            {/* Concept 7 */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-yellow-100 text-yellow-700 font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">7</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">SUMX — funções iteradoras</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">
+                SUMX percorre cada linha de uma tabela, avalia uma expressão por linha e soma os resultados. É essencial quando você precisa calcular algo em nível de linha antes de agregar — como receita = quantidade × preço.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-3">
+                <span className="text-slate-400">// Receita = Quantidade × Preço, linha a linha</span><br />
+                Receita Total = SUMX(<br />
+                &nbsp;&nbsp;Vendas,<br />
+                &nbsp;&nbsp;Vendas[Quantidade] * RELATED(Produtos[Preço])<br />
+                )
+              </div>
+              <p className="text-slate-500 text-sm">Outras funções iteradoras: AVERAGEX, COUNTX, MAXX, MINX — todas seguem o mesmo padrão.</p>
+            </div>
+
+            {/* Concept 8 */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-yellow-100 text-yellow-700 font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">8</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">DIVIDE — divisão segura</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">
+                DIVIDE realiza divisões retornando um valor alternativo (geralmente BLANK ou 0) quando o divisor é zero — evitando erros nos visuais. É sempre preferível ao operador "/" em medidas.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-3">
+                <span className="text-slate-400">// Margem % com proteção contra divisão por zero</span><br />
+                Margem % = DIVIDE(<br />
+                &nbsp;&nbsp;[Lucro Bruto],<br />
+                &nbsp;&nbsp;[Receita Total],<br />
+                &nbsp;&nbsp;0 <span className="text-slate-400">// retorna 0 se Receita for zero</span><br />
+                )
+              </div>
+            </div>
+
+            {/* Concept 9 */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-yellow-100 text-yellow-700 font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">9</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">VAR — variáveis no DAX</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">
+                Variáveis armazenam resultados intermediários, tornando as fórmulas mais legíveis e performáticas. Um resultado calculado com VAR é avaliado apenas uma vez, evitando recálculos repetitivos.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-3">
+                <span className="text-slate-400">// Crescimento YoY com variáveis</span><br />
+                Crescimento % = <br />
+                VAR VendasAtual = SUM(Vendas[Valor])<br />
+                VAR VendasAnoAnterior = CALCULATE(<br />
+                &nbsp;&nbsp;SUM(Vendas[Valor]),<br />
+                &nbsp;&nbsp;SAMEPERIODLASTYEAR(Calendario[Data])<br />
+                )<br />
+                RETURN<br />
+                DIVIDE(VendasAtual - VendasAnoAnterior, VendasAnoAnterior)
+              </div>
+            </div>
+
+            {/* Concept 10 */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-yellow-100 text-yellow-700 font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">10</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">Time Intelligence — inteligência de datas</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">
+                As funções de Time Intelligence permitem comparações temporais como YTD (acumulado do ano), MTD (mês até hoje), crescimento vs. mesmo período do ano anterior e outras análises de tendência — mas exigem uma tabela de datas dedicada no modelo.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-4 font-mono text-sm text-green-400 mb-3">
+                <span className="text-slate-400">// Acumulado do ano (YTD)</span><br />
+                Vendas YTD = TOTALYTD(SUM(Vendas[Valor]), Calendario[Data])<br /><br />
+                <span className="text-slate-400">// Mesmo período do ano anterior</span><br />
+                Vendas SPLY = CALCULATE(<br />
+                &nbsp;&nbsp;SUM(Vendas[Valor]),<br />
+                &nbsp;&nbsp;SAMEPERIODLASTYEAR(Calendario[Data])<br />
+                )
+              </div>
+              <p className="text-slate-500 text-sm">Funções principais: TOTALYTD, TOTALMTD, SAMEPERIODLASTYEAR, DATEADD, PREVIOUSMONTH, PREVIOUSYEAR.</p>
+            </div>
+
+            {/* Summary table */}
+            <div className="bg-yellow-50 border border-yellow-100 rounded-2xl p-6 mb-10">
+              <h3 className="text-xl font-extrabold text-slate-900 mb-4">Resumo: os 10 conceitos</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-yellow-200">
+                      <th className="text-left py-2 pr-4 font-bold text-slate-700">#</th>
+                      <th className="text-left py-2 pr-4 font-bold text-slate-700">Conceito</th>
+                      <th className="text-left py-2 font-bold text-slate-700">Para que serve</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['1', 'Filter Context', 'Define quais dados são considerados no cálculo'],
+                      ['2', 'Row Context', 'Itera linha a linha em colunas e funções X'],
+                      ['3', 'CALCULATE', 'Altera o contexto de filtro de uma expressão'],
+                      ['4', 'ALL', 'Remove filtros — base para % do total'],
+                      ['5', 'FILTER', 'Cria subconjuntos de tabelas com condições'],
+                      ['6', 'RELATED', 'Busca valores em tabelas relacionadas'],
+                      ['7', 'SUMX', 'Soma expressões avaliadas linha a linha'],
+                      ['8', 'DIVIDE', 'Divisão segura (sem erro com divisor zero)'],
+                      ['9', 'VAR', 'Armazena resultados intermediários'],
+                      ['10', 'Time Intelligence', 'Análises temporais: YTD, MTD, YoY'],
+                    ].map(([num, conceito, descricao]) => (
+                      <tr key={num} className="border-b border-yellow-100 last:border-0">
+                        <td className="py-2 pr-4 font-bold text-yellow-600">{num}</td>
+                        <td className="py-2 pr-4 font-mono text-slate-800 font-semibold">{conceito}</td>
+                        <td className="py-2 text-slate-600">{descricao}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl p-8 text-center">
+              <h3 className="text-2xl font-extrabold text-white mb-3">Quer dominar o DAX na prática?</h3>
+              <p className="text-yellow-100 mb-6">No Power BI – Módulo 1 e Módulo 2 da TREINATECH você aplica todos esses conceitos em projetos reais, com acompanhamento do instrutor MCT.</p>
+              <a href="/#cursos" className="inline-block bg-white text-yellow-700 font-bold px-8 py-3 rounded-xl hover:bg-yellow-50 transition-colors">
+                Ver treinamentos de Power BI
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Artigos ainda não desenvolvidos
   return (
     <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center px-4 text-center">
