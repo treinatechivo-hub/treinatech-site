@@ -240,8 +240,8 @@ export const COURSES: Course[] = [
       {
         title: "Parte 1: Revisão e Power Query Avançado",
         items: [
-          "Revisão: modelagem, relações e medidas calculadas",
-          "Transformação avançada de dados no Power Query",
+          "Revisão: modelagem de dados, relações e medidas calculadas",
+          "Trabalhando com grandes bases de dados e performance",
           "Criação de parâmetros para consultas dinâmicas",
           "Pivotar e Unpivotar: reorganizando estruturas de dados",
           "Linguagem M: personalizações avançadas",
@@ -250,12 +250,13 @@ export const COURSES: Course[] = [
       {
         title: "Parte 2: DAX Profissional",
         items: [
-          "Trabalhando com grandes bases de dados e performance",
           "Relacionamentos especiais: many-to-many e bidirecionais",
+          "Funções de tabela e manipulação de tabelas no DAX",
           "Funções iteradoras: SUMX, AVERAGEX e de relação",
           "Variáveis no DAX: legibilidade e eficiência",
-          "Avançando no uso da função CALCULATE",
-          "Time Intelligence: comparação entre períodos",
+          "Avançando no uso da CALCULATE: a rainha do DAX",
+          "Visualização de consulta DAX para entender e otimizar",
+          "Time Intelligence: comparação entre diferentes períodos",
           "Grupos de cálculos e Drill Through",
         ]
       },
@@ -270,15 +271,15 @@ export const COURSES: Course[] = [
         ]
       },
       {
-        title: "Parte 4: Publicação, Segurança e Integração",
+        title: "Parte 4: Publicação, Segurança e Projetos",
         items: [
-          "Power BI Service: criação e publicação de dashboards",
+          "Power BI Service: publicação, integração e compartilhamento estratégico",
           "Power BI Report Server: publicação on-premises sem nuvem (para ambientes corporativos com restrição de acesso à internet)",
           "Fluxo de dados e Datamarts",
-          "Segurança em nível de linha (RLS) avançada",
-          "Detecção de erros: anomalias, logs e diagnósticos",
-          "Integração básica com Power Apps e Power Automate",
-          "Boas práticas para ambientes corporativos",
+          "Detecção de erros: anomalias, logs, diagnósticos e monitoramento",
+          "Segurança em nível de linha (RLS) avançada e colaboração segura",
+          "PROJETO 1 – Relatório Completo: DAX profissional, Power Query avançado e Storytelling",
+          "PROJETO 2 – Dashboard Executivo: IA, bookmarks, menu de filtro e publicação no Power BI Service",
         ]
       },
     ]
