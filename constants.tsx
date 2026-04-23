@@ -11,7 +11,7 @@ export const COLORS = {
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Início', href: '#inicio' },
   { label: 'Sobre Nós', href: '#sobre' },
-  { label: 'Cursos', href: '#cursos' },
+  { label: 'Treinamentos', href: '#cursos' },
   { label: 'Blog', href: '#blog' },
 ];
 
