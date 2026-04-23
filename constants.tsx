@@ -126,48 +126,143 @@ export const COURSES: Course[] = [
   {
     id: 'excel-avancado',
     title: 'Excel Avançado',
-    description: 'Domine automação, fórmulas matriciais e dashboards interativos para se tornar o especialista em dados da sua equipe.',
+    description: 'Domine automação, fórmulas matriciais, VBA e análise de dados — a base completa para dominar o Excel em qualquer contexto profissional.',
     icon: <Table className="w-8 h-8" />,
-    topics: ['Fórmulas Matriciais', 'Tabelas Dinâmicas', 'VBA & Macros', 'Dashboards Avançados'],
+    topics: ['Tabelas Dinâmicas', 'Fórmulas Matriciais', 'Macros & VBA', 'Integração WhatsApp'],
     fullSyllabus: [
       {
-        title: "Parte 1: Fórmulas Avançadas",
+        title: "Parte 1: Tabelas Dinâmicas Avançadas",
         items: [
-          "Funções matriciais: FILTRO, ÚNICO, CLASSIFICAR",
-          "ÍNDICE e CORRESP: busca avançada e bidirecional",
-          "Funções de texto avançadas: TEXTOANTES, TEXTODEPOIS",
-          "Auditoria de fórmulas e rastreamento de precedentes",
-          "Funções lógicas aninhadas de alta complexidade",
+          "Criação, layout e campos calculados",
+          "Agrupamentos, slicers e detalhamento de dados",
+          "Gráficos dinâmicos e modelo de dados",
+          "Tabelas Dinâmicas com múltiplas consultas",
         ]
       },
       {
-        title: "Parte 2: Tabelas Dinâmicas e Power Query",
+        title: "Parte 2: Fórmulas e Dados Avançados",
         items: [
-          "Tabelas dinâmicas avançadas com segmentação",
-          "Linha do tempo e filtros dinâmicos",
-          "Gráficos dinâmicos profissionais",
-          "Power Query: ETL completo e transformação de dados",
-          "Consolidação de múltiplas fontes no Power Query",
+          "Fórmulas Matriciais: SOMA(SE()), CONT.SES(), SOMASES()",
+          "PROCX() Bidimensional: busca produto × mercado",
+          "Funções de Banco de Dados: BDSOMA, BDMÉDIA, BDMÁX, BDMÍN",
+          "Filtro Avançado E/OU + FILTRAR, CLASSIFICAR, ÚNICO",
+          "Formatação Condicional Avançada com fórmulas",
+          "Imagens dinâmicas por lista validada",
+          "Integração com WhatsApp via HIPERLINK",
         ]
       },
       {
-        title: "Parte 3: VBA e Automação",
+        title: "Parte 3: Macros e VBA",
         items: [
-          "Gravação e edição de Macros",
-          "Lógica de programação VBA: variáveis e loops",
-          "Criação de funções personalizadas (UDF)",
-          "Formulários e controles de formulário avançados",
-          "Automatização de relatórios recorrentes",
+          "Macros: absoluta vs. relativa, atalhos e botões",
+          "Automação de fórmulas, gráficos e Sparklines",
+          "VBA: Sub(), Function() e Módulos",
+          "Formulários com caixas de mensagem personalizadas",
+          "Projeto Final: planilha profissional automatizada",
+        ]
+      },
+    ]
+  },
+
+  // ─── EXCEL AVANÇADO + DASHBOARDS ─────────────────────────────────────────────
+  {
+    id: 'excel-avancado-dashboards',
+    title: 'Excel Avançado + Dashboards',
+    description: 'Construa painéis executivos completos com imagens dinâmicas, slicers interativos e layout profissional — do dado ao relatório visual.',
+    icon: <Table className="w-8 h-8" />,
+    topics: ['Dashboard Completo', 'Imagens Dinâmicas', 'Slicers & KPIs', 'Design Executivo'],
+    fullSyllabus: [
+      {
+        title: "Base Técnica: Excel Avançado",
+        items: [
+          "Inclui todo o conteúdo do Excel Avançado",
+          "Tabelas Dinâmicas, Fórmulas Matriciais, Macros e VBA",
+          "Pré-requisito integrado ao treinamento",
         ]
       },
       {
-        title: "Parte 4: Dashboards e Projeto Final",
+        title: "Especialização: Dashboard Profissional",
         items: [
-          "UX/UI para dashboards executivos no Excel",
-          "Painéis interativos com segmentadores e botões",
-          "Integração Excel com Power BI",
-          "Boas práticas de performance em arquivos grandes",
-          "Projeto Final: Dashboard executivo completo",
+          "Análise de banco de dados para construção do painel",
+          "Tabelas Dinâmicas nomeadas e conectadas ao Dashboard",
+          "Planilhas auxiliares com imagens dinâmicas (lojas e vendedores)",
+          "Layout e design profissional do Dashboard",
+          "Cartões com KPIs e imagens dinâmicas por seleção",
+          "Slicers conectados a múltiplos gráficos e tabelas",
+          "Gráfico dinâmico com seleção por célula validada",
+          "Sparklines integrados ao painel",
+          "UX/UI: boas práticas de design para relatórios executivos",
+          "Projeto Final: Dashboard executivo interativo completo",
+        ]
+      },
+    ]
+  },
+
+  // ─── EXCEL AVANÇADO + BI COM EXCEL ───────────────────────────────────────────
+  {
+    id: 'excel-avancado-bi',
+    title: 'Excel Avançado + BI com Excel',
+    description: 'Transforme o Excel em uma ferramenta de BI com Power Query, Power Pivot e DAX — o caminho natural para o Power BI.',
+    icon: <Table className="w-8 h-8" />,
+    topics: ['ETL com Power Query', 'Power Pivot & DAX', 'Star Schema', 'Relatórios Profissionais'],
+    fullSyllabus: [
+      {
+        title: "Base Técnica: Excel Avançado",
+        items: [
+          "Inclui todo o conteúdo do Excel Avançado",
+          "Tabelas Dinâmicas, Fórmulas Matriciais, Macros e VBA",
+          "Pré-requisito integrado ao treinamento",
+        ]
+      },
+      {
+        title: "Especialização: Business Intelligence com Excel",
+        items: [
+          "Introdução ao processo de Business Intelligence",
+          "ETL com Power Query: conexão com CSV, Web e banco de dados",
+          "Tratamento e limpeza de dados no Power Query",
+          "Star Schema (modelo dimensional) na prática",
+          "Modelagem de dados com Power Pivot",
+          "Relacionamentos entre tabelas",
+          "Cálculos DAX: medidas e colunas calculadas",
+          "Tabelas Dinâmicas conectadas ao modelo de dados",
+          "Gráficos e mapas para relatórios profissionais",
+          "Projeto Final: modelo de dados completo com relatório",
+        ]
+      },
+    ]
+  },
+
+  // ─── EXCEL AVANÇADO + ANÁLISE FINANCEIRA ─────────────────────────────────────
+  {
+    id: 'excel-avancado-financeiro',
+    title: 'Excel Avançado + Análise Financeira',
+    description: 'Modelagem financeira, análise de investimentos, fluxo de caixa e sistemas de amortização — Excel aplicado às decisões do negócio.',
+    icon: <Table className="w-8 h-8" />,
+    topics: ['Funções Financeiras', 'VPL, TIR e Payback', 'Fluxo de Caixa', 'Amortização Price & SAC'],
+    fullSyllabus: [
+      {
+        title: "Base Técnica: Excel Avançado",
+        items: [
+          "Inclui todo o conteúdo do Excel Avançado",
+          "Tabelas Dinâmicas, Fórmulas Matriciais, Macros e VBA",
+          "Pré-requisito integrado ao treinamento",
+        ]
+      },
+      {
+        title: "Especialização: Modelagem Financeira",
+        items: [
+          "Funções financeiras: VP(), VF(), PGTO(), TAXA(), NPER(), IPGTO(), PPGTO()",
+          "Juros simples e compostos com gráfico dinâmico por período",
+          "Atingir Meta: análise de margem de lucro (manual e automático)",
+          "Tabela de Dados: simulação financeira com duas variáveis",
+          "Gestão de Cenários: receita e lucro líquido",
+          "SOLVER: estimativa de faturamento e otimização de recursos",
+          "VPL(), TIR() e TMA: análise de viabilidade de projetos",
+          "Payback Simples e Descontado",
+          "Tabela Price e SAC: simulação de financiamentos",
+          "Fluxo de caixa projetado e descontado",
+          "Projeções de receitas, custos e resultados",
+          "Projeto Final: modelo financeiro completo com simuladores",
         ]
       },
     ]
