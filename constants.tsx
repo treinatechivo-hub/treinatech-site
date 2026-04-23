@@ -240,8 +240,8 @@ export const COURSES: Course[] = [
       {
         title: "Parte 1: Revisão e Power Query Avançado",
         items: [
-          "Revisão: modelagem de dados, relações e medidas calculadas",
-          "Trabalhando com grandes bases de dados e performance",
+          "Revisão: modelagem, relações e medidas calculadas",
+          "Transformação avançada de dados no Power Query",
           "Criação de parâmetros para consultas dinâmicas",
           "Pivotar e Unpivotar: reorganizando estruturas de dados",
           "Linguagem M: personalizações avançadas",
@@ -250,13 +250,12 @@ export const COURSES: Course[] = [
       {
         title: "Parte 2: DAX Profissional",
         items: [
+          "Trabalhando com grandes bases de dados e performance",
           "Relacionamentos especiais: many-to-many e bidirecionais",
-          "Funções de tabela e manipulação de tabelas no DAX",
           "Funções iteradoras: SUMX, AVERAGEX e de relação",
           "Variáveis no DAX: legibilidade e eficiência",
-          "Avançando no uso da CALCULATE: a rainha do DAX",
-          "Visualização de consulta DAX para entender e otimizar",
-          "Time Intelligence: comparação entre diferentes períodos",
+          "Avançando no uso da função CALCULATE",
+          "Time Intelligence: comparação entre períodos",
           "Grupos de cálculos e Drill Through",
         ]
       },
@@ -271,15 +270,21 @@ export const COURSES: Course[] = [
         ]
       },
       {
-        title: "Parte 4: Publicação, Segurança e Projetos",
+        title: "Parte 4: Publicação, Segurança e Governança",
         items: [
           "Power BI Service: publicação, integração e compartilhamento estratégico",
           "Power BI Report Server: publicação on-premises sem nuvem (para ambientes corporativos com restrição de acesso à internet)",
           "Fluxo de dados e Datamarts",
           "Detecção de erros: anomalias, logs, diagnósticos e monitoramento",
           "Segurança em nível de linha (RLS) avançada e colaboração segura",
-          "PROJETO 1 – Relatório Completo: DAX profissional, Power Query avançado e Storytelling",
-          "PROJETO 2 – Dashboard Executivo: IA, bookmarks, menu de filtro e publicação no Power BI Service",
+        ]
+      },
+      {
+        title: "Projetos do Módulo 2",
+        items: [
+          "Diferente do Módulo 1, neste módulo são desenvolvidos apenas 2 projetos finais. Todo o conteúdo programático são as partes detalhadas que constroem esses dois entregáveis:",
+          "PROJETO 1 – Relatório Completo: análise estratégica avançada com DAX profissional, Power Query e Storytelling",
+          "PROJETO 2 – Dashboard Executivo: painel interativo com IA, bookmarks, menu de filtro e publicação no Power BI Service",
         ]
       },
     ]
