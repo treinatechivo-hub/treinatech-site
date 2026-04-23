@@ -297,7 +297,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
     );
   }
 
-  if (articleId === 3) {
+  if (articleId === 2) {
     return (
       <div className="min-h-screen bg-slate-50">
         {/* Header */}
