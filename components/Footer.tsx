@@ -57,10 +57,10 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-bold mb-6">Treinamentos</h4>
             <ul className="space-y-4">
-              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Excel (todos os níveis)</button></li>
-              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">Power BI – Módulos 1 e 2</button></li>
-              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors">SQL para Dados</button></li>
-              <li><button onClick={() => goToSection('#cursos')} className="text-slate-400 hover:text-green-500 transition-colors font-semibold text-green-500">→ Ver todos os treinamentos</button></li>
+              <li><a href="/#cursos" className="text-slate-400 hover:text-green-500 transition-colors">Excel (todos os níveis)</a></li>
+              <li><a href="/#cursos" className="text-slate-400 hover:text-green-500 transition-colors">Power BI – Módulos 1 e 2</a></li>
+              <li><a href="/#cursos" className="text-slate-400 hover:text-green-500 transition-colors">SQL para Dados</a></li>
+              <li><a href="/#cursos" className="text-slate-400 hover:text-green-500 transition-colors font-semibold">→ Ver todos os treinamentos</a></li>
             </ul>
           </div>
         </div>
