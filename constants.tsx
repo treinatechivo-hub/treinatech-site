@@ -173,39 +173,111 @@ export const COURSES: Course[] = [
     ]
   },
 
-  // ─── POWER BI ────────────────────────────────────────────────────────────────
+  // ─── POWER BI MÓDULO 1 ───────────────────────────────────────────────────────
   {
-    id: 'powerbi',
-    title: 'Power BI Professional',
-    description: 'Aprenda a criar relatórios dinâmicos e Business Intelligence de alto impacto visual.',
+    id: 'powerbi-modulo1',
+    title: 'Power BI – Módulo 1',
+    description: 'Do dado ao relatório interativo: ETL com Power Query, modelagem, DAX e publicação com 5 projetos reais.',
     icon: <BarChart3 className="w-8 h-8" />,
-    topics: ['Modelagem de Dados', 'Linguagem DAX', 'ETL com Power Query', 'Publicação Web'],
+    topics: ['ETL com Power Query', 'Modelagem e DAX', 'Relatórios Interativos', '5 Projetos Reais'],
     fullSyllabus: [
       {
-        title: "Módulo 1: Preparação de Dados",
+        title: "Parte 1: Conceitos e Fundamentos de BI",
         items: [
-          "Conexão com diversas fontes",
-          "Transformação no Power Query",
-          "Lógica M (Fundamentos)",
-          "Limpeza e tipagem de dados",
+          "Business Intelligence: conceito e aplicações no mercado",
+          "Processo tradicional de BI e sua evolução",
+          "O Power BI: versões Desktop e Service",
+          "Interfaces e política de licenças",
+          "Visão geral do fluxo de trabalho no Power BI",
         ]
       },
       {
-        title: "Módulo 2: Modelagem e DAX",
+        title: "Parte 2: Processo ETL e Power Query",
         items: [
-          "Relacionamentos e Cardinalidade",
-          "Esquema Estrela (Star Schema)",
-          "Medidas vs Colunas Calculadas",
-          "Time Intelligence e Contexto de Filtro",
+          "O processo ETL (Extract, Transform, Load)",
+          "Conectando a múltiplas fontes de dados",
+          "Transformação e limpeza de dados no Power Query",
+          "Aplicação de tipos, filtros e colunas calculadas",
+          "Boas práticas de organização de queries",
         ]
       },
       {
-        title: "Módulo 3: Visualização e Governança",
+        title: "Parte 3: Modelagem de Dados",
         items: [
-          "UX/UI para Dashboards",
-          "Storytelling com Dados",
-          "RLS (Segurança em nível de linha)",
-          "Power BI Service e Gateways",
+          "Banco de dados dimensional: conceito e estrutura",
+          "Relacionamentos entre tabelas: tipos e cardinalidade",
+          "Esquema Estrela (Star Schema) na prática",
+          "Funções e cálculos DAX: medidas vs colunas calculadas",
+          "Contexto de filtro e avaliação de expressões DAX",
+        ]
+      },
+      {
+        title: "Parte 4: Visualização, Publicação e Projetos",
+        items: [
+          "Drill Down: multicamadas de dados em gráficos",
+          "Relatórios interativos com segmentadores",
+          "UX/UI e Storytelling para dashboards profissionais",
+          "Publicação no Power BI Service e compartilhamento",
+          "PROJETO 1 – Demonstrativo de Vendas",
+          "PROJETO 2 – International Motors (ETL com 12 planilhas)",
+          "PROJETO 3 – Pedidos: Vendas / Vendedor / Clientes / Produtos (DAX)",
+          "PROJETO 4 – Painel Covid: web scrapping em tempo real",
+          "PROJETO 5 – Portfólio de Projetos (menu de relatórios)",
+        ]
+      },
+    ]
+  },
+
+  // ─── POWER BI MÓDULO 2 ───────────────────────────────────────────────────────
+  {
+    id: 'powerbi-modulo2',
+    title: 'Power BI – Módulo 2',
+    description: 'DAX avançado, Power Query com linguagem M, visualizações com IA e segurança corporativa — nível profissional.',
+    icon: <BarChart3 className="w-8 h-8" />,
+    topics: ['DAX Avançado & Time Intelligence', 'Power Query + Linguagem M', 'Visuais com IA', 'Segurança & Report Server'],
+    fullSyllabus: [
+      {
+        title: "Parte 1: Revisão e Power Query Avançado",
+        items: [
+          "Revisão: modelagem, relações e medidas calculadas",
+          "Transformação avançada de dados no Power Query",
+          "Criação de parâmetros para consultas dinâmicas",
+          "Pivotar e Unpivotar: reorganizando estruturas de dados",
+          "Linguagem M: personalizações avançadas",
+        ]
+      },
+      {
+        title: "Parte 2: DAX Profissional",
+        items: [
+          "Trabalhando com grandes bases de dados e performance",
+          "Relacionamentos especiais: many-to-many e bidirecionais",
+          "Funções iteradoras: SUMX, AVERAGEX e de relação",
+          "Variáveis no DAX: legibilidade e eficiência",
+          "Avançando no uso da função CALCULATE",
+          "Time Intelligence: comparação entre períodos",
+          "Grupos de cálculos e Drill Through",
+        ]
+      },
+      {
+        title: "Parte 3: Visualizações Avançadas e Design",
+        items: [
+          "Formatação condicional com medidas, visuais e ícones",
+          "Visuais com IA: insights automáticos e preditivos",
+          "Parâmetros em gráfico com botão de opção",
+          "Bookmarks, painel de seleção e menu lateral de filtro",
+          "Recursos visuais, planos de fundo e hierarquia visual",
+        ]
+      },
+      {
+        title: "Parte 4: Publicação, Segurança e Integração",
+        items: [
+          "Power BI Service: criação e publicação de dashboards",
+          "Power BI Report Server: publicação on-premises sem nuvem (para ambientes corporativos com restrição de acesso à internet)",
+          "Fluxo de dados e Datamarts",
+          "Segurança em nível de linha (RLS) avançada",
+          "Detecção de erros: anomalias, logs e diagnósticos",
+          "Integração básica com Power Apps e Power Automate",
+          "Boas práticas para ambientes corporativos",
         ]
       },
     ]
