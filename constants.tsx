@@ -215,6 +215,7 @@ export const COURSES: Course[] = [
         title: "Parte 4: Visualização, Publicação e Projetos",
         items: [
           "Drill Down: multicamadas de dados em gráficos",
+          "Tooltip padrão, personalizado básico e avançado (com visual)",
           "Relatórios interativos com segmentadores",
           "UX/UI e Storytelling para dashboards profissionais",
           "Publicação no Power BI Service e compartilhamento",
