@@ -299,25 +299,24 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
 
   if (articleId === 2) {
     return (
-      <div className="min-h-screen bg-yellow-50">
+      <div className="min-h-screen bg-slate-50">
         {/* Header */}
-        <div className="bg-amber-100 border-b border-amber-200">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10">
-            <button onClick={onBack} className="flex items-center gap-2 bg-green-100 text-green-700 hover:bg-green-200 font-bold px-4 py-2.5 rounded-xl text-sm mb-8 transition-colors active:scale-95">
-              <ArrowLeft className="w-4 h-4" />
-              Voltar ao Blog
+        <div className="bg-gradient-to-br from-slate-900 via-amber-900 to-slate-900 pt-28 pb-16 px-4">
+          <div className="max-w-3xl mx-auto">
+            <button onClick={onBack} className="flex items-center gap-2 text-amber-400 hover:text-amber-300 text-sm font-bold mb-8 transition-colors">
+              <ArrowLeft className="w-4 h-4" /> Voltar ao Blog
             </button>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide border border-yellow-200">Power BI</span>
-              <span className="text-slate-600 text-sm flex items-center gap-1"><Clock className="w-4 h-4" />8 min de leitura</span>
-              <span className="text-slate-600 text-sm flex items-center gap-1"><Calendar className="w-4 h-4" />18 mar 2026</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mb-6">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 border border-amber-400/20 px-4 py-1.5 rounded-full mb-5">
+              Power BI
+            </span>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-6">
               DAX do zero: os 10 conceitos que todo analista precisa dominar
             </h1>
-            <p className="text-slate-700 text-lg leading-relaxed">
-              CALCULATE, FILTER, ALL, RELATED... Veja os 10 conceitos de DAX mais cobrados no mercado e como aplicá-los em situações reais.
-            </p>
+            <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
+              <span className="flex items-center gap-2"><User className="w-4 h-4 text-amber-400" /><span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT</span>
+              <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 18 mar 2026</span>
+              <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 8 min de leitura</span>
+            </div>
           </div>
         </div>
 
