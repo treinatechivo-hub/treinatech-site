@@ -75,8 +75,8 @@ const App: React.FC = () => {
 
   if (page === 'article') {
     return (
-      <div className="min-h-screen bg-slate-900">
-        <Navbar darkBg />
+      <div className="min-h-screen bg-yellow-50">
+        <Navbar darkBg={false} />
         <ArticlePage articleId={articleId} onBack={handleBackToBlog} />
         <Footer />
         <ChatBot />
