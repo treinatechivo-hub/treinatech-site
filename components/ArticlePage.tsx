@@ -309,13 +309,13 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
             </button>
             <div className="flex items-center gap-3 mb-6">
               <span className="bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide border border-yellow-200">Power BI</span>
-              <span className="text-slate-400 text-sm flex items-center gap-1"><Clock className="w-4 h-4" />8 min de leitura</span>
-              <span className="text-slate-400 text-sm flex items-center gap-1"><Calendar className="w-4 h-4" />18 mar 2026</span>
+              <span className="text-slate-600 text-sm flex items-center gap-1"><Clock className="w-4 h-4" />8 min de leitura</span>
+              <span className="text-slate-600 text-sm flex items-center gap-1"><Calendar className="w-4 h-4" />18 mar 2026</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mb-6">
               DAX do zero: os 10 conceitos que todo analista precisa dominar
             </h1>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-700 text-lg leading-relaxed">
               CALCULATE, FILTER, ALL, RELATED... Veja os 10 conceitos de DAX mais cobrados no mercado e como aplicá-los em situações reais.
             </p>
           </div>
