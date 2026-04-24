@@ -299,9 +299,9 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
 
   if (articleId === 2) {
     return (
-      <div className="min-h-screen bg-amber-50">
+      <div className="min-h-screen bg-yellow-50">
         {/* Header */}
-        <div className="bg-amber-50 border-b border-amber-100">
+        <div className="bg-amber-100 border-b border-amber-200">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10">
             <button onClick={onBack} className="flex items-center gap-2 bg-green-100 text-green-700 hover:bg-green-200 font-bold px-4 py-2.5 rounded-xl text-sm mb-8 transition-colors active:scale-95">
               <ArrowLeft className="w-4 h-4" />
@@ -552,7 +552,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
             </div>
 
             {/* CTA */}
-            <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-8 text-center">
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-8 text-center">
               <h3 className="text-2xl font-extrabold text-slate-900 mb-3">Quer dominar o DAX na prática?</h3>
               <p className="text-slate-600 mb-6">No Power BI – Módulo 1 e Módulo 2 da TREINATECH você aplica todos esses conceitos em projetos reais, com acompanhamento do instrutor MCT.</p>
               <a href="/#cursos" className="inline-block bg-green-700 text-white font-bold px-8 py-3 rounded-xl hover:bg-green-800 transition-colors active:scale-95">
