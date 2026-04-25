@@ -73,7 +73,10 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
               onClick={(e) => handleLinkClick(e, '#inicio')}
               className="flex items-center transition-opacity hover:opacity-90"
             >
-              <Logo className="h-10" />
+              <Logo
+                className="h-10"
+                textColor={darkBg && !scrolled ? 'text-white' : 'text-[#16a34a]'}
+              />
             </a>
 
             {/* Desktop Nav */}
@@ -132,7 +135,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
               <X size={32} />
             </button>
 
-            <Logo className="h-16 mb-4" />
+            <Logo className="h-16 mb-4" textColor="text-white" />
 
             {NAV_ITEMS.map((item) => (
               <a
