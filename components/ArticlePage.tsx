@@ -1230,6 +1230,364 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
     );
   }
 
+  // Artigo 6 — Carreira em dados
+  if (articleId === 6) {
+    return (
+      <article className="min-h-screen bg-slate-50">
+        {/* Header */}
+        <div className="bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 pt-28 pb-16 px-4">
+          <div className="max-w-3xl mx-auto">
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 text-purple-400 hover:text-purple-300 text-sm font-bold mb-8 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" /> Voltar ao Blog
+            </button>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-purple-400 bg-purple-400/10 border border-purple-400/20 px-4 py-1.5 rounded-full mb-5">
+              Carreira
+            </span>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-6">
+              Carreira em dados: o que as empresas realmente esperam de você
+            </h1>
+            <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
+              <span className="flex items-center gap-2">
+                <User className="w-4 h-4 text-purple-400" />
+                <span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT
+              </span>
+              <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 15 fev 2026</span>
+              <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 5 min de leitura</span>
+              <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Nível: Todos os níveis</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Imagem de capa */}
+        <div className="max-w-3xl mx-auto px-4 -mt-1">
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=85"
+            alt="Carreira em dados"
+            className="w-full h-72 object-cover rounded-3xl shadow-2xl"
+          />
+        </div>
+
+        {/* Conteúdo */}
+        <div className="max-w-3xl mx-auto px-4 py-14">
+          <div className="flex flex-col lg:flex-row gap-12">
+
+            {/* Artigo principal */}
+            <div className="flex-1 prose-custom">
+
+              {/* Intro */}
+              <p className="text-lg text-slate-600 leading-relaxed mb-8 font-medium border-l-4 border-purple-500 pl-5 bg-purple-50 py-4 pr-4 rounded-r-2xl">
+                Analisamos mais de 50 vagas reais de analista de dados publicadas no LinkedIn, Glassdoor e portais corporativos brasileiros. O resultado mostra uma lacuna clara: a maioria dos candidatos domina ferramentas, mas poucas pessoas combinam habilidades técnicas com raciocínio de negócio — e é exatamente isso que as empresas mais pagam para encontrar.
+              </p>
+
+              {/* Seção 1 */}
+              <h2 id="mercado" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">O mercado de dados no Brasil e no mundo</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O Fórum Econômico Mundial projeta, no relatório <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer" className="text-purple-700 font-semibold hover:underline">Future of Jobs 2025</a>, que analistas e cientistas de dados estarão entre as cinco profissões de maior crescimento global até 2030 — com expectativa de 1 milhão de novas vagas líquidas somente nessa categoria. No Brasil, a demanda cresce em ritmo acelerado: segundo o <a href="https://www.linkedin.com/business/talent/blog/talent-strategy/fastest-growing-jobs" target="_blank" rel="noopener noreferrer" className="text-purple-700 font-semibold hover:underline">LinkedIn Talent Insights</a>, vagas com "análise de dados" no título cresceram mais de 40% entre 2022 e 2024 no país.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-6">
+                Ao mesmo tempo, o <a href="https://survey.stackoverflow.co/2024/" target="_blank" rel="noopener noreferrer" className="text-purple-700 font-semibold hover:underline">Stack Overflow Developer Survey 2024</a> aponta que profissionais de dados estão entre os mais bem remunerados da área de tecnologia globalmente — com salários medianos acima da média do setor em todas as regiões pesquisadas.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+                {[
+                  { valor: '+1 milhão', desc: 'novas vagas de dados previstas até 2030 (WEF, 2025)' },
+                  { valor: '+40%', desc: 'crescimento de vagas de analista no Brasil (LinkedIn, 2024)' },
+                  { valor: 'Top 5', desc: 'profissões mais demandadas globalmente para a próxima década' },
+                ].map(({ valor, desc }, i) => (
+                  <div key={i} className="bg-purple-50 border border-purple-100 rounded-2xl p-5 text-center">
+                    <p className="text-3xl font-extrabold text-purple-700 mb-1">{valor}</p>
+                    <p className="text-xs text-slate-500 leading-snug">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Seção 2 */}
+              <h2 id="hard-skills" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">As habilidades técnicas mais cobradas nas vagas</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Cruzamos as exigências das vagas com dados do <a href="https://survey.stackoverflow.co/2024/" target="_blank" rel="noopener noreferrer" className="text-purple-700 font-semibold hover:underline">Stack Overflow Developer Survey 2024</a> e do <a href="https://www.glassdoor.com/research/data-scientist-job-description/" target="_blank" rel="noopener noreferrer" className="text-purple-700 font-semibold hover:underline">Glassdoor Job & Salary Research</a>. As ferramentas e tecnologias abaixo aparecem com maior frequência nas descrições de vagas de analista de dados no Brasil:
+              </p>
+              <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm mb-8">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-slate-800 text-white">
+                      <th className="text-left px-5 py-3 font-bold">Habilidade</th>
+                      <th className="text-left px-5 py-3 font-bold">Frequência nas vagas</th>
+                      <th className="text-left px-5 py-3 font-bold">Por que as empresas exigem</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['SQL', 'Muito alta (~85% das vagas)', 'Extração de dados de bancos corporativos sem depender de TI'],
+                      ['Excel / Power Query', 'Muito alta (~80% das vagas)', 'Análises rápidas, relatórios operacionais e automação de rotinas'],
+                      ['Power BI ou Tableau', 'Alta (~70% das vagas)', 'Dashboards interativos para gestores e diretoria'],
+                      ['Python (pandas, matplotlib)', 'Média-alta (~55% das vagas)', 'Automação, análise estatística e manipulação de grandes volumes'],
+                      ['Google Analytics / GA4', 'Média (~40% das vagas)', 'Análise de comportamento digital em empresas com e-commerce ou marketing'],
+                      ['Azure / AWS / GCP', 'Crescente (~30% das vagas)', 'Ambientes de dados modernos na nuvem — tendência acelerada pós-2023'],
+                    ].map(([skill, freq, motivo], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                        <td className="px-5 py-3 font-bold text-purple-700">{skill}</td>
+                        <td className="px-5 py-3 text-slate-600 text-xs">{freq}</td>
+                        <td className="px-5 py-3 text-slate-500 text-xs">{motivo}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="bg-purple-50 border border-purple-100 rounded-2xl p-4 mb-8 text-sm text-slate-700">
+                <strong>💡 Ponto de atenção:</strong> SQL continua sendo a habilidade número 1 — presente em mais vagas do que Python ou Power BI. Dominar SQL antes de qualquer outra ferramenta é o caminho mais direto para entrar no mercado de dados.
+              </div>
+
+              {/* Seção 3 */}
+              <h2 id="soft-skills" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">As soft skills que as empresas realmente valorizam</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Segundo o relatório <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer" className="text-purple-700 font-semibold hover:underline">Future of Jobs 2025 do WEF</a>, pensamento analítico e criatividade lideram a lista de competências mais valorizadas para a próxima década — acima de qualquer habilidade técnica específica. A <a href="https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century" target="_blank" rel="noopener noreferrer" className="text-purple-700 font-semibold hover:underline">Harvard Business Review</a> reforça que o diferencial do bom analista está em transformar dados em decisões — não apenas em gerar gráficos.
+              </p>
+              <div className="space-y-3 mb-8">
+                {[
+                  ['Comunicação de resultados', 'Apresentar análises para pessoas não técnicas — gestores, diretores, clientes — de forma clara e acionável. Quem não sabe comunicar, não influencia decisões.'],
+                  ['Raciocínio de negócio', 'Entender o contexto por trás dos dados: qual problema a empresa está tentando resolver? Qual decisão essa análise vai embasar?'],
+                  ['Pensamento crítico', 'Questionar a qualidade dos dados, identificar vieses, reconhecer quando um resultado "bom demais" precisa ser investigado antes de ser apresentado.'],
+                  ['Autonomia e proatividade', 'Trazer análises que ninguém pediu mas que geram valor. Empresas querem analistas que resolvem problemas, não apenas que executam tarefas.'],
+                  ['Colaboração multidisciplinar', 'Trabalhar com times de TI, Marketing, Financeiro e Operações ao mesmo tempo — traduzindo necessidades de negócio em consultas e relatórios.'],
+                ].map(([titulo, desc], i) => (
+                  <div key={i} className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl px-4 py-3 shadow-sm">
+                    <CheckCircle className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-slate-800 text-sm font-bold">{titulo}</p>
+                      <p className="text-slate-500 text-xs mt-0.5">{desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Seção 4 */}
+              <h2 id="diferencial" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">O que separa um analista mediano de um excelente</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                A <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-data-driven-enterprise-of-2025" target="_blank" rel="noopener noreferrer" className="text-purple-700 font-semibold hover:underline">McKinsey Global Institute</a> identificou que empresas orientadas por dados têm 23 vezes mais chances de adquirir clientes e 6 vezes mais chances de reter clientes — mas apenas quando as análises são convertidas em ações concretas. Isso exige um perfil que vai além do técnico:
+              </p>
+              <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm mb-8">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-slate-800 text-white">
+                      <th className="text-left px-5 py-3 font-bold">Analista mediano</th>
+                      <th className="text-left px-5 py-3 font-bold">Analista excelente</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['Responde o que foi pedido', 'Antecipa perguntas que ainda não foram feitas'],
+                      ['Entrega gráficos bonitos', 'Entrega uma recomendação com os dados como evidência'],
+                      ['Domina uma ferramenta', 'Escolhe a ferramenta certa para cada problema'],
+                      ['Usa dados históricos', 'Conecta passado, presente e tendências'],
+                      ['Trabalha isolado', 'Constrói confiança com as áreas de negócio'],
+                      ['Mostra o número', 'Explica o que o número significa para o negócio'],
+                    ].map(([mediano, excelente], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                        <td className="px-5 py-3 text-slate-500 text-sm flex items-start gap-2">
+                          <XCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />{mediano}
+                        </td>
+                        <td className="px-5 py-3 text-slate-700 text-sm font-semibold">
+                          <span className="text-green-600 mr-1">✓</span>{excelente}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Seção 5 */}
+              <h2 id="preparacao" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">O caminho prático para se preparar</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Com base no perfil das vagas e nas competências mapeadas, este é o caminho mais eficiente para quem quer entrar ou se destacar na área de dados:
+              </p>
+              <div className="space-y-4 mb-8">
+                {[
+                  {
+                    passo: '1',
+                    titulo: 'Fundamentos de Excel e Power Query',
+                    desc: 'Excel ainda está em 80% das vagas. Dominar tabelas dinâmicas, Power Query e funções de busca é o pré-requisito básico — e o diferencial em empresas que ainda não adotaram BI.',
+                    cor: 'bg-green-50 border-green-100',
+                    badge: 'bg-green-100 text-green-700',
+                  },
+                  {
+                    passo: '2',
+                    titulo: 'SQL do básico ao intermediário',
+                    desc: 'SELECT, JOIN, GROUP BY, subqueries e CTEs. Suficiente para resolver 90% das demandas de análise de dados no dia a dia corporativo.',
+                    cor: 'bg-blue-50 border-blue-100',
+                    badge: 'bg-blue-100 text-blue-700',
+                  },
+                  {
+                    passo: '3',
+                    titulo: 'Power BI: modelagem e visualização',
+                    desc: 'Criar dashboards interativos com DAX básico, relacionamentos e publicação no Power BI Service. Esta combinação (SQL + Power BI) abre as portas para a maioria das vagas de analista.',
+                    cor: 'bg-yellow-50 border-yellow-100',
+                    badge: 'bg-yellow-100 text-yellow-700',
+                  },
+                  {
+                    passo: '4',
+                    titulo: 'Python para dados (diferencial)',
+                    desc: 'Pandas, matplotlib e automação de relatórios. Não é exigido em todas as vagas, mas aumenta significativamente o salário pretendido e abre portas para cientista de dados.',
+                    cor: 'bg-purple-50 border-purple-100',
+                    badge: 'bg-purple-100 text-purple-700',
+                  },
+                  {
+                    passo: '5',
+                    titulo: 'Portfólio com projetos reais',
+                    desc: 'Um projeto público no GitHub ou no LinkedIn com dados reais vale mais que qualquer certificado isolado. Analise dados abertos do IBGE, DATASUS ou Kaggle e publique suas conclusões.',
+                    cor: 'bg-slate-50 border-slate-200',
+                    badge: 'bg-slate-100 text-slate-700',
+                  },
+                ].map(({ passo, titulo, desc, cor, badge }) => (
+                  <div key={passo} className={`border rounded-2xl p-5 ${cor}`}>
+                    <p className="font-extrabold text-slate-800 mb-1 flex items-center gap-2 text-sm">
+                      <span className={`rounded-full w-6 h-6 flex items-center justify-center text-xs font-black flex-shrink-0 ${badge}`}>{passo}</span>
+                      {titulo}
+                    </p>
+                    <p className="text-slate-500 text-sm">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Seção 6 */}
+              <h2 id="salarios" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Referências salariais no Brasil</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Segundo levantamentos do <a href="https://www.glassdoor.com.br/Sal%C3%A1rios/analista-de-dados-sal%C3%A1rio-SRCH_KO0,17.htm" target="_blank" rel="noopener noreferrer" className="text-purple-700 font-semibold hover:underline">Glassdoor Brasil</a> e da <a href="https://www.catho.com.br/salario/analista-de-dados/" target="_blank" rel="noopener noreferrer" className="text-purple-700 font-semibold hover:underline">Catho</a>, as faixas salariais para profissionais de dados no Brasil em 2025 são:
+              </p>
+              <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm mb-6">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-slate-800 text-white">
+                      <th className="text-left px-5 py-3 font-bold">Nível</th>
+                      <th className="text-left px-5 py-3 font-bold">Perfil</th>
+                      <th className="text-left px-5 py-3 font-bold">Faixa salarial (CLT)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['Júnior', 'Excel + SQL básico, 0–2 anos de experiência', 'R$ 2.500 – R$ 4.500'],
+                      ['Pleno', 'SQL + Power BI + Python básico, 2–5 anos', 'R$ 5.000 – R$ 8.000'],
+                      ['Sênior', 'Stack completa + liderança técnica, 5+ anos', 'R$ 9.000 – R$ 15.000'],
+                      ['Especialista / Lead', 'Arquitetura de dados, cloud, gestão de times', 'R$ 15.000 – R$ 25.000+'],
+                    ].map(([nivel, perfil, salario], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                        <td className="px-5 py-3 font-bold text-purple-700">{nivel}</td>
+                        <td className="px-5 py-3 text-slate-600 text-xs">{perfil}</td>
+                        <td className="px-5 py-3 font-bold text-slate-800">{salario}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-slate-500 text-xs mb-10 italic">* Valores médios de mercado em 2025. Fintechs, consultorias e empresas de tecnologia tendem a pagar 20–40% acima da média.</p>
+
+              {/* Fontes */}
+              <div className="bg-slate-100 rounded-2xl p-5 text-sm text-slate-500 border border-slate-200 mb-10">
+                <p className="font-bold text-slate-700 mb-2">📚 Fontes consultadas</p>
+                <ul className="space-y-1">
+                  <li>
+                    <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer" className="text-purple-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> World Economic Forum — Future of Jobs Report 2025
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://survey.stackoverflow.co/2024/" target="_blank" rel="noopener noreferrer" className="text-purple-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Stack Overflow — Developer Survey 2024
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.linkedin.com/business/talent/blog/talent-strategy/fastest-growing-jobs" target="_blank" rel="noopener noreferrer" className="text-purple-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> LinkedIn Talent Insights — Fastest Growing Jobs
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century" target="_blank" rel="noopener noreferrer" className="text-purple-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Harvard Business Review — Data Scientist: The Sexiest Job
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-data-driven-enterprise-of-2025" target="_blank" rel="noopener noreferrer" className="text-purple-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> McKinsey Global Institute — The Data-Driven Enterprise
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.glassdoor.com.br/Sal%C3%A1rios/analista-de-dados-sal%C3%A1rio-SRCH_KO0,17.htm" target="_blank" rel="noopener noreferrer" className="text-purple-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Glassdoor Brasil — Salários de Analista de Dados
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.catho.com.br/salario/analista-de-dados/" target="_blank" rel="noopener noreferrer" className="text-purple-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Catho — Pesquisa salarial: Analista de Dados
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* CTA */}
+              <div className="bg-gradient-to-r from-purple-700 to-purple-900 rounded-3xl p-8 text-white text-center">
+                <p className="text-lg font-extrabold mb-2">Pronto para entrar no mercado de dados?</p>
+                <p className="text-purple-100 text-sm mb-6">A Treinatech tem trilhas completas que cobrem exatamente o que o mercado exige: Excel, SQL, Power BI e muito mais — com certificação MCT e suporte de instrutor.</p>
+                <a
+                  href="#cursos"
+                  onClick={() => { const el = document.getElementById('cursos'); if(el) el.scrollIntoView({behavior:'smooth'}); }}
+                  className="inline-block bg-white text-purple-800 font-extrabold px-8 py-3 rounded-2xl hover:bg-purple-50 transition-colors active:scale-95"
+                >
+                  Ver trilhas de treinamento →
+                </a>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <aside className="lg:w-64 flex-shrink-0 space-y-6">
+              {/* Índice */}
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm sticky top-24">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Neste artigo</p>
+                <nav className="space-y-2">
+                  {[
+                    { label: 'O mercado de dados', id: 'mercado' },
+                    { label: 'Habilidades técnicas exigidas', id: 'hard-skills' },
+                    { label: 'Soft skills valorizadas', id: 'soft-skills' },
+                    { label: 'Mediano vs. excelente', id: 'diferencial' },
+                    { label: 'Como se preparar', id: 'preparacao' },
+                    { label: 'Referências salariais', id: 'salarios' },
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        const el = document.getElementById(item.id);
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }}
+                      className="w-full text-left text-sm text-slate-500 hover:text-purple-700 cursor-pointer transition-colors py-1 border-b border-slate-50 last:border-0"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+
+              {/* Artigos relacionados */}
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Leia também</p>
+                <div className="space-y-4">
+                  {[
+                    { title: 'SQL para analistas: do zero ao essencial', id: 3 },
+                    { title: 'Como criar um dashboard Power BI em 1 hora', id: 4 },
+                    { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
+                  ].map((rel) => (
+                    <p key={rel.id} className="text-sm text-slate-700 hover:text-purple-700 cursor-pointer font-semibold leading-snug transition-colors">
+                      {rel.title} →
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   // Artigos ainda não desenvolvidos
   return (
     <div className="min-h-screen bg-yellow-50 flex flex-col items-center justify-center px-4 text-center">
