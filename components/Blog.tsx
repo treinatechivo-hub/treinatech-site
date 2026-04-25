@@ -38,7 +38,7 @@ const POSTS: BlogPost[] = [
   {
     id: 3,
     title: 'SQL para analistas: como escrever queries eficientes do zero',
-    excerpt: 'Um guia prático para quem quer começar a escrever SQL sem enrolação: SELECT, JOIN, GROUP BY e muito mais com exemplos reais.',
+    excerpt: 'Um guia prático para quem quer começar a escrever SQL sem enrolação: SELECT, JOIN, GROUP BY e muito mais.',
     category: 'SQL',
     categoryColor: 'bg-blue-100 text-blue-800',
     date: '10 mar 2026',
