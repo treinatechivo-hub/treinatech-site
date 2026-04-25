@@ -564,6 +564,345 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
     );
   }
 
+  // Artigo 3 — SQL para analistas
+  if (articleId === 3) {
+    return (
+      <article className="min-h-screen bg-slate-50">
+        {/* Header */}
+        <div className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 pt-28 pb-16 px-4">
+          <div className="max-w-3xl mx-auto">
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-bold mb-8 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" /> Voltar ao Blog
+            </button>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-400 bg-blue-400/10 border border-blue-400/20 px-4 py-1.5 rounded-full mb-5">
+              SQL
+            </span>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-6">
+              SQL para analistas: como escrever queries eficientes do zero
+            </h1>
+            <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
+              <span className="flex items-center gap-2">
+                <User className="w-4 h-4 text-blue-400" />
+                <span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT
+              </span>
+              <span className="flex items-center gap-2">
+                <Calendar className="w-4 h-4" /> 10 mar 2026
+              </span>
+              <span className="flex items-center gap-2">
+                <Clock className="w-4 h-4" /> 10 min de leitura
+              </span>
+              <span className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4" /> Nível: Iniciante
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Imagem de capa */}
+        <div className="max-w-3xl mx-auto px-4 -mt-1">
+          <img
+            src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=1200&q=85"
+            alt="SQL para analistas"
+            className="w-full h-72 object-cover rounded-3xl shadow-2xl"
+          />
+        </div>
+
+        {/* Conteúdo */}
+        <div className="max-w-3xl mx-auto px-4 py-14">
+          <div className="flex flex-col lg:flex-row gap-12">
+
+            {/* Artigo principal */}
+            <div className="flex-1 prose-custom">
+
+              {/* Intro */}
+              <p className="text-lg text-slate-600 leading-relaxed mb-8 font-medium border-l-4 border-blue-500 pl-5 bg-blue-50 py-4 pr-4 rounded-r-2xl">
+                SQL (Structured Query Language) é a linguagem universal para consulta e manipulação de dados em bancos de dados relacionais. Se você trabalha com dados — seja em Excel, Power BI ou qualquer outra ferramenta — aprender SQL vai multiplicar sua capacidade de análise. Neste guia, você vai do zero ao essencial com exemplos baseados na documentação oficial da Microsoft (T-SQL).
+              </p>
+
+              {/* Seção 1 */}
+              <h2 id="oque-sql" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">O que é SQL e por que aprender</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                SQL é a linguagem padrão para comunicação com bancos de dados relacionais como SQL Server, Azure SQL Database, PostgreSQL e MySQL. Segundo a <a href="https://learn.microsoft.com/pt-br/sql/t-sql/language-reference" target="_blank" rel="noopener noreferrer" className="text-blue-700 font-semibold hover:underline">documentação oficial da Microsoft</a>, T-SQL (Transact-SQL) é a implementação da Microsoft do padrão SQL, com extensões que permitem programação procedural, controle de fluxo e funções avançadas.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Para analistas de dados, dominar SQL significa:
+              </p>
+              <div className="space-y-2 mb-8">
+                {[
+                  'Extrair dados diretamente de bancos corporativos sem depender de TI',
+                  'Criar consultas personalizadas muito mais rápidas que PROCV e tabelas dinâmicas',
+                  'Preparar datasets para Power BI, Excel ou Python com qualidade e eficiência',
+                  'Transformar dados brutos em relatórios prontos para análise',
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3">
+                    <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700 text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Seção 2 */}
+              <h2 id="select-where" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">SELECT e filtragem com WHERE</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O comando <code className="bg-slate-100 px-1.5 py-0.5 rounded text-blue-700 font-mono text-sm">SELECT</code> é o ponto de partida de qualquer consulta SQL. Ele define quais colunas você quer retornar de uma tabela. O <code className="bg-slate-100 px-1.5 py-0.5 rounded text-blue-700 font-mono text-sm">WHERE</code> filtra as linhas com base em condições.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-blue-300 mb-4 overflow-x-auto">
+                <span className="text-slate-500">-- Selecionar todas as colunas de uma tabela</span><br />
+                <span className="text-purple-400">SELECT</span> * <span className="text-purple-400">FROM</span> Vendas;<br /><br />
+                <span className="text-slate-500">-- Selecionar colunas específicas</span><br />
+                <span className="text-purple-400">SELECT</span> ClienteID, Produto, Valor<br />
+                <span className="text-purple-400">FROM</span> Vendas;<br /><br />
+                <span className="text-slate-500">-- Filtrar vendas acima de R$ 1.000</span><br />
+                <span className="text-purple-400">SELECT</span> ClienteID, Produto, Valor<br />
+                <span className="text-purple-400">FROM</span> Vendas<br />
+                <span className="text-purple-400">WHERE</span> Valor {'>'} 1000;<br /><br />
+                <span className="text-slate-500">-- Múltiplas condições com AND / OR</span><br />
+                <span className="text-purple-400">SELECT</span> ClienteID, Produto, Valor<br />
+                <span className="text-purple-400">FROM</span> Vendas<br />
+                <span className="text-purple-400">WHERE</span> Valor {'>'} 1000 <span className="text-purple-400">AND</span> Produto = <span className="text-green-400">'Notebook'</span>;
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Outros operadores úteis no <code className="bg-slate-100 px-1.5 py-0.5 rounded text-blue-700 font-mono text-sm">WHERE</code>:
+              </p>
+              <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm mb-8">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-slate-800 text-white">
+                      <th className="text-left px-5 py-3 font-bold">Operador</th>
+                      <th className="text-left px-5 py-3 font-bold">Uso</th>
+                      <th className="text-left px-5 py-3 font-bold">Exemplo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['BETWEEN', 'Intervalo de valores', "Valor BETWEEN 500 AND 2000"],
+                      ['IN', 'Lista de valores', "Produto IN ('Notebook', 'Monitor')"],
+                      ['LIKE', 'Padrão de texto', "Nome LIKE 'Ana%'"],
+                      ['IS NULL', 'Valores nulos', 'Email IS NULL'],
+                      ['NOT', 'Negação', "Produto NOT IN ('Teclado')"],
+                    ].map(([op, uso, ex], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                        <td className="px-5 py-3 font-mono text-blue-700 font-semibold">{op}</td>
+                        <td className="px-5 py-3 text-slate-600">{uso}</td>
+                        <td className="px-5 py-3 font-mono text-xs text-slate-500">{ex}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Seção 3 */}
+              <h2 id="joins" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">JOINs: cruzando tabelas</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                JOINs permitem combinar dados de duas ou mais tabelas com base em uma coluna em comum — como o <code className="bg-slate-100 px-1.5 py-0.5 rounded text-blue-700 font-mono text-sm">ClienteID</code> que aparece tanto na tabela de Vendas quanto na tabela de Clientes. Segundo a <a href="https://learn.microsoft.com/pt-br/sql/relational-databases/performance/joins" target="_blank" rel="noopener noreferrer" className="text-blue-700 font-semibold hover:underline">documentação da Microsoft</a>, os tipos principais são:
+              </p>
+              <div className="space-y-6 mb-6">
+                <div>
+                  <h3 className="font-extrabold text-slate-800 mb-2 flex items-center gap-2"><span className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-bold">INNER JOIN</span> Somente o que existe em ambas as tabelas</h3>
+                  <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-blue-300 overflow-x-auto">
+                    <span className="text-purple-400">SELECT</span> v.Produto, v.Valor, c.Nome<br />
+                    <span className="text-purple-400">FROM</span> Vendas v<br />
+                    <span className="text-purple-400">INNER JOIN</span> Clientes c <span className="text-purple-400">ON</span> v.ClienteID = c.ClienteID;
+                  </div>
+                  <p className="text-slate-500 text-sm mt-2">Retorna apenas vendas que possuem um cliente correspondente na tabela Clientes.</p>
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-slate-800 mb-2 flex items-center gap-2"><span className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-bold">LEFT JOIN</span> Todos da esquerda + correspondências da direita</h3>
+                  <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-blue-300 overflow-x-auto">
+                    <span className="text-purple-400">SELECT</span> v.Produto, v.Valor, c.Nome<br />
+                    <span className="text-purple-400">FROM</span> Vendas v<br />
+                    <span className="text-purple-400">LEFT JOIN</span> Clientes c <span className="text-purple-400">ON</span> v.ClienteID = c.ClienteID;
+                  </div>
+                  <p className="text-slate-500 text-sm mt-2">Retorna todas as vendas, mesmo que não haja cliente cadastrado (o nome fica NULL).</p>
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-slate-800 mb-2 flex items-center gap-2"><span className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-bold">RIGHT JOIN</span> Todos da direita + correspondências da esquerda</h3>
+                  <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-blue-300 overflow-x-auto">
+                    <span className="text-purple-400">SELECT</span> v.Produto, v.Valor, c.Nome<br />
+                    <span className="text-purple-400">FROM</span> Vendas v<br />
+                    <span className="text-purple-400">RIGHT JOIN</span> Clientes c <span className="text-purple-400">ON</span> v.ClienteID = c.ClienteID;
+                  </div>
+                  <p className="text-slate-500 text-sm mt-2">Retorna todos os clientes, mesmo aqueles que ainda não fizeram nenhuma venda.</p>
+                </div>
+              </div>
+              <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 mb-8 text-sm text-slate-700">
+                <strong>💡 Dica prática:</strong> Na maioria das consultas de análise de dados você vai usar <code className="bg-blue-100 px-1 rounded font-mono">INNER JOIN</code> ou <code className="bg-blue-100 px-1 rounded font-mono">LEFT JOIN</code>. O RIGHT JOIN pode sempre ser reescrito como LEFT JOIN invertendo as tabelas — prefira LEFT JOIN para manter consistência.
+              </div>
+
+              {/* Seção 4 */}
+              <h2 id="groupby" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">GROUP BY e funções de agregação</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O <code className="bg-slate-100 px-1.5 py-0.5 rounded text-blue-700 font-mono text-sm">GROUP BY</code> agrupa linhas com valores iguais em uma coluna e permite calcular totais, médias e contagens por grupo — como uma tabela dinâmica do Excel, mas em SQL. As funções de agregação mais usadas são:
+              </p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-blue-300 mb-4 overflow-x-auto">
+                <span className="text-slate-500">-- Total de vendas por produto</span><br />
+                <span className="text-purple-400">SELECT</span><br />
+                &nbsp;&nbsp;Produto,<br />
+                &nbsp;&nbsp;<span className="text-yellow-300">COUNT</span>(*) <span className="text-purple-400">AS</span> Qtd_Pedidos,<br />
+                &nbsp;&nbsp;<span className="text-yellow-300">SUM</span>(Valor) <span className="text-purple-400">AS</span> Total_Vendas,<br />
+                &nbsp;&nbsp;<span className="text-yellow-300">AVG</span>(Valor) <span className="text-purple-400">AS</span> Ticket_Medio,<br />
+                &nbsp;&nbsp;<span className="text-yellow-300">MAX</span>(Valor) <span className="text-purple-400">AS</span> Maior_Venda,<br />
+                &nbsp;&nbsp;<span className="text-yellow-300">MIN</span>(Valor) <span className="text-purple-400">AS</span> Menor_Venda<br />
+                <span className="text-purple-400">FROM</span> Vendas<br />
+                <span className="text-purple-400">GROUP BY</span> Produto<br />
+                <span className="text-purple-400">ORDER BY</span> Total_Vendas <span className="text-purple-400">DESC</span>;
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Use <code className="bg-slate-100 px-1.5 py-0.5 rounded text-blue-700 font-mono text-sm">HAVING</code> para filtrar grupos após a agregação (equivale a um WHERE aplicado depois do GROUP BY):
+              </p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-blue-300 mb-8 overflow-x-auto">
+                <span className="text-slate-500">-- Apenas produtos com mais de 10 pedidos</span><br />
+                <span className="text-purple-400">SELECT</span> Produto, <span className="text-yellow-300">COUNT</span>(*) <span className="text-purple-400">AS</span> Qtd<br />
+                <span className="text-purple-400">FROM</span> Vendas<br />
+                <span className="text-purple-400">GROUP BY</span> Produto<br />
+                <span className="text-purple-400">HAVING</span> <span className="text-yellow-300">COUNT</span>(*) {'>'} 10;
+              </div>
+
+              {/* Seção 5 */}
+              <h2 id="subqueries-ctes" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Subqueries e CTEs</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Subqueries são consultas aninhadas dentro de outra consulta. CTEs (Common Table Expressions) — criadas com <code className="bg-slate-100 px-1.5 py-0.5 rounded text-blue-700 font-mono text-sm">WITH</code> — são a forma moderna e mais legível de criar resultados intermediários. Segundo a <a href="https://learn.microsoft.com/pt-br/sql/t-sql/queries/with-common-table-expression-transact-sql" target="_blank" rel="noopener noreferrer" className="text-blue-700 font-semibold hover:underline">documentação T-SQL da Microsoft</a>, CTEs melhoram a legibilidade e permitem referenciar o resultado múltiplas vezes na mesma query.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-3 font-semibold text-slate-800">Subquery no WHERE:</p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-blue-300 mb-5 overflow-x-auto">
+                <span className="text-slate-500">-- Clientes que compraram acima da média</span><br />
+                <span className="text-purple-400">SELECT</span> ClienteID, Valor<br />
+                <span className="text-purple-400">FROM</span> Vendas<br />
+                <span className="text-purple-400">WHERE</span> Valor {'>'} (<br />
+                &nbsp;&nbsp;<span className="text-purple-400">SELECT</span> <span className="text-yellow-300">AVG</span>(Valor) <span className="text-purple-400">FROM</span> Vendas<br />
+                );
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3 font-semibold text-slate-800">CTE com WITH:</p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-blue-300 mb-8 overflow-x-auto">
+                <span className="text-slate-500">-- CTE que calcula vendas por região</span><br />
+                <span className="text-purple-400">WITH</span> VendasPorRegiao <span className="text-purple-400">AS</span> (<br />
+                &nbsp;&nbsp;<span className="text-purple-400">SELECT</span> Regiao, <span className="text-yellow-300">SUM</span>(Valor) <span className="text-purple-400">AS</span> Total<br />
+                &nbsp;&nbsp;<span className="text-purple-400">FROM</span> Vendas<br />
+                &nbsp;&nbsp;<span className="text-purple-400">GROUP BY</span> Regiao<br />
+                )<br />
+                <span className="text-purple-400">SELECT</span> Regiao, Total<br />
+                <span className="text-purple-400">FROM</span> VendasPorRegiao<br />
+                <span className="text-purple-400">WHERE</span> Total {'>'} 50000<br />
+                <span className="text-purple-400">ORDER BY</span> Total <span className="text-purple-400">DESC</span>;
+              </div>
+
+              {/* Seção 6 */}
+              <h2 id="performance" className="text-2xl font-extrabold text-slate-900 mt-10 mb-5 scroll-mt-24">Boas práticas de performance</h2>
+              <div className="space-y-4 mb-10">
+                {[
+                  ['Evite SELECT *', 'Especifique apenas as colunas necessárias. SELECT * traz dados desnecessários, aumenta o tráfego de rede e impede o uso eficiente de índices.', 'SELECT Nome, Email FROM Clientes -- ✅'],
+                  ['Use WHERE para limitar linhas antes de JOIN', 'Filtrar antes de cruzar tabelas reduz drasticamente o volume de dados processado. O SQL Server otimiza melhor quando há filtros explícitos.', 'WHERE DataVenda >= \'2026-01-01\''],
+                  ['Prefira EXISTS a IN para subqueries grandes', 'EXISTS para assim que encontra o primeiro resultado, enquanto IN avalia toda a lista. Para tabelas grandes, EXISTS é significativamente mais rápido.', 'WHERE EXISTS (SELECT 1 FROM ...)'],
+                  ['Use índices nas colunas de JOIN e WHERE', 'Colunas usadas frequentemente em JOINs e filtros devem ter índices. Consulte o DBA ou use o Query Analyzer do SQL Server para identificar índices ausentes.', ''],
+                  ['Evite funções em colunas indexadas no WHERE', 'Aplicar uma função à coluna filtrada invalida o uso do índice. Compare valores sem transformar a coluna indexada.', 'WHERE YEAR(DataVenda) = 2026 -- ❌\nWHERE DataVenda >= \'2026-01-01\' -- ✅'],
+                ].map(([titulo, desc, exemplo], i) => (
+                  <div key={i} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                    <p className="font-extrabold text-slate-800 mb-1 flex items-center gap-2">
+                      <span className="bg-blue-100 text-blue-700 rounded-full w-6 h-6 flex items-center justify-center text-xs font-black flex-shrink-0">{i + 1}</span>
+                      {titulo}
+                    </p>
+                    <p className="text-slate-500 text-sm mb-2">{desc}</p>
+                    {exemplo && (
+                      <div className="bg-slate-900 rounded-lg px-4 py-2 font-mono text-xs text-blue-300 whitespace-pre">{exemplo}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Fontes */}
+              <div className="bg-slate-100 rounded-2xl p-5 text-sm text-slate-500 border border-slate-200 mb-10">
+                <p className="font-bold text-slate-700 mb-2">📚 Fontes consultadas</p>
+                <ul className="space-y-1">
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/sql/t-sql/language-reference" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — Referência do T-SQL
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/sql/relational-databases/performance/joins" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — Usando JOINs
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/sql/t-sql/queries/with-common-table-expression-transact-sql" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — WITH (Common Table Expression)
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/sql/relational-databases/query-processing-architecture-guide" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — Guia de arquitetura de processamento de consultas
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* CTA */}
+              <div className="bg-gradient-to-r from-blue-700 to-blue-900 rounded-3xl p-8 text-white text-center">
+                <p className="text-lg font-extrabold mb-2">Quer dominar SQL na prática?</p>
+                <p className="text-blue-100 text-sm mb-6">A Treinatech tem trilha completa de SQL para analistas — do SELECT ao T-SQL avançado com projetos reais e certificação MCT.</p>
+                <a
+                  href="#cursos"
+                  onClick={() => { const el = document.getElementById('cursos'); if(el) el.scrollIntoView({behavior:'smooth'}); }}
+                  className="inline-block bg-white text-blue-800 font-extrabold px-8 py-3 rounded-2xl hover:bg-blue-50 transition-colors active:scale-95"
+                >
+                  Ver trilhas de treinamento →
+                </a>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <aside className="lg:w-64 flex-shrink-0 space-y-6">
+              {/* Índice */}
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm sticky top-24">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Neste artigo</p>
+                <nav className="space-y-2">
+                  {[
+                    { label: 'O que é SQL e por que aprender', id: 'oque-sql' },
+                    { label: 'SELECT e filtragem com WHERE', id: 'select-where' },
+                    { label: 'JOINs: cruzando tabelas', id: 'joins' },
+                    { label: 'GROUP BY e agregações', id: 'groupby' },
+                    { label: 'Subqueries e CTEs', id: 'subqueries-ctes' },
+                    { label: 'Boas práticas de performance', id: 'performance' },
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        const el = document.getElementById(item.id);
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }}
+                      className="w-full text-left text-sm text-slate-500 hover:text-blue-700 cursor-pointer transition-colors py-1 border-b border-slate-50 last:border-0"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+
+              {/* Artigos relacionados */}
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Leia também</p>
+                <div className="space-y-4">
+                  {[
+                    { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
+                    { title: 'DAX do zero: os 10 conceitos essenciais', id: 2 },
+                    { title: 'Como criar um dashboard profissional em 1 hora', id: 4 },
+                  ].map((rel) => (
+                    <p key={rel.id} className="text-sm text-slate-700 hover:text-blue-700 cursor-pointer font-semibold leading-snug transition-colors">
+                      {rel.title} →
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   // Artigos ainda não desenvolvidos
   return (
     <div className="min-h-screen bg-yellow-50 flex flex-col items-center justify-center px-4 text-center">
