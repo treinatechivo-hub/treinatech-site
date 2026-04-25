@@ -279,7 +279,7 @@ export const COURSES: Course[] = [
     id: 'powerbi-modulo1',
     title: 'Power BI – Módulo 1',
     description: 'Do dado ao relatório interativo: ETL com Power Query, modelagem, DAX e publicação com 5 projetos reais.',
-    modalDescription: 'O ponto de partida ideal para quem quer entrar no mundo do Power BI. Você vai percorrer todo o fluxo profissional: conectar e tratar dados com Power Query, modelar com Star Schema, criar medidas DAX e construir relatórios interativos com visual impactante. O treinamento é 100% prático — são 5 projetos reais desenvolvidos do zero, incluindo web scrapping em tempo real e um portfólio de relatórios publicado no Power BI Service.',
+    modalDescription: 'O treinamento começa com a base conceitual de Business Intelligence: o que é BI, o processo tradicional (ETL → Data Warehouse → Modelo de Dados → Relatório), as plataformas modernas de Self-Service BI e o papel do Power BI nesse ecossistema. Você entende a diferença entre Power BI Desktop, Service e Mobile, as versões e licenças, e como funciona o fluxo completo de dados. Na parte técnica, percorre ETL com Power Query, modelagem dimensional (Esquema Estrela, tabelas Fato e Dimensão, relacionamentos e cardinalidade), DAX e contexto de avaliação — finalizando com a criação e publicação de relatórios interativos em 5 projetos reais.',
     icon: <BarChart3 className="w-8 h-8" />,
     topics: ['ETL com Power Query', 'Modelagem e DAX', 'Relatórios Interativos', '5 Projetos Reais'],
     fullSyllabus: [
