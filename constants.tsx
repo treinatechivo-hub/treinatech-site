@@ -336,7 +336,7 @@ export const COURSES: Course[] = [
     id: 'powerbi-modulo2',
     title: 'Power BI – Módulo 2',
     description: 'DAX avançado, Power Query com linguagem M, visualizações com IA e segurança corporativa — nível profissional.',
-    modalDescription: 'Para quem já domina o Módulo 1 e quer alcançar o nível profissional. Aqui você aprofunda o DAX com funções iteradoras, Time Intelligence e grupos de cálculos, domina a linguagem M no Power Query, cria visuais com IA e implementa segurança em nível de linha (RLS). O treinamento cobre ainda o Power BI Report Server para ambientes corporativos sem acesso à nuvem — entregando 2 projetos finais de alto nível.',
+    modalDescription: 'Para quem já domina o Módulo 1 e quer alcançar o nível profissional. Aqui você aprofunda o DAX com funções iteradoras, Time Intelligence e grupos de cálculos, domina a linguagem M no Power Query, cria visuais com IA e implementa segurança em nível de linha (RLS). A publicação dos relatórios pode seguir dois caminhos — o cliente escolhe conforme sua realidade: Power BI Service (nuvem) para acesso via navegador e app mobile, ou Power BI Report Server para empresas que precisam manter os dados em ambiente local. O treinamento finaliza com 2 projetos de alto nível.',
     icon: <BarChart3 className="w-8 h-8" />,
     topics: ['DAX Avançado & Time Intelligence', 'Power Query + Linguagem M', 'Visuais com IA', 'Segurança & Report Server'],
     fullSyllabus: [
