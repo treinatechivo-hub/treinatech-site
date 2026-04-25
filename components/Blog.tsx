@@ -48,7 +48,7 @@ const POSTS: BlogPost[] = [
   {
     id: 4,
     title: 'Como criar um dashboard profissional no Power BI em 1 hora',
-    excerpt: 'Passo a passo completo: da conexão dos dados à publicação de um relatório bonito, funcional e impressionante para sua diretoria.',
+    excerpt: 'Passo a passo completo: da conexão dos dados até um relatório bonito e funcional para apresentar à diretoria.',
     category: 'Power BI',
     categoryColor: 'bg-yellow-100 text-yellow-800',
     date: '03 mar 2026',
@@ -58,7 +58,7 @@ const POSTS: BlogPost[] = [
   {
     id: 5,
     title: 'VBA no Excel: automatize tarefas repetitivas e economize horas por semana',
-    excerpt: 'Macros, loops e funções personalizadas: aprenda como o VBA pode transformar planilhas manuais em máquinas de produtividade.',
+    excerpt: 'Macros, loops e funções personalizadas para transformar planilhas repetitivas em máquinas de produtividade.',
     category: 'Excel & Power BI',
     categoryColor: 'bg-green-100 text-green-800',
     date: '24 fev 2026',
@@ -68,7 +68,7 @@ const POSTS: BlogPost[] = [
   {
     id: 6,
     title: 'Carreira em dados: o que as empresas realmente esperam de você',
-    excerpt: 'Pesquisamos +50 vagas para analistas de dados e encontramos as habilidades mais exigidas. Veja se você está preparado.',
+    excerpt: 'Pesquisamos +50 vagas de analistas e encontramos as habilidades mais exigidas pelo mercado. Você está preparado?',
     category: 'Carreira',
     categoryColor: 'bg-purple-100 text-purple-800',
     date: '15 fev 2026',
@@ -78,7 +78,7 @@ const POSTS: BlogPost[] = [
   {
     id: 7,
     title: 'Power Query: o segredo dos analistas de dados mais rápidos do mercado',
-    excerpt: 'Aprenda a transformar, limpar e combinar dados de múltiplas fontes sem escrever uma linha de código com o Power Query.',
+    excerpt: 'Transforme, limpe e combine dados de múltiplas fontes sem escrever uma linha de código.',
     category: 'Power BI',
     categoryColor: 'bg-yellow-100 text-yellow-800',
     date: '05 fev 2026',
@@ -88,7 +88,7 @@ const POSTS: BlogPost[] = [
   {
     id: 8,
     title: 'Tabelas dinâmicas avançadas: recursos que 90% dos usuários não conhecem',
-    excerpt: 'Segmentações, linha do tempo, campos calculados e consolidação de dados — vá além do básico e impressione em qualquer reunião.',
+    excerpt: 'Segmentações, linha do tempo e campos calculados — vá além do básico e impressione em qualquer reunião.',
     category: 'Excel & Power BI',
     categoryColor: 'bg-green-100 text-green-800',
     date: '28 jan 2026',
