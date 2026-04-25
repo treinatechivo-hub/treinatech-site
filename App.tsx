@@ -8,6 +8,7 @@ import { Pricing } from './components/Pricing';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ChatBot } from './components/ChatBot';
+import { Instructor } from './components/Instructor';
 import { MembersArea } from './components/members/MembersArea';
 import { Blog } from './components/Blog';
 import { ArticlePage } from './components/ArticlePage';
@@ -152,6 +153,9 @@ const App: React.FC = () => {
 
         {/* Cursos */}
         <Courses />
+
+        {/* Instrutor */}
+        <Instructor />
 
         {/* Depoimentos */}
         <Testimonials />
