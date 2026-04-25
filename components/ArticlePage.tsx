@@ -1588,6 +1588,676 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
     );
   }
 
+  // Artigo 5 — VBA no Excel
+  if (articleId === 5) {
+    return (
+      <article className="min-h-screen bg-slate-50">
+        <div className="bg-gradient-to-br from-slate-900 via-green-950 to-slate-900 pt-28 pb-16 px-4">
+          <div className="max-w-3xl mx-auto">
+            <button onClick={onBack} className="flex items-center gap-2 text-green-400 hover:text-green-300 text-sm font-bold mb-8 transition-colors">
+              <ArrowLeft className="w-4 h-4" /> Voltar ao Blog
+            </button>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-green-400 bg-green-400/10 border border-green-400/20 px-4 py-1.5 rounded-full mb-5">
+              Excel &amp; Power BI
+            </span>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-6">
+              VBA no Excel: automatize tarefas repetitivas e economize horas por semana
+            </h1>
+            <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
+              <span className="flex items-center gap-2"><User className="w-4 h-4 text-green-400" /><span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT</span>
+              <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 24 fev 2026</span>
+              <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 9 min de leitura</span>
+              <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Nível: Intermediário</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-3xl mx-auto px-4 -mt-1">
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=85" alt="VBA no Excel" className="w-full h-72 object-cover rounded-3xl shadow-2xl" />
+        </div>
+
+        <div className="max-w-3xl mx-auto px-4 py-14">
+          <div className="flex flex-col lg:flex-row gap-12">
+            <div className="flex-1 prose-custom">
+
+              <p className="text-lg text-slate-600 leading-relaxed mb-8 font-medium border-l-4 border-green-500 pl-5 bg-green-50 py-4 pr-4 rounded-r-2xl">
+                VBA (Visual Basic for Applications) é a linguagem de programação integrada ao Microsoft Excel que permite automatizar praticamente qualquer tarefa manual — de formatar planilhas e enviar e-mails a gerar relatórios completos com um clique. Neste guia você aprende do zero, com exemplos práticos baseados na <a href="https://learn.microsoft.com/pt-br/office/vba/library-reference/concepts/getting-started-with-vba-in-office" target="_blank" rel="noopener noreferrer" className="text-green-700 font-semibold hover:underline">documentação oficial da Microsoft</a>.
+              </p>
+
+              <h2 id="oque-vba" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">O que é VBA e por que ainda vale aprender</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Segundo a <a href="https://learn.microsoft.com/pt-br/office/vba/library-reference/concepts/getting-started-with-vba-in-office" target="_blank" rel="noopener noreferrer" className="text-green-700 font-semibold hover:underline">documentação da Microsoft</a>, VBA é um ambiente de desenvolvimento integrado ao pacote Office que permite controlar aplicativos como Excel, Word e Outlook por meio de código. No Excel, ele opera diretamente sobre a interface — manipulando células, planilhas, gráficos e até outros aplicativos do Windows.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Em um mercado onde Python e Power BI crescem, VBA segue indispensável porque está presente em cada instalação do Excel corporativo, não requer instalação adicional e resolve em minutos problemas que seriam complexos com outras ferramentas. O <a href="https://survey.stackoverflow.co/2024/" target="_blank" rel="noopener noreferrer" className="text-green-700 font-semibold hover:underline">Stack Overflow Developer Survey 2024</a> mostra que VBA continua entre as linguagens mais usadas por profissionais que trabalham com análise de dados em ambientes corporativos.
+              </p>
+              <div className="space-y-2 mb-8">
+                {[
+                  'Consolidar dados de 50 abas em uma única planilha — em segundos',
+                  'Formatar e enviar relatórios em PDF por e-mail automaticamente toda segunda-feira',
+                  'Validar dados e destacar inconsistências com cores e alertas',
+                  'Gerar planilhas individuais por cliente ou por departamento com um único clique',
+                  'Automatizar importação e limpeza de arquivos CSV exportados de sistemas ERP',
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 bg-green-50 border border-green-100 rounded-xl px-4 py-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700 text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <h2 id="primeira-macro" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Gravando e editando sua primeira macro</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                A forma mais rápida de começar com VBA é usar o <strong>Gravador de Macros</strong>. Ele traduz ações manuais em código automaticamente. Acesse via <strong>Desenvolvedor → Gravar Macro</strong> (se a aba não aparecer: Arquivo → Opções → Personalizar Faixa de Opções → habilitar Desenvolvedor).
+              </p>
+              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 mb-4 text-sm text-slate-700">
+                <strong>📌 Passo a passo:</strong> Clique em "Gravar Macro" → dê um nome → execute as ações que quer automatizar → clique em "Parar Gravação". Depois acesse <strong>Alt + F11</strong> para abrir o Editor VBA e ver o código gerado.
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-3">Exemplo: o gravador gera algo assim ao selecionar e formatar células:</p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-green-300 mb-4 overflow-x-auto">
+                <span className="text-slate-400">' Macro gravada automaticamente</span><br />
+                <span className="text-blue-300">Sub</span> FormatarCabecalho()<br />
+                &nbsp;&nbsp;Range(<span className="text-yellow-300">"A1:E1"</span>).Select<br />
+                &nbsp;&nbsp;<span className="text-blue-300">With</span> Selection.Font<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;.Bold = <span className="text-orange-300">True</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;.Size = 12<br />
+                &nbsp;&nbsp;<span className="text-blue-300">End With</span><br />
+                &nbsp;&nbsp;Selection.Interior.Color = RGB(34, 139, 34)<br />
+                <span className="text-blue-300">End Sub</span>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                O código gerado pelo gravador funciona, mas costuma ser verboso. Aprenda a limpá-lo: remova as linhas <code className="bg-slate-100 px-1 rounded font-mono text-sm">.Select</code> e acesse objetos diretamente — isso torna o código mais rápido e profissional.
+              </p>
+
+              <h2 id="estrutura" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Variáveis, tipos de dados e estruturas de controle</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Todo código VBA útil usa variáveis para armazenar valores temporários e estruturas de controle para tomar decisões. Segundo a <a href="https://learn.microsoft.com/pt-br/office/vba/language/concepts/getting-started/declaring-variables" target="_blank" rel="noopener noreferrer" className="text-green-700 font-semibold hover:underline">documentação oficial de variáveis</a>, sempre declare variáveis com <code className="bg-slate-100 px-1 rounded font-mono text-sm">Dim</code> e use <code className="bg-slate-100 px-1 rounded font-mono text-sm">Option Explicit</code> no topo do módulo para evitar erros silenciosos.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-green-300 mb-4 overflow-x-auto">
+                <span className="text-slate-400">' Tipos de variáveis mais usados</span><br />
+                <span className="text-blue-300">Dim</span> nome <span className="text-blue-300">As String</span><br />
+                <span className="text-blue-300">Dim</span> valor <span className="text-blue-300">As Double</span><br />
+                <span className="text-blue-300">Dim</span> qtd <span className="text-blue-300">As Long</span><br />
+                <span className="text-blue-300">Dim</span> ativo <span className="text-blue-300">As Boolean</span><br />
+                <span className="text-blue-300">Dim</span> dataRef <span className="text-blue-300">As Date</span><br /><br />
+                <span className="text-slate-400">' Estrutura condicional</span><br />
+                <span className="text-blue-300">If</span> valor {'>'} 1000 <span className="text-blue-300">Then</span><br />
+                &nbsp;&nbsp;MsgBox <span className="text-yellow-300">"Valor acima do limite!"</span><br />
+                <span className="text-blue-300">ElseIf</span> valor {'>'} 500 <span className="text-blue-300">Then</span><br />
+                &nbsp;&nbsp;MsgBox <span className="text-yellow-300">"Valor intermediário"</span><br />
+                <span className="text-blue-300">Else</span><br />
+                &nbsp;&nbsp;MsgBox <span className="text-yellow-300">"Valor abaixo do padrão"</span><br />
+                <span className="text-blue-300">End If</span>
+              </div>
+
+              <h2 id="loops" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Loops: percorrendo linhas e planilhas</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Loops são o coração da automação em VBA. O <code className="bg-slate-100 px-1 rounded font-mono text-sm">For...Next</code> percorre um intervalo fixo de repetições; o <code className="bg-slate-100 px-1 rounded font-mono text-sm">For Each...Next</code> itera sobre coleções como planilhas ou células; e o <code className="bg-slate-100 px-1 rounded font-mono text-sm">Do While</code> continua enquanto uma condição for verdadeira.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-green-300 mb-4 overflow-x-auto">
+                <span className="text-slate-400">' Percorrer todas as linhas com dado na coluna A</span><br />
+                <span className="text-blue-300">Dim</span> i <span className="text-blue-300">As Long</span><br />
+                <span className="text-blue-300">Dim</span> ultimaLinha <span className="text-blue-300">As Long</span><br />
+                ultimaLinha = Cells(Rows.Count, <span className="text-yellow-300">"A"</span>).End(xlUp).Row<br /><br />
+                <span className="text-blue-300">For</span> i = 2 <span className="text-blue-300">To</span> ultimaLinha<br />
+                &nbsp;&nbsp;<span className="text-blue-300">If</span> Cells(i, 1).Value {'>'} 1000 <span className="text-blue-300">Then</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;Cells(i, 1).Interior.Color = RGB(255, 200, 0)<br />
+                &nbsp;&nbsp;<span className="text-blue-300">End If</span><br />
+                <span className="text-blue-300">Next</span> i<br /><br />
+                <span className="text-slate-400">' Percorrer todas as abas da pasta de trabalho</span><br />
+                <span className="text-blue-300">Dim</span> ws <span className="text-blue-300">As Worksheet</span><br />
+                <span className="text-blue-300">For Each</span> ws <span className="text-blue-300">In</span> ThisWorkbook.Worksheets<br />
+                &nbsp;&nbsp;ws.Range(<span className="text-yellow-300">"A1"</span>).Value = <span className="text-yellow-300">"Atualizado"</span><br />
+                <span className="text-blue-300">Next</span> ws
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                A expressão <code className="bg-slate-100 px-1 rounded font-mono text-sm">Cells(Rows.Count, "A").End(xlUp).Row</code> é essencial: ela encontra dinamicamente a última linha com dado em uma coluna, evitando que seu loop pare antes do fim ou processe linhas em branco.
+              </p>
+
+              <h2 id="range-cells" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Trabalhando com Range e Cells</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                <code className="bg-slate-100 px-1 rounded font-mono text-sm">Range</code> e <code className="bg-slate-100 px-1 rounded font-mono text-sm">Cells</code> são os objetos fundamentais para manipular dados no Excel via VBA. A diferença prática: <code className="bg-slate-100 px-1 rounded font-mono text-sm">Range("A1")</code> usa endereço fixo; <code className="bg-slate-100 px-1 rounded font-mono text-sm">Cells(1, 1)</code> usa índices numéricos — ideal dentro de loops.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-green-300 mb-4 overflow-x-auto">
+                <span className="text-slate-400">' Leitura e escrita de células</span><br />
+                Range(<span className="text-yellow-300">"B2"</span>).Value = <span className="text-yellow-300">"Treinatech"</span><br />
+                Cells(2, 2).Value = <span className="text-yellow-300">"Treinatech"</span> <span className="text-slate-400">' equivalente</span><br /><br />
+                <span className="text-slate-400">' Copiar intervalo para outra aba</span><br />
+                Sheets(<span className="text-yellow-300">"Dados"</span>).Range(<span className="text-yellow-300">"A1:D100"</span>).Copy _<br />
+                &nbsp;&nbsp;Destination:=Sheets(<span className="text-yellow-300">"Resumo"</span>).Range(<span className="text-yellow-300">"A1"</span>)<br /><br />
+                <span className="text-slate-400">' Limpar conteúdo mantendo formatação</span><br />
+                Range(<span className="text-yellow-300">"A2:Z500"</span>).ClearContents
+              </div>
+              <div className="bg-green-50 border border-green-100 rounded-2xl p-4 mb-8 text-sm text-slate-700">
+                <strong>💡 Boas práticas:</strong> Sempre qualifique o objeto Range com a planilha: <code className="bg-green-100 px-1 rounded font-mono">Sheets("Dados").Range("A1")</code> em vez de apenas <code className="bg-green-100 px-1 rounded font-mono">Range("A1")</code>. Isso evita bugs quando o código roda com uma planilha diferente da ativa.
+              </div>
+
+              <h2 id="udfs" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Funções personalizadas (UDFs)</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Além de macros (<code className="bg-slate-100 px-1 rounded font-mono text-sm">Sub</code>), VBA permite criar funções personalizadas (<strong>UDFs — User Defined Functions</strong>) que aparecem no Excel como fórmulas normais. São declaradas com <code className="bg-slate-100 px-1 rounded font-mono text-sm">Function</code> e retornam um valor.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-green-300 mb-4 overflow-x-auto">
+                <span className="text-slate-400">' UDF: extrai somente os dígitos de um texto</span><br />
+                <span className="text-blue-300">Function</span> SomenteNumeros(texto <span className="text-blue-300">As String</span>) <span className="text-blue-300">As String</span><br />
+                &nbsp;&nbsp;<span className="text-blue-300">Dim</span> i <span className="text-blue-300">As Integer</span>, resultado <span className="text-blue-300">As String</span><br />
+                &nbsp;&nbsp;<span className="text-blue-300">For</span> i = 1 <span className="text-blue-300">To</span> Len(texto)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-300">If</span> IsNumeric(Mid(texto, i, 1)) <span className="text-blue-300">Then</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultado = resultado & Mid(texto, i, 1)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-300">End If</span><br />
+                &nbsp;&nbsp;<span className="text-blue-300">Next</span> i<br />
+                &nbsp;&nbsp;SomenteNumeros = resultado<br />
+                <span className="text-blue-300">End Function</span><br /><br />
+                <span className="text-slate-400">' Uso na célula: =SomenteNumeros("CPF: 123.456.789-00")</span><br />
+                <span className="text-slate-400">' Resultado: 12345678900</span>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                UDFs resolvem casos que as funções nativas do Excel não cobrem — como limpar CPFs e telefones, converter categorias específicas do negócio ou calcular regras personalizadas. Uma vez criadas, ficam disponíveis em toda a pasta de trabalho como qualquer outra fórmula.
+              </p>
+
+              <h2 id="boas-praticas" className="text-2xl font-extrabold text-slate-900 mt-10 mb-5 scroll-mt-24">Boas práticas e performance</h2>
+              <div className="space-y-3 mb-10">
+                {[
+                  ['Application.ScreenUpdating = False', 'Desabilite a atualização da tela durante a execução da macro. A diferença de velocidade em grandes planilhas pode ser de 10x ou mais.', 'Application.ScreenUpdating = False\n... código ...\nApplication.ScreenUpdating = True'],
+                  ['Application.Calculation = xlCalculationManual', 'Suspenda o recálculo automático durante operações em massa. Reative ao final com xlCalculationAutomatic.', ''],
+                  ['Evite .Select e .Activate', 'Selecionar células antes de operar é lento e desnecessário. Acesse objetos diretamente: Range("A1").Value = x em vez de Range("A1").Select → Selection.Value = x.', ''],
+                  ['Use arrays para grandes volumes', 'Ler e escrever arrays inteiros é muito mais rápido do que acessar célula a célula em loops. Carregue o intervalo em um array, processe em memória e despeje de volta.', 'Dim dados() As Variant\ndados = Range("A1:D1000").Value\n\' processa dados()\nRange("A1:D1000").Value = dados'],
+                  ['Trate erros com On Error', 'Use On Error Resume Next com cautela e sempre reative o tratamento. Para erros esperados, prefira On Error GoTo com um rótulo de tratamento.', ''],
+                ].map(([titulo, desc, exemplo], i) => (
+                  <div key={i} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                    <p className="font-extrabold text-slate-800 mb-1 flex items-center gap-2 text-sm">
+                      <span className="bg-green-100 text-green-700 rounded-full w-6 h-6 flex items-center justify-center text-xs font-black flex-shrink-0">{i + 1}</span>
+                      <code className="font-mono text-green-800">{titulo}</code>
+                    </p>
+                    <p className="text-slate-500 text-sm mb-2">{desc}</p>
+                    {exemplo && <div className="bg-slate-900 rounded-lg px-4 py-2 font-mono text-xs text-green-300 whitespace-pre">{exemplo}</div>}
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-slate-100 rounded-2xl p-5 text-sm text-slate-500 border border-slate-200 mb-10">
+                <p className="font-bold text-slate-700 mb-2">📚 Fontes consultadas</p>
+                <ul className="space-y-1">
+                  <li><a href="https://learn.microsoft.com/pt-br/office/vba/library-reference/concepts/getting-started-with-vba-in-office" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Learn — Introdução ao VBA no Office</a></li>
+                  <li><a href="https://learn.microsoft.com/pt-br/office/vba/excel/concepts/programming-for-the-single-document-interface-in-excel" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Learn — Programação VBA no Excel</a></li>
+                  <li><a href="https://learn.microsoft.com/pt-br/office/vba/language/concepts/getting-started/declaring-variables" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Learn — Declaração de variáveis no VBA</a></li>
+                  <li><a href="https://survey.stackoverflow.co/2024/" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Stack Overflow Developer Survey 2024</a></li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-r from-green-700 to-green-900 rounded-3xl p-8 text-white text-center">
+                <p className="text-lg font-extrabold mb-2">Quer dominar VBA e automação no Excel?</p>
+                <p className="text-green-100 text-sm mb-6">A Treinatech tem trilha completa de Excel Avançado com VBA — do gravador de macros a sistemas automatizados completos, com certificação MCT.</p>
+                <a href="#cursos" onClick={() => { const el = document.getElementById('cursos'); if(el) el.scrollIntoView({behavior:'smooth'}); }} className="inline-block bg-white text-green-800 font-extrabold px-8 py-3 rounded-2xl hover:bg-green-50 transition-colors active:scale-95">
+                  Ver trilhas de Excel →
+                </a>
+              </div>
+            </div>
+
+            <aside className="lg:w-64 flex-shrink-0 space-y-6">
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm sticky top-24">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Neste artigo</p>
+                <nav className="space-y-2">
+                  {[
+                    { label: 'O que é VBA', id: 'oque-vba' },
+                    { label: 'Primeira macro', id: 'primeira-macro' },
+                    { label: 'Variáveis e estruturas', id: 'estrutura' },
+                    { label: 'Loops', id: 'loops' },
+                    { label: 'Range e Cells', id: 'range-cells' },
+                    { label: 'Funções personalizadas', id: 'udfs' },
+                    { label: 'Boas práticas', id: 'boas-praticas' },
+                  ].map((item) => (
+                    <button key={item.id} onClick={() => { const el = document.getElementById(item.id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className="w-full text-left text-sm text-slate-500 hover:text-green-700 cursor-pointer transition-colors py-1 border-b border-slate-50 last:border-0">
+                      {item.label}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Leia também</p>
+                <div className="space-y-4">
+                  {[
+                    { title: 'Tabelas Dinâmicas Avançadas', id: 8 },
+                    { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
+                    { title: 'Power Query: combine dados sem código', id: 7 },
+                  ].map((rel) => (
+                    <p key={rel.id} className="text-sm text-slate-700 hover:text-green-700 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
+                  ))}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
+  // Artigo 7 — Power Query
+  if (articleId === 7) {
+    return (
+      <article className="min-h-screen bg-slate-50">
+        <div className="bg-gradient-to-br from-slate-900 via-amber-900 to-slate-900 pt-28 pb-16 px-4">
+          <div className="max-w-3xl mx-auto">
+            <button onClick={onBack} className="flex items-center gap-2 text-amber-400 hover:text-amber-300 text-sm font-bold mb-8 transition-colors">
+              <ArrowLeft className="w-4 h-4" /> Voltar ao Blog
+            </button>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 border border-amber-400/20 px-4 py-1.5 rounded-full mb-5">
+              Power BI
+            </span>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-6">
+              Power Query: o segredo dos analistas de dados mais rápidos do mercado
+            </h1>
+            <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
+              <span className="flex items-center gap-2"><User className="w-4 h-4 text-amber-400" /><span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT</span>
+              <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 05 fev 2026</span>
+              <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 7 min de leitura</span>
+              <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Nível: Intermediário</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-3xl mx-auto px-4 -mt-1">
+          <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&q=85" alt="Power Query" className="w-full h-72 object-cover rounded-3xl shadow-2xl" />
+        </div>
+
+        <div className="max-w-3xl mx-auto px-4 py-14">
+          <div className="flex flex-col lg:flex-row gap-12">
+            <div className="flex-1 prose-custom">
+
+              <p className="text-lg text-slate-600 leading-relaxed mb-8 font-medium border-l-4 border-amber-500 pl-5 bg-amber-50 py-4 pr-4 rounded-r-2xl">
+                Power Query é o motor de ETL (Extração, Transformação e Carga) integrado ao Excel e ao Power BI — e é a ferramenta que mais economiza tempo no dia a dia de quem trabalha com dados. Com ele, você conecta qualquer fonte, limpa e transforma os dados visualmente e atualiza tudo com um clique. Tudo baseado na <a href="https://learn.microsoft.com/pt-br/power-query/power-query-what-is-power-query" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">documentação oficial da Microsoft</a>.
+              </p>
+
+              <h2 id="oque-pq" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">O que é o Power Query e onde ele vive</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Segundo a <a href="https://learn.microsoft.com/pt-br/power-query/power-query-what-is-power-query" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">documentação oficial</a>, o Power Query é um mecanismo de transformação e preparação de dados disponível no Excel (a partir de 2016), Power BI Desktop, Analysis Services, Dataverse e outros produtos Microsoft. Ele usa uma linguagem funcional própria chamada <strong>M (Power Query Formula Language)</strong> para registrar cada transformação como uma etapa auditável.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                No <strong>Excel</strong>, acesse via aba <em>Dados → Obter e Transformar Dados</em>. No <strong>Power BI Desktop</strong>, via botão <em>Transformar Dados</em> na aba Página Inicial. O Editor do Power Query é idêntico nas duas ferramentas.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                {[
+                  { titulo: 'Sem código', desc: 'Todas as transformações são feitas por menus visuais — cliques, não digitação.' },
+                  { titulo: 'Auditável', desc: 'Cada etapa fica registrada no painel "Etapas Aplicadas" e pode ser editada ou removida.' },
+                  { titulo: 'Reutilizável', desc: 'Atualize os dados na origem e clique em Atualizar — todas as transformações rodam novamente em segundos.' },
+                  { titulo: 'Escalável', desc: 'Funciona com arquivos locais, SharePoint, SQL, APIs REST e dezenas de outras fontes.' },
+                ].map(({ titulo, desc }, i) => (
+                  <div key={i} className="bg-amber-50 border border-amber-100 rounded-xl p-4">
+                    <p className="font-extrabold text-amber-800 text-sm mb-1">{titulo}</p>
+                    <p className="text-slate-600 text-xs">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <h2 id="fontes" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Conectando fontes de dados</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O Power Query suporta mais de 100 conectores nativos. Conforme a <a href="https://learn.microsoft.com/pt-br/power-query/connectors/" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">lista oficial de conectores</a>, os mais usados no dia a dia corporativo são:
+              </p>
+              <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm mb-6">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-slate-800 text-white">
+                      <th className="text-left px-5 py-3 font-bold">Conector</th>
+                      <th className="text-left px-5 py-3 font-bold">Acesso</th>
+                      <th className="text-left px-5 py-3 font-bold">Caso de uso típico</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['Excel / CSV', 'Dados → Da Pasta de Trabalho / Do Texto', 'Relatórios exportados de sistemas, planilhas de controle'],
+                      ['Pasta (Folder)', 'Dados → Da Pasta', 'Consolidar vários arquivos Excel/CSV de um diretório automaticamente'],
+                      ['SQL Server', 'Dados → Do Banco de Dados', 'Extrair dados de bancos corporativos com query SQL'],
+                      ['SharePoint Online', 'Dados → Do SharePoint Online', 'Listas e arquivos armazenados no SharePoint da empresa'],
+                      ['Web', 'Dados → Da Web', 'Tabelas de páginas HTML, dados abertos de governo, APIs'],
+                      ['OData / REST API', 'Dados → Do Feed OData', 'Integração com sistemas via API (ERP, CRM, SaaS)'],
+                    ].map(([conn, acesso, caso], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                        <td className="px-5 py-3 font-bold text-amber-700">{conn}</td>
+                        <td className="px-5 py-3 text-slate-500 text-xs font-mono">{acesso}</td>
+                        <td className="px-5 py-3 text-slate-600 text-xs">{caso}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <h2 id="transformacoes" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">As transformações mais poderosas</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                As transformações ficam na aba <strong>Transformar</strong> e <strong>Adicionar Coluna</strong> do Editor. Estas são as mais usadas e que mais economizam tempo:
+              </p>
+              <div className="space-y-4 mb-8">
+                {[
+                  {
+                    titulo: 'Despivotar (Unpivot) colunas',
+                    desc: 'Transforma uma tabela "wide" (meses nas colunas) em formato "long" (uma linha por mês) — o formato correto para análise e Power BI. Selecione as colunas de atributo → Transformar → Não Dinamizar Outras Colunas.',
+                  },
+                  {
+                    titulo: 'Expandir colunas aninhadas',
+                    desc: 'Ao conectar APIs JSON ou tabelas relacionadas, o Power Query retorna colunas do tipo "Record" ou "Table". Clique no ícone de seta dupla no cabeçalho da coluna para expandi-las.',
+                  },
+                  {
+                    titulo: 'Coluna condicional',
+                    desc: 'Cria uma nova coluna com lógica if/else visual — sem escrever código. Adicionar Coluna → Coluna Condicional. Ideal para categorizar faixas de valor, status, regiões.',
+                  },
+                  {
+                    titulo: 'Coluna a partir de exemplos',
+                    desc: 'Mostre ao Power Query um exemplo do que você quer extrair e ele infere a lógica automaticamente. Funciona muito bem para extrair partes de datas, textos e códigos estruturados.',
+                  },
+                  {
+                    titulo: 'Mesclar consultas (Merge)',
+                    desc: 'Equivale ao JOIN do SQL: combina duas tabelas por uma coluna em comum. Suporta Inner, Left, Right, Full Outer e Anti Join. Página Inicial → Mesclar Consultas.',
+                  },
+                  {
+                    titulo: 'Acrescentar consultas (Append)',
+                    desc: 'Equivale ao UNION do SQL: empilha linhas de duas ou mais tabelas com a mesma estrutura. Ideal para consolidar múltiplos arquivos mensais em uma única tabela.',
+                  },
+                ].map(({ titulo, desc }, i) => (
+                  <div key={i} className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl px-4 py-3 shadow-sm">
+                    <span className="bg-amber-100 text-amber-700 rounded-full w-6 h-6 flex items-center justify-center text-xs font-black flex-shrink-0 mt-0.5">{i + 1}</span>
+                    <div>
+                      <p className="text-slate-800 text-sm font-bold">{titulo}</p>
+                      <p className="text-slate-500 text-xs mt-0.5">{desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <h2 id="linguagem-m" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Linguagem M: o básico que você precisa saber</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Toda transformação do Power Query gera código na linguagem M nos bastidores. Você não precisa programar em M para usar o Power Query — mas entender o básico permite fazer ajustes que os menus visuais não alcançam. Acesse via <strong>Exibição → Editor Avançado</strong>.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-amber-300 mb-4 overflow-x-auto">
+                <span className="text-slate-400">// Estrutura básica de uma query M</span><br />
+                <span className="text-blue-300">let</span><br />
+                &nbsp;&nbsp;Fonte = Excel.Workbook(File.Contents(<span className="text-yellow-300">"C:\dados.xlsx"</span>), <span className="text-orange-300">true</span>),<br />
+                &nbsp;&nbsp;Planilha = Fonte{"{[Item=\"Vendas\",Kind=\"Sheet\"]}"}{`[Data]`},<br />
+                &nbsp;&nbsp;CabecalhoPromovido = Table.PromoteHeaders(Planilha),<br />
+                &nbsp;&nbsp;TiposAlterados = Table.TransformColumnTypes(CabecalhoPromovido,{"{{"}<span className="text-yellow-300">"Data"</span>, type date{"}}, {{"}<span className="text-yellow-300">"Valor"</span>, type number{"}}"}),<br />
+                &nbsp;&nbsp;FiltroAtivos = Table.SelectRows(TiposAlterados, each [Status] = <span className="text-yellow-300">"Ativo"</span>)<br />
+                <span className="text-blue-300">in</span><br />
+                &nbsp;&nbsp;FiltroAtivos
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Cada variável dentro do bloco <code className="bg-slate-100 px-1 rounded font-mono text-sm">let</code> é uma etapa de transformação. O valor após <code className="bg-slate-100 px-1 rounded font-mono text-sm">in</code> é o resultado final retornado ao modelo. Para parametrizar caminhos de arquivo ou filtros dinâmicos, use <a href="https://learn.microsoft.com/pt-br/power-query/power-query-query-parameters" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">parâmetros de consulta</a>.
+              </p>
+
+              <h2 id="boas-praticas-pq" className="text-2xl font-extrabold text-slate-900 mt-10 mb-5 scroll-mt-24">Boas práticas de performance</h2>
+              <div className="space-y-3 mb-10">
+                {[
+                  ['Filtre logo na primeira etapa', 'Reduza o volume de dados o mais cedo possível na sequência de etapas. Filtrar antes de mesclar ou expandir colunas é muito mais eficiente.'],
+                  ['Remova colunas desnecessárias cedo', 'Carregue apenas as colunas que serão usadas. Menos colunas = modelo menor = atualização mais rápida.'],
+                  ['Evite referências circulares entre queries', 'Organize queries em camadas: Staging (dados brutos) → Transformação → Saída. Queries que referenciam umas às outras em ciclo causam lentidão.'],
+                  ['Desabilite o carregamento de queries auxiliares', 'Queries intermediárias (que só servem como referência) devem ter "Habilitar Carregamento" desativado. Botão direito na query → Habilitar Carregamento (desmarcar).'],
+                  ['Use Query Folding sempre que possível', 'Quando conectado a bancos SQL, o Power Query empurra as transformações para o servidor (Query Folding), processando na fonte em vez de na máquina local. Evite etapas que quebram o folding (como adicionar índice antes de filtrar).'],
+                ].map(([titulo, desc], i) => (
+                  <div key={i} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+                    <p className="font-extrabold text-slate-800 mb-1 flex items-center gap-2 text-sm">
+                      <span className="bg-amber-100 text-amber-700 rounded-full w-6 h-6 flex items-center justify-center text-xs font-black flex-shrink-0">{i + 1}</span>
+                      {titulo}
+                    </p>
+                    <p className="text-slate-500 text-sm">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-slate-100 rounded-2xl p-5 text-sm text-slate-500 border border-slate-200 mb-10">
+                <p className="font-bold text-slate-700 mb-2">📚 Fontes consultadas</p>
+                <ul className="space-y-1">
+                  <li><a href="https://learn.microsoft.com/pt-br/power-query/power-query-what-is-power-query" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Learn — O que é o Power Query?</a></li>
+                  <li><a href="https://learn.microsoft.com/pt-br/power-query/connectors/" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Learn — Conectores do Power Query</a></li>
+                  <li><a href="https://learn.microsoft.com/pt-br/power-query/power-query-query-parameters" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Learn — Parâmetros de consulta</a></li>
+                  <li><a href="https://learn.microsoft.com/pt-br/power-query/query-folding-basics" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Learn — Noções básicas de Query Folding</a></li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-r from-amber-600 to-amber-800 rounded-3xl p-8 text-white text-center">
+                <p className="text-lg font-extrabold mb-2">Quer dominar Power Query do zero ao avançado?</p>
+                <p className="text-amber-100 text-sm mb-6">A Treinatech ensina Power Query no Excel e no Power BI — com casos reais de ETL corporativo, parametrização e linguagem M. Certificação MCT inclusa.</p>
+                <a href="#cursos" onClick={() => { const el = document.getElementById('cursos'); if(el) el.scrollIntoView({behavior:'smooth'}); }} className="inline-block bg-white text-amber-800 font-extrabold px-8 py-3 rounded-2xl hover:bg-amber-50 transition-colors active:scale-95">
+                  Ver trilhas de Power BI →
+                </a>
+              </div>
+            </div>
+
+            <aside className="lg:w-64 flex-shrink-0 space-y-6">
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm sticky top-24">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Neste artigo</p>
+                <nav className="space-y-2">
+                  {[
+                    { label: 'O que é o Power Query', id: 'oque-pq' },
+                    { label: 'Conectando fontes', id: 'fontes' },
+                    { label: 'Transformações essenciais', id: 'transformacoes' },
+                    { label: 'Linguagem M', id: 'linguagem-m' },
+                    { label: 'Boas práticas', id: 'boas-praticas-pq' },
+                  ].map((item) => (
+                    <button key={item.id} onClick={() => { const el = document.getElementById(item.id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className="w-full text-left text-sm text-slate-500 hover:text-amber-700 cursor-pointer transition-colors py-1 border-b border-slate-50 last:border-0">
+                      {item.label}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Leia também</p>
+                <div className="space-y-4">
+                  {[
+                    { title: 'Como criar um dashboard Power BI em 1 hora', id: 4 },
+                    { title: 'DAX do zero: os 10 conceitos essenciais', id: 2 },
+                    { title: 'Tabelas Dinâmicas Avançadas', id: 8 },
+                  ].map((rel) => (
+                    <p key={rel.id} className="text-sm text-slate-700 hover:text-amber-700 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
+                  ))}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
+  // Artigo 8 — Tabelas Dinâmicas Avançadas
+  if (articleId === 8) {
+    return (
+      <article className="min-h-screen bg-slate-50">
+        <div className="bg-gradient-to-br from-slate-900 via-green-950 to-slate-900 pt-28 pb-16 px-4">
+          <div className="max-w-3xl mx-auto">
+            <button onClick={onBack} className="flex items-center gap-2 text-green-400 hover:text-green-300 text-sm font-bold mb-8 transition-colors">
+              <ArrowLeft className="w-4 h-4" /> Voltar ao Blog
+            </button>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-green-400 bg-green-400/10 border border-green-400/20 px-4 py-1.5 rounded-full mb-5">
+              Excel &amp; Power BI
+            </span>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-6">
+              Tabelas dinâmicas avançadas: recursos que 90% dos usuários não conhecem
+            </h1>
+            <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
+              <span className="flex items-center gap-2"><User className="w-4 h-4 text-green-400" /><span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT</span>
+              <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 28 jan 2026</span>
+              <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 6 min de leitura</span>
+              <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Nível: Intermediário</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-3xl mx-auto px-4 -mt-1">
+          <img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?w=1200&q=85" alt="Tabelas Dinâmicas Avançadas" className="w-full h-72 object-cover rounded-3xl shadow-2xl" />
+        </div>
+
+        <div className="max-w-3xl mx-auto px-4 py-14">
+          <div className="flex flex-col lg:flex-row gap-12">
+            <div className="flex-1 prose-custom">
+
+              <p className="text-lg text-slate-600 leading-relaxed mb-8 font-medium border-l-4 border-green-500 pl-5 bg-green-50 py-4 pr-4 rounded-r-2xl">
+                A maioria dos profissionais usa Tabelas Dinâmicas apenas para somar e contar. Mas há um conjunto de recursos avançados — segmentações, linha do tempo, campos calculados e conexão com o modelo de dados — que transforma uma TD comum em um painel interativo de verdade. Tudo baseado na <a href="https://support.microsoft.com/pt-br/office/criar-uma-tabela-dinâmica-para-analisar-dados-de-planilha-a9a84538-bfe9-40a9-a8e9-f99134456576" target="_blank" rel="noopener noreferrer" className="text-green-700 font-semibold hover:underline">documentação oficial da Microsoft</a>.
+              </p>
+
+              <h2 id="revisao" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Revisão rápida: o que uma TD faz bem</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Uma Tabela Dinâmica (TD) resume grandes volumes de dados em segundos, sem fórmulas. Você arrasta campos para as áreas de Linhas, Colunas, Valores e Filtros — e o Excel calcula totais, subtotais e percentuais automaticamente. O ponto de partida recomendado pela Microsoft é sempre usar uma <strong>Tabela Formatada</strong> (Ctrl+T) como fonte de dados: ela expande automaticamente quando novas linhas são adicionadas.
+              </p>
+              <div className="bg-green-50 border border-green-100 rounded-2xl p-4 mb-8 text-sm text-slate-700">
+                <strong>💡 Dica de produtividade:</strong> Use <strong>Alt + N + V + T</strong> para inserir uma Tabela Dinâmica rapidamente com o cursor dentro de qualquer tabela. No Excel 365, experimente <em>Tabelas Dinâmicas Recomendadas</em> — o Excel sugere layouts baseados nos seus dados.
+              </div>
+
+              <h2 id="segmentacoes" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Segmentações de dados (Slicers)</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Segmentações são filtros visuais interativos que ficam visíveis na planilha — muito mais intuitivos do que usar os menus de filtro da TD. Segundo a <a href="https://support.microsoft.com/pt-br/office/usar-segmentações-de-dados-para-filtrar-dados-249f966b-a9d5-4b0f-b31a-12651785d29d" target="_blank" rel="noopener noreferrer" className="text-green-700 font-semibold hover:underline">documentação da Microsoft</a>, um único slicer pode controlar múltiplas Tabelas Dinâmicas ao mesmo tempo — criando painéis interativos sem nenhuma linha de código.
+              </p>
+              <div className="space-y-3 mb-6">
+                {[
+                  ['Inserir', 'Clique dentro da TD → aba Análise de Tabela Dinâmica → Inserir Segmentação de Dados → escolha o campo.'],
+                  ['Conectar a múltiplas TDs', 'Clique com botão direito no slicer → Conexões de Relatório → marque todas as TDs que ele deve controlar.'],
+                  ['Formatar', 'Use as opções da aba Segmentação de Dados para ajustar cores, número de colunas e tamanho dos botões ao layout da página.'],
+                  ['Selecionar múltiplos valores', 'Mantenha Ctrl pressionado para selecionar mais de um item, ou ative o botão de múltipla seleção no canto superior direito do slicer.'],
+                ].map(([acao, desc], i) => (
+                  <div key={i} className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl px-4 py-3 shadow-sm">
+                    <span className="bg-green-100 text-green-700 rounded-full w-6 h-6 flex items-center justify-center text-xs font-black flex-shrink-0 mt-0.5">{i + 1}</span>
+                    <div>
+                      <p className="text-slate-800 text-sm font-bold">{acao}</p>
+                      <p className="text-slate-500 text-xs mt-0.5">{desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <h2 id="linha-do-tempo" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Linha do tempo (Timeline)</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                A Linha do Tempo é um slicer especializado para campos de data — permite filtrar por períodos (Anos, Trimestres, Meses, Dias) com um controle deslizante visual. Para inserir, a coluna de data na fonte precisa ser reconhecida como tipo <em>Data</em> (não texto). Acesse via <strong>Análise de Tabela Dinâmica → Inserir Linha do Tempo</strong>.
+              </p>
+              <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm text-green-300 mb-4 overflow-x-auto">
+                <span className="text-slate-400">' Se a data não for reconhecida, force o tipo na fonte antes de criar a TD:</span><br />
+                <span className="text-slate-400">' Power Query → Tipo da coluna → Data</span><br />
+                <span className="text-slate-400">' Ou na planilha: formate a coluna como Data antes de criar a tabela-fonte</span>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                Assim como os slicers, uma Timeline pode ser conectada a múltiplas TDs simultaneamente — ideal para dashboards onde todas as visualizações devem responder ao mesmo filtro de período.
+              </p>
+
+              <h2 id="campos-calculados" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Campos e itens calculados</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Campos calculados permitem criar novas métricas diretamente na TD sem alterar os dados originais — como margem percentual, ticket médio ou variação entre dois valores.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-3">Acesse via <strong>Análise de Tabela Dinâmica → Campos, Itens e Conjuntos → Campo Calculado</strong>. Exemplos práticos:</p>
+              <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm mb-4">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-slate-800 text-white">
+                      <th className="text-left px-5 py-3 font-bold">Campo calculado</th>
+                      <th className="text-left px-5 py-3 font-bold">Fórmula</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['Margem %', '=Lucro/Receita'],
+                      ['Ticket Médio', '=Receita/Pedidos'],
+                      ['Variação vs Meta', '=(Realizado-Meta)/Meta'],
+                      ['Receita Líquida', '=Receita-(Impostos+Descontos)'],
+                    ].map(([campo, formula], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                        <td className="px-5 py-3 font-semibold text-green-700">{campo}</td>
+                        <td className="px-5 py-3 font-mono text-slate-600 text-xs">{formula}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 mb-8 text-sm text-slate-700">
+                <strong>⚠️ Limitação:</strong> Campos calculados na TD tradicional têm restrições — não suportam funções condicionais complexas nem referenciam outras TDs. Para cálculos mais avançados, migre para o <strong>Modelo de Dados com Power Pivot</strong> e use DAX.
+              </div>
+
+              <h2 id="consolidacao" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Consolidando múltiplas fontes</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O Excel permite criar TDs a partir de múltiplos intervalos de consolidação ou, mais poderoso ainda, do <strong>Modelo de Dados</strong> — que armazena várias tabelas com relacionamentos entre elas, como um mini banco de dados. Segundo a <a href="https://support.microsoft.com/pt-br/office/criar-um-modelo-de-dados-no-excel-87e7a54c-87dc-488e-9410-5c75dbcb0f7b" target="_blank" rel="noopener noreferrer" className="text-green-700 font-semibold hover:underline">documentação da Microsoft</a>, essa abordagem elimina a necessidade de PROCV para cruzar tabelas.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-3">Para adicionar uma tabela ao Modelo de Dados: na caixa de diálogo de criação da TD, marque <strong>"Adicionar estes dados ao Modelo de Dados"</strong>. Depois relacione as tabelas em <strong>Dados → Relações</strong>.</p>
+              <div className="space-y-2 mb-8">
+                {[
+                  'Crie TD que cruza vendas, clientes e produtos sem PROCV',
+                  'Adicione medidas DAX diretamente no Excel via Power Pivot (aba Power Pivot → Gerenciar)',
+                  'Uma única TD pode acessar dados de dezenas de tabelas relacionadas simultaneamente',
+                  'O Modelo de Dados do Excel usa o mesmo motor que o Power BI — o conhecimento é 100% transferível',
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 bg-green-50 border border-green-100 rounded-xl px-4 py-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700 text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <h2 id="dicas-extras" className="text-2xl font-extrabold text-slate-900 mt-10 mb-5 scroll-mt-24">Recursos que poucos conhecem</h2>
+              <div className="space-y-3 mb-10">
+                {[
+                  ['Mostrar valores como % do total pai', 'Em vez de valores absolutos, mostre a participação de cada item no total da linha ou coluna. Botão direito no valor → Mostrar Valores Como → % do Total Pai.'],
+                  ['Classificação por valor dentro de grupos', 'Clique com o botão direito em um valor → Classificar → Do Maior para o Menor. A TD reordena dentro de cada grupo sem perder a hierarquia.'],
+                  ['Agrupar datas automaticamente', 'No Excel 365, TDs com campos de data agrupam automaticamente por ano, trimestre e mês. Clique com o botão direito no campo de data → Agrupar para controlar a granularidade.'],
+                  ['Drill-down com duplo clique', 'Dê um duplo clique em qualquer valor da TD para ver as linhas originais que compõem aquele total — o Excel cria uma nova aba com os dados detalhados.'],
+                  ['Atualizar ao abrir o arquivo', 'Configure a TD para atualizar automaticamente quando o arquivo for aberto: botão direito na TD → Opções → aba Dados → marque "Atualizar dados ao abrir o arquivo".'],
+                ].map(([titulo, desc], i) => (
+                  <div key={i} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+                    <p className="font-extrabold text-slate-800 mb-1 flex items-center gap-2 text-sm">
+                      <span className="bg-green-100 text-green-700 rounded-full w-6 h-6 flex items-center justify-center text-xs font-black flex-shrink-0">{i + 1}</span>
+                      {titulo}
+                    </p>
+                    <p className="text-slate-500 text-sm">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-slate-100 rounded-2xl p-5 text-sm text-slate-500 border border-slate-200 mb-10">
+                <p className="font-bold text-slate-700 mb-2">📚 Fontes consultadas</p>
+                <ul className="space-y-1">
+                  <li><a href="https://support.microsoft.com/pt-br/office/criar-uma-tabela-dinâmica-para-analisar-dados-de-planilha-a9a84538-bfe9-40a9-a8e9-f99134456576" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Support — Criar uma Tabela Dinâmica</a></li>
+                  <li><a href="https://support.microsoft.com/pt-br/office/usar-segmentações-de-dados-para-filtrar-dados-249f966b-a9d5-4b0f-b31a-12651785d29d" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Support — Segmentações de Dados</a></li>
+                  <li><a href="https://support.microsoft.com/pt-br/office/criar-um-modelo-de-dados-no-excel-87e7a54c-87dc-488e-9410-5c75dbcb0f7b" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Support — Modelo de Dados no Excel</a></li>
+                  <li><a href="https://learn.microsoft.com/pt-br/power-bi/transform-model/desktop-create-and-manage-relationships" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Microsoft Learn — Relacionamentos (Power Pivot / Power BI)</a></li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-r from-green-700 to-green-900 rounded-3xl p-8 text-white text-center">
+                <p className="text-lg font-extrabold mb-2">Quer dominar Excel do básico ao avançado?</p>
+                <p className="text-green-100 text-sm mb-6">A Treinatech tem trilha completa de Excel Avançado — Tabelas Dinâmicas, Power Query, Power Pivot e VBA em projetos reais, com certificação MCT.</p>
+                <a href="#cursos" onClick={() => { const el = document.getElementById('cursos'); if(el) el.scrollIntoView({behavior:'smooth'}); }} className="inline-block bg-white text-green-800 font-extrabold px-8 py-3 rounded-2xl hover:bg-green-50 transition-colors active:scale-95">
+                  Ver trilhas de Excel →
+                </a>
+              </div>
+            </div>
+
+            <aside className="lg:w-64 flex-shrink-0 space-y-6">
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm sticky top-24">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Neste artigo</p>
+                <nav className="space-y-2">
+                  {[
+                    { label: 'Revisão rápida', id: 'revisao' },
+                    { label: 'Segmentações (Slicers)', id: 'segmentacoes' },
+                    { label: 'Linha do tempo', id: 'linha-do-tempo' },
+                    { label: 'Campos calculados', id: 'campos-calculados' },
+                    { label: 'Consolidando fontes', id: 'consolidacao' },
+                    { label: 'Recursos extras', id: 'dicas-extras' },
+                  ].map((item) => (
+                    <button key={item.id} onClick={() => { const el = document.getElementById(item.id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className="w-full text-left text-sm text-slate-500 hover:text-green-700 cursor-pointer transition-colors py-1 border-b border-slate-50 last:border-0">
+                      {item.label}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Leia também</p>
+                <div className="space-y-4">
+                  {[
+                    { title: 'VBA no Excel: automatize tarefas repetitivas', id: 5 },
+                    { title: 'Power Query: combine dados sem código', id: 7 },
+                    { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
+                  ].map((rel) => (
+                    <p key={rel.id} className="text-sm text-slate-700 hover:text-green-700 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
+                  ))}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   // Artigos ainda não desenvolvidos
   return (
     <div className="min-h-screen bg-yellow-50 flex flex-col items-center justify-center px-4 text-center">
