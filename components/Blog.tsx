@@ -53,7 +53,7 @@ const POSTS: BlogPost[] = [
     categoryColor: 'bg-yellow-100 text-yellow-800',
     date: '03 mar 2026',
     readTime: '7 min',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1599658880436-c61792e70672?w=800&q=80',
   },
   {
     id: 5,

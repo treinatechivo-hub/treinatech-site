@@ -903,6 +903,333 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
     );
   }
 
+  // Artigo 4 — Dashboard Power BI em 1 hora
+  if (articleId === 4) {
+    return (
+      <article className="min-h-screen bg-slate-50">
+        {/* Header */}
+        <div className="bg-gradient-to-br from-slate-900 via-amber-900 to-slate-900 pt-28 pb-16 px-4">
+          <div className="max-w-3xl mx-auto">
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 text-amber-400 hover:text-amber-300 text-sm font-bold mb-8 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" /> Voltar ao Blog
+            </button>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 border border-amber-400/20 px-4 py-1.5 rounded-full mb-5">
+              Power BI
+            </span>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-6">
+              Como criar um dashboard profissional no Power BI em 1 hora
+            </h1>
+            <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
+              <span className="flex items-center gap-2">
+                <User className="w-4 h-4 text-amber-400" />
+                <span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT
+              </span>
+              <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 03 mar 2026</span>
+              <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 7 min de leitura</span>
+              <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Nível: Iniciante</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Imagem de capa */}
+        <div className="max-w-3xl mx-auto px-4 -mt-1">
+          <img
+            src="https://images.unsplash.com/photo-1599658880436-c61792e70672?w=1200&q=85"
+            alt="Dashboard Power BI profissional"
+            className="w-full h-72 object-cover rounded-3xl shadow-2xl"
+          />
+        </div>
+
+        {/* Conteúdo */}
+        <div className="max-w-3xl mx-auto px-4 py-14">
+          <div className="flex flex-col lg:flex-row gap-12">
+
+            {/* Artigo principal */}
+            <div className="flex-1 prose-custom">
+
+              {/* Intro */}
+              <p className="text-lg text-slate-600 leading-relaxed mb-8 font-medium border-l-4 border-amber-500 pl-5 bg-amber-50 py-4 pr-4 rounded-r-2xl">
+                Criar um dashboard no Power BI parece complexo na primeira vez — mas com o processo certo você vai da planilha a um relatório interativo e publicado na nuvem em menos de uma hora. Neste guia passo a passo, você vai instalar o Power BI Desktop, conectar dados, modelar, visualizar e publicar — tudo com base na <a href="https://learn.microsoft.com/pt-br/power-bi/fundamentals/desktop-getting-started" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">documentação oficial da Microsoft</a>.
+              </p>
+
+              {/* Seção 1 */}
+              <h2 id="instalacao" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Passo 1: instalar o Power BI Desktop</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O <strong>Power BI Desktop</strong> é gratuito e pode ser baixado diretamente pela <a href="https://www.microsoft.com/pt-br/power-platform/products/power-bi/desktop" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">página oficial da Microsoft</a> ou pela Microsoft Store. Segundo a documentação, ele é o ambiente onde você conecta dados, cria modelos e constrói relatórios antes de publicá-los no serviço na nuvem.
+              </p>
+              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 mb-6 text-sm text-slate-700">
+                <strong>💡 Recomendação Microsoft:</strong> Prefira instalar pela <strong>Microsoft Store</strong> — as atualizações são automáticas e você sempre terá a versão mais recente sem precisar reinstalar.
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                Para publicar relatórios na nuvem você precisará de uma conta do <strong>Power BI Service</strong> (app.powerbi.com). Contas Microsoft 365 corporativas já incluem acesso. Se não tiver, cadastre-se gratuitamente com um e-mail corporativo ou de estudante em <a href="https://app.powerbi.com" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">app.powerbi.com</a>.
+              </p>
+
+              {/* Seção 2 */}
+              <h2 id="conectar-dados" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Passo 2: conectar aos dados</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Abra o Power BI Desktop e clique em <strong>Obter Dados</strong> na aba Página Inicial. O Power BI suporta mais de 100 fontes de dados — de arquivos Excel e CSV a bancos SQL Server, SharePoint, Azure e APIs REST. Conforme a <a href="https://learn.microsoft.com/pt-br/power-bi/connect-data/desktop-data-sources" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">documentação oficial</a>, as fontes mais comuns para iniciantes são:
+              </p>
+              <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm mb-6">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-slate-800 text-white">
+                      <th className="text-left px-5 py-3 font-bold">Fonte</th>
+                      <th className="text-left px-5 py-3 font-bold">Quando usar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['Excel / CSV', 'Dados exportados de sistemas, planilhas operacionais'],
+                      ['SQL Server', 'Bancos corporativos — maior performance e volume'],
+                      ['SharePoint Online', 'Listas e planilhas armazenadas no SharePoint da empresa'],
+                      ['Web', 'Tabelas de páginas HTML públicas ou APIs'],
+                      ['Pasta', 'Consolidar múltiplos arquivos Excel ou CSV de uma vez'],
+                    ].map(([fonte, quando], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                        <td className="px-5 py-3 font-semibold text-amber-700">{fonte}</td>
+                        <td className="px-5 py-3 text-slate-600">{quando}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                Após selecionar a fonte e confirmar a conexão, o Power BI abrirá o <strong>Editor do Power Query</strong> automaticamente — onde você limpará e transformará os dados antes de carregá-los no modelo.
+              </p>
+
+              {/* Seção 3 */}
+              <h2 id="power-query" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Passo 3: transformar dados com o Power Query</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O Power Query é o motor de ETL (Extração, Transformação e Carga) do Power BI. Segundo a <a href="https://learn.microsoft.com/pt-br/power-bi/transform-model/desktop-query-overview" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">documentação da Microsoft</a>, todas as transformações são registradas como etapas aplicadas — permitindo auditoria completa e fácil manutenção.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-3">As transformações mais essenciais para um primeiro dashboard:</p>
+              <div className="space-y-3 mb-8">
+                {[
+                  ['Promover a primeira linha como cabeçalho', 'Quando o arquivo não tem cabeçalhos definidos. Aba Início → "Usar a Primeira Linha como Cabeçalho".'],
+                  ['Remover colunas desnecessárias', 'Selecione as colunas que não precisar → clique com o botão direito → Remover. Menos colunas = modelo mais leve.'],
+                  ['Alterar tipos de dados', 'Clique no ícone à esquerda do nome de cada coluna e defina o tipo correto: Data, Número Decimal, Texto, etc.'],
+                  ['Filtrar linhas inválidas', 'Use os filtros automáticos do cabeçalho para remover linhas em branco, erros ou categorias irrelevantes.'],
+                  ['Mesclar ou acrescentar consultas', 'Combine duas tabelas (Mesclar = JOIN horizontal; Acrescentar = UNION vertical). Aba Página Inicial → Combinar.'],
+                ].map(([titulo, desc], i) => (
+                  <div key={i} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+                    <p className="font-extrabold text-slate-800 mb-1 flex items-center gap-2 text-sm">
+                      <span className="bg-amber-100 text-amber-700 rounded-full w-6 h-6 flex items-center justify-center text-xs font-black flex-shrink-0">{i + 1}</span>
+                      {titulo}
+                    </p>
+                    <p className="text-slate-500 text-sm">{desc}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                Quando as transformações estiverem prontas, clique em <strong>Fechar e Aplicar</strong> para carregar os dados no modelo do Power BI Desktop.
+              </p>
+
+              {/* Seção 4 */}
+              <h2 id="modelagem" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Passo 4: modelar os relacionamentos</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Na aba <strong>Modelo</strong> (ícone de diagrama na barra lateral esquerda), você define como as tabelas se relacionam entre si. A Microsoft recomenda o <strong>modelo estrela (Star Schema)</strong> como padrão para dashboards profissionais: uma tabela fato central conectada a tabelas dimensão ao redor.
+              </p>
+              <div className="bg-slate-900 rounded-2xl p-6 mb-6 text-sm font-mono">
+                <div className="flex flex-wrap items-center gap-2 text-center justify-center">
+                  {['dCalendário\n(dimensão)', 'dProdutos\n(dimensão)', 'fVendas\n(fato central)', 'dClientes\n(dimensão)', 'dRegiões\n(dimensão)'].map((step, i, arr) => (
+                    <React.Fragment key={i}>
+                      {i === 2 ? (
+                        <div className="bg-amber-800/50 border-2 border-amber-500/60 rounded-xl px-4 py-2 text-amber-200 text-xs whitespace-pre-line text-center font-bold">{step}</div>
+                      ) : (
+                        <div className="bg-slate-700/50 border border-slate-600/40 rounded-xl px-3 py-2 text-slate-300 text-xs whitespace-pre-line text-center">{step}</div>
+                      )}
+                      {i < arr.length - 1 && i !== 1 && <ChevronRight className="w-4 h-4 text-slate-500 hidden sm:block" />}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Para criar um relacionamento: arraste a coluna chave de uma tabela para a coluna correspondente na outra. O Power BI detecta automaticamente a cardinalidade (1:N, N:1, etc.) conforme a <a href="https://learn.microsoft.com/pt-br/power-bi/transform-model/desktop-create-and-manage-relationships" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">documentação oficial de relacionamentos</a>.
+              </p>
+              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 mb-8 text-sm text-slate-700">
+                <strong>⚠️ Ponto de atenção:</strong> Uma tabela de datas dedicada (<code className="bg-amber-100 px-1 rounded font-mono">dCalendário</code>) é obrigatória para usar funções de inteligência de tempo (YTD, comparativos de período). Crie-a via <strong>Nova Tabela</strong> com a função DAX <code className="bg-amber-100 px-1 rounded font-mono">CALENDARAUTO()</code> e marque-a como tabela de datas nas configurações.
+              </div>
+
+              {/* Seção 5 */}
+              <h2 id="visualizacoes" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Passo 5: criar as visualizações</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Na aba <strong>Relatório</strong>, arraste campos do painel à direita para a tela em branco. O Power BI sugere automaticamente o tipo de visual mais adequado, mas você pode alterar a qualquer momento. Segundo a <a href="https://learn.microsoft.com/pt-br/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">documentação de visuais</a>, os mais usados em dashboards profissionais são:
+              </p>
+              <div className="space-y-3 mb-8">
+                {[
+                  ['Cartão (Card)', 'KPIs principais: faturamento total, nº de clientes, ticket médio. Arraste uma medida → escolha "Cartão".'],
+                  ['Gráfico de Barras/Colunas', 'Comparar categorias: vendas por produto, por região, por mês. Ideal para até 10-12 categorias.'],
+                  ['Gráfico de Linhas', 'Tendências ao longo do tempo. Eixo X = data, Eixo Y = valor. Exige tabela de datas configurada.'],
+                  ['Tabela / Matriz', 'Detalhar dados com múltiplas dimensões. A Matriz permite hierarquias expansíveis (ano → mês → dia).'],
+                  ['Segmentação (Slicer)', 'Filtros interativos visíveis na tela — por período, categoria, região. Arraste a coluna → escolha "Segmentação de Dados".'],
+                  ['Gráfico de Rosca', 'Participação percentual de partes no todo. Use com no máximo 5-6 categorias para manter legibilidade.'],
+                ].map(([visual, desc], i) => (
+                  <div key={i} className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl px-4 py-3 shadow-sm">
+                    <CheckCircle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-slate-800 text-sm font-bold">{visual}</p>
+                      <p className="text-slate-500 text-xs mt-0.5">{desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Seção 6 */}
+              <h2 id="design" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Passo 6: formatação e design profissional</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Um dashboard tecnicamente correto mas visualmente confuso perde impacto na hora da apresentação. Seguindo as <a href="https://learn.microsoft.com/pt-br/power-bi/create-reports/service-dashboards-design-tips" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">diretrizes de design da Microsoft</a>, aplique esses princípios:
+              </p>
+              <div className="space-y-3 mb-6">
+                {[
+                  ['Hierarquia visual', 'KPIs no topo (cartões grandes), gráficos de tendência no meio, detalhes em tabelas na base. O olho percorre de cima para baixo.'],
+                  ['Paleta de cores consistente', 'Use no máximo 3 cores principais. Defina um tema global em Exibição → Temas — o Power BI aplicará automaticamente a todos os visuais.'],
+                  ['Títulos claros e objetivos', 'Cada visual deve ter um título que responda uma pergunta de negócio: "Faturamento por Mês" é melhor que "Gráfico 1".'],
+                  ['Alinhamento e espaçamento', 'Use Ctrl+A → Formatar → Alinhar para alinhar múltiplos visuais. Espaçamento uniforme transmite organização e profissionalismo.'],
+                  ['Fundo e borda', 'Adicione um fundo suave (cinza claro ou branco) e bordas arredondadas nos painéis via painel de formatação para dar profundidade aos cartões.'],
+                ].map(([titulo, desc], i) => (
+                  <div key={i} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+                    <p className="font-extrabold text-slate-800 mb-1 flex items-center gap-2 text-sm">
+                      <span className="bg-amber-100 text-amber-700 rounded-full w-6 h-6 flex items-center justify-center text-xs font-black flex-shrink-0">{i + 1}</span>
+                      {titulo}
+                    </p>
+                    <p className="text-slate-500 text-sm">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Seção 7 */}
+              <h2 id="publicar" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Passo 7: publicar no Power BI Service</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Com o relatório pronto no Power BI Desktop, clique em <strong>Publicar</strong> na aba Página Inicial. Selecione o workspace de destino e aguarde o upload. Conforme a <a href="https://learn.microsoft.com/pt-br/power-bi/create-reports/desktop-upload-desktop-files" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">documentação oficial de publicação</a>, o processo leva de segundos a poucos minutos dependendo do tamanho do modelo.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-4">No Power BI Service (app.powerbi.com) você poderá:</p>
+              <div className="space-y-2 mb-6">
+                {[
+                  'Criar um Dashboard fixando os visuais mais importantes do relatório (ícone de pino em cada visual)',
+                  'Configurar atualização automática dos dados em Conjuntos de Dados → Atualizar Agora / Agendar Atualização',
+                  'Compartilhar o relatório com colegas via link ou por workspace — sem precisar enviar arquivos por e-mail',
+                  'Acessar via app Power BI Mobile no celular (iOS e Android) com a mesma conta corporativa',
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 bg-amber-50 border border-amber-100 rounded-xl px-4 py-3">
+                    <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700 text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-10 text-sm text-slate-700">
+                <strong>⚠️ Atenção com o compartilhamento:</strong> Cada usuário que acessar um relatório no Power BI Service precisa de uma licença <strong>Power BI Pro</strong> (ou estar em um workspace Premium). Sem licença, o link abrirá apenas para o dono do relatório.
+              </div>
+
+              {/* Fontes */}
+              <div className="bg-slate-100 rounded-2xl p-5 text-sm text-slate-500 border border-slate-200 mb-10">
+                <p className="font-bold text-slate-700 mb-2">📚 Fontes consultadas</p>
+                <ul className="space-y-1">
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/power-bi/fundamentals/desktop-getting-started" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — Introdução ao Power BI Desktop
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/power-bi/connect-data/desktop-data-sources" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — Fontes de dados no Power BI Desktop
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/power-bi/transform-model/desktop-query-overview" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — Visão geral de consultas no Power BI Desktop
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/power-bi/transform-model/desktop-create-and-manage-relationships" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — Criar e gerenciar relacionamentos
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — Tipos de visualização no Power BI
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/power-bi/create-reports/service-dashboards-design-tips" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — Dicas de design para dashboards
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://learn.microsoft.com/pt-br/power-bi/create-reports/desktop-upload-desktop-files" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> Microsoft Learn — Publicar do Power BI Desktop
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* CTA */}
+              <div className="bg-gradient-to-r from-amber-600 to-amber-800 rounded-3xl p-8 text-white text-center">
+                <p className="text-lg font-extrabold mb-2">Quer criar dashboards profissionais de verdade?</p>
+                <p className="text-amber-100 text-sm mb-6">A Treinatech tem trilha completa de Power BI — do zero ao nível avançado com DAX, modelagem e publicação corporativa, com acompanhamento de instrutor MCT.</p>
+                <a
+                  href="#cursos"
+                  onClick={() => { const el = document.getElementById('cursos'); if(el) el.scrollIntoView({behavior:'smooth'}); }}
+                  className="inline-block bg-white text-amber-800 font-extrabold px-8 py-3 rounded-2xl hover:bg-amber-50 transition-colors active:scale-95"
+                >
+                  Ver trilhas de Power BI →
+                </a>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <aside className="lg:w-64 flex-shrink-0 space-y-6">
+              {/* Índice */}
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm sticky top-24">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Neste artigo</p>
+                <nav className="space-y-2">
+                  {[
+                    { label: 'Instalar o Power BI Desktop', id: 'instalacao' },
+                    { label: 'Conectar aos dados', id: 'conectar-dados' },
+                    { label: 'Transformar com Power Query', id: 'power-query' },
+                    { label: 'Modelar relacionamentos', id: 'modelagem' },
+                    { label: 'Criar visualizações', id: 'visualizacoes' },
+                    { label: 'Design profissional', id: 'design' },
+                    { label: 'Publicar no Power BI Service', id: 'publicar' },
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        const el = document.getElementById(item.id);
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }}
+                      className="w-full text-left text-sm text-slate-500 hover:text-amber-700 cursor-pointer transition-colors py-1 border-b border-slate-50 last:border-0"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+
+              {/* Artigos relacionados */}
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Leia também</p>
+                <div className="space-y-4">
+                  {[
+                    { title: 'DAX do zero: os 10 conceitos essenciais', id: 2 },
+                    { title: 'Power Query: o segredo dos analistas mais rápidos', id: 7 },
+                    { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
+                  ].map((rel) => (
+                    <p key={rel.id} className="text-sm text-slate-700 hover:text-amber-700 cursor-pointer font-semibold leading-snug transition-colors">
+                      {rel.title} →
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   // Artigos ainda não desenvolvidos
   return (
     <div className="min-h-screen bg-yellow-50 flex flex-col items-center justify-center px-4 text-center">
