@@ -108,7 +108,7 @@ export const Courses: React.FC = () => {
                 <div className="mb-10">
                     <h4 className="text-lg font-bold text-slate-900 mb-4">Sobre o treinamento</h4>
                     <p className="text-slate-600 leading-relaxed text-lg">
-                        Este curso foi estruturado para levar você do zero ao nível profissional, com foco total na aplicação prática de mercado. Confira os módulos abaixo:
+                        {selectedCourse.modalDescription}
                     </p>
                 </div>
 

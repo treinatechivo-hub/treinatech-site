@@ -9,6 +9,7 @@ export interface Course {
   id: string;
   title: string;
   description: string;
+  modalDescription: string;
   icon: React.ReactNode;
   topics: string[];
   fullSyllabus: CourseModule[];

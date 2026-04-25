@@ -21,6 +21,7 @@ export const COURSES: Course[] = [
     id: 'excel-basico',
     title: 'Excel Básico',
     description: 'Aprenda a organizar dados, construir planilhas e tomar decisões com clareza — do zero ao relatório profissional.',
+    modalDescription: 'Ideal para quem está começando do zero ou quer consolidar os fundamentos. Você vai aprender a criar planilhas organizadas, aplicar fórmulas essenciais, usar PROCV e PROCX para cruzar dados e construir relatórios e gráficos com visual profissional. Ao final, você terá autonomia para resolver as tarefas mais comuns do Excel no dia a dia corporativo.',
     icon: <Table className="w-8 h-8" />,
     topics: ['Fórmulas Essenciais', 'Filtros e Validação', 'PROCV e PROCX', 'Gráficos e Relatórios'],
     fullSyllabus: [
@@ -72,6 +73,7 @@ export const COURSES: Course[] = [
     id: 'excel-intermediario',
     title: 'Excel Intermediário',
     description: 'Transforme dados em decisões com fórmulas condicionais, KPIs visuais, consultas avançadas e dashboards interativos.',
+    modalDescription: 'Para quem já conhece o básico e quer ir além. Neste treinamento você aprende lógica condicional aplicada ao negócio, KPIs com formatação condicional e ícones, cálculos de datas e parcelas, filtros avançados, PROCV e PROCX na prática e finaliza com um Dashboard multi-abas completo — o projeto International Motors. Inclui também integração com WhatsApp direto da planilha.',
     icon: <Table className="w-8 h-8" />,
     topics: ['SE e SES na prática', 'Formatação Condicional', 'PROCV, PROCX e SEERRO', 'Dashboard e Segurança'],
     fullSyllabus: [
@@ -127,6 +129,7 @@ export const COURSES: Course[] = [
     id: 'excel-avancado',
     title: 'Excel Avançado',
     description: 'Domine automação, fórmulas matriciais, VBA e análise de dados — a base completa para dominar o Excel em qualquer contexto profissional.',
+    modalDescription: 'O treinamento mais completo para quem quer dominar o Excel de ponta a ponta. Você vai trabalhar com Tabelas Dinâmicas avançadas, fórmulas matriciais, funções de banco de dados, automação com Macros e programação em VBA — criando sistemas automatizados do zero. É também a base obrigatória para as especializações em Dashboards, BI com Excel e Análise Financeira.',
     icon: <Table className="w-8 h-8" />,
     topics: ['Tabelas Dinâmicas', 'Fórmulas Matriciais', 'Macros & VBA', 'Integração WhatsApp'],
     fullSyllabus: [
@@ -169,6 +172,7 @@ export const COURSES: Course[] = [
     id: 'excel-avancado-dashboards',
     title: 'Excel Avançado + Dashboards',
     description: 'Construa painéis executivos completos com imagens dinâmicas, slicers interativos e layout profissional — do dado ao relatório visual.',
+    modalDescription: 'Combina todo o conteúdo do Excel Avançado com uma especialização focada na construção de dashboards executivos de alto impacto. Você vai criar painéis com imagens dinâmicas por seleção, slicers conectados a múltiplos gráficos, KPIs visuais e design profissional seguindo boas práticas de UX/UI. O resultado é um Dashboard interativo completo pronto para apresentar à diretoria.',
     icon: <Table className="w-8 h-8" />,
     topics: ['Dashboard Completo', 'Imagens Dinâmicas', 'Slicers & KPIs', 'Design Executivo'],
     fullSyllabus: [
@@ -203,6 +207,7 @@ export const COURSES: Course[] = [
     id: 'excel-avancado-bi',
     title: 'Excel Avançado + BI com Excel',
     description: 'Transforme o Excel em uma ferramenta de BI com Power Query, Power Pivot e DAX — o caminho natural para o Power BI.',
+    modalDescription: 'Combina o Excel Avançado com uma especialização em Business Intelligence usando o próprio Excel. Você aprende ETL com Power Query, modelagem dimensional com Star Schema, Power Pivot e as primeiras medidas em DAX — transformando o Excel em uma ferramenta de BI robusta. É também o caminho natural e recomendado para quem planeja migrar para o Power BI.',
     icon: <Table className="w-8 h-8" />,
     topics: ['ETL com Power Query', 'Power Pivot & DAX', 'Star Schema', 'Relatórios Profissionais'],
     fullSyllabus: [
@@ -237,6 +242,7 @@ export const COURSES: Course[] = [
     id: 'excel-avancado-financeiro',
     title: 'Excel Avançado + Análise Financeira',
     description: 'Modelagem financeira, análise de investimentos, fluxo de caixa e sistemas de amortização — Excel aplicado às decisões do negócio.',
+    modalDescription: 'Combina o Excel Avançado com uma especialização voltada a profissionais das áreas financeira, contábil e de controladoria. Você vai trabalhar com funções financeiras nativas do Excel, análise de viabilidade (VPL, TIR, Payback), simulações com SOLVER e Tabela de Dados, tabelas Price e SAC, e fluxo de caixa projetado — aplicando o Excel diretamente nas decisões estratégicas do negócio.',
     icon: <Table className="w-8 h-8" />,
     topics: ['Funções Financeiras', 'VPL, TIR e Payback', 'Fluxo de Caixa', 'Amortização Price & SAC'],
     fullSyllabus: [
@@ -273,6 +279,7 @@ export const COURSES: Course[] = [
     id: 'powerbi-modulo1',
     title: 'Power BI – Módulo 1',
     description: 'Do dado ao relatório interativo: ETL com Power Query, modelagem, DAX e publicação com 5 projetos reais.',
+    modalDescription: 'O ponto de partida ideal para quem quer entrar no mundo do Power BI. Você vai percorrer todo o fluxo profissional: conectar e tratar dados com Power Query, modelar com Star Schema, criar medidas DAX e construir relatórios interativos com visual impactante. O treinamento é 100% prático — são 5 projetos reais desenvolvidos do zero, incluindo web scrapping em tempo real e um portfólio de relatórios publicado no Power BI Service.',
     icon: <BarChart3 className="w-8 h-8" />,
     topics: ['ETL com Power Query', 'Modelagem e DAX', 'Relatórios Interativos', '5 Projetos Reais'],
     fullSyllabus: [
@@ -329,6 +336,7 @@ export const COURSES: Course[] = [
     id: 'powerbi-modulo2',
     title: 'Power BI – Módulo 2',
     description: 'DAX avançado, Power Query com linguagem M, visualizações com IA e segurança corporativa — nível profissional.',
+    modalDescription: 'Para quem já domina o Módulo 1 e quer alcançar o nível profissional. Aqui você aprofunda o DAX com funções iteradoras, Time Intelligence e grupos de cálculos, domina a linguagem M no Power Query, cria visuais com IA e implementa segurança em nível de linha (RLS). O treinamento cobre ainda o Power BI Report Server para ambientes corporativos sem acesso à nuvem — entregando 2 projetos finais de alto nível.',
     icon: <BarChart3 className="w-8 h-8" />,
     topics: ['DAX Avançado & Time Intelligence', 'Power Query + Linguagem M', 'Visuais com IA', 'Segurança & Report Server'],
     fullSyllabus: [
@@ -390,6 +398,7 @@ export const COURSES: Course[] = [
     id: 'sql',
     title: 'SQL para Dados',
     description: 'Aprenda a manipular grandes volumes de dados nos bancos de dados mais utilizados no mercado.',
+    modalDescription: 'Treinamento completo de SQL voltado para analistas de dados, desenvolvedores e profissionais que precisam extrair e manipular dados em bancos relacionais. Você vai do SELECT básico até otimização de queries com índices e plano de execução — passando por JOINs, Subqueries, CTEs, Views, Stored Procedures e Triggers. Compatível com SQL Server, PostgreSQL e MySQL.',
     icon: <Database className="w-8 h-8" />,
     topics: ['Selects & Joins', 'Views & Triggers', 'Otimização de Queries', 'PostgreSQL/MySQL'],
     fullSyllabus: [
