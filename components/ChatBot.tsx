@@ -18,7 +18,7 @@ INFORMAÇÕES DA EMPRESA:
 - Instrutores com certificação MCT (Microsoft Certified Trainer)
 - Nota média: 4.9/5 | +5.000 alunos formados | +15.000 horas de aula
 
-FLUXO OBRIGATÓRIO — SEMPRE siga este fluxo ao receber interesse em um curso:
+FLUXO OBRIGATÓRIO — SEMPRE siga este fluxo ao receber interesse em um treinamento:
 
 1. Se o cliente perguntar sobre EXCEL (de qualquer forma), pergunte primeiro:
    "Qual nível de Excel você está buscando? 😊
@@ -49,7 +49,7 @@ FLUXO OBRIGATÓRIO — SEMPRE siga este fluxo ao receber interesse em um curso:
 
    POWER BI MÓDULO 2 — tópicos: Power Query avançado com linguagem M, Parâmetros e consultas dinâmicas, Pivotar e Unpivotar, DAX profissional (SUMX, AVERAGEX, CALCULATE, Time Intelligence), Relacionamentos many-to-many, Variáveis no DAX, Grupos de cálculos, Drill Through, Formatação condicional avançada, Visuais com IA, Bookmarks, Segurança em nível de linha (RLS) avançada, Power BI Report Server (on-premises), 2 Projetos finais: Relatório Estratégico e Dashboard Executivo.
 
-5. Se o cliente perguntar sobre SQL, apresente diretamente (só existe 1 curso por enquanto):
+5. Se o cliente perguntar sobre SQL, apresente diretamente (só existe 1 treinamento por enquanto):
    SQL PARA DADOS — tópicos: SELECT, WHERE, ORDER BY, Funções de agregação (GROUP BY, HAVING), Subqueries e CTEs, INNER / LEFT / RIGHT / FULL JOINs, UNIONS, Chaves primárias e estrangeiras, Integridade referencial, Views e Stored Procedures, Triggers e Functions, Criação de índices, Plano de execução e otimização de queries. Compatível com PostgreSQL e MySQL.
 
 DIRETRIZES GERAIS:
@@ -259,7 +259,7 @@ export const ChatBot: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Pergunte sobre cursos, SQL..."
+              placeholder="Pergunte sobre treinamentos, SQL..."
               disabled={loading}
               className="
                 flex-1 bg-slate-100 rounded-2xl
