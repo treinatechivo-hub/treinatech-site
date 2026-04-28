@@ -151,10 +151,10 @@ const App: React.FC = () => {
               {[
                 { name: 'Frísia', logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br', bg: 'bg-white' },
                 { name: 'Agrária', logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br', bg: 'bg-white' },
-                { name: 'Sicoob', logo: 'https://www.sicoob.com.br/image/layout_set_logo', url: 'https://www.sicoob.com.br', bg: 'bg-white' },
+                { name: 'Sicoob', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/250px-Logotipo_do_Sicoob.svg.png', url: 'https://www.sicoob.com.br', bg: 'bg-white' },
                 { name: 'Frísia', logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br', bg: 'bg-white' },
                 { name: 'Agrária', logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br', bg: 'bg-white' },
-                { name: 'Sicoob', logo: 'https://www.sicoob.com.br/image/layout_set_logo', url: 'https://www.sicoob.com.br', bg: 'bg-white' },
+                { name: 'Sicoob', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/250px-Logotipo_do_Sicoob.svg.png', url: 'https://www.sicoob.com.br', bg: 'bg-white' },
               ].map((item, idx) => (
                 <a
                   key={idx}
