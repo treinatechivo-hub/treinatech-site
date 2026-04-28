@@ -43,20 +43,20 @@ const stats = [
 
 export const Instructor: React.FC = () => {
   return (
-    <section id="instrutor" className="py-24 bg-white scroll-mt-20">
+    <section id="instrutor" className="py-24 bg-slate-900 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <p className="text-green-700 font-bold text-xs uppercase tracking-[0.3em] mb-3">Seu Instrutor</p>
-          <h2 className="text-4xl font-bold text-slate-900 mb-4">Quem vai te ensinar</h2>
-          <p className="text-lg text-slate-500">Formação técnica sólida. Experiência corporativa real.</p>
+          <p className="text-green-400 font-bold text-xs uppercase tracking-[0.3em] mb-3">Seu Instrutor</p>
+          <h2 className="text-4xl font-bold text-white mb-4">Quem vai te ensinar</h2>
+          <p className="text-lg text-slate-400">Formação técnica sólida. Experiência corporativa real.</p>
         </div>
 
         {/* Card principal */}
-        <div className="bg-slate-50 rounded-[2.5rem] border border-slate-100 overflow-hidden shadow-xl">
+        <div className="bg-slate-800 rounded-[2.5rem] border border-slate-700 overflow-hidden shadow-xl">
           <div className="grid md:grid-cols-5">
             {/* Coluna esquerda — foto */}
-            <div className="md:col-span-2 bg-gradient-to-br from-slate-800 to-slate-900 p-10 flex flex-col items-center justify-center text-center gap-6">
+            <div className="md:col-span-2 bg-gradient-to-br from-slate-700 to-slate-800 p-10 flex flex-col items-center justify-center text-center gap-6">
               <div className="w-44 h-44 rounded-3xl overflow-hidden border-4 border-white/20 shadow-2xl">
                 <img
                   src="/ivo.png"
@@ -82,19 +82,19 @@ export const Instructor: React.FC = () => {
 
             {/* Coluna direita — bio + certs */}
             <div className="md:col-span-3 p-8 sm:p-10 lg:p-14 flex flex-col justify-center gap-8">
-              <div className="space-y-4 text-slate-600 leading-relaxed text-[1.05rem]">
+              <div className="space-y-4 text-slate-300 leading-relaxed text-[1.05rem]">
                 <p>
                   Instrutor com mais de{' '}
-                  <strong className="text-slate-900">10 anos de experiência</strong> em treinamentos
+                  <strong className="text-white">10 anos de experiência</strong> em treinamentos
                   corporativos de tecnologia e análise de dados. Fundou a Treinatech em 2012 e desde
                   então treinou centenas de profissionais em grandes cooperativas do{' '}
-                  <strong className="text-slate-900">Sistema OCB (Sescoop)</strong> — Frísia,
+                  <strong className="text-white">Sistema OCB (Sescoop)</strong> — Frísia,
                   Castrolanda, Coonagro e Agrária — além de empresas como Telefônica, Bradesco, Unimed
                   Curitiba, BHS Corrugated, Construtora Greenwood e Lavitta Engenharia.
                 </p>
                 <p>
                   Possui as principais certificações Microsoft na área, incluindo o{' '}
-                  <strong className="text-slate-900">MCT (Microsoft Certified Trainer)</strong> — título
+                  <strong className="text-white">MCT (Microsoft Certified Trainer)</strong> — título
                   concedido diretamente pela Microsoft a instrutores com domínio técnico e didático
                   comprovados — garantindo que cada conteúdo ensinado segue os padrões oficiais.
                 </p>
@@ -134,11 +134,11 @@ export const Instructor: React.FC = () => {
           </div>
 
           {/* Stats */}
-          <div className="border-t border-slate-200 grid grid-cols-3 divide-x divide-slate-200">
+          <div className="border-t border-slate-700 grid grid-cols-3 divide-x divide-slate-700">
             {stats.map((stat) => (
               <div key={stat.label} className="py-8 text-center">
-                <p className="text-3xl font-extrabold text-green-700 mb-1">{stat.value}</p>
-                <p className="text-sm text-slate-500 font-medium">{stat.label}</p>
+                <p className="text-3xl font-extrabold text-green-400 mb-1">{stat.value}</p>
+                <p className="text-sm text-slate-400 font-medium">{stat.label}</p>
               </div>
             ))}
           </div>
