@@ -121,29 +121,55 @@ const App: React.FC = () => {
 
         {/* Parceiros */}
         <div className="bg-slate-800/60 py-12 border-y border-slate-700 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4">
-            <p className="text-center text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 mb-8">
-              Treinamentos realizados em grandes cooperativas
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32">
-              <div className="group flex flex-col items-center gap-1 transition-all">
-                <span className="text-3xl font-black tracking-tighter text-slate-300 group-hover:text-[#005aab] transition-colors duration-500 uppercase italic">
-                  Frísia
-                </span>
-                <div className="h-0.5 w-0 group-hover:w-full bg-[#005aab] transition-all duration-500"></div>
-              </div>
-              <div className="group flex flex-col items-center gap-1 transition-all">
-                <span className="text-3xl font-black tracking-tighter text-slate-300 group-hover:text-[#007c41] transition-colors duration-500 uppercase">
-                  Agrária
-                </span>
-                <div className="h-0.5 w-0 group-hover:w-full bg-[#007c41] transition-all duration-500"></div>
-              </div>
-              <div className="group flex flex-col items-center gap-1 transition-all">
-                <span className="text-3xl font-black tracking-tighter text-slate-300 group-hover:text-[#003641] transition-colors duration-500 uppercase">
-                  Sicoob
-                </span>
-                <div className="h-0.5 w-0 group-hover:w-full bg-[#003641] transition-all duration-500"></div>
-              </div>
+          <p className="text-center text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 mb-8">
+            Treinamentos realizados em grandes cooperativas
+          </p>
+          <style>{`
+            @keyframes marquee {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .marquee-track {
+              display: flex;
+              width: max-content;
+              animation: marquee 18s linear infinite;
+            }
+            .marquee-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+          <div className="relative overflow-hidden">
+            <div
+              className="pointer-events-none absolute left-0 top-0 h-full w-24 z-10"
+              style={{ background: 'linear-gradient(to right, #1a2236cc, transparent)' }}
+            />
+            <div
+              className="pointer-events-none absolute right-0 top-0 h-full w-24 z-10"
+              style={{ background: 'linear-gradient(to left, #1a2236cc, transparent)' }}
+            />
+            <div className="marquee-track">
+              {[
+                { name: 'Frísia', logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br', bg: 'bg-white' },
+                { name: 'Agrária', logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br', bg: 'bg-white' },
+                { name: 'Sicoob', logo: 'https://www.sicoob.com.br/image/layout_set_logo', url: 'https://www.sicoob.com.br', bg: 'bg-white' },
+                { name: 'Frísia', logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br', bg: 'bg-white' },
+                { name: 'Agrária', logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br', bg: 'bg-white' },
+                { name: 'Sicoob', logo: 'https://www.sicoob.com.br/image/layout_set_logo', url: 'https://www.sicoob.com.br', bg: 'bg-white' },
+              ].map((item, idx) => (
+                <a
+                  key={idx}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mx-16 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300"
+                >
+                  <img
+                    src={item.logo}
+                    alt={item.name}
+                    className="h-12 w-auto object-contain filter brightness-0 invert hover:brightness-100 hover:invert-0 transition-all duration-300"
+                  />
+                </a>
+              ))}
             </div>
           </div>
         </div>
