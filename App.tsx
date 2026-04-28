@@ -122,7 +122,7 @@ const App: React.FC = () => {
         {/* Parceiros */}
         <div className="bg-slate-800/60 py-12 border-y border-slate-700 overflow-hidden">
           <p className="text-center text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 mb-8">
-            Treinamentos realizados em grandes cooperativas
+            Empresas e cooperativas que já treinaram com a Treinatech
           </p>
           <style>{`
             @keyframes marquee {
@@ -132,42 +132,35 @@ const App: React.FC = () => {
             .marquee-track {
               display: flex;
               width: max-content;
-              animation: marquee 18s linear infinite;
+              animation: marquee 30s linear infinite;
             }
             .marquee-track:hover {
               animation-play-state: paused;
             }
           `}</style>
           <div className="relative overflow-hidden">
-            <div
-              className="pointer-events-none absolute left-0 top-0 h-full w-24 z-10"
-              style={{ background: 'linear-gradient(to right, #1a2236cc, transparent)' }}
-            />
-            <div
-              className="pointer-events-none absolute right-0 top-0 h-full w-24 z-10"
-              style={{ background: 'linear-gradient(to left, #1a2236cc, transparent)' }}
-            />
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-24 z-10"
+              style={{ background: 'linear-gradient(to right, #1a2236cc, transparent)' }} />
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-24 z-10"
+              style={{ background: 'linear-gradient(to left, #1a2236cc, transparent)' }} />
             <div className="marquee-track">
-              {[
-                { name: 'Frísia', logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br' },
-                { name: 'Agrária', logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br' },
-                { name: 'Sicoob', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/250px-Logotipo_do_Sicoob.svg.png', url: 'https://www.sicoob.com.br' },
-                { name: 'Frísia', logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br' },
-                { name: 'Agrária', logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br' },
-                { name: 'Sicoob', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/250px-Logotipo_do_Sicoob.svg.png', url: 'https://www.sicoob.com.br' },
-              ].map((item, idx) => (
+              {([
+                { name: 'Frísia',              logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br', dark: false },
+                { name: 'Agrária',             logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br', dark: false },
+                { name: 'Sicoob',              logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/250px-Logotipo_do_Sicoob.svg.png', url: 'https://www.sicoob.com.br', dark: false },
+                { name: 'Sistema Ocepar',      logo: 'https://www.paranacooperativo.coop.br/images/Logo/logo-sistemaocepar.svg', url: 'https://www.paranacooperativo.coop.br', dark: true },
+                { name: 'Coonagro',            logo: 'https://coonagro.coop.br/wp-content/uploads/2024/06/image-15-Traced.png', url: 'https://coonagro.coop.br', dark: true },
+                { name: 'Bracell',             logo: 'https://www.bracell.com/wp-content/uploads/2019/04/bracell_logo_FA.png', url: 'https://www.bracell.com', dark: false },
+                { name: 'Greenwood',           logo: 'https://static.wixstatic.com/media/4a8932_44f4dee7a33f445f81f2b5078176756d~mv2.png', url: 'https://www.construtoragreenwood.com.br', dark: true },
+              ] as { name: string; logo: string; url: string; dark: boolean }[]).flatMap(item => [item, { ...item, _dup: true }]).map((item, idx) => (
                 <a
                   key={idx}
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mx-8 flex items-center justify-center bg-white rounded-xl px-6 py-3 opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300 shadow-sm"
+                  className={`mx-6 flex items-center justify-center rounded-xl px-6 py-3 opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300 shadow-sm ${item.dark ? 'bg-slate-700' : 'bg-white'}`}
                 >
-                  <img
-                    src={item.logo}
-                    alt={item.name}
-                    className="h-10 w-auto object-contain"
-                  />
+                  <img src={item.logo} alt={item.name} className="h-10 w-auto object-contain" />
                 </a>
               ))}
             </div>
