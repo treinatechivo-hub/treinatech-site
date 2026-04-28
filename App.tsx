@@ -149,24 +149,24 @@ const App: React.FC = () => {
             />
             <div className="marquee-track">
               {[
-                { name: 'Frísia', logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br', bg: 'bg-white' },
-                { name: 'Agrária', logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br', bg: 'bg-white' },
-                { name: 'Sicoob', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/250px-Logotipo_do_Sicoob.svg.png', url: 'https://www.sicoob.com.br', bg: 'bg-white' },
-                { name: 'Frísia', logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br', bg: 'bg-white' },
-                { name: 'Agrária', logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br', bg: 'bg-white' },
-                { name: 'Sicoob', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/250px-Logotipo_do_Sicoob.svg.png', url: 'https://www.sicoob.com.br', bg: 'bg-white' },
+                { name: 'Frísia', logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br' },
+                { name: 'Agrária', logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br' },
+                { name: 'Sicoob', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/250px-Logotipo_do_Sicoob.svg.png', url: 'https://www.sicoob.com.br' },
+                { name: 'Frísia', logo: 'https://www.frisia.coop.br/assets/images/menu-logo.png', url: 'https://www.frisia.coop.br' },
+                { name: 'Agrária', logo: 'https://www.agraria.com.br/img/logo-agraria.svg', url: 'https://www.agraria.com.br' },
+                { name: 'Sicoob', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/250px-Logotipo_do_Sicoob.svg.png', url: 'https://www.sicoob.com.br' },
               ].map((item, idx) => (
                 <a
                   key={idx}
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mx-16 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  className="mx-8 flex items-center justify-center bg-white rounded-xl px-6 py-3 opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300 shadow-sm"
                 >
                   <img
                     src={item.logo}
                     alt={item.name}
-                    className="h-12 w-auto object-contain filter brightness-0 invert hover:brightness-100 hover:invert-0 transition-all duration-300"
+                    className="h-10 w-auto object-contain"
                   />
                 </a>
               ))}
