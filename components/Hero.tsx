@@ -101,6 +101,9 @@ export const Hero: React.FC = () => {
             <p className="text-xl text-slate-300 mb-10 leading-relaxed">
               Domine as ferramentas de análise de dados mais exigidas pelo mercado: <span className="font-bold text-white">Excel, Power BI e SQL</span>. Transformamos você no especialista que as empresas procuram para gerar resultados reais.
             </p>
+            <p className="text-base text-slate-400 mb-10 leading-relaxed">
+              Números que comprovam: <span className="font-bold text-white">92% dos nossos participantes</span> relatam melhora direta na performance profissional após os treinamentos, e <span className="font-bold text-white">95% aprovam</span> o conteúdo e a metodologia aplicada.
+            </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <a
