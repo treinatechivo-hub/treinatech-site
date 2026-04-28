@@ -87,10 +87,13 @@ export const Instructor: React.FC = () => {
                   Instrutor com mais de{' '}
                   <strong className="text-white">10 anos de experiência</strong> em treinamentos
                   corporativos de tecnologia e análise de dados. Fundou a Treinatech em 2012 e desde
-                  então treinou centenas de profissionais em grandes cooperativas do{' '}
+                  então treinou centenas de profissionais em organizações como o{' '}
+                  <a href="https://www.paranacooperativo.coop.br/" target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-blue-300">Sistema Ocepar</a>{' '}
+                  e grandes cooperativas do{' '}
                   <strong className="text-white">Sistema OCB (Sescoop)</strong> — Frísia,
                   Castrolanda, Coonagro e Agrária — além de empresas como Telefônica, Bradesco, Unimed
-                  Curitiba, BHS Corrugated, Construtora Greenwood e Lavitta Engenharia.
+                  Curitiba, BHS Corrugated, Construtora Greenwood e{' '}
+                  <a href="https://www.bracell.com/" target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-blue-300">Bracell</a>.
                 </p>
                 <p>
                   Possui as principais certificações Microsoft na área, incluindo o{' '}
