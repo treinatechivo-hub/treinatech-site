@@ -80,13 +80,13 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
             </a>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center space-x-10">
+            <div className="hidden md:flex items-center space-x-6">
               {NAV_ITEMS.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleLinkClick(e, item.href)}
-                  className={`text-sm font-bold transition-colors uppercase tracking-widest ${linkColor}`}
+                  className={`text-xs font-bold transition-colors uppercase tracking-widest ${linkColor}`}
                 >
                   {item.label}
                 </a>
@@ -94,7 +94,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
               <a
                 href="#alunos"
                 onClick={(e) => handleLinkClick(e, '#alunos')}
-                className={`px-6 py-3 rounded-full text-sm font-black transition-all border-2 uppercase tracking-widest ${
+                className={`px-5 py-3 rounded-full text-xs font-black transition-all border-2 uppercase tracking-widest ${
                   darkBg && !scrolled
                     ? 'border-white text-white hover:bg-white/10'
                     : 'border-slate-300 text-slate-700 hover:border-green-600 hover:text-green-700'
@@ -105,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
               <a
                 href="#contato"
                 onClick={(e) => handleLinkClick(e, '#contato')}
-                className="bg-green-700 text-white px-8 py-3 rounded-full text-sm font-black hover:bg-green-800 transition-all shadow-lg hover:shadow-green-900/20 active:scale-95 uppercase tracking-widest"
+                className="bg-green-700 text-white px-5 py-3 rounded-full text-xs font-black hover:bg-green-800 transition-all shadow-lg hover:shadow-green-900/20 active:scale-95 uppercase tracking-widest"
               >
                 Fale Conosco
               </a>
