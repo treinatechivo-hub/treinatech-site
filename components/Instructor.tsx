@@ -37,8 +37,8 @@ const certifications = [
 
 const stats = [
   { value: '+10 anos', label: 'de experiência corporativa' },
-  { value: '+500', label: 'profissionais capacitados' },
-  { value: '+15', label: 'grandes empresas atendidas' },
+  { value: '+5.000', label: 'profissionais capacitados' },
+  { value: '+30', label: 'grandes empresas atendidas' },
 ];
 
 export const Instructor: React.FC = () => {
