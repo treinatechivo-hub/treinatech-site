@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, Play, BarChart3, Database } from 'lucide-react';
+import { ArrowRight, Play, BarChart3, ThumbsUp } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -134,7 +134,7 @@ export const Hero: React.FC = () => {
                 ))}
               </div>
               <p className="text-sm text-slate-300">
-                <span className="font-bold text-white">+5.000 alunos</span> já transformaram suas carreiras
+                <span className="font-bold text-white">+5.000 participantes</span> já transformaram suas carreiras
               </p>
             </div>
           </div>
@@ -163,11 +163,11 @@ export const Hero: React.FC = () => {
              {/* Floating Card 2 */}
             <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl z-20 flex items-center gap-4">
               <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600">
-                <Database />
+                <ThumbsUp />
               </div>
               <div>
-                <p className="text-xs text-slate-400 font-bold uppercase">Suporte</p>
-                <p className="text-sm font-bold text-slate-800">24/7 Especializado</p>
+                <p className="text-xs text-slate-400 font-bold uppercase">Satisfação</p>
+                <p className="text-sm font-bold text-slate-800">95% aprovação</p>
               </div>
             </div>
           </div>
