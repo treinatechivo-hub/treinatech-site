@@ -16,7 +16,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 1,
     name: "David Ribeiro",
     role: "Auditoria Interna · Riscos · Compliance",
-    image: "https://i.pravatar.cc/150?u=david-ribeiro-treinatech",
+    image: "/testimonials/Rafael_Adrian.png",
     content: "Com uma didática clara, domínio técnico e atenção às dúvidas dos alunos, o Ivo conseguiu transformar conceitos complexos em aprendizados acessíveis e práticos. O conteúdo foi bem estruturado, com exemplos aplicáveis ao dia a dia profissional. Recomendo fortemente para quem busca aprimorar seus conhecimentos em SQL.",
     rating: 5
   },
@@ -24,7 +24,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 2,
     name: "Tiago Augusto Schmidt",
     role: "Analista de Operações Sr · Cooperativa Agrária Agroindustrial",
-    image: "https://i.pravatar.cc/150?u=tiago-schmidt-treinatech",
+    image: "/testimonials/Thiago-Schmidt.png",
     content: "Parabéns Ivo pelo excelente treinamento de Power BI. A organização, o conteúdo e a didática foram realmente produtivos. Além disso, o suporte e a atenção aos participantes fizeram toda a diferença. Parabéns pelo trabalho bem feito!",
     rating: 5
   },
@@ -32,7 +32,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 3,
     name: "Thomas Favoretto",
     role: "Analista de Derivativos · Mercado Financeiro · Agronegócio",
-    image: "https://i.pravatar.cc/150?u=thomas-favoretto-treinatech",
+    image: "/testimonials/Thomas_Favoretto.png",
     content: "Recomendo fortemente o professor Ivo Amarante Jr. como professor de Power BI. Ele possui uma didática excepcional, tornando conceitos complexos fáceis de entender e aplicáveis ao dia a dia. Demonstra profundo conhecimento técnico, aliado a uma grande capacidade de adaptação às necessidades individuais de cada aluno.",
     rating: 5
   },
@@ -40,7 +40,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 4,
     name: "Henrique Xavier",
     role: "Coordenador · Sescoop/PR · Mestre em Gestão de Cooperativas",
-    image: "https://i.pravatar.cc/150?u=henrique-xavier-treinatech",
+    image: "/testimonials/Henrique-Xavier.png",
     content: "O Ivo é um especialista em Excel — percebe-se o quanto ele é apaixonado pela ferramenta e isso se reflete na forma que compartilha seu conhecimento. Seu método de ensino é super bacana, pois ensina na prática, fazendo com que a turma pense em como aplicar o conteúdo em sua rotina. Parabéns pela excelência.",
     rating: 5
   }
