@@ -16,7 +16,7 @@ const TESTIMONIALS: Testimonial[] = [
     id: 1,
     name: "David Ribeiro",
     role: "Auditoria Interna · Riscos · Compliance",
-    image: "/testimonials/Rafael_Adrian.png",
+    image: "/testimonials/David_Ribeiro.png",
     content: "Com uma didática clara, domínio técnico e atenção às dúvidas dos alunos, o Ivo conseguiu transformar conceitos complexos em aprendizados acessíveis e práticos. O conteúdo foi bem estruturado, com exemplos aplicáveis ao dia a dia profissional. Recomendo fortemente para quem busca aprimorar seus conhecimentos em SQL.",
     rating: 5
   },
