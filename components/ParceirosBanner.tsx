@@ -9,6 +9,8 @@ const PARCEIROS = [
   { name: 'Castrolanda',         logo: '/parceiros/Castrolanda.png',                                                                                                                                           url: 'https://www.castrolanda.coop.br',           dark: false, square: false },
   { name: 'Bracell',             logo: 'https://www.bracell.com/wp-content/uploads/2019/04/bracell_logo_FA.png',                                                                                                url: 'https://www.bracell.com',                   dark: false, square: false },
   { name: 'Construtora Greenwood', logo: 'https://static.wixstatic.com/media/4a8932_44f4dee7a33f445f81f2b5078176756d~mv2.png/v1/fill/w_300,h_300,al_c,q_90,enc_avif,quality_auto/Logo_transparente.png',       url: 'https://www.construtoragreenwood.com.br',   dark: true,  square: true  },
+  { name: 'Omar Calçados',         logo: '/parceiros/Omar-Calcados.gif',                                                                                                                                           url: 'https://www.omarcalcados.com.br',           dark: false, square: false },
+  { name: 'DentalUni',             logo: '/parceiros/DentalUni.png',                                                                                                                                               url: 'https://www.dentaluni.com.br',              dark: false, square: false },
 ];
 
 export const ParceirosBanner: React.FC = () => (
