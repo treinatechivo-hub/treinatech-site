@@ -14,6 +14,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Treinamentos', href: '#cursos' },
   { label: 'Investimento', href: '#precos' },
   { label: 'Instrutor', href: '#instrutor' },
+  { label: 'Depoimentos', href: '#depoimentos' },
   { label: 'Blog', href: '#blog' },
 ];
 

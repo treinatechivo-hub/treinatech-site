@@ -48,7 +48,7 @@ const TESTIMONIALS: Testimonial[] = [
 
 export const Testimonials: React.FC = () => {
   return (
-    <section className="py-24 bg-slate-900 relative overflow-hidden">
+    <section id="depoimentos" className="py-24 bg-slate-900 relative overflow-hidden">
       {/* Decorative quotes background */}
       <div className="absolute top-10 left-10 text-slate-600 opacity-20 pointer-events-none">
         <Quote size={200} />
