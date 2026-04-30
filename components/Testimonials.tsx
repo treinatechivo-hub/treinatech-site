@@ -14,34 +14,34 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
-    name: "Mariana Silva",
-    role: "Analista de Planejamento na TechCorp",
-    image: "https://i.pravatar.cc/150?u=mariana",
-    content: "O treinamento de Excel Avançado mudou minha produtividade. O que eu levava horas para fazer agora resolvo em minutos com automações simples que aprendi.",
+    name: "David Ribeiro",
+    role: "Auditoria Interna · Riscos · Compliance",
+    image: "https://i.pravatar.cc/150?u=david-ribeiro-treinatech",
+    content: "Com uma didática clara, domínio técnico e atenção às dúvidas dos alunos, o Ivo conseguiu transformar conceitos complexos em aprendizados acessíveis e práticos. O conteúdo foi bem estruturado, com exemplos aplicáveis ao dia a dia profissional. Recomendo fortemente para quem busca aprimorar seus conhecimentos em SQL.",
     rating: 5
   },
   {
     id: 2,
-    name: "Ricardo Mendes",
-    role: "Gerente Comercial",
-    image: "https://i.pravatar.cc/150?u=ricardo",
-    content: "O curso de Power BI da Treinatech é excepcional. A metodologia hands-on me permitiu criar dashboards de vendas que hoje são usados por toda a diretoria.",
+    name: "Tiago Augusto Schmidt",
+    role: "Analista de Operações Sr · Cooperativa Agrária Agroindustrial",
+    image: "https://i.pravatar.cc/150?u=tiago-schmidt-treinatech",
+    content: "Parabéns Ivo pelo excelente treinamento de Power BI. A organização, o conteúdo e a didática foram realmente produtivos. Além disso, o suporte e a atenção aos participantes fizeram toda a diferença. Parabéns pelo trabalho bem feito!",
     rating: 5
   },
   {
     id: 3,
-    name: "Juliana Costa",
-    role: "Cientista de Dados Junior",
-    image: "https://i.pravatar.cc/150?u=juliana",
-    content: "SQL sempre foi um bicho de sete cabeças para mim. Com a Treinatech, a lógica ficou clara e hoje manipulo bancos de dados complexos com total confiança.",
+    name: "Thomas Favoretto",
+    role: "Analista de Derivativos · Mercado Financeiro · Agronegócio",
+    image: "https://i.pravatar.cc/150?u=thomas-favoretto-treinatech",
+    content: "Recomendo fortemente o professor Ivo Amarante Jr. como professor de Power BI. Ele possui uma didática excepcional, tornando conceitos complexos fáceis de entender e aplicáveis ao dia a dia. Demonstra profundo conhecimento técnico, aliado a uma grande capacidade de adaptação às necessidades individuais de cada aluno.",
     rating: 5
   },
   {
     id: 4,
-    name: "André Oliveira",
-    role: "Consultor de BI Independente",
-    image: "https://i.pravatar.cc/150?u=andre",
-    content: "Melhor custo-benefício que já encontrei. O suporte pós-curso é o grande diferencial, eles realmente se importam com o seu aprendizado.",
+    name: "Henrique Xavier",
+    role: "Coordenador · Sescoop/PR · Mestre em Gestão de Cooperativas",
+    image: "https://i.pravatar.cc/150?u=henrique-xavier-treinatech",
+    content: "O Ivo é um especialista em Excel — percebe-se o quanto ele é apaixonado pela ferramenta e isso se reflete na forma que compartilha seu conhecimento. Seu método de ensino é super bacana, pois ensina na prática, fazendo com que a turma pense em como aplicar o conteúdo em sua rotina. Parabéns pela excelência.",
     rating: 5
   }
 ];
