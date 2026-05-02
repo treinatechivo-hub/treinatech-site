@@ -13,6 +13,8 @@ export interface Course {
   icon: React.ReactNode;
   topics: string[];
   fullSyllabus: CourseModule[];
+  badge?: string;
+  badgeColor?: 'green' | 'blue' | 'purple';
 }
 
 export interface NavItem {

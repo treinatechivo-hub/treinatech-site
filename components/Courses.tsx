@@ -36,7 +36,13 @@ export const Courses: React.FC = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {COURSES.map((course) => (
+          {COURSES.map((course) => {
+            const badgeStyles = {
+              green: 'bg-green-500 text-white',
+              blue: 'bg-blue-500 text-white',
+              purple: 'bg-purple-500 text-white',
+            };
+            return (
             <button
               key={course.id}
               onClick={() => setSelectedCourse(course)}
@@ -44,11 +50,18 @@ export const Courses: React.FC = () => {
             >
               {/* Decorative accent */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-green-100 rounded-bl-[100px] opacity-0 group-hover:opacity-40 transition-opacity"></div>
-              
+
+              {/* Badge */}
+              {course.badge && (
+                <span className={`absolute top-6 right-6 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${badgeStyles[course.badgeColor ?? 'green']}`}>
+                  {course.badge}
+                </span>
+              )}
+
               <div className="w-16 h-16 bg-slate-700 rounded-2xl flex items-center justify-center text-green-400 shadow-sm mb-6 group-hover:bg-green-700 group-hover:text-white transition-colors duration-500">
                 {course.icon}
               </div>
-              
+
               <h3 className="text-2xl font-bold text-white mb-4">{course.title}</h3>
               <p className="text-slate-300 mb-8 leading-relaxed">{course.description}</p>
 
@@ -66,7 +79,8 @@ export const Courses: React.FC = () => {
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
               </div>
             </button>
-          ))}
+            );
+          })}
         </div>
       </div>
 
