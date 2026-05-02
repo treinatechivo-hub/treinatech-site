@@ -12,5 +12,5 @@
   <line x1="18" y1="21" x2="26" y2="21" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/>
   <line x1="18" y1="25" x2="24" y2="25" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/>
   <!-- Texto Treinatech -->
-  <text x="42" y="23" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#16a34a" letter-spacing="-0.4">Treinatech</text>
+  <text x="42" y="23" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#16a34a">Treinatech</text>
 </svg>

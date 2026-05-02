@@ -34,14 +34,18 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
       currentHash.startsWith('#artigo-') ||
       currentHash === '#demo'
     ) {
+      const targetId = href.replace('#', '');
       window.location.hash = '';
-      setTimeout(() => {
-        const el = document.getElementById(href.replace('#', ''));
+      window.scrollTo(0, 0);
+      const tryScroll = (attempts = 0) => {
+        const el = document.getElementById(targetId);
         if (el) {
-          const offset = 80;
-          window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - offset, behavior: 'smooth' });
+          window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+        } else if (attempts < 20) {
+          setTimeout(() => tryScroll(attempts + 1), 50);
         }
-      }, 100);
+      };
+      setTimeout(tryScroll, 80);
       setIsOpen(false);
       return;
     }
