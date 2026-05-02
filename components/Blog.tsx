@@ -95,9 +95,20 @@ const POSTS: BlogPost[] = [
     readTime: '6 min',
     image: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80',
   },
+  {
+    id: 9,
+    title: 'Claude AI: a IA que vai transformar a sua forma de trabalhar',
+    excerpt: 'Entenda o que é o Claude, como ele se compara a outras IAs e por que dominar essa ferramenta pode acelerar sua carreira em dados e gestão.',
+    category: 'IA & Claude',
+    categoryColor: 'bg-orange-100 text-orange-800',
+    date: '01 mai 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80',
+    featured: true,
+  },
 ];
 
-const CATEGORIES = ['Todos', 'Excel & Power BI', 'Power BI', 'SQL', 'Carreira'];
+const CATEGORIES = ['Todos', 'IA & Claude', 'Excel & Power BI', 'Power BI', 'SQL', 'Carreira'];
 
 interface BlogProps {
   onArticleOpen?: (id: number) => void;

@@ -2258,6 +2258,213 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
     );
   }
 
+  // Artigo 9 — Claude AI
+  if (articleId === 9) {
+    return (
+      <article className="min-h-screen bg-slate-50">
+        {/* Header */}
+        <div className="bg-gradient-to-br from-slate-900 via-orange-950 to-slate-900 pt-28 pb-16 px-4">
+          <div className="max-w-3xl mx-auto">
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 text-orange-400 hover:text-orange-300 text-sm font-bold mb-8 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" /> Voltar ao Blog
+            </button>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-orange-400 bg-orange-400/10 border border-orange-400/20 px-4 py-1.5 rounded-full mb-5">
+              IA &amp; Claude
+            </span>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-6">
+              Claude AI: a IA que vai transformar a sua forma de trabalhar
+            </h1>
+            <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
+              <span className="flex items-center gap-2">
+                <User className="w-4 h-4 text-orange-400" />
+                <span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT
+              </span>
+              <span className="flex items-center gap-2">
+                <Calendar className="w-4 h-4" /> 01 mai 2026
+              </span>
+              <span className="flex items-center gap-2">
+                <Clock className="w-4 h-4" /> 8 min de leitura
+              </span>
+              <span className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4" /> Nível: Iniciante
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Capa */}
+        <div className="max-w-3xl mx-auto px-4 -mt-1">
+          <img
+            src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=85"
+            alt="Claude AI"
+            className="w-full h-72 object-cover rounded-3xl shadow-2xl"
+          />
+        </div>
+
+        {/* Conteúdo */}
+        <div className="max-w-3xl mx-auto px-4 py-14">
+          <div className="flex flex-col lg:flex-row gap-12">
+            <div className="flex-1 prose-custom">
+
+              {/* Intro */}
+              <p className="text-lg text-slate-600 leading-relaxed mb-8 font-medium border-l-4 border-orange-500 pl-5 bg-orange-50 py-4 pr-4 rounded-r-2xl">
+                Se você ainda usa IA apenas para responder perguntas rápidas, está deixando a maior parte do potencial na mesa. O <strong>Claude</strong>, desenvolvido pela Anthropic, é um assistente de IA de nova geração — projetado para raciocinar, criar, analisar e colaborar de forma segura e confiável. Neste artigo, você vai entender o que é o Claude, como ele funciona e por que aprender a usá-lo pode ser o diferencial da sua carreira.
+              </p>
+
+              {/* O que é o Claude */}
+              <h2 id="o-que-e" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">O que é o Claude?</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O Claude é um modelo de linguagem de grande escala (LLM) criado pela <strong>Anthropic</strong>, empresa fundada em 2021 por ex-pesquisadores da OpenAI. Diferente de outras IAs, o Claude foi desenvolvido com foco em <strong>segurança, honestidade e utilidade</strong> — princípios que guiam o chamado <em>Constitutional AI</em>, abordagem própria da Anthropic para criar modelos alinhados com valores humanos.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Segundo a <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer" className="text-orange-600 font-semibold hover:underline">documentação oficial da Anthropic</a>, o Claude é capaz de realizar tarefas complexas de análise, escrita, programação, raciocínio e conversação — com uma janela de contexto de até 200 mil tokens, o equivalente a ler e processar um livro inteiro em uma única sessão.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                A família Claude inclui modelos para diferentes necessidades: <strong>Claude Haiku</strong> (rápido e leve), <strong>Claude Sonnet</strong> (equilíbrio ideal para uso cotidiano) e <strong>Claude Opus</strong> (máxima capacidade de raciocínio). Para a maioria dos profissionais, o Sonnet na versão Pro já oferece desempenho excepcional.
+              </p>
+
+              {/* Por que se destaca */}
+              <h2 id="diferenciais" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Por que o Claude se destaca entre as IAs?</h2>
+              <p className="text-slate-600 leading-relaxed mb-6">
+                Existem hoje dezenas de assistentes de IA no mercado. O que torna o Claude diferente não é apenas o desempenho em benchmarks — é a <strong>qualidade das respostas em contextos profissionais reais</strong>. Algumas características notáveis:
+              </p>
+              <div className="space-y-4 mb-8">
+                {[
+                  { titulo: 'Respostas mais longas e estruturadas', desc: 'O Claude é capaz de produzir documentos, relatórios e análises completas sem truncar o conteúdo — algo comum em outros modelos.' },
+                  { titulo: 'Contexto gigante (200 mil tokens)', desc: 'Você pode colar planilhas, contratos, datasets inteiros e pedir análise. Nenhum outro modelo de uso geral chega perto dessa capacidade.' },
+                  { titulo: 'Extended Thinking', desc: 'Nos planos Pro e acima, o Claude pode "pensar antes de responder" — ideal para problemas de lógica, estratégia e análise de dados complexos.' },
+                  { titulo: 'Artefatos e projetos', desc: 'Crie documentos, planilhas, apresentações e páginas HTML diretamente no chat, com histórico de contexto persistente nos Projetos.' },
+                  { titulo: 'Integrações nativas', desc: 'Conecte o Claude ao Google Drive, Docs, Sheets, Outlook, OneDrive e outros apps sem precisar copiar e colar conteúdo.' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-4 bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                    <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600 font-extrabold text-sm shrink-0">{i + 1}</div>
+                    <div>
+                      <p className="font-bold text-slate-900 mb-1">{item.titulo}</p>
+                      <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Módulos de treinamento */}
+              <h2 id="treinamentos" className="text-2xl font-extrabold text-slate-900 mt-10 mb-6 scroll-mt-24">Nossos treinamentos de Claude na Treinatech</h2>
+              <p className="text-slate-600 leading-relaxed mb-6">
+                A Treinatech desenvolveu uma trilha completa de IA com foco no Claude, estruturada em três módulos progressivos. Cada módulo foi desenhado para um perfil e momento diferente de aprendizado:
+              </p>
+
+              {/* Card Introdução */}
+              <div className="rounded-3xl border-2 border-orange-200 bg-orange-50 p-7 mb-5">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="bg-green-500 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">Gratuito</span>
+                  <span className="text-orange-700 font-extrabold text-lg">Introdução ao Claude — 4 horas</span>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Módulo de entrada, totalmente gratuito. Ideal para quem nunca usou IA ou quer entender o potencial do Claude antes de investir em um plano pago. Você vai aprender o que é o Claude, como criar sua conta, a lógica de prompts e casos de uso reais no dia a dia profissional — em apenas 4 horas.
+                </p>
+                <ul className="space-y-2 text-sm text-slate-600">
+                  {['O que é IA e como o Claude funciona', 'Criando conta e explorando a interface', 'Primeiros prompts: como pedir o que você quer', 'Casos de uso: e-mails, resumos, relatórios e análises'].map((t, i) => (
+                    <li key={i} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500 shrink-0" />{t}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Card Free */}
+              <div className="rounded-3xl border-2 border-blue-200 bg-blue-50 p-7 mb-5">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="bg-blue-500 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">Free</span>
+                  <span className="text-blue-800 font-extrabold text-lg">Claude Free Completo — 12 horas</span>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Para quem quer ir além do básico sem assinar o plano pago. Em 12 horas você aprende a criar prompts profissionais, usar o Claude para escrita técnica, análise de dados, gerenciamento de projetos com memória de contexto e automação leve de tarefas — tudo com a versão gratuita.
+                </p>
+                <ul className="space-y-2 text-sm text-slate-600">
+                  {['Fundamentos de prompting e engenharia de contexto', 'Escrita profissional: propostas, relatórios e comunicação', 'Análise de dados com planilhas e textos', 'Projects e memória: contexto persistente entre sessões', 'Pesquisa com busca na web integrada'].map((t, i) => (
+                    <li key={i} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-500 shrink-0" />{t}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Card Pro */}
+              <div className="rounded-3xl border-2 border-purple-200 bg-purple-50 p-7 mb-8">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="bg-purple-500 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">Pro</span>
+                  <span className="text-purple-800 font-extrabold text-lg">Claude Pro Completo — 18 horas</span>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  A trilha completa para quem quer extrair o máximo do Claude Pro. As 12 horas do módulo Free são a base — e você avança para Extended Thinking, integrações com Google Workspace e Microsoft 365, Live Artifacts, automações com Dispatch e Claude Code. Ideal para analistas, gestores e profissionais de TI que querem vantagem competitiva real.
+                </p>
+                <ul className="space-y-2 text-sm text-slate-600">
+                  {['Extended Thinking e Deep Research para análises complexas', 'Integração com Google Drive, Docs, Sheets, Outlook e OneDrive', 'Live Artifacts: dashboards e interfaces em tempo real', 'Cowork completo: Dispatch e Customize', 'Claude Code: automação com código assistido por IA'].map((t, i) => (
+                    <li key={i} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-purple-500 shrink-0" />{t}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Carreira */}
+              <h2 id="carreira" className="text-2xl font-extrabold text-slate-900 mt-10 mb-4 scroll-mt-24">Por que aprender IA agora acelera sua carreira?</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O mercado de trabalho está passando pela maior transformação das últimas décadas. Ferramentas como o Claude não substituem profissionais — elas <strong>amplificam</strong> os que sabem usá-las. Um analista de dados que usa Claude de forma eficiente pode entregar em 2 horas o que antes levaria um dia inteiro.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Segundo um relatório da <strong>McKinsey Global Institute</strong>, atividades que correspondem a até <strong>70% do tempo de trabalho</strong> de analistas, gestores e comunicadores poderão ser automatizadas ou aceleradas por IA generativa nos próximos anos. Quem domina essas ferramentas hoje está na frente.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                Na prática, isso significa: relatórios que levavam horas prontos em minutos, análises que exigiam um time feitas por uma pessoa, comunicação mais clara e precisa, e mais tempo livre para o trabalho de alto valor que só humanos fazem — estratégia, relacionamento e criatividade.
+              </p>
+
+              {/* CTA */}
+              <div className="bg-gradient-to-r from-orange-600 to-orange-800 rounded-3xl p-8 text-white text-center">
+                <p className="text-lg font-extrabold mb-2">Comece gratuitamente — 4 horas que podem mudar sua carreira</p>
+                <p className="text-orange-100 text-sm mb-6">A Treinatech tem trilha completa de IA com foco no Claude. Do básico gratuito ao Pro avançado, com certificação MCT.</p>
+                <a
+                  href="#cursos"
+                  onClick={() => { const el = document.getElementById('cursos'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}
+                  className="inline-block bg-white text-orange-700 font-extrabold px-8 py-3 rounded-2xl hover:bg-orange-50 transition-colors active:scale-95"
+                >
+                  Ver trilha de IA →
+                </a>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <aside className="lg:w-64 flex-shrink-0 space-y-6">
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm sticky top-24">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Neste artigo</p>
+                <nav className="space-y-2">
+                  {[
+                    { label: 'O que é o Claude?', id: 'o-que-e' },
+                    { label: 'Diferenciais', id: 'diferenciais' },
+                    { label: 'Treinamentos', id: 'treinamentos' },
+                    { label: 'Carreira', id: 'carreira' },
+                  ].map((item) => (
+                    <button key={item.id} onClick={() => { const el = document.getElementById(item.id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className="w-full text-left text-sm text-slate-500 hover:text-orange-600 cursor-pointer transition-colors py-1 border-b border-slate-50 last:border-0">
+                      {item.label}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">Leia também</p>
+                <div className="space-y-4">
+                  {[
+                    { title: 'Carreira em dados: o que as empresas esperam de você', id: 6 },
+                    { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
+                    { title: 'SQL para analistas: queries eficientes do zero', id: 3 },
+                  ].map((rel) => (
+                    <p key={rel.id} className="text-sm text-slate-700 hover:text-orange-600 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
+                  ))}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   // Artigos ainda não desenvolvidos
   return (
     <div className="min-h-screen bg-yellow-50 flex flex-col items-center justify-center px-4 text-center">
