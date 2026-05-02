@@ -47,7 +47,7 @@ export const COURSES: Course[] = [
           "A fórmula dos 4 ingredientes: contexto, tarefa, formato, restrição",
           "Demonstração: mesmo pedido, dois prompts, dois resultados completamente diferentes",
           "Como refinar a resposta sem começar do zero",
-          "Exercício: cada aluno escreve e testa seu primeiro prompt real",
+          "Exercício: cada participante escreve e testa seu primeiro prompt real",
         ]
       },
       {
@@ -56,7 +56,7 @@ export const COURSES: Course[] = [
           "Uso 1 — Escrita profissional: e-mails, comunicados e textos difíceis em minutos",
           "Uso 2 — Análise de documentos: suba um PDF e extraia o que importa",
           "Uso 3 — Organização de ideias: o Claude como parceiro de raciocínio",
-          "Exercício prático em cada uso com tarefa real do aluno",
+          "Exercício prático em cada uso com tarefa real do participante",
         ]
       },
       {
