@@ -27,6 +27,7 @@ export const COURSES: Course[] = [
     icon: <Sparkles className="w-8 h-8" />,
     badge: 'Gratuito',
     badgeColor: 'green',
+    comingSoon: true,
     topics: ['O que é o Claude e como ele funciona', 'Fórmula do prompt que gera resultados', 'Escrita, análise e organização na prática', 'Free vs Pro: qual faz sentido para você'],
     fullSyllabus: [
       {

@@ -15,6 +15,7 @@ export interface Course {
   fullSyllabus: CourseModule[];
   badge?: string;
   badgeColor?: 'green' | 'blue' | 'purple';
+  comingSoon?: boolean;
 }
 
 export interface NavItem {

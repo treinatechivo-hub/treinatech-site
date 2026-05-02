@@ -62,6 +62,13 @@ export const Courses: React.FC = () => {
                 {course.icon}
               </div>
 
+              {course.comingSoon && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 mb-4 rounded-full text-xs font-bold uppercase tracking-widest bg-amber-400 text-amber-900">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-900 animate-pulse"></span>
+                  Em Breve!
+                </span>
+              )}
+
               <h3 className="text-2xl font-bold text-white mb-4">{course.title}</h3>
               <p className="text-slate-300 mb-8 leading-relaxed">{course.description}</p>
 
