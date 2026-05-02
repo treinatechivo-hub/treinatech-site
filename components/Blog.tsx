@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { Search, Tag, ArrowRight, Calendar, Clock, ChevronRight } from 'lucide-react';
-import emailjs from '@emailjs/browser';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
-import { getApp } from 'firebase/app';
 
 interface BlogPost {
   id: number;
@@ -141,17 +138,11 @@ export const Blog: React.FC<BlogProps> = ({ onArticleOpen }) => {
     e.preventDefault();
     if (!email) return;
     try {
-      const db = getFirestore(getApp());
-      await setDoc(doc(db, 'newsletter_subscribers', email.toLowerCase().replace(/[@.]/g, '_')), {
-        email: email.toLowerCase(),
-        subscribedAt: new Date().toISOString(),
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
       });
-      await emailjs.send(
-        'service_ah6lm8a',
-        'template_newsletter',
-        { to_email: email },
-        'XeePO6lYgHbFUMjwf',
-      );
     } catch (err) {
       console.error('Newsletter subscription error:', err);
     }
