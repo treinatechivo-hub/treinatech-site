@@ -169,10 +169,14 @@ export const Contact: React.FC = () => {
                       name="treinamento"
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all disabled:cursor-not-allowed"
                     >
+                      <option>Excel Básico</option>
+                      <option>Excel Intermediário</option>
                       <option>Excel Avançado</option>
-                      <option>Power BI Professional</option>
+                      <option>Power BI Módulo 1</option>
+                      <option>Power BI Módulo 2</option>
                       <option>SQL para Dados</option>
-                      <option>Treinamento Corporativo</option>
+                      <option>Claude na Prática – Free</option>
+                      <option>Claude na Prática – Pro</option>
                       <option>Trilha Completa (Excel + Power BI + SQL)</option>
                     </select>
                   </div>
