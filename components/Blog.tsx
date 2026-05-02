@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Search, Tag, ArrowRight, Calendar, Clock, ChevronRight } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
-import { app } from '../firebase';
+import { getApp } from 'firebase/app';
 
 interface BlogPost {
   id: number;
@@ -141,7 +141,7 @@ export const Blog: React.FC<BlogProps> = ({ onArticleOpen }) => {
     e.preventDefault();
     if (!email) return;
     try {
-      const db = getFirestore(app);
+      const db = getFirestore(getApp());
       await setDoc(doc(db, 'newsletter_subscribers', email.toLowerCase().replace(/[@.]/g, '_')), {
         email: email.toLowerCase(),
         subscribedAt: new Date().toISOString(),
