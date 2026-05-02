@@ -74,6 +74,7 @@ export const COURSES: Course[] = [
   // ─── CLAUDE: FREE COMPLETO ───────────────────────────────────────────────────
   {
     id: 'claude-free',
+    comingSoon: true,
     title: 'Claude na Prática – Free',
     description: 'Domine todos os recursos disponíveis na versão gratuita do Claude: prompts, projetos, análise de dados, escrita profissional e muito mais.',
     modalDescription: 'Treinamento completo para quem quer tirar o máximo da versão gratuita do Claude. Em 12 horas você desenvolve domínio real sobre prompts avançados, escrita e revisão de textos profissionais, análise de documentos e imagens, pesquisa com Web Search, organização com Projects e Memory, e aplica tudo isso na sua área de atuação. Leve, fluído e 100% orientado a resultados reais.',
@@ -153,6 +154,7 @@ export const COURSES: Course[] = [
   // ─── CLAUDE: PRO COMPLETO ────────────────────────────────────────────────────
   {
     id: 'claude-pro',
+    comingSoon: true,
     title: 'Claude na Prática – Pro',
     description: 'Tudo do curso Free mais os recursos exclusivos do plano Pro: Extended Thinking, Research, Google Workspace, Microsoft 365 e automação com Cowork.',
     modalDescription: 'Treinamento completo para quem tem ou planeja ter o plano Pro do Claude. Em 18 horas você domina todos os recursos da versão gratuita e vai além: raciocínio estendido para decisões complexas, pesquisa aprofundada multi-fonte com Research, integração com Gmail, Google Calendar e Docs, automação no Excel e PowerPoint, e tarefas agentic com Cowork. O curso mais completo da trilha.',
