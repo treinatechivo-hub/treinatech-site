@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Search, Tag, ArrowRight, Calendar, Clock, ChevronRight } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { app } from '../firebase';
 
 interface BlogPost {
   id: number;
@@ -23,7 +26,6 @@ const POSTS: BlogPost[] = [
     date: '25 mar 2026',
     readTime: '6 min',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-    featured: true,
   },
   {
     id: 2,
@@ -135,12 +137,26 @@ export const Blog: React.FC<BlogProps> = ({ onArticleOpen }) => {
   const featured = filtered.find((p) => p.featured);
   const rest = filtered.filter((p) => !p.featured);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail('');
+    if (!email) return;
+    try {
+      const db = getFirestore(app);
+      await setDoc(doc(db, 'newsletter_subscribers', email.toLowerCase().replace(/[@.]/g, '_')), {
+        email: email.toLowerCase(),
+        subscribedAt: new Date().toISOString(),
+      });
+      await emailjs.send(
+        'service_ah6lm8a',
+        'template_newsletter',
+        { to_email: email },
+        'XeePO6lYgHbFUMjwf',
+      );
+    } catch (err) {
+      console.error('Newsletter subscription error:', err);
     }
+    setSubscribed(true);
+    setEmail('');
   };
 
   return (
@@ -295,7 +311,7 @@ export const Blog: React.FC<BlogProps> = ({ onArticleOpen }) => {
             <div className="bg-gradient-to-br from-green-700 to-green-900 rounded-3xl p-6 text-white shadow-xl">
               <h3 className="text-lg font-extrabold mb-2">📩 Fique por dentro!</h3>
               <p className="text-green-100 text-sm mb-5">
-                Receba artigos exclusivos sobre Excel, Power BI e SQL direto no seu e-mail. Sem spam.
+                Receba artigos exclusivos sobre Excel, Power BI, SQL e IA com Claude direto no seu e-mail. Sem spam.
               </p>
               {subscribed ? (
                 <div className="bg-white/20 rounded-2xl p-4 text-center text-sm font-bold animate-in">
@@ -358,7 +374,7 @@ export const Blog: React.FC<BlogProps> = ({ onArticleOpen }) => {
               </h3>
               <div className="flex flex-col gap-4">
                 {POSTS.slice(0, 4).map((post, i) => (
-                  <div key={post.id} className="flex items-start gap-3 group cursor-pointer">
+                  <div key={post.id} onClick={() => handleOpenArticle(post.id)} className="flex items-start gap-3 group cursor-pointer">
                     <span className="text-2xl font-black text-slate-100 leading-none w-8 flex-shrink-0">
                       {String(i + 1).padStart(2, '0')}
                     </span>

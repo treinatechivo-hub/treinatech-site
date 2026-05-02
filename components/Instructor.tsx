@@ -4,9 +4,9 @@ import { Linkedin, BadgeCheck } from 'lucide-react';
 
 const certifications = [
   {
-    code: 'MCT',
-    name: 'Microsoft Certified Trainer',
-    bg: 'bg-[#0078d4]',
+    code: 'MOS-200',
+    name: 'Microsoft Office Specialist – Excel',
+    bg: 'bg-[#217346]',
     dark: false,
   },
   {
@@ -16,9 +16,9 @@ const certifications = [
     dark: true,
   },
   {
-    code: 'MOS',
-    name: 'Excel Associate',
-    bg: 'bg-[#217346]',
+    code: 'MCT',
+    name: 'Microsoft Certified Trainer',
+    bg: 'bg-[#0078d4]',
     dark: false,
   },
   {
@@ -38,7 +38,7 @@ const certifications = [
 const stats = [
   { value: '+10 anos', label: 'de experiência corporativa' },
   { value: '+5.000', label: 'profissionais capacitados' },
-  { value: '+30', label: 'grandes empresas atendidas' },
+  { value: '+20', label: 'grandes empresas atendidas' },
 ];
 
 export const Instructor: React.FC = () => {
