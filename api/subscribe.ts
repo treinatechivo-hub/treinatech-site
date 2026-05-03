@@ -10,39 +10,38 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Email inválido' });
   }
 
-  const apiKey = process.env.MAILCHIMP_API_KEY;
-  const audienceId = process.env.MAILCHIMP_AUDIENCE_ID;
-
-  if (!apiKey || !audienceId) {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) {
     return res.status(500).json({ error: 'Configuração ausente no servidor' });
   }
 
-  const dc = apiKey.split('-')[1];
-
   try {
-    const mcRes = await fetch(
-      `https://${dc}.api.mailchimp.com/3.0/lists/${audienceId}/members`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${Buffer.from(`anystring:${apiKey}`).toString('base64')}`,
-        },
-        body: JSON.stringify({
-          email_address: email.toLowerCase().trim(),
-          status: 'subscribed',
-        }),
-      }
-    );
+    const brevoRes = await fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': apiKey,
+      },
+      body: JSON.stringify({
+        email: email.toLowerCase().trim(),
+        listIds: [5],
+        updateEnabled: true,
+      }),
+    });
 
-    const data = await mcRes.json();
+    const data = await brevoRes.json();
 
-    if (mcRes.ok || data.title === 'Member Exists') {
+    if (brevoRes.ok || brevoRes.status === 204) {
       return res.status(200).json({ success: true });
     }
 
-    console.error('Mailchimp error:', data);
-    return res.status(400).json({ error: data.detail ?? 'Erro ao cadastrar' });
+    // Contato já existe — considera sucesso
+    if (data.code === 'duplicate_parameter') {
+      return res.status(200).json({ success: true });
+    }
+
+    console.error('Brevo error:', data);
+    return res.status(400).json({ error: data.message ?? 'Erro ao cadastrar' });
   } catch (err) {
     console.error('Subscribe handler error:', err);
     return res.status(500).json({ error: 'Erro interno' });
