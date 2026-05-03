@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { Search, Tag, ArrowRight, Calendar, Clock, ChevronRight } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+const EMAILJS_SERVICE_ID = 'service_ah6lm8a';
+const EMAILJS_NEWSLETTER_TEMPLATE_ID = 'template_newsletter';
+const EMAILJS_PUBLIC_KEY = 'XeePO6lYgHbFUMjwf';
 
 interface BlogPost {
   id: number;
@@ -143,6 +148,12 @@ export const Blog: React.FC<BlogProps> = ({ onArticleOpen }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_NEWSLETTER_TEMPLATE_ID,
+        { to_email: email },
+        EMAILJS_PUBLIC_KEY,
+      );
     } catch (err) {
       console.error('Newsletter subscription error:', err);
     }
