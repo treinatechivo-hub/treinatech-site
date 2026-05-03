@@ -139,26 +139,25 @@ export const Blog: React.FC<BlogProps> = ({ onArticleOpen }) => {
   const featured = filtered.find((p) => p.featured);
   const rest = filtered.filter((p) => !p.featured);
 
-  const handleSubscribe = async (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    try {
-      await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_NEWSLETTER_TEMPLATE_ID,
-        { to_email: email },
-        EMAILJS_PUBLIC_KEY,
-      );
-    } catch (err) {
-      console.error('Newsletter subscription error:', err);
-    }
+    const captured = email;
     setSubscribed(true);
     setEmail('');
+    Promise.all([
+      fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: captured }),
+      }),
+      emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_NEWSLETTER_TEMPLATE_ID,
+        { to_email: captured },
+        EMAILJS_PUBLIC_KEY,
+      ),
+    ]).catch((err) => console.error('Newsletter subscription error:', err));
   };
 
   return (
