@@ -1,9 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { MEMBER_COURSES, CourseData, Lesson } from '../data/memberCourses';
 import {
   LogOut, PlayCircle, FileText, ChevronDown, ChevronRight,
-  CheckCircle2, Lock, Download, BookOpen, Award, Clock,
+  CheckCircle2, Download, BookOpen, Award, Clock, PenLine, Save,
 } from 'lucide-react';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -101,6 +101,38 @@ export const MemberDashboard: React.FC = () => {
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(
     new Set(['ex-1-1', 'ex-1-2', 'pbi-1-1']) // demo: some completed
   );
+
+  // ── Anotações por aula (persistidas no localStorage) ──────────────────────
+  const [notes, setNotes] = useState<Record<string, string>>(() => {
+    try {
+      const saved = localStorage.getItem('treinatech_notes');
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
+  const [noteSaved, setNoteSaved] = useState(false);
+
+  const handleNoteChange = useCallback((lessonId: string, value: string) => {
+    setNotes((prev) => ({ ...prev, [lessonId]: value }));
+    setNoteSaved(false);
+  }, []);
+
+  const saveNote = useCallback((lessonId: string) => {
+    try {
+      const updated = { ...notes };
+      localStorage.setItem('treinatech_notes', JSON.stringify(updated));
+      setNoteSaved(true);
+      setTimeout(() => setNoteSaved(false), 2000);
+    } catch { /* ignore */ }
+  }, [notes]);
+
+  // Auto-save ao trocar de aula
+  useEffect(() => {
+    try {
+      localStorage.setItem('treinatech_notes', JSON.stringify(notes));
+    } catch { /* ignore */ }
+  }, [notes]);
 
   const toggleModule = (id: string) => {
     setExpandedModules((prev) => {
@@ -378,6 +410,49 @@ export const MemberDashboard: React.FC = () => {
                   <div className="flex items-center gap-2 text-green-700 text-sm font-semibold bg-green-50 px-4 py-2.5 rounded-xl border border-green-200">
                     <CheckCircle2 size={15} />
                     Concluída
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* ── Painel de Anotações ── */}
+            {activeLesson && (
+              <div className="mt-6 bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                <div className="flex items-center justify-between px-5 py-3 border-b border-slate-100 bg-slate-50">
+                  <div className="flex items-center gap-2">
+                    <PenLine size={14} className="text-slate-500" />
+                    <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Minhas Anotações</span>
+                    <span className="text-[10px] text-slate-400 font-medium">— {activeLesson.title}</span>
+                  </div>
+                  <button
+                    onClick={() => saveNote(activeLesson.id)}
+                    className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all ${
+                      noteSaved
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-slate-100 text-slate-600 hover:bg-green-50 hover:text-green-700'
+                    }`}
+                  >
+                    <Save size={11} />
+                    {noteSaved ? 'Salvo!' : 'Salvar'}
+                  </button>
+                </div>
+                <textarea
+                  value={notes[activeLesson.id] || ''}
+                  onChange={(e) => handleNoteChange(activeLesson.id, e.target.value)}
+                  placeholder="Escreva suas anotações sobre esta aula... Dicas, pontos importantes, dúvidas para perguntar."
+                  className="w-full h-36 px-5 py-4 text-sm text-slate-700 placeholder-slate-300 resize-none focus:outline-none leading-relaxed"
+                />
+                {notes[activeLesson.id] && (
+                  <div className="px-5 py-2 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-[10px] text-slate-400">
+                      {notes[activeLesson.id].length} caracteres
+                    </span>
+                    <button
+                      onClick={() => handleNoteChange(activeLesson.id, '')}
+                      className="text-[10px] text-slate-400 hover:text-red-400 transition-colors"
+                    >
+                      Limpar anotação
+                    </button>
                   </div>
                 )}
               </div>
