@@ -62,7 +62,7 @@ export const MEMBER_COURSES: CourseData[] = [
         id: 'excel-m1',
         title: 'Módulo 1 — Excel Básico',
         lessons: [
-          { id: 'ex-1-1', title: 'Interface e navegação no Excel', duration: '15:00', provider: 'youtube', videoId: 'q5CSEx44Crc', free: true },
+          { id: 'ex-1-1', title: 'Interface e navegação no Excel', duration: '15:00', provider: 'youtube', videoId: 'gLW1Ijfi604', free: true },
           { id: 'ex-1-2', title: 'Células, linhas, colunas e referências', duration: '18:20', provider: 'youtube', videoId: '2kO5xkPl2bo' },
           { id: 'ex-1-3', title: 'Fórmulas: SOMA, MÉDIA, MÁXIMO, MÍNIMO', duration: '20:10', provider: 'youtube', videoId: 'jWckFhoiqQg' },
           { id: 'ex-1-4', title: 'Referências absolutas e relativas', duration: '14:45', provider: 'youtube', videoId: 'HujvzrwNMHQ' },
@@ -79,7 +79,7 @@ export const MEMBER_COURSES: CourseData[] = [
         id: 'excel-m2',
         title: 'Módulo 2 — Excel Intermediário',
         lessons: [
-          { id: 'ex-2-1', title: 'SE e SES — lógica condicional aplicada ao negócio', duration: '18:30', provider: 'youtube', videoId: 'fmKp1GRciNo' },
+          { id: 'ex-2-1', title: 'SE e SES — lógica condicional aplicada ao negócio', duration: '18:30', provider: 'youtube', videoId: 'aG_28CLm2a0' },
           { id: 'ex-2-2', title: 'KPIs com formatação condicional e ícones', duration: '22:10', provider: 'youtube', videoId: 'zE5B8gLQLAQ' },
           { id: 'ex-2-3', title: 'DATAM, DATADIF e cálculo de parcelas', duration: '16:45', provider: 'youtube', videoId: '6FIEvdFkcw8' },
           { id: 'ex-2-4', title: 'CONT.SE, SOMASE e SOMARPRODUTO', duration: '21:00', provider: 'youtube', videoId: 'FychSpj92rQ' },
@@ -95,8 +95,8 @@ export const MEMBER_COURSES: CourseData[] = [
         id: 'excel-m3',
         title: 'Módulo 3 — Excel Avançado',
         lessons: [
-          { id: 'ex-3-1', title: 'Tabelas Dinâmicas avançadas e campos calculados', duration: '26:00', provider: 'youtube', videoId: '45JpMj8kQDU' },
-          { id: 'ex-3-2', title: 'Fórmulas Matriciais — SOMA(SE()), SOMASES()', duration: '22:15', provider: 'youtube', videoId: 'bGFAHIe4FLc' },
+          { id: 'ex-3-1', title: 'Power Pivot — Modelagem e Análise Avançada', duration: '26:00', provider: 'youtube', videoId: 'px5ij8QkHF8' },
+          { id: 'ex-3-2', title: 'Dashboard Profissional no Excel', duration: '22:15', provider: 'youtube', videoId: 'HeX2GTEBbNk' },
           { id: 'ex-3-3', title: 'PROCX Bidimensional — busca produto × mercado', duration: '19:00', provider: 'youtube', videoId: 'dS0HzsL2EJk' },
           { id: 'ex-3-4', title: 'Power Query — ETL e feriados automáticos', duration: '24:00', provider: 'youtube', videoId: 'EDNulu8DVWg' },
           { id: 'ex-3-5', title: 'Macros — absoluta vs. relativa, atalhos e botões', duration: '20:00', provider: 'youtube', videoId: 'fmKp1GRciNo' },
