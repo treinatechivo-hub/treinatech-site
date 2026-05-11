@@ -13,9 +13,11 @@ import { MembersArea } from './components/members/MembersArea';
 import { Blog } from './components/Blog';
 import { ArticlePage } from './components/ArticlePage';
 import { DemoPage } from './pages/DemoPage';
+import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { ParceirosBanner } from './components/ParceirosBanner';
+import { AuthProvider } from './contexts/AuthContext';
 
-type Page = 'home' | 'members' | 'blog' | 'article' | 'demo';
+type Page = 'home' | 'members' | 'blog' | 'article' | 'demo' | 'reset-password';
 
 const WA_SVG = (
   <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current">
@@ -34,8 +36,16 @@ const WhatsAppButton: React.FC = () => (
   </a>
 );
 
+const getOobCode = () => {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('mode') === 'resetPassword' ? params.get('oobCode') : null;
+};
+
 const App: React.FC = () => {
+  const oobCode = getOobCode();
+
   const getInitialPage = (): Page => {
+    if (oobCode) return 'reset-password';
     if (window.location.hash === '#alunos') return 'members';
     if (window.location.hash === '#blog') return 'blog';
     if (window.location.hash === '#demo') return 'demo';
@@ -70,6 +80,14 @@ const App: React.FC = () => {
     setPage('blog');
     window.location.hash = '#blog';
   };
+
+  if (page === 'reset-password' && oobCode) {
+    return (
+      <AuthProvider>
+        <ResetPasswordPage oobCode={oobCode} />
+      </AuthProvider>
+    );
+  }
 
   if (page === 'members') {
     return <MembersArea />;

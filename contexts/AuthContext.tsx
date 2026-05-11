@@ -9,6 +9,7 @@ import {
     GoogleAuthProvider,
     getAuth,
     sendPasswordResetEmail,
+    confirmPasswordReset,
 } from 'firebase/auth';
 import { initializeApp, getApps } from 'firebase/app';
 
@@ -47,6 +48,7 @@ interface AuthContextType {
     signInWithEmail: (email: string, password: string) => Promise<void>;
     signUpWithEmail: (name: string, email: string, password: string) => Promise<void>;
     resetPassword: (email: string) => Promise<void>;
+    confirmReset: (oobCode: string, newPassword: string) => Promise<void>;
     signOut: () => Promise<void>;
     firebaseApp: typeof firebaseApp;
 }
@@ -158,7 +160,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const clearAuthError = () => setAuthError(null);
 
     const resetPassword = async (email: string) => {
-          await sendPasswordResetEmail(auth, email);
+          await sendPasswordResetEmail(auth, email, {
+              url: 'https://www.treinatech.com.br',
+              handleCodeInApp: true,
+          });
+    };
+
+    const confirmReset = async (oobCode: string, newPassword: string) => {
+          await confirmPasswordReset(auth, oobCode, newPassword);
     };
 
     const signOut = async () => {
@@ -166,7 +175,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     return (
-          <AuthContext.Provider value={{ user, loading, authError, clearAuthError, signInWithGoogle, signInWithEmail, signUpWithEmail, resetPassword, signOut, firebaseApp }}>
+          <AuthContext.Provider value={{ user, loading, authError, clearAuthError, signInWithGoogle, signInWithEmail, signUpWithEmail, resetPassword, confirmReset, signOut, firebaseApp }}>
             {children}
           </AuthContext.Provider>
         );
