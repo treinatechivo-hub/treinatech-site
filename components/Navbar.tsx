@@ -131,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
       {/* Mobile Menu Overlay — fora do <nav> para evitar z-index stacking context */}
       {isOpen && (
         <div className="fixed inset-0 bg-slate-900 z-[99999] md:hidden">
-          <div className="flex flex-col items-center justify-center h-full space-y-10 px-6">
+          <div className="flex flex-col items-center justify-center h-full space-y-6 px-6">
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-6 right-6 p-4 text-white"
@@ -139,14 +139,14 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
               <X size={32} />
             </button>
 
-            <Logo className="h-16 mb-4" textColor="text-white" />
+            <Logo className="h-12 mb-2" textColor="text-white" />
 
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleLinkClick(e, item.href)}
-                className="text-3xl font-black text-white hover:text-green-400 uppercase tracking-tighter"
+                className="text-xl font-black text-white hover:text-green-400 uppercase tracking-tighter"
               >
                 {item.label}
               </a>
@@ -155,14 +155,14 @@ export const Navbar: React.FC<NavbarProps> = ({ darkBg = false }) => {
             <a
               href="#alunos"
               onClick={(e) => handleLinkClick(e, '#alunos')}
-              className="w-full border-2 border-white text-white text-center py-5 rounded-2xl text-xl font-black uppercase tracking-widest hover:border-green-400 hover:text-green-400 transition-all"
+              className="w-full border-2 border-white text-white text-center py-4 rounded-2xl text-base font-black uppercase tracking-widest hover:border-green-400 hover:text-green-400 transition-all"
             >
               Área do Aluno
             </a>
             <a
               href="#contato"
               onClick={(e) => handleLinkClick(e, '#contato')}
-              className="w-full bg-green-700 text-white text-center py-5 rounded-2xl text-xl font-black shadow-2xl uppercase tracking-widest hover:bg-green-800 transition-all"
+              className="w-full bg-green-700 text-white text-center py-4 rounded-2xl text-base font-black shadow-2xl uppercase tracking-widest hover:bg-green-800 transition-all"
             >
               Fale Conosco
             </a>

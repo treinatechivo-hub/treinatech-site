@@ -33,7 +33,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
             <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
               <span className="flex items-center gap-2">
                 <User className="w-4 h-4 text-green-400" />
-                <span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT
+                <span className="text-white font-semibold">Ivo Amarante Jr.</span> · Instrutor MCT
               </span>
               <span className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" /> 25 mar 2026
@@ -284,7 +284,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
                     { title: 'Power Query: o segredo dos analistas mais rápidos', id: 7 },
                     { title: 'Como criar um dashboard profissional em 1 hora', id: 4 },
                   ].map((rel) => (
-                    <p key={rel.id} className="text-sm text-slate-700 hover:text-green-700 cursor-pointer font-semibold leading-snug transition-colors">
+                    <p key={rel.id} onClick={() => { window.location.hash = `#artigo-${rel.id}`; window.scrollTo(0, 0); }} className="text-sm text-slate-700 hover:text-green-700 cursor-pointer font-semibold leading-snug transition-colors">
                       {rel.title} →
                     </p>
                   ))}
@@ -313,7 +313,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
               DAX do zero: os 10 conceitos que todo analista precisa dominar
             </h1>
             <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
-              <span className="flex items-center gap-2"><User className="w-4 h-4 text-amber-400" /><span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT</span>
+              <span className="flex items-center gap-2"><User className="w-4 h-4 text-amber-400" /><span className="text-white font-semibold">Ivo Amarante Jr.</span> · Instrutor MCT</span>
               <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 18 mar 2026</span>
               <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 8 min de leitura</span>
             </div>
@@ -586,7 +586,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
             <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
               <span className="flex items-center gap-2">
                 <User className="w-4 h-4 text-blue-400" />
-                <span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT
+                <span className="text-white font-semibold">Ivo Amarante Jr.</span> · Instrutor MCT
               </span>
               <span className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" /> 10 mar 2026
@@ -890,7 +890,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
                     { title: 'DAX do zero: os 10 conceitos essenciais', id: 2 },
                     { title: 'Como criar um dashboard profissional em 1 hora', id: 4 },
                   ].map((rel) => (
-                    <p key={rel.id} className="text-sm text-slate-700 hover:text-blue-700 cursor-pointer font-semibold leading-snug transition-colors">
+                    <p key={rel.id} onClick={() => { window.location.hash = `#artigo-${rel.id}`; window.scrollTo(0, 0); }} className="text-sm text-slate-700 hover:text-blue-700 cursor-pointer font-semibold leading-snug transition-colors">
                       {rel.title} →
                     </p>
                   ))}
@@ -925,7 +925,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
             <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
               <span className="flex items-center gap-2">
                 <User className="w-4 h-4 text-amber-400" />
-                <span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT
+                <span className="text-white font-semibold">Ivo Amarante Jr.</span> · Instrutor MCT
               </span>
               <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 03 mar 2026</span>
               <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 7 min de leitura</span>
@@ -1217,7 +1217,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
                     { title: 'Power Query: o segredo dos analistas mais rápidos', id: 7 },
                     { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
                   ].map((rel) => (
-                    <p key={rel.id} className="text-sm text-slate-700 hover:text-amber-700 cursor-pointer font-semibold leading-snug transition-colors">
+                    <p key={rel.id} onClick={() => { window.location.hash = `#artigo-${rel.id}`; window.scrollTo(0, 0); }} className="text-sm text-slate-700 hover:text-amber-700 cursor-pointer font-semibold leading-snug transition-colors">
                       {rel.title} →
                     </p>
                   ))}
@@ -1252,7 +1252,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
             <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
               <span className="flex items-center gap-2">
                 <User className="w-4 h-4 text-purple-400" />
-                <span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT
+                <span className="text-white font-semibold">Ivo Amarante Jr.</span> · Instrutor MCT
               </span>
               <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 15 fev 2026</span>
               <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 5 min de leitura</span>
@@ -1575,7 +1575,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
                     { title: 'Como criar um dashboard Power BI em 1 hora', id: 4 },
                     { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
                   ].map((rel) => (
-                    <p key={rel.id} className="text-sm text-slate-700 hover:text-purple-700 cursor-pointer font-semibold leading-snug transition-colors">
+                    <p key={rel.id} onClick={() => { window.location.hash = `#artigo-${rel.id}`; window.scrollTo(0, 0); }} className="text-sm text-slate-700 hover:text-purple-700 cursor-pointer font-semibold leading-snug transition-colors">
                       {rel.title} →
                     </p>
                   ))}
@@ -1604,7 +1604,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
               VBA no Excel: automatize tarefas repetitivas e economize horas por semana
             </h1>
             <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
-              <span className="flex items-center gap-2"><User className="w-4 h-4 text-green-400" /><span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT</span>
+              <span className="flex items-center gap-2"><User className="w-4 h-4 text-green-400" /><span className="text-white font-semibold">Ivo Amarante Jr.</span> · Instrutor MCT</span>
               <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 24 fev 2026</span>
               <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 9 min de leitura</span>
               <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Nível: Intermediário</span>
@@ -1820,7 +1820,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
                     { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
                     { title: 'Power Query: combine dados sem código', id: 7 },
                   ].map((rel) => (
-                    <p key={rel.id} className="text-sm text-slate-700 hover:text-green-700 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
+                    <p key={rel.id} onClick={() => { window.location.hash = `#artigo-${rel.id}`; window.scrollTo(0, 0); }} className="text-sm text-slate-700 hover:text-green-700 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
                   ))}
                 </div>
               </div>
@@ -1847,7 +1847,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
               Power Query: o segredo dos analistas de dados mais rápidos do mercado
             </h1>
             <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
-              <span className="flex items-center gap-2"><User className="w-4 h-4 text-amber-400" /><span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT</span>
+              <span className="flex items-center gap-2"><User className="w-4 h-4 text-amber-400" /><span className="text-white font-semibold">Ivo Amarante Jr.</span> · Instrutor MCT</span>
               <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 05 fev 2026</span>
               <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 7 min de leitura</span>
               <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Nível: Intermediário</span>
@@ -2043,7 +2043,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
                     { title: 'DAX do zero: os 10 conceitos essenciais', id: 2 },
                     { title: 'Tabelas Dinâmicas Avançadas', id: 8 },
                   ].map((rel) => (
-                    <p key={rel.id} className="text-sm text-slate-700 hover:text-amber-700 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
+                    <p key={rel.id} onClick={() => { window.location.hash = `#artigo-${rel.id}`; window.scrollTo(0, 0); }} className="text-sm text-slate-700 hover:text-amber-700 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
                   ))}
                 </div>
               </div>
@@ -2070,7 +2070,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
               Tabelas dinâmicas avançadas: recursos que 90% dos usuários não conhecem
             </h1>
             <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
-              <span className="flex items-center gap-2"><User className="w-4 h-4 text-green-400" /><span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT</span>
+              <span className="flex items-center gap-2"><User className="w-4 h-4 text-green-400" /><span className="text-white font-semibold">Ivo Amarante Jr.</span> · Instrutor MCT</span>
               <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> 28 jan 2026</span>
               <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 6 min de leitura</span>
               <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Nível: Intermediário</span>
@@ -2247,7 +2247,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
                     { title: 'Power Query: combine dados sem código', id: 7 },
                     { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
                   ].map((rel) => (
-                    <p key={rel.id} className="text-sm text-slate-700 hover:text-green-700 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
+                    <p key={rel.id} onClick={() => { window.location.hash = `#artigo-${rel.id}`; window.scrollTo(0, 0); }} className="text-sm text-slate-700 hover:text-green-700 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
                   ))}
                 </div>
               </div>
@@ -2280,7 +2280,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
             <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
               <span className="flex items-center gap-2">
                 <User className="w-4 h-4 text-orange-400" />
-                <span className="text-white font-semibold">Ivo Amarante</span> · Instrutor MCT
+                <span className="text-white font-semibold">Ivo Amarante Jr.</span> · Instrutor MCT
               </span>
               <span className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" /> 01 mai 2026
@@ -2454,7 +2454,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
                     { title: 'Excel vs Power BI: Qual ferramenta usar?', id: 1 },
                     { title: 'SQL para analistas: queries eficientes do zero', id: 3 },
                   ].map((rel) => (
-                    <p key={rel.id} className="text-sm text-slate-700 hover:text-orange-600 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
+                    <p key={rel.id} onClick={() => { window.location.hash = `#artigo-${rel.id}`; window.scrollTo(0, 0); }} className="text-sm text-slate-700 hover:text-orange-600 cursor-pointer font-semibold leading-snug transition-colors">{rel.title} →</p>
                   ))}
                 </div>
               </div>

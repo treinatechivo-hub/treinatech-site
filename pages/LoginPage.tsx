@@ -209,6 +209,7 @@ export const LoginPage: React.FC = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Seu E-mail"
               required
+              autoComplete="off"
               className="w-full pl-11 pr-4 py-3.5 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
             />
           </div>
@@ -221,6 +222,7 @@ export const LoginPage: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Sua Senha"
               required
+              autoComplete="new-password"
               className="w-full pl-11 pr-11 py-3.5 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
             />
             <button

@@ -110,7 +110,7 @@ export const Hero: React.FC = () => {
                 href="#cursos"
                 className="flex items-center justify-center px-8 py-4 bg-green-700 text-white font-bold rounded-xl hover:bg-green-800 transition-all shadow-xl hover:shadow-green-900/20 group"
               >
-                Conhecer Cursos
+                Conhecer Treinamentos
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
               </a>
               <a
