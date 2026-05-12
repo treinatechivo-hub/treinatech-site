@@ -90,7 +90,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">E-mail</h4>
-                  <p className="text-slate-400 group-hover:text-slate-200 transition-colors">contato@treinatech.com.br</p>
+                  <a href="mailto:contato@treinatech.com.br" className="text-slate-400 group-hover:text-slate-200 transition-colors hover:text-green-400">contato@treinatech.com.br</a>
                 </div>
               </div>
             </div>
