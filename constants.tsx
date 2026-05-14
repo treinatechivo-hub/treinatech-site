@@ -23,7 +23,7 @@ export const COURSES: Course[] = [
     id: 'claude-intro',
     title: 'Introdução à IA com Foco no Claude',
     description: 'Entenda o que é Inteligência Artificial, conheça as principais ferramentas do mercado e descubra por que o Claude se destaca. Em 1h30, você sai com 3 usos práticos funcionando — sem nenhum conhecimento prévio.',
-    modalDescription: 'O ponto de partida para quem quer entender de vez o que é inteligência artificial generativa e como o Claude pode transformar o seu dia a dia profissional. Em 4 horas você aprende o que é o Claude, como escrever prompts que funcionam de verdade e experimenta três aplicações práticas e imediatas — escrita, análise de documentos e organização de ideias. Gratuito e sem pré-requisitos.',
+    modalDescription: 'O ponto de entrada para quem quer entender o cenário atual da IA e sair do zero com resultados práticos. Em 1h30 e 8 aulas de 5 a 15 minutos, você conhece as principais ferramentas do mercado, entende por que o Claude se destaca, aprende a escrever prompts que funcionam de verdade e já aplica tudo em três situações reais do dia a dia. Gratuito e sem pré-requisitos.',
     icon: <Sparkles className="w-8 h-8" />,
     badge: 'Gratuito',
     badgeColor: 'green',
@@ -31,41 +31,30 @@ export const COURSES: Course[] = [
     topics: ['Principais IAs: ChatGPT, Gemini, Copilot e Claude', 'Por que o Claude se destaca no mercado', 'A fórmula do prompt que gera resultados reais', '3 usos práticos no mesmo dia: escrita, análise e organização'],
     fullSyllabus: [
       {
-        title: "Módulo 1 — O que é o Claude e por que isso muda tudo (1h)",
+        title: "Módulo 1 — O Cenário da IA Hoje (25min)",
         items: [
-          "IA Generativa em 5 minutos: o que mudou e por quê importa agora",
-          "O que o Claude faz muito bem — e o que ele não faz",
+          "IA generativa em 5 minutos: o que mudou e por que importa agora",
+          "ChatGPT, Gemini, Copilot e Claude: o que cada um faz melhor",
+          "Por que o Claude se destaca: raciocínio, contexto longo e segurança",
           "Criando sua conta gratuita em claude.ai passo a passo",
-          "Tour pela interface: chat, projetos, histórico",
-          "Diferença entre plano Free e Pro — sem pressão, com clareza",
         ]
       },
       {
-        title: "Módulo 2 — Seu primeiro prompt que realmente funciona (1h)",
+        title: "Módulo 2 — A Fórmula do Prompt (25min)",
         items: [
-          "Por que a maioria das pessoas usa o Claude errado",
-          "A fórmula dos 4 ingredientes: contexto, tarefa, formato, restrição",
+          "Por que a maioria das pessoas usa IA errado",
+          "A fórmula de 4 ingredientes: contexto, tarefa, formato, restrição",
           "Demonstração: mesmo pedido, dois prompts, dois resultados completamente diferentes",
-          "Como refinar a resposta sem começar do zero",
-          "Exercício: cada participante escreve e testa seu primeiro prompt real",
+          "Exercício: você escreve e testa seu primeiro prompt real",
         ]
       },
       {
-        title: "Módulo 3 — Três usos práticos para começar hoje (1h30min)",
+        title: "Módulo 3 — 3 Usos Práticos para Hoje (40min)",
         items: [
-          "Uso 1 — Escrita profissional: e-mails, comunicados e textos difíceis em minutos",
-          "Uso 2 — Análise de documentos: suba um PDF e extraia o que importa",
-          "Uso 3 — Organização de ideias: o Claude como parceiro de raciocínio",
-          "Exercício prático em cada uso com tarefa real do participante",
-        ]
-      },
-      {
-        title: "Módulo 4 — O que vem depois: sua jornada com o Claude (30min)",
-        items: [
-          "O que você já consegue fazer com o plano Free",
-          "Quando o Pro passa a fazer sentido na prática",
-          "Seu compromisso: uma tarefa real nos próximos 7 dias",
-          "Guia rápido com 10 prompts prontos para usar amanhã",
+          "Uso 1 — Escrita: e-mails e textos profissionais em minutos",
+          "Uso 2 — Análise: suba um documento e extraia o que importa",
+          "Uso 3 — Organização: o Claude como parceiro de raciocínio",
+          "Próximos passos: sua tarefa real nos próximos 7 dias",
         ]
       },
     ]
@@ -77,75 +66,48 @@ export const COURSES: Course[] = [
     comingSoon: true,
     title: 'Claude na Prática – Free',
     description: 'Domine os recursos da versão gratuita do Claude com aulas curtas e objetivas. Prompts avançados, escrita profissional, análise de documentos e organização com Projects — tudo aplicado ao dia a dia corporativo.',
-    modalDescription: 'Treinamento completo para quem quer tirar o máximo da versão gratuita do Claude. Em 12 horas você desenvolve domínio real sobre prompts avançados, escrita e revisão de textos profissionais, análise de documentos e imagens, pesquisa com Web Search, organização com Projects e Memory, e aplica tudo isso na sua área de atuação. Leve, fluído e 100% orientado a resultados reais.',
+    modalDescription: 'Treinamento completo para quem quer tirar o máximo da versão gratuita do Claude. Em 4 a 5 horas com aulas curtas e objetivas, você desenvolve domínio real sobre prompts avançados, escrita e análise de documentos profissionais, organização com Projects e Memory, e pesquisa atualizada com Web Search — tudo aplicado a situações reais do ambiente corporativo.',
     icon: <Bot className="w-8 h-8" />,
     badgeColor: 'blue',
     topics: ['Prompts avançados por resultado real', 'Escrita, revisão e análise de documentos', 'Projects e Memory na prática', 'Web Search e casos corporativos reais'],
     fullSyllabus: [
       {
-        title: "Módulo 1 — Fundamentos e Interface (1h30min)",
-        items: [
-          "Como o Claude processa texto: janela de contexto em linguagem simples",
-          "Modelos disponíveis no Free: Sonnet e Haiku — quando usar cada um",
-          "Limites de uso e como gerenciá-los no dia a dia",
-          "Configuração inicial: estilos de resposta e instrução global",
-          "Boas práticas de organização do histórico de conversas",
-        ]
-      },
-      {
-        title: "Módulo 2 — Prompts Avançados (2h)",
+        title: "Módulo 1 — Prompts Avançados por Resultado Real (1h)",
         items: [
           "Fórmula completa: contexto + tarefa + formato + restrição + exemplo",
           "Técnicas de refinamento: iterar sem recomeçar do zero",
-          "Prompts encadeados: tarefas complexas em etapas",
+          "Prompts encadeados para tarefas complexas em etapas",
           "Templates reutilizáveis para comunicação, análise e planejamento",
-          "Erros comuns e como corrigi-los com precisão",
-          "Exercício: montar biblioteca pessoal de prompts para o dia a dia",
+          "Exercício: monte sua biblioteca pessoal de prompts",
         ]
       },
       {
-        title: "Módulo 3 — Escrita Profissional (2h)",
+        title: "Módulo 2 — Escrita, Revisão e Análise de Documentos (1h30min)",
         items: [
           "E-mails difíceis: cobrança, negociação, feedbacks delicados",
-          "Relatórios e atas: estruturados, diretos e prontos para apresentar",
+          "Relatórios e atas: estruturados e prontos para apresentar",
           "Revisão e reescrita: simplificar textos densos, adaptar tom e estilo",
-          "Estilos do Claude: configurando o tom padrão das respostas",
-          "Resumos executivos: de documentos longos para uma página",
-          "Exercício: reescreva um texto real seu com ajuda do Claude",
+          "Upload de PDF, Word e CSV: perguntas inteligentes sobre documentos",
+          "Análise de planilhas e interpretação de gráficos e imagens",
         ]
       },
       {
-        title: "Módulo 4 — Análise de Documentos e Dados (2h)",
+        title: "Módulo 3 — Projects e Memory na Prática (1h)",
         items: [
-          "Upload de PDF, Word, TXT e CSV: o que é possível e como funciona",
-          "Perguntas inteligentes sobre documentos: contratos, laudos, manuais",
-          "Comparando documentos: encontrando diferenças e riscos",
-          "Análise de planilhas CSV: insights e recomendações",
-          "Interpretação de gráficos, dashboards e imagens",
-          "Artifacts: tabelas, visualizações e relatórios direto no chat",
-        ]
-      },
-      {
-        title: "Módulo 5 — Projects, Memory e Web Search (2h)",
-        items: [
-          "Projects: criando espaços de contexto por área de trabalho",
+          "Projects: espaços de contexto por área de trabalho",
           "Instruções de projeto: o Claude já sabe o que você precisa",
           "Upload de arquivos no projeto: base de conhecimento persistente",
           "Memory: configurando o Claude para lembrar de você",
-          "Web Search: pesquisa atualizada em tempo real com citações",
-          "Exercício: criar e configurar um projeto para a sua área",
+          "Exercício: criar e configurar um projeto para sua área",
         ]
       },
       {
-        title: "Módulo 6 — Claude por Área e Próximos Passos (2h30min)",
+        title: "Módulo 4 — Web Search e Casos Corporativos Reais (1h)",
         items: [
-          "Gestão: comunicados, planos de ação, feedbacks e análise de cenários",
-          "RH: trilhas de aprendizado, descrições de cargo, pesquisas de clima",
-          "Marketing: copies, briefings, roteiros e análise de concorrência",
-          "Finanças: interpretação de relatórios, comentários e benchmarks",
-          "Vendas: propostas, roteiros de abordagem e argumentos de resposta",
-          "Plano de 30 dias: 3 tarefas reais que você vai delegar ao Claude",
-          "Boas práticas: o que verificar, o que não colocar e como evoluir",
+          "Web Search: pesquisa atualizada em tempo real com citações",
+          "Gestão, RH, Marketing, Finanças e Vendas: aplicações reais",
+          "Artifacts: tabelas, visualizações e relatórios direto no chat",
+          "Plano de 30 dias: 3 tarefas reais para delegar ao Claude",
         ]
       },
     ]
@@ -157,68 +119,59 @@ export const COURSES: Course[] = [
     comingSoon: true,
     title: 'Claude na Prática – Pro',
     description: 'Tudo do curso Free mais os recursos exclusivos do plano Pro: Extended Thinking, Research, integração com Google Workspace e Microsoft 365, Artifacts e automação com Cowork.',
-    modalDescription: 'Treinamento completo para quem tem ou planeja ter o plano Pro do Claude. Em 18 horas você domina todos os recursos da versão gratuita e vai além: raciocínio estendido para decisões complexas, pesquisa aprofundada multi-fonte com Research, integração com Gmail, Google Calendar e Docs, automação no Excel e PowerPoint, e tarefas agentic com Cowork. O curso mais completo da trilha.',
+    modalDescription: 'Treinamento completo para quem tem ou planeja ter o plano Pro do Claude. Em 8 a 9 horas você parte do curso Free e vai além: Extended Thinking para decisões complexas, Research avançado multi-fonte, integração com Google Workspace e Microsoft 365, criação de Artifacts em HTML e React, e automação real de tarefas com Cowork. O curso mais completo da trilha.',
     icon: <BrainCircuit className="w-8 h-8" />,
     badgeColor: 'purple',
     topics: ['Extended Thinking e Research avançado', 'Google Workspace e Microsoft 365 integrados', 'Artifacts: HTML, React e visualizações', 'Cowork: automação de tarefas no desktop'],
     fullSyllabus: [
       {
-        title: "Base Completa — Claude Free (12h)",
+        title: "Base — Claude na Prática Free (incluído)",
         items: [
           "Inclui todo o conteúdo do curso Claude na Prática – Free",
-          "Fundamentos, prompts avançados, escrita profissional",
-          "Análise de documentos, dados e imagens",
-          "Projects, Memory, Web Search e Artifacts",
-          "Aplicações por área e plano de 30 dias",
+          "Prompts avançados, escrita, revisão e análise de documentos",
+          "Projects, Memory, Web Search e casos corporativos reais",
         ]
       },
       {
-        title: "Módulo Pro 1 — Extended Thinking & Research (2h)",
+        title: "Módulo Pro 1 — Extended Thinking e Research Avançado (2h)",
         items: [
           "Extended Thinking: como ativar e quando usar o raciocínio profundo",
-          "Ideal para: decisões estratégicas, análises multi-variáveis, debugging de situações",
-          "Exercício: problema real de tomada de decisão com e sem Extended Thinking",
-          "Research: diferença entre Web Search e pesquisa aprofundada multi-fonte",
-          "Como formatar o pedido para obter o melhor relatório estruturado",
-          "Casos de uso: due diligence, análise de mercado, benchmarking, pesquisa acadêmica",
+          "Ideal para: decisões estratégicas, análises multi-variáveis, cenários complexos",
+          "Exercício: problema real com e sem Extended Thinking",
+          "Research: pesquisa aprofundada multi-fonte vs Web Search",
+          "Casos: due diligence, análise de mercado, benchmarking, pesquisa acadêmica",
           "Exercício: Research sobre um tema estratégico da sua área",
         ]
       },
       {
-        title: "Módulo Pro 2 — Google Workspace & Microsoft 365 (1h30min)",
+        title: "Módulo Pro 2 — Google Workspace e Microsoft 365 (2h)",
         items: [
-          "Gmail: rascunhar respostas, resumir threads longas, classificar prioridades",
-          "Google Calendar: criar blocos de tempo, redigir convites, organizar agenda",
-          "Google Docs: editar, expandir, resumir e formatar documentos diretamente",
-          "Como conectar sua conta Google ao Claude Pro com segurança",
-          "Claude for Excel: escrever fórmulas, limpar dados, gerar análises",
-          "Claude for PowerPoint: estrutura de slides, reescrita e sugestões de design",
-          "Exercício: do dado bruto à apresentação executiva usando os dois plugins",
+          "Gmail: rascunhar respostas, resumir threads, priorizar e-mails",
+          "Google Calendar e Docs: integração direta com o Claude",
+          "Claude for Excel: fórmulas, limpeza de dados e análises",
+          "Claude for PowerPoint: estrutura de slides, reescrita e design",
+          "Exercício: do dado bruto à apresentação executiva",
         ]
       },
       {
-        title: "Módulo Pro 3 — Cowork: Automação Agentic Completa (1h30min)",
+        title: "Módulo Pro 3 — Artifacts: HTML, React e Visualizações (2h)",
         items: [
-          "O que é Cowork: o Claude age por você em sistemas, não só conversa",
-          "New Task: criando e delegando tarefas agentic do zero",
-          "Projects no Cowork: organizando automações por área de trabalho",
-          "Scheduled: agendando tarefas para rodar automaticamente",
-          "Live Artifacts: criando e editando documentos e arquivos em tempo real durante a execução",
-          "Dispatch (Beta): distribuindo tarefas para múltiplos agentes em paralelo",
-          "Customize: configurando o comportamento do agente Cowork para seu contexto",
-          "Casos de uso: entrada de dados, QA de aplicações, navegação em sistemas legados",
+          "O que são Artifacts e como ativá-los no Claude Pro",
+          "HTML: páginas, formulários e relatórios interativos",
+          "React: componentes e interfaces funcionais direto no chat",
+          "Visualizações: gráficos, dashboards e tabelas dinâmicas",
+          "Exercício: criar um relatório interativo com dados reais",
+        ]
+      },
+      {
+        title: "Módulo Pro 4 — Cowork: Automação de Tarefas no Desktop (2h)",
+        items: [
+          "O que é Cowork: o Claude age por você em sistemas reais",
+          "New Task: delegando tarefas agentic do zero",
+          "Scheduled: agendando automações para rodar sozinhas",
+          "Live Artifacts: editando documentos em tempo real durante a execução",
           "Quando usar com cuidado: tarefas irreversíveis pedem confirmação humana",
-          "Demonstração ao vivo: uma automação real com Live Artifacts e Customize ativos",
-        ]
-      },
-      {
-        title: "Módulo Pro 4 — Visão Geral do Claude Code (30min)",
-        items: [
-          "O que é o Claude Code: ferramenta de terminal para automação e tarefas técnicas",
-          "Para que serve sem precisar saber programar: o que é possível solicitar",
-          "Diferença entre Code e Cowork: quando usar cada um",
-          "Demonstração: o Claude Code executando uma tarefa simples ao vivo",
-          "Quando faz sentido aprofundar — recursos e próximos passos para quem quiser ir além",
+          "Demonstração ao vivo: automação real com Cowork ativo",
         ]
       },
     ]
