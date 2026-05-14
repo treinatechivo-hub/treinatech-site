@@ -21,14 +21,14 @@ export const COURSES: Course[] = [
   // ─── CLAUDE: INTRODUÇÃO GRATUITA ─────────────────────────────────────────────
   {
     id: 'claude-intro',
-    title: 'Introdução ao Claude',
-    description: 'Descubra o que é o Claude, como conversar com ele e saia com três usos práticos funcionando no mesmo dia — sem nenhum conhecimento prévio.',
+    title: 'Introdução à IA com Foco no Claude',
+    description: 'Entenda o que é Inteligência Artificial, conheça as principais ferramentas do mercado e descubra por que o Claude se destaca. Em 1h30, você sai com 3 usos práticos funcionando — sem nenhum conhecimento prévio.',
     modalDescription: 'O ponto de partida para quem quer entender de vez o que é inteligência artificial generativa e como o Claude pode transformar o seu dia a dia profissional. Em 4 horas você aprende o que é o Claude, como escrever prompts que funcionam de verdade e experimenta três aplicações práticas e imediatas — escrita, análise de documentos e organização de ideias. Gratuito e sem pré-requisitos.',
     icon: <Sparkles className="w-8 h-8" />,
     badge: 'Gratuito',
     badgeColor: 'green',
     comingSoon: true,
-    topics: ['O que é o Claude e como ele funciona', 'Fórmula do prompt que gera resultados', 'Escrita, análise e organização na prática', 'Free vs Pro: qual faz sentido para você'],
+    topics: ['Principais IAs: ChatGPT, Gemini, Copilot e Claude', 'Por que o Claude se destaca no mercado', 'A fórmula do prompt que gera resultados reais', '3 usos práticos no mesmo dia: escrita, análise e organização'],
     fullSyllabus: [
       {
         title: "Módulo 1 — O que é o Claude e por que isso muda tudo (1h)",
@@ -76,11 +76,11 @@ export const COURSES: Course[] = [
     id: 'claude-free',
     comingSoon: true,
     title: 'Claude na Prática – Free',
-    description: 'Domine todos os recursos disponíveis na versão gratuita do Claude: prompts, projetos, análise de dados, escrita profissional e muito mais.',
+    description: 'Domine os recursos da versão gratuita do Claude com aulas curtas e objetivas. Prompts avançados, escrita profissional, análise de documentos e organização com Projects — tudo aplicado ao dia a dia corporativo.',
     modalDescription: 'Treinamento completo para quem quer tirar o máximo da versão gratuita do Claude. Em 12 horas você desenvolve domínio real sobre prompts avançados, escrita e revisão de textos profissionais, análise de documentos e imagens, pesquisa com Web Search, organização com Projects e Memory, e aplica tudo isso na sua área de atuação. Leve, fluído e 100% orientado a resultados reais.',
     icon: <Bot className="w-8 h-8" />,
     badgeColor: 'blue',
-    topics: ['Prompts avançados por resultado', 'Escrita e revisão profissional', 'Análise de documentos e imagens', 'Projects, Memory e Web Search'],
+    topics: ['Prompts avançados por resultado real', 'Escrita, revisão e análise de documentos', 'Projects e Memory na prática', 'Web Search e casos corporativos reais'],
     fullSyllabus: [
       {
         title: "Módulo 1 — Fundamentos e Interface (1h30min)",
@@ -156,11 +156,11 @@ export const COURSES: Course[] = [
     id: 'claude-pro',
     comingSoon: true,
     title: 'Claude na Prática – Pro',
-    description: 'Tudo do curso Free mais os recursos exclusivos do plano Pro: Extended Thinking, Research, Google Workspace, Microsoft 365 e automação com Cowork.',
+    description: 'Tudo do curso Free mais os recursos exclusivos do plano Pro: Extended Thinking, Research, integração com Google Workspace e Microsoft 365, Artifacts e automação com Cowork.',
     modalDescription: 'Treinamento completo para quem tem ou planeja ter o plano Pro do Claude. Em 18 horas você domina todos os recursos da versão gratuita e vai além: raciocínio estendido para decisões complexas, pesquisa aprofundada multi-fonte com Research, integração com Gmail, Google Calendar e Docs, automação no Excel e PowerPoint, e tarefas agentic com Cowork. O curso mais completo da trilha.',
     icon: <BrainCircuit className="w-8 h-8" />,
     badgeColor: 'purple',
-    topics: ['Tudo do curso Free (12h)', 'Extended Thinking & Research', 'Google Workspace & Microsoft 365', 'Cowork e automação de tarefas'],
+    topics: ['Extended Thinking e Research avançado', 'Google Workspace e Microsoft 365 integrados', 'Artifacts: HTML, React e visualizações', 'Cowork: automação de tarefas no desktop'],
     fullSyllabus: [
       {
         title: "Base Completa — Claude Free (12h)",
