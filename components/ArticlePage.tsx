@@ -2359,13 +2359,13 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
               <div className="rounded-3xl border-2 border-orange-200 bg-orange-50 p-7 mb-5">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="bg-green-500 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">Gratuito</span>
-                  <span className="text-orange-700 font-extrabold text-lg">Introdução ao Claude — 4 horas</span>
+                  <span className="text-orange-700 font-extrabold text-lg">Introdução à IA com Foco no Claude — 1h30</span>
                 </div>
                 <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                  Módulo de entrada, totalmente gratuito. Ideal para quem nunca usou IA ou quer entender o potencial do Claude antes de investir em um plano pago. Você vai aprender o que é o Claude, como criar sua conta, a lógica de prompts e casos de uso reais no dia a dia profissional — em apenas 4 horas.
+                  Módulo de entrada, totalmente gratuito. Entenda o cenário atual da IA, conheça as principais ferramentas do mercado e descubra por que o Claude se destaca. Em 1h30, você sai com 3 usos práticos funcionando — sem nenhum conhecimento prévio.
                 </p>
                 <ul className="space-y-2 text-sm text-slate-600">
-                  {['O que é IA e como o Claude funciona', 'Criando conta e explorando a interface', 'Primeiros prompts: como pedir o que você quer', 'Casos de uso: e-mails, resumos, relatórios e análises'].map((t, i) => (
+                  {['Principais IAs: ChatGPT, Gemini, Copilot e Claude', 'Por que o Claude se destaca no mercado', 'A fórmula do prompt que gera resultados reais', '3 usos práticos no mesmo dia: escrita, análise e organização'].map((t, i) => (
                     <li key={i} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500 shrink-0" />{t}</li>
                   ))}
                 </ul>
@@ -2375,13 +2375,13 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
               <div className="rounded-3xl border-2 border-blue-200 bg-blue-50 p-7 mb-5">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="bg-blue-500 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">Free</span>
-                  <span className="text-blue-800 font-extrabold text-lg">Claude Free Completo — 12 horas</span>
+                  <span className="text-blue-800 font-extrabold text-lg">Claude na Prática – Free — 4 a 5 horas</span>
                 </div>
                 <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                  Para quem quer ir além do básico sem assinar o plano pago. Em 12 horas você aprende a criar prompts profissionais, usar o Claude para escrita técnica, análise de dados, gerenciamento de projetos com memória de contexto e automação leve de tarefas — tudo com a versão gratuita.
+                  Domínio completo dos recursos da versão gratuita do Claude com aulas curtas e objetivas. Prompts avançados, escrita profissional, análise de documentos e organização com Projects — tudo aplicado ao dia a dia corporativo.
                 </p>
                 <ul className="space-y-2 text-sm text-slate-600">
-                  {['Fundamentos de prompting e engenharia de contexto', 'Escrita profissional: propostas, relatórios e comunicação', 'Análise de dados com planilhas e textos', 'Projects e memória: contexto persistente entre sessões', 'Pesquisa com busca na web integrada'].map((t, i) => (
+                  {['Prompts avançados por resultado real', 'Escrita, revisão e análise de documentos', 'Projects e Memory na prática', 'Web Search e casos corporativos reais'].map((t, i) => (
                     <li key={i} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-500 shrink-0" />{t}</li>
                   ))}
                 </ul>
@@ -2391,13 +2391,13 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
               <div className="rounded-3xl border-2 border-purple-200 bg-purple-50 p-7 mb-8">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="bg-purple-500 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">Pro</span>
-                  <span className="text-purple-800 font-extrabold text-lg">Claude Pro Completo — 18 horas</span>
+                  <span className="text-purple-800 font-extrabold text-lg">Claude na Prática – Pro — 8 a 9 horas</span>
                 </div>
                 <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                  A trilha completa para quem quer extrair o máximo do Claude Pro. As 12 horas do módulo Free são a base — e você avança para Extended Thinking, integrações com Google Workspace e Microsoft 365, Live Artifacts, automações com Dispatch e Claude Code. Ideal para analistas, gestores e profissionais de TI que querem vantagem competitiva real.
+                  Tudo do curso Free mais os recursos exclusivos do plano Pro. Você parte do domínio completo da versão gratuita e avança para Extended Thinking, Research avançado, integração com Google Workspace e Microsoft 365, criação de Artifacts e automação real com Cowork.
                 </p>
                 <ul className="space-y-2 text-sm text-slate-600">
-                  {['Extended Thinking e Deep Research para análises complexas', 'Integração com Google Drive, Docs, Sheets, Outlook e OneDrive', 'Live Artifacts: dashboards e interfaces em tempo real', 'Cowork completo: Dispatch e Customize', 'Claude Code: automação com código assistido por IA'].map((t, i) => (
+                  {['Extended Thinking e Research avançado', 'Google Workspace e Microsoft 365 integrados', 'Artifacts: HTML, React e visualizações', 'Cowork: automação de tarefas no desktop'].map((t, i) => (
                     <li key={i} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-purple-500 shrink-0" />{t}</li>
                   ))}
                 </ul>
@@ -2417,8 +2417,8 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ articleId, onBack }) =
 
               {/* CTA */}
               <div className="bg-gradient-to-r from-orange-600 to-orange-800 rounded-3xl p-8 text-white text-center">
-                <p className="text-lg font-extrabold mb-2">Comece gratuitamente — 4 horas que podem mudar sua carreira</p>
-                <p className="text-orange-100 text-sm mb-6">A Treinatech tem trilha completa de IA com foco no Claude. Do básico gratuito ao Pro avançado, com certificação MCT.</p>
+                <p className="text-lg font-extrabold mb-2">Comece gratuitamente — 1h30 que podem mudar sua carreira</p>
+                <p className="text-orange-100 text-sm mb-6">A Treinatech tem trilha completa de IA com foco no Claude. Da introdução gratuita ao Pro avançado, com certificação MCT.</p>
                 <a
                   href="#cursos"
                   onClick={() => { const el = document.getElementById('cursos'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}

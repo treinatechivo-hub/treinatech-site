@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, ArrowRight, CheckCircle, Clock, Users } from 'lucide-react';
+import { Play, ArrowRight, CheckCircle, Users } from 'lucide-react';
 
 export const DemoPage: React.FC = () => {
   return (
@@ -55,36 +55,6 @@ export const DemoPage: React.FC = () => {
               <p className="text-white font-bold text-lg">Vídeo em produção</p>
               <p className="text-white/60 text-sm">Disponível em breve</p>
             </div>
-          </div>
-        </div>
-
-        {/* Roteiro da demo (30s) */}
-        <div className="bg-white rounded-3xl p-8 shadow-sm border border-green-100 mb-10">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center text-green-700">
-              <Clock className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="font-extrabold text-slate-900">Roteiro da demonstração — 30 segundos</p>
-              <p className="text-sm text-slate-500">Script para gravação profissional futura</p>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            {[
-              { time: '0–5s', cena: 'Abertura com logo animada da Treinatech + tagline "Sua carreira em dados começa aqui"' },
-              { time: '5–12s', cena: 'Tela de uma aula ao vivo: instrutor explicando DAX no Power BI com dashboard aberto' },
-              { time: '12–20s', cena: 'Split-screen: antes (planilha bagunçada) vs depois (dashboard profissional em Power BI)' },
-              { time: '20–26s', cena: 'Depoimento de 5s de aluno real: "Consegui minha promoção 3 meses depois do curso"' },
-              { time: '26–30s', cena: 'Call-to-action final: Logo + "Comece hoje — treinatech.com.br"' },
-            ].map((item, i) => (
-              <div key={i} className="flex gap-4 items-start">
-                <span className="bg-green-700 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap mt-0.5">
-                  {item.time}
-                </span>
-                <p className="text-slate-600 text-sm leading-relaxed">{item.cena}</p>
-              </div>
-            ))}
           </div>
         </div>
 

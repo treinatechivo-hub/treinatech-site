@@ -173,7 +173,7 @@ export const Blog: React.FC<BlogProps> = ({ onArticleOpen }) => {
             <span className="text-green-400">dados em carreira.</span>
           </h1>
           <p className="text-slate-300 text-lg mb-10 max-w-2xl mx-auto">
-            Artigos práticos sobre Excel, Power BI e SQL escritos por instrutores certificados MCT para você evoluir de verdade.
+            Artigos práticos sobre Excel, Power BI, SQL e IA com Claude escritos por instrutores certificados MCT para você evoluir de verdade.
           </p>
 
           {/* Busca */}

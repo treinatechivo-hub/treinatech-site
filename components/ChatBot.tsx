@@ -54,11 +54,11 @@ FLUXO OBRIGATÓRIO — SEMPRE siga este fluxo ao receber interesse em um treinam
 
 6. Se o cliente perguntar sobre CLAUDE IA (ou inteligência artificial / Claude / IA da Anthropic), informe que a Treinatech está lançando em breve uma trilha completa de treinamentos sobre Claude:
 
-   INTRODUÇÃO AO CLAUDE — Em breve! Curso GRATUITO com duração de 4 horas. Ideal para quem nunca usou ou quer entender o que é o Claude e como aproveitá-lo no dia a dia. Tópicos: O que é o Claude e como ele funciona, Fórmula do prompt que gera resultados, Escrita, análise e organização na prática, Free vs Pro: qual faz sentido para você. O aluno sai do zero e já aplica 3 usos práticos no mesmo dia — sem nenhum conhecimento prévio.
+   INTRODUÇÃO À IA COM FOCO NO CLAUDE — Em breve! Curso GRATUITO, duração de 1h30. Ideal para quem quer entender o cenário atual da IA e sair do zero com resultados práticos no mesmo dia — sem nenhum conhecimento prévio. Tópicos: Principais IAs: ChatGPT, Gemini, Copilot e Claude, Por que o Claude se destaca no mercado, A fórmula do prompt que gera resultados reais, 3 usos práticos no mesmo dia: escrita, análise e organização.
 
-   CLAUDE NA PRÁTICA – FREE — Em breve! Domínio completo dos recursos disponíveis na versão gratuita do Claude: prompts avançados por resultado, escrita e revisão profissional, análise de documentos e imagens, Projects, Memory e Web Search.
+   CLAUDE NA PRÁTICA – FREE — Em breve! Domínio completo dos recursos da versão gratuita do Claude. Duração: 4 a 5 horas com aulas curtas e objetivas. Tópicos: Prompts avançados por resultado real, Escrita, revisão e análise de documentos, Projects e Memory na prática, Web Search e casos corporativos reais.
 
-   CLAUDE NA PRÁTICA – PRO — Em breve! Tudo do curso Free mais os recursos exclusivos do plano Pro: Extended Thinking & Research, Google Workspace & Microsoft 365, Cowork e automação de tarefas.
+   CLAUDE NA PRÁTICA – PRO — Em breve! Tudo do curso Free mais os recursos exclusivos do plano Pro. Duração: 8 a 9 horas. Tópicos: Extended Thinking e Research avançado, Google Workspace e Microsoft 365 integrados, Artifacts: HTML, React e visualizações, Cowork: automação de tarefas no desktop.
 
    Convide o cliente a se cadastrar na lista de espera pelo site ou WhatsApp (41 99183-2100) para ser avisado no lançamento.
 
@@ -98,7 +98,7 @@ async function askClaude(messages: Message[]): Promise<string> {
 const INITIAL_MESSAGE: Message = {
   role: 'assistant',
   content:
-    'Olá! Sou o assistente virtual da Treinatech. Como posso te ajudar hoje com nossos treinamentos de Excel, Power BI ou SQL? 😊',
+    'Olá! Sou o assistente virtual da Treinatech. Como posso te ajudar hoje com nossos treinamentos de Excel, Power BI, SQL ou Claude IA? 😊',
 };
 
 export const ChatBot: React.FC = () => {
@@ -269,7 +269,7 @@ export const ChatBot: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Pergunte sobre treinamentos, SQL..."
+              placeholder="Pergunte sobre Excel, Power BI, SQL, Claude IA..."
               disabled={loading}
               className="
                 flex-1 bg-slate-100 rounded-2xl
