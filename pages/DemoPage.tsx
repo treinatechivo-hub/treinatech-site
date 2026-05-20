@@ -1,26 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BarChart3, ArrowRight, ExternalLink } from 'lucide-react';
 
 interface Project {
   title: string;
-  client: string;
-  segment: string;
   iframeSrc: string;
 }
 
 const PROJECTS: Project[] = [
   {
     title: 'Demonstrativo de Vendas',
-    client: '',
-    segment: '',
     iframeSrc: 'https://app.powerbi.com/view?r=eyJrIjoiOTAwMTZmOTktZjA2My00NjdjLWI5MzctYTBjNzU4NDRhYTQwIiwidCI6ImNhNWFmOGFlLThkZjMtNDM3OS1hMGU5LTA5YWM4ZmE1YTk5ZCJ9',
+  },
+  {
+    title: 'International Motors',
+    iframeSrc: 'https://app.powerbi.com/view?r=eyJrIjoiMWY0NDMzY2EtZTk4OS00ZjZiLTlmMTAtYjU3OGJlNDk5ZGEzIiwidCI6ImNhNWFmOGFlLThkZjMtNDM3OS1hMGU5LTA5YWM4ZmE1YTk5ZCJ9',
   },
 ];
 
 export const DemoPage: React.FC = () => {
-  const [active, setActive] = useState<number>(0);
-  const project = PROJECTS[active];
-
   return (
     <main className="pt-28 pb-20 px-4">
       <div className="max-w-5xl mx-auto">
@@ -39,63 +36,42 @@ export const DemoPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Tabs de projetos — cresce conforme novos são adicionados */}
-        {PROJECTS.length > 1 && (
-          <div className="flex flex-wrap gap-3 justify-center mb-8">
-            {PROJECTS.map((p, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-full text-sm font-bold transition-all border-2 ${
-                  active === i
-                    ? 'bg-green-700 border-green-700 text-white shadow-lg'
-                    : 'border-slate-600 text-slate-300 hover:border-green-500 hover:text-white'
-                }`}
-              >
-                <BarChart3 className="w-4 h-4" />
-                {p.client} — {p.title}
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Lista de projetos empilhados */}
+        <div className="flex flex-col gap-8 mb-8">
+          {PROJECTS.map((project, idx) => (
+            <div key={idx} className="bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-700">
 
-        {/* Card do projeto */}
-        <div className="bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 mb-8">
-
-          {/* Header do card */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 bg-green-700 rounded-xl flex items-center justify-center">
-                <BarChart3 className="w-5 h-5 text-white" />
+              {/* Header do card */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-green-700 rounded-xl flex items-center justify-center">
+                    <BarChart3 className="w-5 h-5 text-white" />
+                  </div>
+                  <p className="text-white font-bold text-sm">{project.title}</p>
+                </div>
+                <a
+                  href={project.iframeSrc}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-xs text-green-400 hover:text-green-300 font-bold transition-colors"
+                >
+                  Abrir em tela cheia
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
               </div>
-              <div>
-                <p className="text-white font-bold text-sm">{project.title}</p>
-                {(project.client || project.segment) && (
-                  <p className="text-slate-400 text-xs">{[project.client, project.segment].filter(Boolean).join(' · ')}</p>
-                )}
+
+              {/* iframe responsivo */}
+              <div className="relative w-full" style={{ paddingBottom: '62.25%' }}>
+                <iframe
+                  title={project.title}
+                  src={project.iframeSrc}
+                  frameBorder="0"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
               </div>
             </div>
-            <a
-              href={`https://app.powerbi.com/view?r=${project.iframeSrc.split('?r=')[1]}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-green-400 hover:text-green-300 font-bold transition-colors"
-            >
-              Abrir em tela cheia
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
-
-          {/* iframe responsivo */}
-          <div className="relative w-full" style={{ paddingBottom: '62.25%' }}>
-            <iframe
-              title={project.title}
-              src={project.iframeSrc}
-              frameBorder="0"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            />
-          </div>
+          ))}
         </div>
 
         {/* Nota de rodapé */}
