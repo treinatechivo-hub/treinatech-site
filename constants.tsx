@@ -490,7 +490,8 @@ export const COURSES: Course[] = [
           "PROJETO 5 – Portfólio de Projetos (menu de relatórios)",
         ]
       },
-    ]
+    ],
+    projectIframe: 'https://app.powerbi.com/view?r=eyJrIjoiOTAwMTZmOTktZjA2My00NjdjLWI5MzctYTBjNzU4NDRhYTQwIiwidCI6ImNhNWFmOGFlLThkZjMtNDM3OS1hMGU5LTA5YWM4ZmE1YTk5ZCJ9',
   },
 
   // ─── POWER BI MÓDULO 2 ───────────────────────────────────────────────────────

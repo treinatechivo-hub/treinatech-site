@@ -152,6 +152,22 @@ export const Courses: React.FC = () => {
                     ))}
                 </div>
 
+                {selectedCourse.projectIframe && (
+                  <div className="mt-12">
+                    <h4 className="text-lg font-bold text-slate-900 mb-1">Projeto desenvolvido no treinamento</h4>
+                    <p className="text-sm text-slate-500 mb-4">Dashboard interativo criado durante as aulas — explore os dados.</p>
+                    <div className="relative w-full rounded-2xl overflow-hidden border border-slate-200 shadow-sm" style={{ paddingBottom: '62.25%' }}>
+                      <iframe
+                        title="Projeto Power BI"
+                        src={selectedCourse.projectIframe}
+                        frameBorder="0"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                      />
+                    </div>
+                  </div>
+                )}
+
                 <div className="mt-12 p-8 bg-green-50 rounded-3xl border border-green-100">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                         <div className="max-w-md">
