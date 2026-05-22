@@ -480,7 +480,7 @@ export const COURSES: Course[] = [
           "Drill Down: multicamadas de dados em gráficos",
           "Tooltip padrão, personalizado básico e avançado (com visual)",
           "Relatórios interativos com segmentadores",
-          "UX/UI e Storytelling para dashboards profissionais",
+          "UX/UI e Storytelling para relatórios e dashboards profissionais",
           "Publicação no Power BI Service e compartilhamento",
           "PROJETO 1 – Demonstrativo de Vendas",
           "PROJETO 2 – International Motors (ETL com 12 planilhas)",
