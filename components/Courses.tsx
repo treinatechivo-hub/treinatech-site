@@ -155,7 +155,7 @@ export const Courses: React.FC = () => {
                 {selectedCourse.projectIframes && selectedCourse.projectIframes.length > 0 && (
                   <div className="mt-12">
                     <h4 className="text-lg font-bold text-slate-900 mb-1">Projetos desenvolvidos no treinamento</h4>
-                    <p className="text-sm text-slate-500 mb-6">Dashboards interativos criados durante as aulas — explore os dados.</p>
+                    <p className="text-sm text-slate-500 mb-6">Relatórios interativos criados durante as aulas — explore os dados.</p>
                     <div className="flex flex-col gap-6">
                       {selectedCourse.projectIframes.map((src, idx) => (
                         <div key={idx} className="relative w-full rounded-2xl overflow-hidden border border-slate-200 shadow-sm" style={{ paddingBottom: '62.25%' }}>

@@ -491,7 +491,7 @@ export const COURSES: Course[] = [
       },
     ],
     projectIframes: [
-      'https://app.powerbi.com/view?r=eyJrIjoiOTAwMTZmOTktZjA2My00NjdjLWI5MzctYTBjNzU4NDRhYTQwIiwidCI6ImNhNWFmOGFlLThkZjMtNDM3OS1hMGU5LTA5YWM4ZmE1YTk5ZCJ9',
+      'https://app.powerbi.com/view?r=eyJrIjoiZDYzZGMwYjQtZDM0Yy00NjhhLTk3MzMtYzYyNTU2MzVjYjBjIiwidCI6ImNhNWFmOGFlLThkZjMtNDM3OS1hMGU5LTA5YWM4ZmE1YTk5ZCJ9',
       'https://app.powerbi.com/view?r=eyJrIjoiMWY0NDMzY2EtZTk4OS00ZjZiLTlmMTAtYjU3OGJlNDk5ZGEzIiwidCI6ImNhNWFmOGFlLThkZjMtNDM3OS1hMGU5LTA5YWM4ZmE1YTk5ZCJ9',
     ],
   },
