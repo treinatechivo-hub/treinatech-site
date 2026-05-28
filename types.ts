@@ -17,6 +17,7 @@ export interface Course {
   badgeColor?: 'green' | 'blue' | 'purple';
   comingSoon?: boolean;
   projectIframes?: string[];
+  exampleImage?: string;
 }
 
 export interface NavItem {

@@ -81,6 +81,17 @@ export const Courses: React.FC = () => {
                 ))}
               </ul>
 
+              {course.exampleImage && (
+                <div className="mt-6 mb-2 rounded-xl overflow-hidden border border-slate-600">
+                  <img
+                    src={course.exampleImage}
+                    alt={`Exemplo de projeto do ${course.title}`}
+                    className="w-full object-cover"
+                  />
+                  <p className="text-xs text-slate-400 text-center py-2 bg-slate-700/50">Exemplo de projeto do treinamento</p>
+                </div>
+              )}
+
               <div className="inline-flex items-center text-green-400 font-bold">
                 Ver conteúdo completo
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />

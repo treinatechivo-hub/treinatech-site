@@ -282,7 +282,8 @@ export const COURSES: Course[] = [
           "Projeto Final: International Motors Dashboard",
         ]
       },
-    ]
+    ],
+    exampleImage: '/Excel_Inter.png',
   },
 
   // ─── EXCEL AVANÇADO ──────────────────────────────────────────────────────────
@@ -360,7 +361,8 @@ export const COURSES: Course[] = [
           "Projeto Final: Dashboard executivo interativo completo",
         ]
       },
-    ]
+    ],
+    exampleImage: '/Excel_Avan.png',
   },
 
   // ─── EXCEL AVANÇADO + BI COM EXCEL ───────────────────────────────────────────
