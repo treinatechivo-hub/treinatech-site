@@ -207,36 +207,4 @@ export const Contact: React.FC = () => {
                         href={`https://wa.me/${WA_NUMBER}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-bold underline"
-                      >
-                        Clique aqui para falar no WhatsApp.
-                      </a>
-                    </p>
-                  )}
-
-                  <button
-                    disabled={status === 'sending'}
-                    type="submit"
-                    className="w-full bg-green-700 text-white font-bold py-4 rounded-xl hover:bg-green-800 transition-all flex items-center justify-center gap-3 shadow-lg disabled:bg-slate-300 disabled:shadow-none disabled:cursor-not-allowed relative overflow-hidden group"
-                  >
-                    {status === 'sending' ? (
-                      <>
-                        <Loader2 className="animate-spin" size={20} />
-                        Enviando...
-                      </>
-                    ) : (
-                      <>
-                        Solicitar Orçamento
-                        <Send size={18} className="transition-transform group-hover:translate-x-1" />
-                      </>
-                    )}
-                  </button>
-                </form>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+                        className="font-bold
