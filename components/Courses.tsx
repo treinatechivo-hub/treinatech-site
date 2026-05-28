@@ -81,17 +81,6 @@ export const Courses: React.FC = () => {
                 ))}
               </ul>
 
-              {course.exampleImage && (
-                <div className="mt-6 mb-2 rounded-xl overflow-hidden border border-slate-600">
-                  <img
-                    src={course.exampleImage}
-                    alt={`Exemplo de projeto do ${course.title}`}
-                    className="w-full object-cover"
-                  />
-                  <p className="text-xs text-slate-400 text-center py-2 bg-slate-700/50">Exemplo de projeto do treinamento</p>
-                </div>
-              )}
-
               <div className="inline-flex items-center text-green-400 font-bold">
                 Ver conteúdo completo
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -162,6 +151,20 @@ export const Courses: React.FC = () => {
                         </div>
                     ))}
                 </div>
+
+                {selectedCourse.exampleImage && (
+                  <div className="mt-12">
+                    <h4 className="text-lg font-bold text-slate-900 mb-1">Exemplo de projeto do treinamento</h4>
+                    <p className="text-sm text-slate-500 mb-6">Veja um projeto real desenvolvido durante as aulas.</p>
+                    <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+                      <img
+                        src={selectedCourse.exampleImage}
+                        alt={`Exemplo de projeto do ${selectedCourse.title}`}
+                        className="w-full object-cover"
+                      />
+                    </div>
+                  </div>
+                )}
 
                 {selectedCourse.projectIframes && selectedCourse.projectIframes.length > 0 && (
                   <div className="mt-12">

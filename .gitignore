@@ -31,3 +31,5 @@ SITE/
 
 # Chave de conta de serviço Firebase (NUNCA commitar)
 admin/serviceAccountKey.json
+
+.vercel
