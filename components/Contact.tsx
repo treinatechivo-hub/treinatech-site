@@ -35,7 +35,9 @@ export const Contact: React.FC = () => {
     const curso = data.get('treinamento') || '';
     const msg   = data.get('message')     || '';
     const text  = encodeURIComponent(
-      `Olá! Meu nome é ${nome} (${email}).\nTenho interesse em: ${curso}.\n${msg}`
+      `Olá! Meu nome é ${nome} (${email}).
+Tenho interesse em: ${curso}.
+${msg}`
     );
     return `https://wa.me/${WA_NUMBER}?text=${text}`;
   };
@@ -207,4 +209,36 @@ export const Contact: React.FC = () => {
                         href={`https://wa.me/${WA_NUMBER}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-bold
+                        className="font-bold text-red-700 underline hover:no-underline"
+                      >
+                        envie pelo WhatsApp
+                      </a>
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-lg hover:shadow-green-500/25 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {status === 'sending' ? (
+                      <>
+                        <Loader2 className="animate-spin" size={20} />
+                        Enviando...
+                      </>
+                    ) : (
+                      <>
+                        <Send size={20} />
+                        Enviar Mensagem
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
