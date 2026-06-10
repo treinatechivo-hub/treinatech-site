@@ -20,6 +20,10 @@ function buildVideoSrc(lesson: Lesson): string {
       return lesson.videoId;
     case 'direct':
       return lesson.videoId;
+    case 'onedrive':
+      return lesson.videoId.includes('action=embedview')
+        ? lesson.videoId
+        : `${lesson.videoId}&action=embedview`;
     default:
       return '';
   }
@@ -654,14 +658,4 @@ export const MemberDashboard: React.FC = () => {
                     activeCourse?.id === c.id ? 'bg-green-100 text-green-800' : 'bg-white text-slate-600 border border-slate-200'
                   }`}
                 >
-                  {c.icon} {c.title}
-                </button>
-              ))}
-            </div>
-
-          </div>
-        </main>
-      </div>
-    </div>
-  );
-};
+               
