@@ -35,7 +35,7 @@ export const DemoPage: React.FC = () => {
             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
               <iframe
                 title="Abertura — Treina IA"
-                src="https://treinatechivo-my.sharepoint.com/:v:/g/personal/ivo_treinatech_com_br/IQByBdNBmiCFSIk-t1CTcvD6AWL2EExPPhtg5B_mk2MP_Jo?e=UE2Wlk&action=embedview"
+                src="https://www.youtube.com/embed/TC8lC3Qqb30"
                 frameBorder="0"
                 allowFullScreen
                 className="absolute inset-0 w-full h-full"
