@@ -1,10 +1,10 @@
-// ─── Types ────────────────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────────────────
 
 export interface Lesson {
   id: string;
   title: string;
   duration: string;
-  provider: 'youtube' | 'vimeo' | 'hotmart' | 'direct';
+  provider: 'youtube' | 'vimeo' | 'hotmart' | 'direct' | 'onedrive';
   videoId: string;
   free?: boolean;
 }
@@ -35,17 +35,18 @@ export interface CourseData {
   pdfs: CoursePDF[];
 }
 
-// ─── Courses ──────────────────────────────────────────────────────────────────
+// ─── Courses ──────────────────────────────────────────────────────────────────────────────
 //
 // VÍDEOS DEMO: usando vídeos públicos do canal Hashtag Treinamentos (YouTube).
 // Substitua os videoId pelos IDs dos seus vídeos quando publicar.
 //
 // YouTube:  provider: 'youtube', videoId: 'ID_DO_VIDEO'
 // Vimeo:    provider: 'vimeo',   videoId: 'ID_DO_VIDEO'
+// OneDrive: provider: 'onedrive', videoId: 'SHARING_URL_DO_ONEDRIVE'
 
 export const MEMBER_COURSES: CourseData[] = [
 
-  // ─── EXCEL ─────────────────────────────────────────────────────────────────
+  // ─── EXCEL ───────────────────────────────────────────────────────────────────────────
   {
     id: 'excel',
     title: 'Excel — Básico ao Avançado',
@@ -57,7 +58,7 @@ export const MEMBER_COURSES: CourseData[] = [
     totalHours: '16h 30min',
     modules: [
 
-      // ── Módulo 1: Básico (YouTube) ──────────────────────────────────────────
+      // ── Módulo 1: Básico (YouTube) ────────────────────────────────────────────────────────
       {
         id: 'excel-m1',
         title: 'Módulo 1 — Excel Básico',
@@ -74,7 +75,7 @@ export const MEMBER_COURSES: CourseData[] = [
         ],
       },
 
-      // ── Módulo 2: Intermediário (YouTube) ──────────────────────────────────
+      // ── Módulo 2: Intermediário (YouTube) ────────────────────────────────────────────
       {
         id: 'excel-m2',
         title: 'Módulo 2 — Excel Intermediário',
@@ -90,7 +91,7 @@ export const MEMBER_COURSES: CourseData[] = [
         ],
       },
 
-      // ── Módulo 3: Avançado (YouTube) ───────────────────────────────────────
+      // ── Módulo 3: Avançado (YouTube) ───────────────────────────────────────────────
       {
         id: 'excel-m3',
         title: 'Módulo 3 — Excel Avançado',
@@ -118,7 +119,7 @@ export const MEMBER_COURSES: CourseData[] = [
     ],
   },
 
-  // ─── POWER BI ───────────────────────────────────────────────────────────────
+  // ─── POWER BI ─────────────────────────────────────────────────────────────────────────────────
   {
     id: 'powerbi',
     title: 'Power BI — Módulo 1 e 2',
@@ -130,7 +131,7 @@ export const MEMBER_COURSES: CourseData[] = [
     totalHours: '15h 00min',
     modules: [
 
-      // ── Módulo 1: Básico + Intermediário Parte 1 (YouTube) ──────────────────
+      // ── Módulo 1: Básico + Intermediário Parte 1 (YouTube) ───────────────────────────────────────
       {
         id: 'pbi-m1',
         title: 'Módulo 1 — Fundamentos, ETL, Modelagem e DAX',
@@ -153,7 +154,7 @@ export const MEMBER_COURSES: CourseData[] = [
         ],
       },
 
-      // ── Módulo 2: Intermediário Parte 2 + Avançado (YouTube) ───────────────
+      // ── Módulo 2: Intermediário Parte 2 + Avançado (YouTube) ───────────────────────────────────
       {
         id: 'pbi-m2',
         title: 'Módulo 2 — DAX Avançado, IA e Governança',
@@ -184,5 +185,34 @@ export const MEMBER_COURSES: CourseData[] = [
       { title: 'Projeto — International Motors (Power BI)', description: 'Arquivo .pbix do projeto completo do Módulo 1', fileUrl: 'PLACEHOLDER_PDF_URL', sizeMB: 3.2 },
       { title: 'Guia — Star Schema e Modelagem Dimensional', description: 'Referência completa de modelagem para Power BI', fileUrl: 'PLACEHOLDER_PDF_URL', sizeMB: 1.4 },
     ],
+  },
+
+  // ─── TREINA IA — GRATUITO ──────────────────────────────────────────────────────────────────────────────
+  {
+    id: 'treina-ia',
+    title: 'Treina IA — Gratuito',
+    description: 'Domine Inteligência Artificial na prática. Curso introdutório gratuito com projetos reais.',
+    icon: '🤖',
+    color: 'from-violet-600 to-purple-700',
+    accentColor: '#7c3aed',
+    totalLessons: 1,
+    totalHours: '0h',
+    modules: [
+      {
+        id: 'tia-m1',
+        title: 'Módulo 1 — Introdução',
+        lessons: [
+          {
+            id: 'tia-1-1',
+            title: 'Abertura',
+            duration: '00:00',
+            provider: 'onedrive',
+            videoId: 'https://treinatechivo-my.sharepoint.com/:v:/g/personal/ivo_treinatech_com_br/IQByBdNBmiCFSIk-t1CTcvD6AWL2EExPPhtg5B_mk2MP_Jo?e=UE2Wlk',
+            free: true,
+          },
+        ],
+      },
+    ],
+    pdfs: [],
   },
 ];
