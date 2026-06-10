@@ -1,4 +1,4 @@
-// ─── Types ────────────────────────────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface Lesson {
   id: string;
@@ -35,7 +35,7 @@ export interface CourseData {
   pdfs: CoursePDF[];
 }
 
-// ─── Courses ──────────────────────────────────────────────────────────────────────────────
+// ─── Courses ──────────────────────────────────────────────────────────────────
 //
 // VÍDEOS DEMO: usando vídeos públicos do canal Hashtag Treinamentos (YouTube).
 // Substitua os videoId pelos IDs dos seus vídeos quando publicar.
@@ -46,7 +46,7 @@ export interface CourseData {
 
 export const MEMBER_COURSES: CourseData[] = [
 
-  // ─── EXCEL ───────────────────────────────────────────────────────────────────────────
+  // ─── EXCEL ─────────────────────────────────────────────────────────────────
   {
     id: 'excel',
     title: 'Excel — Básico ao Avançado',
@@ -58,7 +58,7 @@ export const MEMBER_COURSES: CourseData[] = [
     totalHours: '16h 30min',
     modules: [
 
-      // ── Módulo 1: Básico (YouTube) ────────────────────────────────────────────────────────
+      // ── Módulo 1: Básico (YouTube) ──────────────────────────────────────────
       {
         id: 'excel-m1',
         title: 'Módulo 1 — Excel Básico',
@@ -75,7 +75,7 @@ export const MEMBER_COURSES: CourseData[] = [
         ],
       },
 
-      // ── Módulo 2: Intermediário (YouTube) ────────────────────────────────────────────
+      // ── Módulo 2: Intermediário (YouTube) ──────────────────────────────────
       {
         id: 'excel-m2',
         title: 'Módulo 2 — Excel Intermediário',
@@ -91,7 +91,7 @@ export const MEMBER_COURSES: CourseData[] = [
         ],
       },
 
-      // ── Módulo 3: Avançado (YouTube) ───────────────────────────────────────────────
+      // ── Módulo 3: Avançado (YouTube) ───────────────────────────────────────
       {
         id: 'excel-m3',
         title: 'Módulo 3 — Excel Avançado',
@@ -119,7 +119,7 @@ export const MEMBER_COURSES: CourseData[] = [
     ],
   },
 
-  // ─── POWER BI ─────────────────────────────────────────────────────────────────────────────────
+  // ─── POWER BI ───────────────────────────────────────────────────────────────
   {
     id: 'powerbi',
     title: 'Power BI — Módulo 1 e 2',
@@ -131,7 +131,6 @@ export const MEMBER_COURSES: CourseData[] = [
     totalHours: '15h 00min',
     modules: [
 
-      // ── Módulo 1: Básico + Intermediário Parte 1 (YouTube) ───────────────────────────────────────
       {
         id: 'pbi-m1',
         title: 'Módulo 1 — Fundamentos, ETL, Modelagem e DAX',
@@ -154,7 +153,6 @@ export const MEMBER_COURSES: CourseData[] = [
         ],
       },
 
-      // ── Módulo 2: Intermediário Parte 2 + Avançado (YouTube) ───────────────────────────────────
       {
         id: 'pbi-m2',
         title: 'Módulo 2 — DAX Avançado, IA e Governança',
@@ -187,7 +185,7 @@ export const MEMBER_COURSES: CourseData[] = [
     ],
   },
 
-  // ─── TREINA IA — GRATUITO ──────────────────────────────────────────────────────────────────────────────
+  // ─── TREINA IA — GRATUITO ──────────────────────────────────────────────────
   {
     id: 'treina-ia',
     title: 'Treina IA — Gratuito',
@@ -206,8 +204,8 @@ export const MEMBER_COURSES: CourseData[] = [
             id: 'tia-1-1',
             title: 'Abertura',
             duration: '00:00',
-            provider: 'onedrive',
-            videoId: 'https://treinatechivo-my.sharepoint.com/:v:/g/personal/ivo_treinatech_com_br/IQByBdNBmiCFSIk-t1CTcvD6AWL2EExPPhtg5B_mk2MP_Jo?e=UE2Wlk',
+            provider: 'youtube',
+            videoId: 'TC8lC3Qqb30',
             free: true,
           },
         ],
