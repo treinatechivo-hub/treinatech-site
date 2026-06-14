@@ -239,6 +239,14 @@ export const AdminDashboard: React.FC = () => {
           )}
           <span className="text-sm font-medium text-slate-700 hidden sm:block">{user.name.split(' ')[0]}</span>
           <button
+            onClick={() => { window.location.hash = 'forum'; }}
+            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-green-700 transition-colors px-2 py-1.5 rounded-lg hover:bg-green-50"
+            title="Ir para o Fórum"
+          >
+            <BookOpen size={14} />
+            <span className="hidden sm:block">Fórum</span>
+          </button>
+          <button
             onClick={signOut}
             className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-red-500 transition-colors px-2 py-1.5 rounded-lg hover:bg-red-50"
           >
