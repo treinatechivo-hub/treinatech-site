@@ -31,6 +31,7 @@ import {
   Clock,
   AlertCircle,
   LogOut,
+  BookOpen,
 } from 'lucide-react';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -57,7 +58,7 @@ function Avatar({ name, photo, size = 32 }: { name: string; photo: string | null
         src={photo}
         alt={name}
         style={{ width: size, height: size }}
-        className="rounded-full ring-2 ring-green-100 flex-shrink-0 object-cover"
+        className="rounded-full ring-2 ring-green-700/40 flex-shrink-0 object-cover"
       />
     );
   }
@@ -65,7 +66,7 @@ function Avatar({ name, photo, size = 32 }: { name: string; photo: string | null
   return (
     <div
       style={{ width: size, height: size, fontSize: size * 0.4 }}
-      className="rounded-full bg-green-100 text-green-700 font-bold flex items-center justify-center flex-shrink-0"
+      className="rounded-full bg-green-800 text-green-300 font-bold flex items-center justify-center flex-shrink-0"
     >
       {initials}
     </div>
@@ -77,97 +78,81 @@ function Avatar({ name, photo, size = 32 }: { name: string; photo: string | null
 const CategoriesView: React.FC<{
   onSelectCategory: (cat: ForumCategory) => void;
   onBack: () => void;
-}> = ({ onSelectCategory, onBack }) => {
+}> = ({ onSelectCategory }) => {
   const [categories, setCategories] = useState<ForumCategory[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    getCategories()
-      .then(setCategories)
-      .catch(() => setError('Erro ao carregar categorias. Verifique as regras do Firestore.'))
-      .finally(() => setLoading(false));
+    getCategories().then((cats) => {
+      setCategories(cats);
+      setLoading(false);
+    });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 size={28} className="animate-spin text-green-500" />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-8">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-700 transition-colors"
-        >
-          <Home size={14} /> Site
-        </button>
-        <ChevronRight size={14} className="text-slate-300" />
-        <span className="text-sm font-bold text-slate-800">Fórum</span>
-      </div>
-
-      <div className="mb-6">
-        <h1 className="text-2xl font-extrabold text-slate-900">Fórum da Comunidade</h1>
-        <p className="text-slate-500 text-sm mt-1">Tire dúvidas, compartilhe conhecimento e conecte-se com outros alunos.</p>
-      </div>
-
-      {loading && (
-        <div className="flex items-center justify-center py-16">
-          <Loader2 size={28} className="animate-spin text-green-600" />
-        </div>
-      )}
-
-      {error && (
-        <div className="bg-red-50 border border-red-200 rounded-2xl p-6 flex items-start gap-3">
-          <AlertCircle size={18} className="text-red-500 flex-shrink-0 mt-0.5" />
+      <div className="mb-8">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-3xl">💬</span>
           <div>
-            <p className="text-sm font-semibold text-red-700">Erro ao carregar</p>
-            <p className="text-xs text-red-500 mt-1">{error}</p>
-            <p className="text-xs text-slate-500 mt-2">
-              Verifique as <strong>Regras do Firestore</strong> no Firebase Console e permita leitura/escrita para usuários autenticados.
-            </p>
+            <h1 className="text-2xl font-bold text-white">Fórum da Comunidade</h1>
+            <p className="text-slate-400 text-sm">Compartilhe, aprenda e conecte-se com outros alunos</p>
           </div>
         </div>
-      )}
+      </div>
 
-      {!loading && !error && (
-        <div className="space-y-2">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => onSelectCategory(cat)}
-              className="w-full bg-white border border-slate-200 hover:border-green-300 hover:shadow-sm rounded-2xl p-5 text-left transition-all group"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-2xl flex-shrink-0 group-hover:bg-green-50 transition-colors">
-                  {cat.icon}
+      {/* Categories grid */}
+      <div className="grid gap-3">
+        {categories.map((cat) => (
+          <button
+            key={cat.id}
+            onClick={() => onSelectCategory(cat)}
+            className="w-full text-left bg-slate-800 border border-slate-700 rounded-xl px-5 py-4 hover:bg-slate-700 hover:border-slate-600 transition-all group"
+          >
+            <div className="flex items-center gap-4">
+              <span className="text-3xl flex-shrink-0">{cat.icon}</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="font-bold text-white text-base group-hover:text-green-400 transition-colors truncate">
+                    {cat.name}
+                  </h3>
+                  <ChevronRight size={16} className="text-slate-500 flex-shrink-0" />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2">
-                    <h3 className="font-bold text-slate-800 group-hover:text-green-700 transition-colors">{cat.name}</h3>
-                    <div className="hidden sm:flex items-center gap-4 text-xs text-slate-400 flex-shrink-0">
-                      <span className="flex items-center gap-1">
-                        <MessageSquare size={12} /> {cat.topicsCount} tópicos
-                      </span>
-                      <span>{cat.postsCount} posts</span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-slate-500 mt-0.5 truncate">{cat.description}</p>
+                <p className="text-slate-400 text-sm mt-0.5 truncate">{cat.description}</p>
+                <div className="flex items-center gap-4 mt-2">
+                  <span className="text-xs text-slate-500">
+                    <span className="text-slate-300 font-semibold">{cat.topicsCount}</span> tópicos
+                  </span>
+                  <span className="text-xs text-slate-500">
+                    <span className="text-slate-300 font-semibold">{cat.postsCount}</span> posts
+                  </span>
                   {cat.lastPost && (
-                    <p className="text-xs text-slate-400 mt-1.5">
-                      Último post: <span className="text-slate-600 font-medium">{cat.lastPost.authorName}</span>
-                      {' · '}{formatDate(cat.lastPost.createdAt)}
-                    </p>
+                    <span className="text-xs text-slate-500 truncate hidden sm:block">
+                      último: <span className="text-slate-400">{cat.lastPost.authorName}</span>
+                    </span>
                   )}
                 </div>
-                <ChevronRight size={16} className="text-slate-300 group-hover:text-green-500 flex-shrink-0 transition-colors" />
               </div>
-            </button>
-          ))}
-        </div>
-      )}
+            </div>
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
 
-// ─── View: Topics List ────────────────────────────────────────────────────────
+// ─── View: Topics ─────────────────────────────────────────────────────────────
+
+type TopicTab = 'todos' | 'populares' | 'sem-resposta';
 
 const TopicsView: React.FC<{
   category: ForumCategory;
@@ -177,94 +162,148 @@ const TopicsView: React.FC<{
 }> = ({ category, onSelectTopic, onNewTopic, onBack }) => {
   const [topics, setTopics] = useState<ForumTopic[]>([]);
   const [loading, setLoading] = useState(true);
+  const [tab, setTab] = useState<TopicTab>('todos');
 
   useEffect(() => {
-    getTopicsByCategory(category.id)
-      .then(setTopics)
-      .finally(() => setLoading(false));
+    setLoading(true);
+    getTopicsByCategory(category.id).then((t) => {
+      setTopics(t);
+      setLoading(false);
+    });
   }, [category.id]);
+
+  const filteredTopics = topics.filter((t) => {
+    if (tab === 'populares') return t.likes.length > 0 || t.repliesCount > 2;
+    if (tab === 'sem-resposta') return t.repliesCount === 0;
+    return true;
+  });
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 mb-6 text-xs text-slate-400">
-        <button onClick={onBack} className="hover:text-slate-700 flex items-center gap-1 transition-colors">
-          <Home size={12} /> Site
-        </button>
-        <ChevronRight size={12} className="text-slate-300" />
-        <button onClick={() => window.location.hash = '#forum'} className="hover:text-slate-700 transition-colors">
+      <div className="flex items-center gap-2 text-sm mb-6">
+        <button
+          onClick={onBack}
+          className="text-slate-400 hover:text-white transition-colors"
+        >
           Fórum
         </button>
-        <ChevronRight size={12} className="text-slate-300" />
-        <span className="text-slate-700 font-semibold">{category.name}</span>
+        <ChevronRight size={14} className="text-slate-600" />
+        <span className="text-white font-semibold">
+          {category.icon} {category.name}
+        </span>
       </div>
 
-      {/* Header */}
-      <div className="flex items-start justify-between gap-4 mb-6">
-        <div className="flex items-center gap-3">
-          <span className="text-3xl">{category.icon}</span>
-          <div>
-            <h1 className="text-xl font-extrabold text-slate-900">{category.name}</h1>
-            <p className="text-slate-500 text-sm">{category.description}</p>
-          </div>
+      {/* Title + New Topic */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-xl font-bold text-white">{category.name}</h2>
+          <p className="text-slate-400 text-sm mt-0.5">{category.description}</p>
         </div>
         <button
           onClick={onNewTopic}
-          className="flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all active:scale-95 flex-shrink-0"
+          className="flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all active:scale-95"
         >
-          <PlusCircle size={16} /> Novo tópico
+          <PlusCircle size={16} />
+          <span className="hidden sm:inline">Novo tópico</span>
+          <span className="sm:hidden">Novo</span>
         </button>
       </div>
 
-      {loading && (
-        <div className="flex items-center justify-center py-16">
-          <Loader2 size={28} className="animate-spin text-green-600" />
-        </div>
-      )}
-
-      {!loading && topics.length === 0 && (
-        <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center">
-          <MessageSquare size={36} className="text-slate-200 mx-auto mb-3" />
-          <p className="text-slate-500 font-medium">Nenhum tópico ainda.</p>
-          <p className="text-slate-400 text-sm mt-1">Seja o primeiro a postar!</p>
+      {/* Tabs */}
+      <div className="flex items-center gap-1 mb-4 border-b border-slate-700">
+        {([
+          { key: 'todos', label: 'Todos' },
+          { key: 'populares', label: 'Populares' },
+          { key: 'sem-resposta', label: 'Sem resposta' },
+        ] as { key: TopicTab; label: string }[]).map(({ key, label }) => (
           <button
-            onClick={onNewTopic}
-            className="mt-4 inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all"
+            key={key}
+            onClick={() => setTab(key)}
+            className={`px-4 py-2 text-sm font-semibold border-b-2 -mb-px transition-colors ${
+              tab === key
+                ? 'border-green-500 text-green-400'
+                : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
           >
-            <PlusCircle size={15} /> Criar primeiro tópico
+            {label}
           </button>
-        </div>
-      )}
+        ))}
+      </div>
 
-      {!loading && topics.length > 0 && (
-        <div className="space-y-2">
-          {topics.map((topic) => (
+      {/* Topic list */}
+      {loading ? (
+        <div className="flex items-center justify-center py-16">
+          <Loader2 size={24} className="animate-spin text-green-500" />
+        </div>
+      ) : filteredTopics.length === 0 ? (
+        <div className="text-center py-16">
+          <MessageSquare size={40} className="text-slate-600 mx-auto mb-3" />
+          <p className="text-slate-400 font-medium">
+            {tab === 'sem-resposta' ? 'Todos os tópicos têm resposta!' :
+             tab === 'populares' ? 'Nenhum tópico popular ainda.' :
+             'Seja o primeiro a criar um tópico!'}
+          </p>
+          {tab === 'todos' && (
+            <button
+              onClick={onNewTopic}
+              className="mt-4 text-sm text-green-500 hover:text-green-400 font-semibold transition-colors"
+            >
+              Criar primeiro tópico →
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className="divide-y divide-slate-700/50">
+          {filteredTopics.map((topic) => (
             <button
               key={topic.id}
               onClick={() => onSelectTopic(topic)}
-              className="w-full bg-white border border-slate-200 hover:border-green-300 hover:shadow-sm rounded-2xl p-4 text-left transition-all group"
+              className="w-full text-left py-4 hover:bg-slate-800/50 rounded-xl px-3 -mx-3 transition-colors group"
             >
               <div className="flex items-start gap-3">
-                <Avatar name={topic.authorName} photo={topic.authorPhoto} size={36} />
+                {/* Stats column */}
+                <div className="flex flex-col items-center gap-2 flex-shrink-0 w-14 pt-1">
+                  <div className="flex flex-col items-center">
+                    <span className="text-sm font-bold text-slate-300">{topic.repliesCount}</span>
+                    <span className="text-[10px] text-slate-500">respostas</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="text-sm font-bold text-slate-400">{topic.likes.length}</span>
+                    <span className="text-[10px] text-slate-500">curtidas</span>
+                  </div>
+                </div>
+
+                {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    {topic.pinned && <Pin size={12} className="text-green-600 flex-shrink-0" />}
-                    {topic.solved && (
-                      <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                        ✔ Resolvido
+                  <div className="flex items-start gap-2 flex-wrap">
+                    {topic.pinned && (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded">
+                        <Pin size={9} /> Fixado
                       </span>
                     )}
-                    <h3 className="font-semibold text-slate-800 group-hover:text-green-700 transition-colors text-sm leading-tight">
-                      {topic.title}
-                    </h3>
+                    {topic.solved && (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-green-400 bg-green-400/10 px-1.5 py-0.5 rounded">
+                        <CheckCircle2 size={9} /> Resolvido
+                      </span>
+                    )}
                   </div>
-                  <p className="text-xs text-slate-500 mt-1 line-clamp-1">{topic.content}</p>
-                  <div className="flex items-center gap-3 mt-2 text-[11px] text-slate-400">
-                    <span className="font-medium text-slate-600">{topic.authorName}</span>
-                    <span className="flex items-center gap-1"><Clock size={10} />{formatDate(topic.createdAt)}</span>
-                    <span className="flex items-center gap-1"><MessageSquare size={10} />{topic.repliesCount}</span>
-                    <span className="flex items-center gap-1"><Eye size={10} />{topic.views}</span>
-                    <span className="flex items-center gap-1"><Heart size={10} />{topic.likes.length}</span>
+                  <h3 className="font-semibold text-slate-100 group-hover:text-green-400 transition-colors mt-1 leading-snug">
+                    {topic.title}
+                  </h3>
+                  <div className="flex items-center gap-3 mt-2 flex-wrap">
+                    <div className="flex items-center gap-1.5">
+                      <Avatar name={topic.authorName} photo={topic.authorPhoto} size={20} />
+                      <span className="text-xs text-slate-400">{topic.authorName}</span>
+                    </div>
+                    <span className="flex items-center gap-1 text-xs text-slate-500">
+                      <Clock size={11} />
+                      {formatDate(topic.updatedAt)}
+                    </span>
+                    <span className="flex items-center gap-1 text-xs text-slate-500">
+                      <Eye size={11} />
+                      {topic.views}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -287,46 +326,19 @@ const TopicView: React.FC<{
   const { user } = useAuth();
   const [topic, setTopic] = useState<ForumTopic | null>(null);
   const [replies, setReplies] = useState<ForumReply[]>([]);
-  const [loading, setLoading] = useState(true);
   const [replyText, setReplyText] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    getTopic(topicId).then((t) => {
-      setTopic(t);
-      setLoading(false);
-    });
-    incrementTopicViews(topicId).catch(() => {});
+    getTopic(topicId).then(setTopic);
+    incrementTopicViews(topicId);
   }, [topicId]);
 
   useEffect(() => {
     const unsub = subscribeToReplies(topicId, setReplies);
     return unsub;
   }, [topicId]);
-
-  const handleLikeTopic = async () => {
-    if (!topic || !user) return;
-    const liked = topic.likes.includes(user.uid);
-    setTopic((prev) => prev ? {
-      ...prev,
-      likes: liked ? prev.likes.filter((id) => id !== user.uid) : [...prev.likes, user.uid],
-    } : prev);
-    await toggleTopicLike(topicId, user.uid, liked);
-  };
-
-  const handleLikeReply = async (reply: ForumReply) => {
-    if (!user) return;
-    const liked = reply.likes.includes(user.uid);
-    await toggleReplyLike(reply.id, user.uid, liked);
-  };
-
-  const handleMarkSolution = async (reply: ForumReply) => {
-    if (!user || !topic) return;
-    if (user.uid !== topic.authorUid && !user.isAdmin) return;
-    await markReplyAsSolution(reply.id, topicId, !reply.isSolution);
-    getTopic(topicId).then(setTopic);
-  };
 
   const handleSubmitReply = async () => {
     if (!user || !replyText.trim()) return;
@@ -341,25 +353,59 @@ const TopicView: React.FC<{
         authorPhoto: user.photoURL,
       });
       setReplyText('');
-      setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 300);
+      setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
     } finally {
       setSubmitting(false);
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-24">
-        <Loader2 size={28} className="animate-spin text-green-600" />
-      </div>
+  const handleTopicLike = async () => {
+    if (!user || !topic) return;
+    const liked = topic.likes.includes(user.uid);
+    await toggleTopicLike(topicId, user.uid, liked);
+    setTopic((prev) =>
+      prev
+        ? {
+            ...prev,
+            likes: liked
+              ? prev.likes.filter((id) => id !== user.uid)
+              : [...prev.likes, user.uid],
+          }
+        : null
     );
-  }
+  };
+
+  const handleReplyLike = async (reply: ForumReply) => {
+    if (!user) return;
+    const liked = reply.likes.includes(user.uid);
+    await toggleReplyLike(reply.id, user.uid, liked);
+    setReplies((prev) =>
+      prev.map((r) =>
+        r.id === reply.id
+          ? {
+              ...r,
+              likes: liked
+                ? r.likes.filter((id) => id !== user.uid)
+                : [...r.likes, user.uid],
+            }
+          : r
+      )
+    );
+  };
+
+  const handleMarkSolution = async (reply: ForumReply) => {
+    if (!user || !topic || user.uid !== topic.authorUid) return;
+    await markReplyAsSolution(reply.id, topicId, !reply.isSolution);
+    setReplies((prev) =>
+      prev.map((r) => ({ ...r, isSolution: r.id === reply.id ? !reply.isSolution : false }))
+    );
+    setTopic((prev) => (prev ? { ...prev, solved: !reply.isSolution } : null));
+  };
 
   if (!topic) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <p className="text-slate-500">Tópico não encontrado.</p>
-        <button onClick={onBack} className="mt-4 text-sm text-green-700 underline">Voltar</button>
+      <div className="flex items-center justify-center py-20">
+        <Loader2 size={28} className="animate-spin text-green-500" />
       </div>
     );
   }
@@ -368,142 +414,138 @@ const TopicView: React.FC<{
   const topicLiked = user ? topic.likes.includes(user.uid) : false;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-4 py-8 space-y-5">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 mb-6 text-xs text-slate-400">
-        <button onClick={onBackToForum} className="hover:text-slate-700 flex items-center gap-1 transition-colors">
-          <Home size={12} /> Site
-        </button>
-        <ChevronRight size={12} className="text-slate-300" />
-        <button onClick={() => window.location.hash = '#forum'} className="hover:text-slate-700 transition-colors">
+      <div className="flex items-center gap-2 text-sm">
+        <button onClick={onBackToForum} className="text-slate-400 hover:text-white transition-colors">
           Fórum
         </button>
-        <ChevronRight size={12} className="text-slate-300" />
-        <button onClick={onBack} className="hover:text-slate-700 transition-colors">Categoria</button>
-        <ChevronRight size={12} className="text-slate-300" />
-        <span className="text-slate-700 font-semibold truncate max-w-[200px]">{topic.title}</span>
+        <ChevronRight size={14} className="text-slate-600" />
+        <button onClick={onBack} className="text-slate-400 hover:text-white transition-colors truncate max-w-[120px]">
+          Categoria
+        </button>
+        <ChevronRight size={14} className="text-slate-600" />
+        <span className="text-white font-semibold truncate max-w-[200px]">{topic.title}</span>
       </div>
 
-      {/* Original Post */}
-      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden mb-4">
-        <div className="p-6">
-          <div className="flex items-start gap-2 mb-4 flex-wrap">
+      {/* Topic card */}
+      <div className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden">
+        <div className="px-6 py-5 border-b border-slate-700">
+          <div className="flex items-start gap-2 flex-wrap mb-2">
             {topic.pinned && (
-              <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full flex items-center gap-1">
+              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded">
                 <Pin size={9} /> Fixado
               </span>
             )}
             {topic.solved && (
-              <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full flex items-center gap-1">
+              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-green-400 bg-green-400/10 px-1.5 py-0.5 rounded">
                 <CheckCircle2 size={9} /> Resolvido
               </span>
             )}
           </div>
-
-          <h1 className="text-xl font-extrabold text-slate-900 mb-5">{topic.title}</h1>
-
-          <div className="flex items-start gap-4">
-            <Avatar name={topic.authorName} photo={topic.authorPhoto} size={44} />
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="font-semibold text-slate-800 text-sm">{topic.authorName}</span>
-                <span className="text-xs text-slate-400">{formatDate(topic.createdAt)}</span>
-                <span className="text-xs text-slate-400 flex items-center gap-1"><Eye size={10} /> {topic.views}</span>
-              </div>
-              <p className="text-slate-700 text-sm leading-relaxed whitespace-pre-wrap">{topic.content}</p>
-              <div className="mt-4 pt-4 border-t border-slate-100 flex items-center gap-3">
-                <button
-                  onClick={handleLikeTopic}
-                  className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl border transition-all ${
-                    topicLiked
-                      ? 'bg-red-50 border-red-200 text-red-500'
-                      : 'bg-slate-50 border-slate-200 text-slate-500 hover:border-red-200 hover:text-red-400'
-                  }`}
-                >
-                  <Heart size={12} className={topicLiked ? 'fill-red-400' : ''} />
-                  {topic.likes.length > 0 && topic.likes.length}
-                  {topicLiked ? ' Curtido' : ' Curtir'}
-                </button>
-                <span className="text-xs text-slate-400 flex items-center gap-1">
-                  <MessageSquare size={11} /> {replies.length} {replies.length === 1 ? 'resposta' : 'respostas'}
-                </span>
-              </div>
+          <h1 className="text-xl font-bold text-white leading-snug">{topic.title}</h1>
+          <div className="flex items-center gap-4 mt-3 flex-wrap">
+            <div className="flex items-center gap-2">
+              <Avatar name={topic.authorName} photo={topic.authorPhoto} size={28} />
+              <span className="text-sm font-medium text-slate-300">{topic.authorName}</span>
             </div>
+            <span className="flex items-center gap-1.5 text-xs text-slate-500">
+              <Clock size={12} />
+              {formatDate(topic.createdAt)}
+            </span>
+            <span className="flex items-center gap-1.5 text-xs text-slate-500">
+              <Eye size={12} />
+              {topic.views} visualizações
+            </span>
           </div>
+        </div>
+
+        <div className="px-6 py-5">
+          <p className="text-slate-200 leading-relaxed whitespace-pre-wrap">{topic.content}</p>
+        </div>
+
+        <div className="px-6 py-4 border-t border-slate-700 flex items-center gap-3">
+          <button
+            onClick={handleTopicLike}
+            className={`flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-lg transition-all ${
+              topicLiked
+                ? 'text-red-400 bg-red-400/10 hover:bg-red-400/20'
+                : 'text-slate-400 hover:text-red-400 hover:bg-red-400/10'
+            }`}
+          >
+            <Heart size={15} className={topicLiked ? 'fill-current' : ''} />
+            {topic.likes.length}
+          </button>
+          <span className="flex items-center gap-2 text-sm text-slate-500">
+            <MessageSquare size={15} />
+            {replies.length} {replies.length === 1 ? 'resposta' : 'respostas'}
+          </span>
         </div>
       </div>
 
       {/* Replies */}
-      {replies.length > 0 && (
-        <div className="space-y-3 mb-4">
-          {replies.map((reply) => {
-            const replyLiked = user ? reply.likes.includes(user.uid) : false;
-            const canMarkSolution = isAuthor || user?.isAdmin;
-            return (
-              <div
-                key={reply.id}
-                className={`bg-white border rounded-2xl overflow-hidden transition-all ${
-                  reply.isSolution ? 'border-green-300 shadow-sm shadow-green-100' : 'border-slate-200'
+      {replies.map((reply) => {
+        const replyLiked = user ? reply.likes.includes(user.uid) : false;
+        return (
+          <div
+            key={reply.id}
+            className={`bg-slate-800 border rounded-2xl overflow-hidden ${
+              reply.isSolution ? 'border-green-600' : 'border-slate-700'
+            }`}
+          >
+            {reply.isSolution && (
+              <div className="px-5 py-2 bg-green-900/30 border-b border-green-700/40 flex items-center gap-2">
+                <CheckCircle2 size={14} className="text-green-400" />
+                <span className="text-xs font-bold text-green-400 uppercase tracking-wide">Melhor Resposta</span>
+              </div>
+            )}
+            <div className="px-5 py-4 border-b border-slate-700 flex items-center justify-between flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <Avatar name={reply.authorName} photo={reply.authorPhoto} size={28} />
+                <span className="text-sm font-medium text-slate-300">{reply.authorName}</span>
+                <span className="text-xs text-slate-500">{formatDate(reply.createdAt)}</span>
+              </div>
+            </div>
+            <div className="px-5 py-4">
+              <p className="text-slate-200 leading-relaxed whitespace-pre-wrap">{reply.content}</p>
+            </div>
+            <div className="px-5 py-3 border-t border-slate-700 flex items-center gap-3">
+              <button
+                onClick={() => handleReplyLike(reply)}
+                className={`flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg transition-all ${
+                  replyLiked
+                    ? 'text-red-400 bg-red-400/10 hover:bg-red-400/20'
+                    : 'text-slate-400 hover:text-red-400 hover:bg-red-400/10'
                 }`}
               >
-                {reply.isSolution && (
-                  <div className="bg-green-50 border-b border-green-200 px-5 py-2 flex items-center gap-2">
-                    <CheckCircle2 size={13} className="text-green-600" />
-                    <span className="text-xs font-bold text-green-700">Melhor resposta</span>
-                  </div>
-                )}
-                <div className="p-5">
-                  <div className="flex items-start gap-4">
-                    <Avatar name={reply.authorName} photo={reply.authorPhoto} size={36} />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="font-semibold text-slate-800 text-sm">{reply.authorName}</span>
-                        <span className="text-xs text-slate-400">{formatDate(reply.createdAt)}</span>
-                      </div>
-                      <p className="text-slate-700 text-sm leading-relaxed whitespace-pre-wrap">{reply.content}</p>
-                      <div className="mt-3 pt-3 border-t border-slate-100 flex items-center gap-2 flex-wrap">
-                        <button
-                          onClick={() => handleLikeReply(reply)}
-                          className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl border transition-all ${
-                            replyLiked
-                              ? 'bg-red-50 border-red-200 text-red-500'
-                              : 'bg-slate-50 border-slate-200 text-slate-500 hover:border-red-200 hover:text-red-400'
-                          }`}
-                        >
-                          <Heart size={11} className={replyLiked ? 'fill-red-400' : ''} />
-                          {reply.likes.length > 0 && reply.likes.length}
-                          {replyLiked ? ' Curtido' : ' Curtir'}
-                        </button>
-                        {canMarkSolution && (
-                          <button
-                            onClick={() => handleMarkSolution(reply)}
-                            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl border transition-all ${
-                              reply.isSolution
-                                ? 'bg-green-100 border-green-300 text-green-700'
-                                : 'bg-slate-50 border-slate-200 text-slate-500 hover:border-green-300 hover:text-green-600'
-                            }`}
-                          >
-                            <CheckCircle2 size={11} />
-                            {reply.isSolution ? 'Solução marcada' : 'Marcar como solução'}
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+                <Heart size={13} className={replyLiked ? 'fill-current' : ''} />
+                {reply.likes.length}
+              </button>
+              {isAuthor && (
+                <button
+                  onClick={() => handleMarkSolution(reply)}
+                  className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all ${
+                    reply.isSolution
+                      ? 'text-green-400 bg-green-400/10 hover:bg-green-400/20'
+                      : 'text-slate-400 hover:text-green-400 hover:bg-green-400/10'
+                  }`}
+                >
+                  <CheckCircle2 size={13} />
+                  {reply.isSolution ? 'Desmarcar solução' : 'Marcar como solução'}
+                </button>
+              )}
+            </div>
+          </div>
+        );
+      })}
 
       <div ref={bottomRef} />
 
       {/* Reply Box */}
-      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
-        <div className="flex items-center gap-2 px-5 py-3 border-b border-slate-100 bg-slate-50">
-          <MessageSquare size={13} className="text-slate-500" />
-          <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Sua Resposta</span>
+      <div className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden">
+        <div className="flex items-center gap-2 px-5 py-3 border-b border-slate-700 bg-slate-800/80">
+          <MessageSquare size={13} className="text-slate-400" />
+          <span className="text-xs font-bold text-slate-300 uppercase tracking-wide">Sua Resposta</span>
         </div>
         <div className="p-4">
           <div className="flex items-start gap-3">
@@ -514,14 +556,14 @@ const TopicView: React.FC<{
                 onChange={(e) => setReplyText(e.target.value)}
                 placeholder="Escreva sua resposta..."
                 rows={4}
-                className="w-full text-sm text-slate-700 placeholder-slate-300 border border-slate-200 rounded-xl px-4 py-3 resize-none focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-200 transition-all leading-relaxed"
+                className="w-full text-sm text-slate-200 placeholder-slate-500 bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 resize-none focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 transition-all leading-relaxed"
               />
               <div className="flex items-center justify-between mt-2">
-                <span className="text-xs text-slate-400">{replyText.length} caracteres</span>
+                <span className="text-xs text-slate-500">{replyText.length} caracteres</span>
                 <button
                   onClick={handleSubmitReply}
                   disabled={!replyText.trim() || submitting}
-                  className="flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
                   Responder
@@ -562,7 +604,7 @@ const NewTopicView: React.FC<{
         authorPhoto: user.photoURL,
       });
       onSuccess(id);
-    } catch (e) {
+    } catch {
       setError('Erro ao criar tópico. Tente novamente.');
       setSubmitting(false);
     }
@@ -573,24 +615,24 @@ const NewTopicView: React.FC<{
       <div className="flex items-center gap-3 mb-6">
         <button
           onClick={onCancel}
-          className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-700 transition-colors"
+          className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
         >
           <ChevronLeft size={14} /> Voltar
         </button>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-100 bg-slate-50 flex items-center gap-3">
+      <div className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-700 bg-slate-800 flex items-center gap-3">
           <span className="text-xl">{category.icon}</span>
           <div>
-            <h2 className="font-bold text-slate-800">Novo tópico</h2>
+            <h2 className="font-bold text-white">Novo tópico</h2>
             <p className="text-xs text-slate-400">em {category.name}</p>
           </div>
         </div>
 
         <div className="p-6 space-y-5">
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">
+            <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">
               Título *
             </label>
             <input
@@ -599,13 +641,13 @@ const NewTopicView: React.FC<{
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Descreva brevemente o assunto..."
               maxLength={200}
-              className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 placeholder-slate-300 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-200 transition-all"
+              className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 transition-all"
             />
-            <p className="text-[11px] text-slate-400 mt-1 text-right">{title.length}/200</p>
+            <p className="text-[11px] text-slate-500 mt-1 text-right">{title.length}/200</p>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">
+            <label className="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">
               Conteúdo *
             </label>
             <textarea
@@ -613,28 +655,28 @@ const NewTopicView: React.FC<{
               onChange={(e) => setContent(e.target.value)}
               placeholder="Detalhe sua dúvida, ideia ou comentário. Quanto mais contexto, melhor!"
               rows={8}
-              className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 placeholder-slate-300 resize-none focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-200 transition-all leading-relaxed"
+              className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 resize-none focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 transition-all leading-relaxed"
             />
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 flex items-center gap-2">
-              <AlertCircle size={14} className="text-red-500" />
-              <span className="text-xs text-red-600">{error}</span>
+            <div className="bg-red-900/30 border border-red-700 rounded-xl px-4 py-3 flex items-center gap-2">
+              <AlertCircle size={14} className="text-red-400" />
+              <span className="text-xs text-red-400">{error}</span>
             </div>
           )}
 
           <div className="flex items-center justify-end gap-3 pt-2">
             <button
               onClick={onCancel}
-              className="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-800 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all"
+              className="px-5 py-2.5 text-sm font-semibold text-slate-400 hover:text-white border border-slate-600 rounded-xl hover:bg-slate-700 transition-all"
             >
               Cancelar
             </button>
             <button
               onClick={handleSubmit}
               disabled={!title.trim() || !content.trim() || submitting}
-              className="flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
               Publicar tópico
@@ -660,37 +702,43 @@ export const ForumPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
   if (!user) return null;
 
+  const goToCourses = () => {
+    window.location.assign(window.location.pathname + '#alunos');
+  };
+
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen bg-slate-900">
       {/* Top Nav */}
-      <header className="bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between sticky top-0 z-40 shadow-sm">
+      <header className="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between sticky top-0 z-40">
         <div className="flex items-center gap-3">
+          {/* Back to courses button */}
           <button
-            onClick={onBack}
-            className="flex items-center gap-2 text-slate-400 hover:text-slate-700 transition-colors"
+            onClick={goToCourses}
+            className="flex items-center gap-2 text-slate-400 hover:text-green-400 transition-colors px-2 py-1.5 rounded-lg hover:bg-slate-800"
+            title="Voltar à área de cursos"
           >
-            <Home size={16} />
-            <span className="hidden sm:block text-xs font-medium">Site</span>
+            <BookOpen size={16} />
+            <span className="hidden sm:block text-xs font-medium">Área de Cursos</span>
           </button>
-          <span className="text-slate-300">/</span>
+          <span className="text-slate-700">/</span>
           <button
             onClick={() => setView({ type: 'categories' })}
-            className="text-xs font-bold text-green-700 hover:text-green-800 transition-colors"
+            className="text-xs font-bold text-green-500 hover:text-green-400 transition-colors"
           >
             💬 Fórum
           </button>
           {view.type === 'topics' && (
             <>
-              <span className="text-slate-300 hidden sm:block">/</span>
-              <span className="text-xs text-slate-600 font-semibold hidden sm:block truncate max-w-[180px]">
+              <span className="text-slate-700 hidden sm:block">/</span>
+              <span className="text-xs text-slate-400 font-semibold hidden sm:block truncate max-w-[180px]">
                 {view.category.icon} {view.category.name}
               </span>
             </>
           )}
           {(view.type === 'topic' || view.type === 'new-topic') && (
             <>
-              <span className="text-slate-300 hidden sm:block">/</span>
-              <span className="text-xs text-slate-600 font-semibold hidden sm:block truncate max-w-[200px]">
+              <span className="text-slate-700 hidden sm:block">/</span>
+              <span className="text-xs text-slate-400 font-semibold hidden sm:block truncate max-w-[200px]">
                 {view.category?.icon} {view.category?.name}
               </span>
             </>
@@ -699,15 +747,15 @@ export const ForumPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex flex-col leading-tight text-right">
-            <span className="text-xs font-medium text-slate-700">{user.name}</span>
-            <span className="text-[10px] text-slate-400">{user.email}</span>
+            <span className="text-xs font-medium text-slate-300">{user.name}</span>
+            <span className="text-[10px] text-slate-500">{user.email}</span>
           </div>
           {user.photoURL && (
-            <img src={user.photoURL} alt={user.name} className="w-8 h-8 rounded-full ring-2 ring-green-100" />
+            <img src={user.photoURL} alt={user.name} className="w-8 h-8 rounded-full ring-2 ring-green-700/40" />
           )}
           <button
             onClick={signOut}
-            className="flex items-center gap-1 text-xs text-slate-400 hover:text-red-500 transition-colors px-2 py-1.5 rounded-lg hover:bg-red-50"
+            className="flex items-center gap-1 text-xs text-slate-500 hover:text-red-400 transition-colors px-2 py-1.5 rounded-lg hover:bg-slate-800"
           >
             <LogOut size={14} />
             <span className="hidden sm:block">Sair</span>
@@ -720,7 +768,7 @@ export const ForumPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         {view.type === 'categories' && (
           <CategoriesView
             onSelectCategory={(cat) => setView({ type: 'topics', category: cat })}
-            onBack={onBack}
+            onBack={goToCourses}
           />
         )}
 
@@ -731,7 +779,7 @@ export const ForumPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
               setView({ type: 'topic', topicId: topic.id, categoryId: topic.categoryId, category: view.category })
             }
             onNewTopic={() => setView({ type: 'new-topic', category: view.category })}
-            onBack={onBack}
+            onBack={() => setView({ type: 'categories' })}
           />
         )}
 
@@ -743,7 +791,7 @@ export const ForumPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
               const cat = view.category;
               setView({ type: 'topics', category: cat });
             }}
-            onBackToForum={onBack}
+            onBackToForum={() => setView({ type: 'categories' })}
           />
         )}
 

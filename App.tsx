@@ -99,7 +99,7 @@ const App: React.FC = () => {
   if (page === 'forum') {
     return (
       <AuthProvider>
-        <ForumPage onBack={() => { window.location.hash = ''; }} />
+        <ForumPage onBack={() => { window.location.assign(window.location.pathname + '#alunos'); }} />
       </AuthProvider>
     );
   }

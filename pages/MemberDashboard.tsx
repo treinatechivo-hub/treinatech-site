@@ -13,7 +13,8 @@ import {
 function buildVideoSrc(lesson: Lesson): string {
   switch (lesson.provider) {
     case 'youtube':
-      return `https://www.youtube.com/embed/${lesson.videoId}?rel=0&modestbranding=1&color=white`;
+      // enablejsapi=1 allows postMessage events (needed for onEnded detection)
+      return `https://www.youtube.com/embed/${lesson.videoId}?rel=0&modestbranding=1&color=white&enablejsapi=1`;
     case 'vimeo':
       return `https://player.vimeo.com/video/${lesson.videoId}?title=0&byline=0&portrait=0&color=008837`;
     case 'hotmart':
@@ -31,7 +32,24 @@ function buildVideoSrc(lesson: Lesson): string {
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-const VideoPlayer: React.FC<{ lesson: Lesson | null }> = ({ lesson }) => {
+const VideoPlayer: React.FC<{ lesson: Lesson | null; onEnded?: () => void }> = ({ lesson, onEnded }) => {
+  // Listen for postMessage events from YouTube / Vimeo iframes
+  useEffect(() => {
+    if (!lesson || lesson.provider === 'direct' || lesson.provider === 'onedrive') return;
+    const handler = (e: MessageEvent) => {
+      try {
+        const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+        // YouTube IFrame API: playerState 0 = ended
+        if (data.event === 'onStateChange' && data.info === 0) onEnded?.();
+        if (data.info?.playerState === 0) onEnded?.();
+        // Vimeo Player API: finish event
+        if (data.event === 'finish') onEnded?.();
+      } catch { /* ignore parse errors */ }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, [lesson?.id, onEnded]);
+
   if (!lesson) {
     return (
       <div className="w-full aspect-video bg-slate-900 flex flex-col items-center justify-center gap-4">
@@ -49,6 +67,7 @@ const VideoPlayer: React.FC<{ lesson: Lesson | null }> = ({ lesson }) => {
           controls
           className="w-full h-full"
           title={lesson.title}
+          onEnded={onEnded}
         />
       </div>
     );
@@ -298,12 +317,12 @@ export const MemberDashboard: React.FC = () => {
 
           {/* Forum link */}
           <button
-            onClick={() => { window.location.hash = '#forum'; }}
-            className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-2 py-1 rounded-lg text-slate-400 hover:text-green-700 hover:bg-green-50 transition-colors"
+            onClick={() => { window.location.assign(window.location.pathname + '#forum'); }}
+            className="flex items-center gap-1.5 text-xs font-semibold px-2 py-1 rounded-lg text-slate-400 hover:text-green-700 hover:bg-green-50 transition-colors"
             title="Fórum da Comunidade"
           >
             <MessageSquare size={15} />
-            Fórum
+            <span className="hidden sm:inline">Fórum</span>
           </button>
 
           {/* Sidebar toggle */}
@@ -484,7 +503,12 @@ export const MemberDashboard: React.FC = () => {
 
           {/* ── Video player (full width, no constraints) ── */}
           <div className="w-full bg-black">
-            <VideoPlayer lesson={activeLesson} />
+            <VideoPlayer
+              lesson={activeLesson}
+              onEnded={activeLesson && !completedLessons.has(activeLesson.id)
+                ? () => markComplete(activeLesson.id)
+                : undefined}
+            />
           </div>
 
           {/* ── Below video ── */}

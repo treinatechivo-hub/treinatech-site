@@ -169,12 +169,17 @@ export async function getTopicsByCategory(categoryId: string): Promise<ForumTopi
   const q = query(
     collection(db, 'forum_topics'),
     where('categoryId', '==', categoryId),
-    orderBy('pinned', 'desc'),
     orderBy('updatedAt', 'desc'),
     limit(50)
   );
   const snap = await getDocs(q);
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() } as ForumTopic));
+  const topics = snap.docs.map((d) => ({ id: d.id, ...d.data() } as ForumTopic));
+  // Sort pinned topics to top client-side (avoids composite Firestore index requirement)
+  return topics.sort((a, b) => {
+    if (a.pinned && !b.pinned) return -1;
+    if (!a.pinned && b.pinned) return 1;
+    return 0;
+  });
 }
 
 export async function getTopic(topicId: string): Promise<ForumTopic | null> {
