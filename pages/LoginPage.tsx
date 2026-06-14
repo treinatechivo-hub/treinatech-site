@@ -88,12 +88,12 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 relative">
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 relative">
 
       {/* Back button */}
       <button
         onClick={handleBack}
-        className="absolute top-6 left-6 flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-green-700 transition-colors group"
+        className="absolute top-6 left-6 flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-green-400 transition-colors group"
       >
         <ArrowLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
         Voltar para o site

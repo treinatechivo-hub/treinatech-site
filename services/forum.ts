@@ -6,6 +6,7 @@ import {
   getDocs,
   addDoc,
   updateDoc,
+  deleteDoc,
   setDoc,
   query,
   where,
@@ -317,6 +318,37 @@ export async function markReplyAsSolution(replyId: string, topicId: string, isSo
   await updateDoc(doc(db, 'forum_replies', replyId), { isSolution });
   // Mark topic as solved
   await markTopicSolved(topicId, isSolution);
+}
+
+// ─── Delete (admin only) ─────────────────────────────────────────────────────
+
+export async function deleteTopic(topicId: string, categoryId: string): Promise<void> {
+  const db = getDb();
+  // Delete all replies first
+  const repliesSnap = await getDocs(
+    query(collection(db, 'forum_replies'), where('topicId', '==', topicId))
+  );
+  const replyCount = repliesSnap.docs.length;
+  for (const d of repliesSnap.docs) {
+    await deleteDoc(doc(db, 'forum_replies', d.id));
+  }
+  await deleteDoc(doc(db, 'forum_topics', topicId));
+  await updateDoc(doc(db, 'forum_categories', categoryId), {
+    topicsCount: increment(-1),
+    postsCount: increment(-(1 + replyCount)),
+  });
+}
+
+export async function deleteReply(replyId: string, topicId: string, categoryId: string): Promise<void> {
+  const db = getDb();
+  await deleteDoc(doc(db, 'forum_replies', replyId));
+  await updateDoc(doc(db, 'forum_topics', topicId), {
+    repliesCount: increment(-1),
+    updatedAt: serverTimestamp(),
+  });
+  await updateDoc(doc(db, 'forum_categories', categoryId), {
+    postsCount: increment(-1),
+  });
 }
 
 // ─── Recent Topics (for home screen) ─────────────────────────────────────────

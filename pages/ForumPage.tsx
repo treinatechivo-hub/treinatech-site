@@ -14,6 +14,8 @@ import {
   toggleReplyLike,
   markReplyAsSolution,
   incrementTopicViews,
+  deleteTopic,
+  deleteReply,
 } from '../services/forum';
 import { Timestamp } from 'firebase/firestore';
 import {
@@ -32,7 +34,12 @@ import {
   AlertCircle,
   LogOut,
   BookOpen,
+  Trash2,
 } from 'lucide-react';
+
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const ADMIN_EMAIL = 'treinatechivo@gmail.com';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -49,6 +56,29 @@ function formatDate(ts: Timestamp | undefined | null): string {
   const days = Math.floor(hours / 24);
   if (days < 7) return `há ${days}d`;
   return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+function getTopicStatus(topic: ForumTopic): 'aberto' | 'em-andamento' | 'resolvido' {
+  if (topic.solved) return 'resolvido';
+  if (topic.repliesCount > 0) return 'em-andamento';
+  return 'aberto';
+}
+
+const STATUS_STYLE = {
+  aberto: { label: 'Aberto', cls: 'text-red-400 bg-red-400/10' },
+  'em-andamento': { label: 'Em andamento', cls: 'text-amber-400 bg-amber-400/10' },
+  resolvido: { label: 'Resolvido', cls: 'text-green-400 bg-green-400/10' },
+};
+
+function StatusBadge({ topic }: { topic: ForumTopic }) {
+  const status = getTopicStatus(topic);
+  const { label, cls } = STATUS_STYLE[status];
+  const Icon = status === 'resolvido' ? CheckCircle2 : status === 'em-andamento' ? Clock : AlertCircle;
+  return (
+    <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded ${cls}`}>
+      <Icon size={9} /> {label}
+    </span>
+  );
 }
 
 function Avatar({ name, photo, size = 32 }: { name: string; photo: string | null; size?: number }) {
@@ -282,11 +312,7 @@ const TopicsView: React.FC<{
                         <Pin size={9} /> Fixado
                       </span>
                     )}
-                    {topic.solved && (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-green-400 bg-green-400/10 px-1.5 py-0.5 rounded">
-                        <CheckCircle2 size={9} /> Resolvido
-                      </span>
-                    )}
+                    <StatusBadge topic={topic} />
                   </div>
                   <h3 className="font-semibold text-slate-100 group-hover:text-green-400 transition-colors mt-1 leading-snug">
                     {topic.title}
@@ -402,6 +428,19 @@ const TopicView: React.FC<{
     setTopic((prev) => (prev ? { ...prev, solved: !reply.isSolution } : null));
   };
 
+  const handleDeleteTopic = async () => {
+    if (!window.confirm('Excluir este tópico e todas as suas respostas? Esta ação é irreversível.')) return;
+    await deleteTopic(topicId, categoryId);
+    onBack();
+  };
+
+  const handleDeleteReply = async (replyId: string) => {
+    if (!window.confirm('Excluir esta resposta?')) return;
+    await deleteReply(replyId, topicId, categoryId);
+    setReplies((prev) => prev.filter((r) => r.id !== replyId));
+    setTopic((prev) => prev ? { ...prev, repliesCount: Math.max(0, prev.repliesCount - 1) } : null);
+  };
+
   if (!topic) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -411,6 +450,7 @@ const TopicView: React.FC<{
   }
 
   const isAuthor = user?.uid === topic.authorUid;
+  const isAdmin = user?.email === ADMIN_EMAIL;
   const topicLiked = user ? topic.likes.includes(user.uid) : false;
 
   return (
@@ -437,11 +477,7 @@ const TopicView: React.FC<{
                 <Pin size={9} /> Fixado
               </span>
             )}
-            {topic.solved && (
-              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-green-400 bg-green-400/10 px-1.5 py-0.5 rounded">
-                <CheckCircle2 size={9} /> Resolvido
-              </span>
-            )}
+            <StatusBadge topic={topic} />
           </div>
           <h1 className="text-xl font-bold text-white leading-snug">{topic.title}</h1>
           <div className="flex items-center gap-4 mt-3 flex-wrap">
@@ -480,6 +516,15 @@ const TopicView: React.FC<{
             <MessageSquare size={15} />
             {replies.length} {replies.length === 1 ? 'resposta' : 'respostas'}
           </span>
+          {isAdmin && (
+            <button
+              onClick={handleDeleteTopic}
+              className="ml-auto flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-400/10 transition-all"
+            >
+              <Trash2 size={13} />
+              Excluir tópico
+            </button>
+          )}
         </div>
       </div>
 
@@ -532,6 +577,15 @@ const TopicView: React.FC<{
                 >
                   <CheckCircle2 size={13} />
                   {reply.isSolution ? 'Desmarcar solução' : 'Marcar como solução'}
+                </button>
+              )}
+              {isAdmin && (
+                <button
+                  onClick={() => handleDeleteReply(reply.id)}
+                  className="ml-auto flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-400/10 transition-all"
+                >
+                  <Trash2 size={13} />
+                  Excluir
                 </button>
               )}
             </div>
