@@ -5,7 +5,7 @@ import {
   LogOut, PlayCircle, FileText, ChevronDown, ChevronRight,
   CheckCircle2, Download, BookOpen, Award, Clock, PenLine, Save,
   ChevronLeft, SkipForward, Heart, Star, ToggleLeft, ToggleRight,
-  Home,
+  Home, MessageSquare,
 } from 'lucide-react';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -294,6 +294,16 @@ export const MemberDashboard: React.FC = () => {
           >
             {autoplay ? <ToggleRight size={18} className="text-green-600" /> : <ToggleLeft size={18} />}
             Autoplay
+          </button>
+
+          {/* Forum link */}
+          <button
+            onClick={() => { window.location.hash = '#forum'; }}
+            className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-2 py-1 rounded-lg text-slate-400 hover:text-green-700 hover:bg-green-50 transition-colors"
+            title="Fórum da Comunidade"
+          >
+            <MessageSquare size={15} />
+            Fórum
           </button>
 
           {/* Sidebar toggle */}

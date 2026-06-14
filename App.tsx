@@ -16,8 +16,9 @@ import { DemoPage } from './pages/DemoPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { ParceirosBanner } from './components/ParceirosBanner';
 import { AuthProvider } from './contexts/AuthContext';
+import { ForumPage } from './pages/ForumPage';
 
-type Page = 'home' | 'members' | 'blog' | 'article' | 'demo' | 'reset-password';
+type Page = 'home' | 'members' | 'blog' | 'article' | 'demo' | 'reset-password' | 'forum';
 
 const WA_SVG = (
   <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current">
@@ -49,6 +50,7 @@ const App: React.FC = () => {
     if (window.location.hash === '#alunos') return 'members';
     if (window.location.hash === '#blog') return 'blog';
     if (window.location.hash === '#demo') return 'demo';
+    if (window.location.hash === '#forum') return 'forum';
     return 'home';
   };
 
@@ -61,6 +63,7 @@ const App: React.FC = () => {
       if (hash === '#alunos') setPage('members');
       else if (hash === '#blog') setPage('blog');
       else if (hash === '#demo') setPage('demo');
+      else if (hash === '#forum') setPage('forum');
       else if (hash.startsWith('#artigo-')) {
         setArticleId(Number(hash.replace('#artigo-', '')));
         setPage('article');
@@ -91,6 +94,14 @@ const App: React.FC = () => {
 
   if (page === 'members') {
     return <MembersArea />;
+  }
+
+  if (page === 'forum') {
+    return (
+      <AuthProvider>
+        <ForumPage onBack={() => { window.location.hash = ''; }} />
+      </AuthProvider>
+    );
   }
 
   if (page === 'article') {
