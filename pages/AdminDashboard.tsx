@@ -8,6 +8,7 @@ import {
   LogOut, Plus, Trash2, Edit3, Search, Users, BookOpen,
   CheckCircle2, X, Save, BarChart3, Shield, ChevronDown, Loader2,
 } from 'lucide-react';
+import { Logo } from '../components/Logo';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -224,14 +225,7 @@ export const AdminDashboard: React.FC = () => {
       {/* ── Header ── */}
       <header className="bg-white border-b border-slate-100 px-6 py-3 flex items-center justify-between sticky top-0 z-40 shadow-sm">
         <div className="flex items-center gap-3">
-          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-            <rect width="40" height="40" rx="8" fill="#1a5c35"/>
-            <rect x="8" y="10" width="24" height="20" rx="2.5" stroke="white" strokeWidth="1.8" fill="none"/>
-            <line x1="8" y1="16.5" x2="32" y2="16.5" stroke="white" strokeWidth="1.8"/>
-            <line x1="20" y1="10" x2="20" y2="30" stroke="white" strokeWidth="1.8"/>
-            <rect x="9.5" y="11.5" width="9" height="3.5" rx="1" fill="white" fillOpacity="0.95"/>
-          </svg>
-          <span className="text-[#1a5c35] font-bold text-lg lowercase hidden sm:block">treinatech</span>
+          <Logo />
           <span className="text-slate-300 hidden sm:block">|</span>
           <div className="hidden sm:flex items-center gap-1.5 text-slate-500 text-sm">
             <Shield size={14} className="text-amber-500" />

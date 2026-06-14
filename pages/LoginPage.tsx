@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Loader2, Mail, Lock, Eye, EyeOff, ArrowLeft, User } from 'lucide-react';
+import { Logo } from '../components/Logo';
 
 const GoogleIcon = () => (
   <svg width="20" height="20" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -103,15 +104,7 @@ export const LoginPage: React.FC = () => {
 
         {/* Icon */}
         <div className="flex justify-center mb-6">
-          <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center">
-            <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-              <rect width="40" height="40" rx="8" fill="#1a5c35"/>
-              <rect x="8" y="10" width="24" height="20" rx="2.5" stroke="white" strokeWidth="1.8" fill="none"/>
-              <line x1="8" y1="16.5" x2="32" y2="16.5" stroke="white" strokeWidth="1.8"/>
-              <line x1="20" y1="10" x2="20" y2="30" stroke="white" strokeWidth="1.8"/>
-              <rect x="9.5" y="11.5" width="9" height="3.5" rx="1" fill="white" fillOpacity="0.95"/>
-            </svg>
-          </div>
+          <Logo />
         </div>
 
         {/* Title */}
