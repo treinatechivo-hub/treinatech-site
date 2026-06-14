@@ -166,10 +166,10 @@ const TopicsView: React.FC<{
 
   useEffect(() => {
     setLoading(true);
-    getTopicsByCategory(category.id).then((t) => {
-      setTopics(t);
-      setLoading(false);
-    });
+    getTopicsByCategory(category.id)
+      .then((t) => setTopics(t))
+      .catch(() => setTopics([]))
+      .finally(() => setLoading(false));
   }, [category.id]);
 
   const filteredTopics = topics.filter((t) => {

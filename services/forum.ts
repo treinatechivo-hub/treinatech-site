@@ -166,19 +166,22 @@ async function seedCategories() {
 
 export async function getTopicsByCategory(categoryId: string): Promise<ForumTopic[]> {
   const db = getDb();
+  // Only use where() — no orderBy() — to avoid composite index requirement.
+  // Sorting is done client-side.
   const q = query(
     collection(db, 'forum_topics'),
     where('categoryId', '==', categoryId),
-    orderBy('updatedAt', 'desc'),
     limit(50)
   );
   const snap = await getDocs(q);
   const topics = snap.docs.map((d) => ({ id: d.id, ...d.data() } as ForumTopic));
-  // Sort pinned topics to top client-side (avoids composite Firestore index requirement)
+  // Sort client-side: pinned first, then most recently updated
   return topics.sort((a, b) => {
     if (a.pinned && !b.pinned) return -1;
     if (!a.pinned && b.pinned) return 1;
-    return 0;
+    const aTime = a.updatedAt?.toMillis?.() ?? 0;
+    const bTime = b.updatedAt?.toMillis?.() ?? 0;
+    return bTime - aTime;
   });
 }
 
