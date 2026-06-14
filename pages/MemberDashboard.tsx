@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { MEMBER_COURSES, CourseData, Lesson } from '../data/memberCourses';
 import {
@@ -33,22 +33,47 @@ function buildVideoSrc(lesson: Lesson): string {
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 const VideoPlayer: React.FC<{ lesson: Lesson | null; onEnded?: () => void }> = ({ lesson, onEnded }) => {
-  // Listen for postMessage events from YouTube / Vimeo iframes
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  // Ref keeps onEnded current without needing it in the effect's dep array
+  const onEndedRef = useRef<(() => void) | undefined>(onEnded);
+  useEffect(() => { onEndedRef.current = onEnded; });
+
   useEffect(() => {
     if (!lesson || lesson.provider === 'direct' || lesson.provider === 'onedrive') return;
+
     const handler = (e: MessageEvent) => {
       try {
         const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-        // YouTube IFrame API: playerState 0 = ended
-        if (data.event === 'onStateChange' && data.info === 0) onEnded?.();
-        if (data.info?.playerState === 0) onEnded?.();
-        // Vimeo Player API: finish event
-        if (data.event === 'finish') onEnded?.();
+        // YouTube: infoDelivery with playerState 0 = ended
+        if (data.event === 'infoDelivery' && data.info?.playerState === 0) onEndedRef.current?.();
+        // YouTube: legacy onStateChange format
+        if (data.event === 'onStateChange' && data.info === 0) onEndedRef.current?.();
+        // Vimeo
+        if (data.event === 'finish') onEndedRef.current?.();
       } catch { /* ignore parse errors */ }
     };
+
     window.addEventListener('message', handler);
-    return () => window.removeEventListener('message', handler);
-  }, [lesson?.id, onEnded]);
+
+    // YouTube requires a "listening" handshake before it sends state events back
+    const sendListening = () => {
+      if (lesson.provider === 'youtube') {
+        iframeRef.current?.contentWindow?.postMessage(
+          JSON.stringify({ event: 'listening' }), '*'
+        );
+      }
+    };
+    const iframe = iframeRef.current;
+    iframe?.addEventListener('load', sendListening);
+    // Also try after a delay in case iframe already loaded
+    const t = setTimeout(sendListening, 1200);
+
+    return () => {
+      window.removeEventListener('message', handler);
+      iframe?.removeEventListener('load', sendListening);
+      clearTimeout(t);
+    };
+  }, [lesson?.id]); // onEnded NOT in deps — handled via ref above
 
   if (!lesson) {
     return (
@@ -67,7 +92,7 @@ const VideoPlayer: React.FC<{ lesson: Lesson | null; onEnded?: () => void }> = (
           controls
           className="w-full h-full"
           title={lesson.title}
-          onEnded={onEnded}
+          onEnded={() => onEndedRef.current?.()}
         />
       </div>
     );
@@ -76,6 +101,7 @@ const VideoPlayer: React.FC<{ lesson: Lesson | null; onEnded?: () => void }> = (
   return (
     <div className="w-full aspect-video bg-black">
       <iframe
+        ref={iframeRef}
         key={lesson.id}
         src={buildVideoSrc(lesson)}
         title={lesson.title}
@@ -223,9 +249,11 @@ export const MemberDashboard: React.FC = () => {
   }, [activeLesson, activeCourse]);
 
   const markComplete = (lessonId: string) => {
+    // Add to completed (Set ignores duplicates naturally)
     setCompletedLessons((prev) => new Set([...prev, lessonId]));
+    // Always try autoplay regardless of prior completion status
     if (autoplay && nextLesson) {
-      setTimeout(() => selectLesson(nextLesson), 400);
+      setTimeout(() => selectLesson(nextLesson), 600);
     }
   };
 
@@ -505,9 +533,7 @@ export const MemberDashboard: React.FC = () => {
           <div className="w-full bg-black">
             <VideoPlayer
               lesson={activeLesson}
-              onEnded={activeLesson && !completedLessons.has(activeLesson.id)
-                ? () => markComplete(activeLesson.id)
-                : undefined}
+              onEnded={activeLesson ? () => markComplete(activeLesson.id) : undefined}
             />
           </div>
 
