@@ -40,6 +40,7 @@ import {
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const ADMIN_EMAIL = 'treinatechivo@gmail.com';
+const ADMIN_ONLY_CATEGORIES = ['Anúncios e Novidades'];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -190,9 +191,12 @@ const TopicsView: React.FC<{
   onNewTopic: () => void;
   onBack: () => void;
 }> = ({ category, onSelectTopic, onNewTopic, onBack }) => {
+  const { user } = useAuth();
   const [topics, setTopics] = useState<ForumTopic[]>([]);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<TopicTab>('todos');
+  const isAdmin = user?.email === ADMIN_EMAIL;
+  const canPost = isAdmin || !ADMIN_ONLY_CATEGORIES.includes(category.name);
 
   useEffect(() => {
     setLoading(true);
@@ -230,14 +234,16 @@ const TopicsView: React.FC<{
           <h2 className="text-xl font-bold text-white">{category.name}</h2>
           <p className="text-slate-400 text-sm mt-0.5">{category.description}</p>
         </div>
-        <button
-          onClick={onNewTopic}
-          className="flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all active:scale-95"
-        >
-          <PlusCircle size={16} />
-          <span className="hidden sm:inline">Novo tópico</span>
-          <span className="sm:hidden">Novo</span>
-        </button>
+        {canPost && (
+          <button
+            onClick={onNewTopic}
+            className="flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all active:scale-95"
+          >
+            <PlusCircle size={16} />
+            <span className="hidden sm:inline">Novo tópico</span>
+            <span className="sm:hidden">Novo</span>
+          </button>
+        )}
       </div>
 
       {/* Tabs */}
@@ -274,7 +280,7 @@ const TopicsView: React.FC<{
              tab === 'populares' ? 'Nenhum tópico popular ainda.' :
              'Seja o primeiro a criar um tópico!'}
           </p>
-          {tab === 'todos' && (
+          {tab === 'todos' && canPost && (
             <button
               onClick={onNewTopic}
               className="mt-4 text-sm text-green-500 hover:text-green-400 font-semibold transition-colors"

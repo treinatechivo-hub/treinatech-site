@@ -225,7 +225,9 @@ export const AdminDashboard: React.FC = () => {
       {/* ── Header ── */}
       <header className="bg-slate-900 border-b border-slate-800 px-6 py-3 flex items-center justify-between sticky top-0 z-40">
         <div className="flex items-center gap-3">
-          <Logo />
+          <button onClick={() => { window.location.hash = ''; }} title="Voltar ao site">
+            <Logo />
+          </button>
           <span className="text-slate-700 hidden sm:block">|</span>
           <div className="hidden sm:flex items-center gap-1.5 text-sm">
             <Shield size={14} className="text-amber-400" />
