@@ -22,13 +22,13 @@ const ALL_COURSES = [
 
 const CourseTag: React.FC<{ courseId: string }> = ({ courseId }) => {
   const colors: Record<string, string> = {
-    excel: 'bg-emerald-100 text-emerald-700',
-    powerbi: 'bg-amber-100 text-amber-700',
-    sql: 'bg-blue-100 text-blue-700',
+    excel: 'bg-emerald-900/60 text-emerald-300',
+    powerbi: 'bg-amber-900/60 text-amber-300',
+    sql: 'bg-blue-900/60 text-blue-300',
   };
   const labels: Record<string, string> = { excel: 'Excel', powerbi: 'Power BI', sql: 'SQL' };
   return (
-    <span className={`inline-block px-2 py-0.5 rounded-md text-xs font-semibold ${colors[courseId] ?? 'bg-slate-100 text-slate-600'}`}>
+    <span className={`inline-block px-2 py-0.5 rounded-md text-xs font-semibold ${colors[courseId] ?? 'bg-slate-700 text-slate-300'}`}>
       {labels[courseId] ?? courseId}
     </span>
   );
@@ -63,44 +63,44 @@ const StudentModal: React.FC<StudentModalProps> = ({ student, onSave, onClose })
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl w-full max-w-md p-6" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-bold text-slate-900">
+          <h3 className="text-lg font-bold text-white">
             {student ? 'Editar Aluno' : 'Adicionar Aluno'}
           </h3>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600"><X size={20} /></button>
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-200"><X size={20} /></button>
         </div>
 
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-1.5">Nome completo</label>
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1.5">Nome completo</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Ex: João da Silva"
-              className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-1.5">E-mail</label>
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1.5">E-mail</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="aluno@email.com"
               disabled={!!student}
-              className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 disabled:bg-slate-50 disabled:text-slate-400"
+              className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 disabled:opacity-50"
             />
             {!student && (
-              <p className="text-xs text-slate-400 mt-1">O aluno usará este e-mail para se cadastrar e acessar os cursos.</p>
+              <p className="text-xs text-slate-500 mt-1">O aluno usará este e-mail para se cadastrar e acessar os cursos.</p>
             )}
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">Cursos liberados</label>
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Cursos liberados</label>
             <div className="flex gap-2 flex-wrap">
               {ALL_COURSES.map((c) => (
                 <button
@@ -110,7 +110,7 @@ const StudentModal: React.FC<StudentModalProps> = ({ student, onSave, onClose })
                   className={`px-4 py-2 rounded-xl text-sm font-semibold border-2 transition-all ${
                     courses.includes(c.id)
                       ? 'bg-green-600 border-green-600 text-white'
-                      : 'border-slate-200 text-slate-600 hover:border-green-300'
+                      : 'border-slate-600 text-slate-400 hover:border-green-500 hover:text-slate-200'
                   }`}
                 >
                   {c.label}
@@ -123,25 +123,25 @@ const StudentModal: React.FC<StudentModalProps> = ({ student, onSave, onClose })
             <button
               type="button"
               onClick={() => setActive((v) => !v)}
-              className={`relative w-11 h-6 rounded-full transition-colors ${active ? 'bg-green-600' : 'bg-slate-200'}`}
+              className={`relative w-11 h-6 rounded-full transition-colors ${active ? 'bg-green-600' : 'bg-slate-600'}`}
             >
               <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-all ${active ? 'left-6' : 'left-1'}`} />
             </button>
-            <span className="text-sm text-slate-600 font-medium">{active ? 'Acesso ativo' : 'Acesso suspenso'}</span>
+            <span className="text-sm text-slate-300 font-medium">{active ? 'Acesso ativo' : 'Acesso suspenso'}</span>
           </div>
         </div>
 
         <div className="flex gap-3 mt-6">
           <button
             onClick={onClose}
-            className="flex-1 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors"
+            className="flex-1 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 hover:bg-slate-700 transition-colors"
           >
             Cancelar
           </button>
           <button
             onClick={handleSave}
             disabled={!name.trim() || !email.trim()}
-            className="flex-1 py-2.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 py-2.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-600 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Save size={15} /> Salvar
           </button>
@@ -220,27 +220,27 @@ export const AdminDashboard: React.FC = () => {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-900">
 
       {/* ── Header ── */}
-      <header className="bg-white border-b border-slate-100 px-6 py-3 flex items-center justify-between sticky top-0 z-40 shadow-sm">
+      <header className="bg-slate-900 border-b border-slate-800 px-6 py-3 flex items-center justify-between sticky top-0 z-40">
         <div className="flex items-center gap-3">
           <Logo />
-          <span className="text-slate-300 hidden sm:block">|</span>
-          <div className="hidden sm:flex items-center gap-1.5 text-slate-500 text-sm">
-            <Shield size={14} className="text-amber-500" />
-            <span className="font-semibold text-amber-600">Painel Administrativo</span>
+          <span className="text-slate-700 hidden sm:block">|</span>
+          <div className="hidden sm:flex items-center gap-1.5 text-sm">
+            <Shield size={14} className="text-amber-400" />
+            <span className="font-semibold text-amber-400">Painel Administrativo</span>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           {user.photoURL && (
-            <img src={user.photoURL} alt={user.name} className="w-8 h-8 rounded-full ring-2 ring-amber-200" />
+            <img src={user.photoURL} alt={user.name} className="w-8 h-8 rounded-full ring-2 ring-amber-500/40" />
           )}
-          <span className="text-sm font-medium text-slate-700 hidden sm:block">{user.name.split(' ')[0]}</span>
+          <span className="text-sm font-medium text-slate-300 hidden sm:block">{user.name.split(' ')[0]}</span>
           <button
             onClick={() => { window.location.hash = 'forum'; }}
-            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-green-700 transition-colors px-2 py-1.5 rounded-lg hover:bg-green-50"
+            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-green-400 transition-colors px-2 py-1.5 rounded-lg hover:bg-slate-800"
             title="Ir para o Fórum"
           >
             <BookOpen size={14} />
@@ -248,7 +248,7 @@ export const AdminDashboard: React.FC = () => {
           </button>
           <button
             onClick={signOut}
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-red-500 transition-colors px-2 py-1.5 rounded-lg hover:bg-red-50"
+            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-red-400 transition-colors px-2 py-1.5 rounded-lg hover:bg-slate-800"
           >
             <LogOut size={14} /> Sair
           </button>
@@ -260,41 +260,41 @@ export const AdminDashboard: React.FC = () => {
         {/* ── Stats ── */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
           {[
-            { icon: <Users size={18} />, label: 'Total de Alunos', value: stats.total, color: 'bg-blue-50 text-blue-600' },
-            { icon: <CheckCircle2 size={18} />, label: 'Ativos', value: stats.active, color: 'bg-green-50 text-green-600' },
-            { icon: <BarChart3 size={18} />, label: 'Excel', value: stats.byExcel, color: 'bg-emerald-50 text-emerald-600' },
-            { icon: <BarChart3 size={18} />, label: 'Power BI', value: stats.byPBI, color: 'bg-amber-50 text-amber-600' },
-            { icon: <BookOpen size={18} />, label: 'SQL', value: stats.bySQL, color: 'bg-indigo-50 text-indigo-600' },
+            { icon: <Users size={18} />, label: 'Total de Alunos', value: stats.total, color: 'bg-blue-900/50 text-blue-400' },
+            { icon: <CheckCircle2 size={18} />, label: 'Ativos', value: stats.active, color: 'bg-green-900/50 text-green-400' },
+            { icon: <BarChart3 size={18} />, label: 'Excel', value: stats.byExcel, color: 'bg-emerald-900/50 text-emerald-400' },
+            { icon: <BarChart3 size={18} />, label: 'Power BI', value: stats.byPBI, color: 'bg-amber-900/50 text-amber-400' },
+            { icon: <BookOpen size={18} />, label: 'SQL', value: stats.bySQL, color: 'bg-indigo-900/50 text-indigo-400' },
           ].map((s) => (
-            <div key={s.label} className="bg-white rounded-2xl border border-slate-100 p-4 shadow-sm">
+            <div key={s.label} className="bg-slate-800 rounded-2xl border border-slate-700 p-4">
               <div className={`w-9 h-9 rounded-xl flex items-center justify-center mb-3 ${s.color}`}>
                 {s.icon}
               </div>
-              <div className="text-2xl font-black text-slate-900">{s.value}</div>
+              <div className="text-2xl font-black text-white">{s.value}</div>
               <div className="text-xs text-slate-400 font-semibold uppercase tracking-wide mt-0.5">{s.label}</div>
             </div>
           ))}
         </div>
 
         {/* ── Tabela ── */}
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-          <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
+        <div className="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden">
+          <div className="p-4 border-b border-slate-700 flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
             <div className="flex gap-3 flex-1 flex-wrap">
               <div className="relative flex-1 min-w-[200px]">
-                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
                 <input
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Buscar por nome ou e-mail..."
-                  className="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                  className="w-full pl-9 pr-4 py-2 bg-slate-700 border border-slate-600 rounded-xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30"
                 />
               </div>
               <div className="relative">
                 <select
                   value={filterCourse}
                   onChange={(e) => setFilterCourse(e.target.value)}
-                  className="appearance-none pl-3 pr-8 py-2 border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none focus:border-green-500 bg-white"
+                  className="appearance-none pl-3 pr-8 py-2 bg-slate-700 border border-slate-600 rounded-xl text-sm text-slate-300 focus:outline-none focus:border-green-500"
                 >
                   <option value="all">Todos os cursos</option>
                   {ALL_COURSES.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
@@ -305,7 +305,7 @@ export const AdminDashboard: React.FC = () => {
 
             <button
               onClick={() => setModal({ open: true, student: null })}
-              className="flex items-center gap-2 bg-green-700 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-green-800 transition-colors whitespace-nowrap"
+              className="flex items-center gap-2 bg-green-700 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-green-600 transition-colors whitespace-nowrap"
             >
               <Plus size={16} /> Adicionar Aluno
             </button>
@@ -313,44 +313,44 @@ export const AdminDashboard: React.FC = () => {
 
           {loadingData ? (
             <div className="flex items-center justify-center py-16">
-              <Loader2 size={24} className="animate-spin text-green-600" />
+              <Loader2 size={24} className="animate-spin text-green-500" />
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-slate-100 bg-slate-50">
-                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Aluno</th>
-                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">E-mail</th>
-                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Cursos</th>
-                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Status</th>
-                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Cadastro</th>
-                    <th className="text-right px-4 py-3 text-xs font-bold text-slate-500 uppercase tracking-wide">Ações</th>
+                  <tr className="border-b border-slate-700 bg-slate-700/40">
+                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wide">Aluno</th>
+                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wide">E-mail</th>
+                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wide">Cursos</th>
+                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wide">Status</th>
+                    <th className="text-left px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wide">Cadastro</th>
+                    <th className="text-right px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wide">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filtered.length === 0 && (
                     <tr>
-                      <td colSpan={6} className="text-center py-12 text-slate-400 text-sm">
+                      <td colSpan={6} className="text-center py-12 text-slate-500 text-sm">
                         Nenhum aluno encontrado.
                       </td>
                     </tr>
                   )}
                   {filtered.map((student) => (
-                    <tr key={student.id} className="border-b border-slate-50 hover:bg-slate-50/60 transition-colors">
+                    <tr key={student.id} className="border-b border-slate-700/50 hover:bg-slate-700/30 transition-colors">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold text-xs flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-green-800 flex items-center justify-center text-green-300 font-bold text-xs flex-shrink-0">
                             {student.name.charAt(0).toUpperCase()}
                           </div>
-                          <span className="font-semibold text-slate-900 text-sm">{student.name}</span>
+                          <span className="font-semibold text-slate-100 text-sm">{student.name}</span>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-slate-500">{student.email}</td>
+                      <td className="px-4 py-3 text-slate-400">{student.email}</td>
                       <td className="px-4 py-3">
                         <div className="flex gap-1 flex-wrap">
                           {student.enrolledCourses.length === 0
-                            ? <span className="text-slate-300 text-xs">—</span>
+                            ? <span className="text-slate-600 text-xs">—</span>
                             : student.enrolledCourses.map((c) => <CourseTag key={c} courseId={c} />)
                           }
                         </div>
@@ -360,27 +360,27 @@ export const AdminDashboard: React.FC = () => {
                           onClick={() => handleToggleActive(student)}
                           className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors ${
                             student.active
-                              ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                              : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                              ? 'bg-green-900/50 text-green-400 hover:bg-green-900/80'
+                              : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
                           }`}
                         >
-                          <span className={`w-1.5 h-1.5 rounded-full ${student.active ? 'bg-green-500' : 'bg-slate-400'}`} />
+                          <span className={`w-1.5 h-1.5 rounded-full ${student.active ? 'bg-green-400' : 'bg-slate-500'}`} />
                           {student.active ? 'Ativo' : 'Suspenso'}
                         </button>
                       </td>
-                      <td className="px-4 py-3 text-slate-400 text-xs">{student.createdAt}</td>
+                      <td className="px-4 py-3 text-slate-500 text-xs">{student.createdAt}</td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-end gap-1">
                           <button
                             onClick={() => setModal({ open: true, student })}
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                            className="p-1.5 rounded-lg text-slate-500 hover:text-blue-400 hover:bg-blue-900/30 transition-colors"
                             title="Editar"
                           >
                             <Edit3 size={15} />
                           </button>
                           <button
                             onClick={() => setDeleteId(student.id)}
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                            className="p-1.5 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-900/30 transition-colors"
                             title="Excluir"
                           >
                             <Trash2 size={15} />
@@ -395,7 +395,7 @@ export const AdminDashboard: React.FC = () => {
           )}
 
           {!loadingData && filtered.length > 0 && (
-            <div className="px-4 py-3 border-t border-slate-100 text-xs text-slate-400">
+            <div className="px-4 py-3 border-t border-slate-700 text-xs text-slate-500">
               Exibindo {filtered.length} de {students.length} alunos
             </div>
           )}
@@ -413,20 +413,20 @@ export const AdminDashboard: React.FC = () => {
 
       {/* ── Confirmar exclusão ── */}
       {deleteId && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm">
-            <h3 className="text-base font-bold text-slate-900 mb-2">Excluir aluno?</h3>
-            <p className="text-sm text-slate-500 mb-6">Esta ação é irreversível. O aluno perderá o acesso à plataforma.</p>
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl p-6 w-full max-w-sm">
+            <h3 className="text-base font-bold text-white mb-2">Excluir aluno?</h3>
+            <p className="text-sm text-slate-400 mb-6">Esta ação é irreversível. O aluno perderá o acesso à plataforma.</p>
             <div className="flex gap-3">
               <button
                 onClick={() => setDeleteId(null)}
-                className="flex-1 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+                className="flex-1 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 hover:bg-slate-700"
               >
                 Cancelar
               </button>
               <button
                 onClick={() => handleDelete(deleteId)}
-                className="flex-1 py-2.5 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors"
+                className="flex-1 py-2.5 rounded-xl bg-red-700 text-white text-sm font-semibold hover:bg-red-600 transition-colors"
               >
                 Excluir
               </button>
