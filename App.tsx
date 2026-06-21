@@ -17,8 +17,9 @@ import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { ParceirosBanner } from './components/ParceirosBanner';
 import { AuthProvider } from './contexts/AuthContext';
 import { ForumPage } from './pages/ForumPage';
+import { RegisterPage } from './pages/RegisterPage';
 
-type Page = 'home' | 'members' | 'blog' | 'article' | 'demo' | 'reset-password' | 'forum';
+type Page = 'home' | 'members' | 'blog' | 'article' | 'demo' | 'reset-password' | 'forum' | 'cadastro';
 
 const WA_SVG = (
   <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current">
@@ -51,6 +52,7 @@ const App: React.FC = () => {
     if (window.location.hash === '#blog') return 'blog';
     if (window.location.hash === '#demo') return 'demo';
     if (window.location.hash === '#forum') return 'forum';
+    if (window.location.hash === '#cadastro') return 'cadastro';
     return 'home';
   };
 
@@ -64,6 +66,7 @@ const App: React.FC = () => {
       else if (hash === '#blog') setPage('blog');
       else if (hash === '#demo') setPage('demo');
       else if (hash === '#forum') setPage('forum');
+      else if (hash === '#cadastro') setPage('cadastro');
       else if (hash.startsWith('#artigo-')) {
         setArticleId(Number(hash.replace('#artigo-', '')));
         setPage('article');
@@ -102,6 +105,10 @@ const App: React.FC = () => {
         <ForumPage onBack={() => { window.location.assign(window.location.pathname + '#alunos'); }} />
       </AuthProvider>
     );
+  }
+
+  if (page === 'cadastro') {
+    return <RegisterPage />;
   }
 
   if (page === 'article') {

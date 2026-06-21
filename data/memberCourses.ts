@@ -46,6 +46,36 @@ export interface CourseData {
 
 export const MEMBER_COURSES: CourseData[] = [
 
+  // ─── INTRODUÇÃO À IA COM FOCO NO CLAUDE — GRATUITO ────────────────────────
+  {
+    id: 'intro-ia-claude',
+    title: 'Introdução à IA com Foco no Claude',
+    description: 'Aprenda Inteligência Artificial na prática com foco no Claude. Curso gratuito e direto ao ponto.',
+    icon: '🤖',
+    color: 'bg-violet-50',
+    accentColor: '#7c3aed',
+    totalLessons: 8,
+    totalHours: '1h 30min',
+    modules: [
+      {
+        id: 'ia-m1',
+        title: 'Módulo 1 — Fundamentos',
+        lessons: [
+          { id: 'ia-1-1', title: 'IA Gratuita — Aula 1', duration: '10:04', provider: 'youtube', videoId: 'mE5hqXAXMhM', free: true },
+          { id: 'ia-1-2', title: 'IA Gratuita — Aula 2', duration: '10:19', provider: 'youtube', videoId: 'zKTp947bZ-U' },
+          { id: 'ia-1-3', title: 'IA Gratuita — Aula 3', duration: '10:23', provider: 'youtube', videoId: 'LnmpamSUlog' },
+          { id: 'ia-1-4', title: 'IA Gratuita — Aula 4', duration: '11:05', provider: 'youtube', videoId: 'PclzQrjoZ5s' },
+          // Aulas 5–8: ainda em gravação — atualizar videoId quando chegarem
+          { id: 'ia-1-5', title: 'Aula 5 — [em breve]', duration: '00:00', provider: 'youtube', videoId: 'PLACEHOLDER' },
+          { id: 'ia-1-6', title: 'Aula 6 — [em breve]', duration: '00:00', provider: 'youtube', videoId: 'PLACEHOLDER' },
+          { id: 'ia-1-7', title: 'Aula 7 — [em breve]', duration: '00:00', provider: 'youtube', videoId: 'PLACEHOLDER' },
+          { id: 'ia-1-8', title: 'Aula 8 — [em breve]', duration: '00:00', provider: 'youtube', videoId: 'PLACEHOLDER' },
+        ],
+      },
+    ],
+    pdfs: [],
+  },
+
   // ─── EXCEL ─────────────────────────────────────────────────────────────────
   {
     id: 'excel',
@@ -185,32 +215,4 @@ export const MEMBER_COURSES: CourseData[] = [
     ],
   },
 
-  // ─── TREINA IA — GRATUITO ──────────────────────────────────────────────────
-  {
-    id: 'treina-ia',
-    title: 'Treina IA — Gratuito',
-    description: 'Domine Inteligência Artificial na prática. Curso introdutório gratuito com projetos reais.',
-    icon: '🤖',
-    color: 'from-violet-600 to-purple-700',
-    accentColor: '#7c3aed',
-    totalLessons: 1,
-    totalHours: '0h',
-    modules: [
-      {
-        id: 'tia-m1',
-        title: 'Módulo 1 — Introdução',
-        lessons: [
-          {
-            id: 'tia-1-1',
-            title: 'Abertura',
-            duration: '00:00',
-            provider: 'youtube',
-            videoId: 'TC8lC3Qqb30',
-            free: true,
-          },
-        ],
-      },
-    ],
-    pdfs: [],
-  },
 ];

@@ -34,9 +34,16 @@ export interface StudentRecord {
   name: string;
   email: string;
   enrolledCourses: string[];
+  courseExpiry?: Record<string, string>; // { 'intro-ia-claude': '2026-07-21T00:00:00Z' }
   active: boolean;
   createdAt: string;
   uid?: string;
+}
+
+export function isCourseExpired(student: StudentRecord, courseId: string): boolean {
+  const expiry = student.courseExpiry?.[courseId];
+  if (!expiry) return false;
+  return new Date(expiry) < new Date();
 }
 
 function emailToId(email: string) {

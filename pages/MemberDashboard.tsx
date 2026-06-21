@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { MEMBER_COURSES, CourseData, Lesson } from '../data/memberCourses';
+import { isCourseExpired, StudentRecord } from '../services/firestore';
 import {
   LogOut, PlayCircle, FileText, ChevronDown, ChevronRight,
   CheckCircle2, Download, BookOpen, Award, Clock, PenLine, Save,
@@ -276,6 +277,10 @@ export const MemberDashboard: React.FC = () => {
   const completedInCourse  = allLessons.filter((l) => completedLessons.has(l.id)).length;
   const progressPct        = totalLessons > 0 ? Math.round((completedInCourse / totalLessons) * 100) : 0;
 
+  const isActiveCourseExpired = activeCourse && user
+    ? isCourseExpired(user as unknown as StudentRecord, activeCourse.id)
+    : false;
+
   if (!user) return null;
 
   return (
@@ -394,6 +399,11 @@ export const MemberDashboard: React.FC = () => {
                   <div className="min-w-0">
                     <h2 className="font-bold text-slate-900 text-sm leading-tight truncate">{activeCourse.title}</h2>
                     <p className="text-xs text-slate-400 mt-0.5">{activeCourse.totalHours} · {activeCourse.totalLessons} aulas</p>
+                    {isActiveCourseExpired && (
+                      <span className="inline-block mt-1 text-[10px] font-bold bg-red-100 text-red-600 px-2 py-0.5 rounded-full uppercase tracking-wide">
+                        Acesso expirado
+                      </span>
+                    )}
                   </div>
                 </div>
                 {/* Progress */}
@@ -531,10 +541,28 @@ export const MemberDashboard: React.FC = () => {
 
           {/* ── Video player (full width, no constraints) ── */}
           <div className="w-full bg-black">
-            <VideoPlayer
-              lesson={activeLesson}
-              onEnded={activeLesson ? () => markComplete(activeLesson.id) : undefined}
-            />
+            {isActiveCourseExpired ? (
+              <div className="w-full aspect-video bg-slate-900 flex flex-col items-center justify-center gap-4">
+                <div className="text-4xl">🔒</div>
+                <p className="text-white font-bold text-lg">Acesso expirado</p>
+                <p className="text-slate-400 text-sm text-center max-w-xs px-4">
+                  Seu período de 30 dias para este curso chegou ao fim. Entre em contato para renovar.
+                </p>
+                <a
+                  href="https://wa.me/5541991832100"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-xl transition-all"
+                >
+                  Falar com a Treinatech
+                </a>
+              </div>
+            ) : (
+              <VideoPlayer
+                lesson={activeLesson}
+                onEnded={activeLesson ? () => markComplete(activeLesson.id) : undefined}
+              />
+            )}
           </div>
 
           {/* ── Below video ── */}

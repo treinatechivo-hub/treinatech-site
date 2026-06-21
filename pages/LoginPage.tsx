@@ -285,6 +285,11 @@ export const LoginPage: React.FC = () => {
             </>
           )}
         </p>
+        <p className="text-center text-sm text-slate-400 mt-3">
+          <a href="#cadastro" style={{ color: '#7c3aed', fontWeight: 'bold' }}>
+            🤖 Acesse gratuitamente o curso de IA
+          </a>
+        </p>
         </>}
       </div>
     </div>
