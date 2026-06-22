@@ -169,7 +169,9 @@ export const MemberDashboard: React.FC = () => {
   const { user, signOut } = useAuth();
 
   const enrolledCourses = useMemo(
-    () => MEMBER_COURSES.filter((c) => user?.enrolledCourses.includes(c.id)),
+    () => MEMBER_COURSES.filter((c) =>
+      c.id === 'intro-ia-claude' || user?.enrolledCourses.includes(c.id)
+    ),
     [user]
   );
 

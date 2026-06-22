@@ -28,36 +28,57 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  // 1. Criar usuário no Firebase Auth
+  // 1. Criar ou buscar usuário no Firebase Auth
   let uid: string;
+  let isExisting = false;
   try {
     const user = await auth.createUser({ email, password, displayName: name });
     uid = user.uid;
   } catch (err: any) {
     if (err.code === 'auth/email-already-exists') {
-      return res.status(409).json({ error: 'Este e-mail já está cadastrado.' });
+      // Usuário já existe — busca o uid para atualizar o Firestore
+      const existing = await auth.getUserByEmail(email);
+      uid = existing.uid;
+      isExisting = true;
+    } else {
+      console.error('Auth error:', err);
+      return res.status(500).json({ error: 'Erro ao criar conta.' });
     }
-    console.error('Auth error:', err);
-    return res.status(500).json({ error: 'Erro ao criar conta.' });
   }
 
   // 2. Calcular expiração (30 dias)
   const expiresAt = new Date();
   expiresAt.setDate(expiresAt.getDate() + 30);
 
-  // 3. Criar registro no Firestore
+  // 3. Criar ou atualizar registro no Firestore
   const id = emailToId(email);
-  const studentData = {
-    id,
-    name,
-    email: email.toLowerCase().trim(),
-    enrolledCourses: ['intro-ia-claude'],
-    courseExpiry: { 'intro-ia-claude': expiresAt.toISOString() },
-    active: true,
-    createdAt: new Date().toISOString(),
-    uid,
-  };
-  await db.collection('students').doc(id).set(studentData);
+  const docRef = db.collection('students').doc(id);
+
+  if (isExisting) {
+    // Adiciona intro-ia-claude sem sobrescrever outros cursos
+    const snap = await docRef.get();
+    const data = snap.exists ? snap.data() : {};
+    const enrolled: string[] = data?.enrolledCourses ?? [];
+    if (!enrolled.includes('intro-ia-claude')) enrolled.push('intro-ia-claude');
+    await docRef.set({
+      ...data,
+      id,
+      enrolledCourses: enrolled,
+      courseExpiry: { ...(data?.courseExpiry ?? {}), 'intro-ia-claude': expiresAt.toISOString() },
+      uid,
+    }, { merge: true });
+  } else {
+    await docRef.set({
+      id,
+      name,
+      email: email.toLowerCase().trim(),
+      enrolledCourses: ['intro-ia-claude'],
+      courseExpiry: { 'intro-ia-claude': expiresAt.toISOString() },
+      active: true,
+      createdAt: new Date().toISOString(),
+      uid,
+    });
+  }
 
   // 4. Enviar e-mail de boas-vindas via Brevo
   const brevoApiKey = process.env.BREVO_API_KEY!;
