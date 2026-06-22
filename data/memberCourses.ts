@@ -68,9 +68,10 @@ export const MEMBER_COURSES: CourseData[] = [
       },
     ],
     materials: [
-      { title: 'Guia de Prompts para Claude', description: 'Os melhores prompts para usar no dia a dia com IA', fileUrl: 'PLACEHOLDER_URL', sizeMB: 1.2, type: 'pdf' },
-      { title: 'Planilha de Casos de Uso com IA', description: 'Template com exemplos práticos de aplicação no trabalho', fileUrl: 'PLACEHOLDER_URL', sizeMB: 0.8, type: 'xlsx' },
-      { title: 'Glossário de IA', description: 'Os principais termos de IA explicados de forma simples', fileUrl: 'PLACEHOLDER_URL', sizeMB: 0.5, type: 'docx' },
+      { title: 'Material — Aula 1', description: 'Apostila da Aula 1: O que é IA e como ela funciona', fileUrl: '/Materiais/Aula01_Aluno.pdf', sizeMB: 3.8, type: 'pdf' },
+      { title: 'Material — Aula 2', description: 'Apostila da Aula 2', fileUrl: '/Materiais/Aula02_Aluno.pdf', sizeMB: 3.8, type: 'pdf' },
+      { title: 'Material — Aula 3', description: 'Apostila da Aula 3', fileUrl: '/Materiais/Aula03_Aluno.pdf', sizeMB: 3.8, type: 'pdf' },
+      { title: 'Material — Aula 4', description: 'Apostila da Aula 4', fileUrl: '/Materiais/Aula04_Aluno.pdf', sizeMB: 3.8, type: 'pdf' },
     ],
   },
 
