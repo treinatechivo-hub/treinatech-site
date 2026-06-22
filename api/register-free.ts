@@ -88,6 +88,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     body: JSON.stringify({
       sender: { name: 'Treinatech', email: 'contato@treinatech.com.br' },
       to: [{ email, name }],
+      bcc: [{ email: 'treinatechivo@gmail.com', name: 'Treinatech' }],
       subject: 'Bem-vindo(a) à Treinatech — seus dados de acesso',
       htmlContent: `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
