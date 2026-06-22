@@ -6,7 +6,7 @@ import {
   LogOut, PlayCircle, FileText, ChevronDown, ChevronRight,
   CheckCircle2, Download, BookOpen, Award, Clock, PenLine, Save,
   ChevronLeft, SkipForward, Heart, Star, ToggleLeft, ToggleRight,
-  Home, MessageSquare,
+  Home, MessageSquare, Lock,
 } from 'lucide-react';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -168,11 +168,22 @@ const StarRating: React.FC<{ lessonId: string }> = ({ lessonId }) => {
 export const MemberDashboard: React.FC = () => {
   const { user, signOut } = useAuth();
 
+  // IDs aos quais o usuário tem acesso (com retrocompat para IDs antigos)
+  const enrolledCourseIds = useMemo(() => {
+    const ids = new Set(user?.enrolledCourses ?? []);
+    // Retrocompat: 'excel' antigo dá acesso a todos os módulos
+    if (ids.has('excel')) { ids.add('excel-basico'); ids.add('excel-intermediario'); ids.add('excel-avancado'); }
+    // Retrocompat: 'powerbi' antigo dá acesso a ambos os módulos
+    if (ids.has('powerbi')) { ids.add('powerbi-m1'); ids.add('powerbi-m2'); }
+    return ids;
+  }, [user?.enrolledCourses]);
+
+  const isCourseAccessible = (courseId: string) =>
+    courseId === 'intro-ia-claude' || enrolledCourseIds.has(courseId);
+
   const enrolledCourses = useMemo(
-    () => MEMBER_COURSES.filter((c) =>
-      c.id === 'intro-ia-claude' || user?.enrolledCourses.includes(c.id)
-    ),
-    [user]
+    () => MEMBER_COURSES.filter((c) => isCourseAccessible(c.id)),
+    [enrolledCourseIds]
   );
 
   const [activeCourse, setActiveCourse]     = useState<CourseData | undefined>(enrolledCourses[0]);
@@ -186,13 +197,18 @@ export const MemberDashboard: React.FC = () => {
   const [expandedModules, setExpandedModules] = useState<Set<string>>(
     new Set([enrolledCourses[0]?.modules?.[0]?.id])
   );
-  const [completedLessons, setCompletedLessons] = useState<Set<string>>(
-    new Set(['ex-1-1', 'ex-1-2', 'pbi-1-1'])
-  );
+  const [completedLessons, setCompletedLessons] = useState<Set<string>>(() => {
+    try { return new Set(JSON.parse(localStorage.getItem('treinatech_completed') || '[]')); } catch { return new Set(); }
+  });
   const [notes, setNotes] = useState<Record<string, string>>(() => {
     try { return JSON.parse(localStorage.getItem('treinatech_notes') || '{}'); } catch { return {}; }
   });
   const [noteSaved, setNoteSaved] = useState(false);
+
+  // Persist completed lessons
+  useEffect(() => {
+    try { localStorage.setItem('treinatech_completed', JSON.stringify([...completedLessons])); } catch {}
+  }, [completedLessons]);
 
   // Persist notes
   useEffect(() => {
@@ -300,10 +316,6 @@ export const MemberDashboard: React.FC = () => {
             <Home size={16} />
             <span className="hidden sm:block text-xs font-medium">Site</span>
           </button>
-          <span className="text-slate-300 hidden sm:block">/</span>
-          <span className="text-xs text-slate-500 font-medium hidden sm:block truncate max-w-[120px]">
-            {activeCourse?.title}
-          </span>
           {activeLesson && activeLessonModule && (
             <>
               <span className="text-slate-300 hidden md:block">/</span>
@@ -318,22 +330,30 @@ export const MemberDashboard: React.FC = () => {
           )}
         </div>
 
-        {/* Center: course switcher */}
-        <div className="flex items-center gap-2 mx-2">
-          {enrolledCourses.map((c) => (
-            <button
-              key={c.id}
-              onClick={() => switchCourse(c)}
-              className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                activeCourse?.id === c.id
-                  ? 'bg-green-100 text-green-800'
-                  : 'text-slate-500 hover:bg-slate-100'
-              }`}
-            >
-              <span>{c.icon}</span>
-              <span className="max-w-[140px] truncate">{c.title}</span>
-            </button>
-          ))}
+        {/* Center: course switcher — mostra todos, bloqueia não habilitados */}
+        <div className="flex items-center gap-1 mx-2 flex-wrap">
+          {MEMBER_COURSES.map((c) => {
+            const accessible = isCourseAccessible(c.id);
+            const isActive = activeCourse?.id === c.id;
+            return (
+              <button
+                key={c.id}
+                onClick={() => accessible && switchCourse(c)}
+                title={accessible ? c.title : 'Você não tem acesso a este módulo'}
+                className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  isActive
+                    ? 'bg-green-100 text-green-800'
+                    : accessible
+                    ? 'text-slate-500 hover:bg-slate-100 cursor-pointer'
+                    : 'text-slate-300 cursor-not-allowed opacity-60'
+                }`}
+              >
+                <span>{c.icon}</span>
+                <span className="max-w-[120px] truncate">{c.title}</span>
+                {!accessible && <Lock size={10} className="flex-shrink-0" />}
+              </button>
+            );
+          })}
         </div>
 
         {/* Right: autoplay + user */}
@@ -510,28 +530,43 @@ export const MemberDashboard: React.FC = () => {
                 </div>
               ) : (
                 <div className="p-4 space-y-3">
-                  {activeCourse?.pdfs.map((pdf, idx) => (
-                    <div key={idx} className="bg-slate-50 border border-slate-200 rounded-2xl p-4 hover:border-green-200 transition-colors">
-                      <div className="flex items-start gap-3">
-                        <div className="w-9 h-9 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                          <FileText size={16} className="text-red-600" />
+                  {(!activeCourse?.materials || activeCourse.materials.length === 0) && (
+                    <p className="text-xs text-slate-400 text-center py-6">Nenhum material disponível ainda.</p>
+                  )}
+                  {activeCourse?.materials.map((mat, idx) => {
+                    const typeConfig: Record<string, { bg: string; text: string; label: string }> = {
+                      pdf:  { bg: 'bg-red-100',    text: 'text-red-600',    label: 'PDF' },
+                      docx: { bg: 'bg-blue-100',   text: 'text-blue-600',   label: 'Word' },
+                      xlsx: { bg: 'bg-green-100',  text: 'text-green-600',  label: 'Excel' },
+                      pptx: { bg: 'bg-orange-100', text: 'text-orange-600', label: 'PPT' },
+                    };
+                    const cfg = typeConfig[mat.type ?? 'pdf'];
+                    return (
+                      <div key={idx} className="bg-slate-50 border border-slate-200 rounded-2xl p-4 hover:border-green-200 transition-colors">
+                        <div className="flex items-start gap-3">
+                          <div className={`w-9 h-9 ${cfg.bg} rounded-xl flex items-center justify-center flex-shrink-0`}>
+                            <FileText size={16} className={cfg.text} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <p className="text-xs font-bold text-slate-800 leading-tight">{mat.title}</p>
+                              <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${cfg.bg} ${cfg.text}`}>{cfg.label}</span>
+                            </div>
+                            <p className="text-[10px] text-slate-500 mt-1">{mat.description}</p>
+                            <p className="text-[10px] text-slate-400 mt-0.5">{mat.sizeMB} MB</p>
+                          </div>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-bold text-slate-800 leading-tight">{pdf.title}</p>
-                          <p className="text-[10px] text-slate-500 mt-1">{pdf.description}</p>
-                          <p className="text-[10px] text-slate-400 mt-0.5">{pdf.sizeMB} MB</p>
-                        </div>
+                        <a
+                          href={mat.fileUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-3 w-full flex items-center justify-center gap-1.5 bg-white border border-slate-200 hover:border-green-300 hover:bg-green-50 text-xs font-semibold text-slate-700 hover:text-green-700 py-2 rounded-xl transition-all"
+                        >
+                          <Download size={12} /> Baixar {cfg.label}
+                        </a>
                       </div>
-                      <a
-                        href={pdf.fileUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-3 w-full flex items-center justify-center gap-1.5 bg-white border border-slate-200 hover:border-green-300 hover:bg-green-50 text-xs font-semibold text-slate-700 hover:text-green-700 py-2 rounded-xl transition-all"
-                      >
-                        <Download size={12} /> Baixar PDF
-                      </a>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -740,17 +775,24 @@ export const MemberDashboard: React.FC = () => {
 
             {/* ── Mobile course switcher ── */}
             <div className="flex md:hidden gap-2 flex-wrap pt-2">
-              {enrolledCourses.map((c) => (
-                <button
-                  key={c.id}
-                  onClick={() => switchCourse(c)}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
-                    activeCourse?.id === c.id ? 'bg-green-100 text-green-800' : 'bg-white text-slate-600 border border-slate-200'
-                  }`}
-                >
-                  {c.icon} {c.title}
-                </button>
-              ))}
+              {MEMBER_COURSES.map((c) => {
+                const accessible = isCourseAccessible(c.id);
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => accessible && switchCourse(c)}
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
+                      activeCourse?.id === c.id
+                        ? 'bg-green-100 text-green-800'
+                        : accessible
+                        ? 'bg-white text-slate-600 border border-slate-200'
+                        : 'bg-white text-slate-300 border border-slate-100 cursor-not-allowed'
+                    }`}
+                  >
+                    {c.icon} {c.title} {!accessible && <Lock size={10} />}
+                  </button>
+                );
+              })}
             </div>
 
           </div>
