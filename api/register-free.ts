@@ -82,7 +82,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // 4. Enviar e-mail de boas-vindas via Brevo
   const brevoApiKey = process.env.BREVO_API_KEY!;
-  await fetch('https://api.brevo.com/v3/smtp/email', {
+  const brevoRes = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'api-key': brevoApiKey },
     body: JSON.stringify({
@@ -116,6 +116,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `,
     }),
   });
+
+  if (!brevoRes.ok) {
+    const brevoError = await brevoRes.text();
+    console.error('Brevo error:', brevoError);
+    return res.status(500).json({ error: 'Erro ao enviar e-mail. Tente novamente.' });
+  }
 
   return res.status(200).json({ success: true });
 }
