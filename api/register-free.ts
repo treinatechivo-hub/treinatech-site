@@ -36,10 +36,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     uid = user.uid;
   } catch (err: any) {
     if (err.code === 'auth/email-already-exists') {
-      // Usuário já existe — busca o uid para atualizar o Firestore
+      // Usuário já existe — busca o uid, atualiza senha e displayName
       const existing = await auth.getUserByEmail(email);
       uid = existing.uid;
       isExisting = true;
+      // Atualiza a senha para a nova fornecida no cadastro
+      await auth.updateUser(uid, { password, displayName: name });
     } else {
       console.error('Auth error:', err);
       return res.status(500).json({ error: 'Erro ao criar conta.' });
