@@ -86,7 +86,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'api-key': brevoApiKey },
     body: JSON.stringify({
-      sender: { name: 'Treinatech', email: 'noreply@treinatech.com.br' },
+      sender: { name: 'Treinatech', email: 'treinatechivo@gmail.com' },
       to: [{ email, name }],
       subject: 'Bem-vindo(a) à Treinatech — seus dados de acesso',
       htmlContent: `
