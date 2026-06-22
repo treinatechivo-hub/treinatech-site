@@ -121,9 +121,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (!brevoRes.ok) {
     const brevoError = await brevoRes.text();
-    console.error('Brevo error:', brevoError);
+    console.error('❌ Brevo error:', brevoError);
     return res.status(500).json({ error: 'Erro ao enviar e-mail. Tente novamente.' });
   }
 
+  const brevoSuccess = await brevoRes.json();
+  console.log('✅ Email enviado com sucesso:', brevoSuccess);
   return res.status(200).json({ success: true });
 }
