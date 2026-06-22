@@ -186,6 +186,10 @@ export const MemberDashboard: React.FC = () => {
     [enrolledCourseIds]
   );
 
+  // Switcher mostra só cursos acessíveis quando o aluno tem apenas 1 (gratuito)
+  // Com 2+ cursos, mostra todos com cadeado nos bloqueados
+  const switcherCourses = enrolledCourses.length > 1 ? MEMBER_COURSES : enrolledCourses;
+
   const [activeCourse, setActiveCourse]     = useState<CourseData | undefined>(enrolledCourses[0]);
   const [activeLesson, setActiveLesson]     = useState<Lesson | null>(null);
   const [activeTab, setActiveTab]           = useState<'aulas' | 'materiais'>('aulas');
@@ -330,9 +334,9 @@ export const MemberDashboard: React.FC = () => {
           )}
         </div>
 
-        {/* Center: course switcher — mostra todos, bloqueia não habilitados */}
+        {/* Center: course switcher */}
         <div className="flex items-center gap-1 mx-2 flex-wrap">
-          {MEMBER_COURSES.map((c) => {
+          {switcherCourses.map((c) => {
             const accessible = isCourseAccessible(c.id);
             const isActive = activeCourse?.id === c.id;
             return (
@@ -775,7 +779,7 @@ export const MemberDashboard: React.FC = () => {
 
             {/* ── Mobile course switcher ── */}
             <div className="flex md:hidden gap-2 flex-wrap pt-2">
-              {MEMBER_COURSES.map((c) => {
+              {switcherCourses.map((c) => {
                 const accessible = isCourseAccessible(c.id);
                 return (
                   <button
