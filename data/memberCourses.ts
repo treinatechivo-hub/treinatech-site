@@ -279,7 +279,7 @@ export const MEMBER_COURSES: CourseData[] = [
         id: 'sql-m1',
         title: 'Módulo 1 — Manipulação de Dados (DML)',
         lessons: [
-          { id: 'sql-1-1', title: 'Introdução ao SQL e ambientes de banco de dados', duration: '14:00', provider: 'youtube', videoId: 'Ofst8DdA4Rg', free: true },
+          { id: 'sql-1-1', title: 'Introdução ao SQL e ambientes de banco de dados', duration: '14:00', provider: 'youtube', videoId: 'ncgEQBONI_w', free: true },
           { id: 'sql-1-2', title: 'SELECT, WHERE, ORDER BY — filtros e ordenação', duration: '20:00', provider: 'youtube', videoId: 'HXV3zeQKqGY' },
           { id: 'sql-1-3', title: 'Funções de Agregação — COUNT, SUM, AVG, MAX, MIN', duration: '18:00', provider: 'youtube', videoId: '7S_tz1z_5bA' },
           { id: 'sql-1-4', title: 'GROUP BY, HAVING — filtragem de grupos', duration: '16:00', provider: 'youtube', videoId: 'ZhuHCtR3xq8' },

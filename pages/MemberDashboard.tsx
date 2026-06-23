@@ -175,6 +175,8 @@ export const MemberDashboard: React.FC = () => {
     if (ids.has('excel')) { ids.add('excel-basico'); ids.add('excel-intermediario'); ids.add('excel-avancado'); }
     // Retrocompat: 'powerbi' antigo dá acesso a ambos os módulos
     if (ids.has('powerbi')) { ids.add('powerbi-m1'); ids.add('powerbi-m2'); }
+    // Retrocompat: 'sql' do admin corresponde a 'sql-dados'
+    if (ids.has('sql')) { ids.add('sql-dados'); }
     return ids;
   }, [user?.enrolledCourses]);
 
