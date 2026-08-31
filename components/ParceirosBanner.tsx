@@ -11,6 +11,7 @@ const PARCEIROS = [
   { name: 'Construtora Greenwood', logo: 'https://static.wixstatic.com/media/4a8932_44f4dee7a33f445f81f2b5078176756d~mv2.png/v1/fill/w_300,h_300,al_c,q_90,enc_avif,quality_auto/Logo_transparente.png',       url: 'https://www.construtoragreenwood.com.br',   dark: true,  square: true,  imgH: 'h-16' },
   { name: 'Omar Calçados',       logo: '/parceiros/Omar-Calcados.gif',                                                                                                                                           url: 'https://www.omarcalcados.com.br',           dark: false, square: false, imgH: 'h-16' },
   { name: 'DentalUni',           logo: '/parceiros/DentalUni.png',                                                                                                                                               url: 'https://www.dentaluni.com.br',              dark: false, square: false, imgH: 'h-16' },
+  { name: 'Lavitta',             logo: '/parceiros/Lavitta1.png',                                                                                                                                 url: 'https://lavitta.com.br',                    dark: false, square: false, imgH: 'h-10' },
 ];
 
 export const ParceirosBanner: React.FC = () => (
