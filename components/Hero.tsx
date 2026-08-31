@@ -127,23 +127,13 @@ export const Hero: React.FC = () => {
             
             <div className="mt-12 flex items-center gap-6">
               <div className="flex -space-x-3">
-                {[
-                  { skin: '#E8B08A', hair: '#3B2A20', bg: '#FDE9DC' },
-                  { skin: '#8D5A3C', hair: '#1A1310', bg: '#EFDDD0' },
-                  { skin: '#F2C9A0', hair: '#8A5A2B', bg: '#FBEFE1' },
-                  { skin: '#C98A5E', hair: '#241C16', bg: '#F3E2D3' },
-                ].map((p, i) => (
-                  <svg
+                {['/avatars/avatar1.png', '/avatars/avatar2.png', '/avatars/avatar3.png', '/avatars/avatar4.png'].map((src, i) => (
+                  <img
                     key={i}
-                    viewBox="0 0 40 40"
-                    className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
-                    aria-label="Estudante"
-                  >
-                    <circle cx="20" cy="20" r="20" fill={p.bg} />
-                    <circle cx="20" cy="17" r="7.5" fill={p.skin} />
-                    <path d="M6 40c0-8.8 6.3-15 14-15s14 6.2 14 15" fill={p.skin} />
-                    <path d="M12 15c0-5.5 3.6-10 8-10s8 4.5 8 10c0-1-3.6 1-8 1s-8-2-8-1z" fill={p.hair} />
-                  </svg>
+                    src={src}
+                    className="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover"
+                    alt="Estudante"
+                  />
                 ))}
               </div>
               <p className="text-sm text-slate-300">
