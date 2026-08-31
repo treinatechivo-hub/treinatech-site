@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, Play, BarChart3, ThumbsUp } from 'lucide-react';
+import { ArrowRight, Play, BarChart3, ThumbsUp, User } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -127,13 +127,14 @@ export const Hero: React.FC = () => {
             
             <div className="mt-12 flex items-center gap-6">
               <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <img
+                {['bg-green-600', 'bg-emerald-600', 'bg-teal-600', 'bg-green-700'].map((color, i) => (
+                  <div
                     key={i}
-                    src={`https://picsum.photos/seed/${i + 10}/100/100`}
-                    className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
-                    alt="Estudante"
-                  />
+                    className={`w-10 h-10 rounded-full border-2 border-white shadow-sm flex items-center justify-center ${color}`}
+                    aria-label="Estudante"
+                  >
+                    <User className="w-5 h-5 text-white" strokeWidth={2.5} />
+                  </div>
                 ))}
               </div>
               <p className="text-sm text-slate-300">
